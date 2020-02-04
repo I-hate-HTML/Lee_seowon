@@ -11,5 +11,6 @@
 
 	<h1>안녕하세요 test중입니다.</h1>
 
+	<strong>내일은 피티 받는날 입니다.</strong>
 </body>
 </html>
