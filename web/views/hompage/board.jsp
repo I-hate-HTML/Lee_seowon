@@ -14,7 +14,7 @@
   
   
 <link
-	href="<%=request.getContextPath()%>/resources/hompage/css/cleanblogmin.css"
+	href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css"
 	rel="stylesheet">
   
 	<!-- 부트스트랩 -->
@@ -39,9 +39,6 @@
 	<!-- 이것만 위치 맞춰주면됨 -->
 <link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"
 	rel="stylesheet">
-
-	
-
 
 
   <style>

@@ -11,7 +11,7 @@
     <!-- v1.0 -->
 	<!-- 개별페이지 CSS -->
 <link
-	href="<%=request.getContextPath()%>/resources/hompage/css/cleanblogmin.css"
+	href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css"
 	rel="stylesheet">
   
 	<!-- 부트스트랩 -->
@@ -70,19 +70,20 @@
                         <tbody>
                                 <tr>
                                     <th class="tatd">제목: </th>
-                                    <th colspan="3">게시글 제목 영역입니다.</th>
+                                    <th colspan="3"><%// b.getBtitle() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">작성자: </th>
-                                    <th>작성자 이름 입니다.</th>
+                                    <th><%// b.getBwriter() %></th>
                                     <th class="tatd">작성날짜 : </th>
-                                    <th>2042-42-42</th>
+                                    <th><%// b.getDate() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">내용: </th>
                                     <td colspan="3">
                                     <div style="height: 500px;">
                                         게시글 내용 영역입니다.영역확이니ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
+                                        <% //b.getBcontent() %>
                                     </div>
                                 </td>
                                 </tr>
@@ -90,7 +91,11 @@
                     </table>
 
                 <div class="float-right">
+                
+                <%// if(){ %>
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location='boardcheck.html'" class="pull-right"/>
+                <%//} %>  
+                  
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location='board.html'" class="pull-right"/>
               </div>
       		</div>

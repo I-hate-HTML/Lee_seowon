@@ -8,7 +8,7 @@
 	<title>게시글 쓰기</title>
 	
 <link
-	href="<%=request.getContextPath()%>/resources/hompage/css/cleanblogmin.css"
+	href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css"
 	rel="stylesheet">
   
 	<!-- 부트스트랩 -->
