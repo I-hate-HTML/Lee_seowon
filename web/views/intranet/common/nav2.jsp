@@ -20,13 +20,13 @@
   
   
   <!-- Custom fonts for this template-->
-  <link href="/intranetProject/resource/intranet/all.min.css" rel="stylesheet" type="text/css">
-  <link href="/intranetProject/resource/intranet/css.css" rel="stylesheet" type="text/css">
-  <link href="/intranetProject/resource/intranet/1_content.css" rel="stylesheet" type="text/css">
+  <link href="../../resources/intranet/intranet/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../../resources/intranet/intranet/css.css" rel="stylesheet" type="text/css">
+  <link href="../../resources/intranet/intranet/1_content.css" rel="stylesheet" type="text/css">
    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="/intranetProject/resource/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+  <link href="../../resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   
   <title>꿈나라어린이집 # 인트라넷</title>
@@ -270,7 +270,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="/intranetProject/resource/image/a.png" alt="">
+                    <img class="rounded-circle" src="../../resources/intranet/image/a.png" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -280,7 +280,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="/intranetProject/resource/image/woo.png" alt="">
+                    <img class="rounded-circle" src="../../resources/intranet/image/woo.png" alt="">
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -290,7 +290,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="/intranetProject/resource/image/woo.png" alt="">
+                    <img class="rounded-circle" src="../../resources/intranet/image/woo.png" alt="">
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -310,7 +310,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">차은우 선생님</span>
-                <img class="img-profile rounded-circle" src="/intranetProject/resource/image/woo.png">
+                <img class="img-profile rounded-circle" src="../../resources/intranet/image/woo.png">
               </a>
 
               <!-- Dropdown - 선생님 인포메이션 -->

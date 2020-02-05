@@ -33,7 +33,7 @@ public class JDBCTemplate {
 		
 	}
 	
-	// ¿À¹ö·Îµù ±â¼ú Àû¿ë!
+	// ì˜¤ë²„ë¡œë”© ê¸°ìˆ  ì ìš©!
 		public static void close(Connection con) {
 			try {
 				if(con != null && !con.isClosed()) 

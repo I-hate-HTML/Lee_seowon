@@ -10,156 +10,157 @@ public class Daily implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int dno;
-	private int dtype;
-	private int dclass;
-	private String dtitle;
-	private String dcontent;
-	private String dwriter;
-	private String teacherCode;
-	private String doardfile;
-	private Date ddate;
-	private int dcount;
-	private String status;
-	private String dpwd;
+	private int bno;		// ê¸€ë²ˆí˜¸
+	private int bclass;		// ë°˜
+	private String btitle;	// ê¸€ì œëª©
+	private String bcontent; // ê¸€ë‚´ìš©
+	private Date bdate;		// ê¸€ë²ˆí˜¸
+	private String bwriter;	// ì‘ì„±ì
+	private int bcategory;	// ì¹´í…Œê³ ë¦¬ (1-ê³µì§€ì‚¬í•­ / 2-êµìœ¡ì¼ì§€)
+	private String bfile;	// ì²¨ë¶€íŒŒì¼
+	private int bwriterCode;// ì‘ì„±ì ì§ì›ì½”ë“œ
+	private String status;	// ê¸€ìƒíƒœ
 	
 	
 	public Daily() {}
 
 
+
 	/**
-	 * @³»¿ë ±³À°ÀÏÁö Á¶È¸¿ë
+	 * ê¸€ ì¡°íšŒìš©
+	 * @param bno
+	 * @param bclass
+	 * @param btitle
+	 * @param bcontent
+	 * @param bdate
+	 * @param bwriter
+	 * @param bcategory
+	 * @param bfile
+	 * @param bwriterCode
+	 * @param status
 	 */
-	public Daily(int dno, int dtype, int dclass, String dtitle, String dcontent, String dwriter, String teacherCode,
-			String doardfile, Date ddate, int dcount, String status, String dpwd) {
+	public Daily(int bno, int bclass, String btitle, String bcontent, Date bdate, String bwriter, int bcategory,
+			String bfile, int bwriterCode, String status) {
 		super();
-		this.dno = dno;
-		this.dtype = dtype;
-		this.dclass = dclass;
-		this.dtitle = dtitle;
-		this.dcontent = dcontent;
-		this.dwriter = dwriter;
-		this.teacherCode = teacherCode;
-		this.doardfile = doardfile;
-		this.ddate = ddate;
-		this.dcount = dcount;
+		this.bno = bno;
+		this.bclass = bclass;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bdate = bdate;
+		this.bwriter = bwriter;
+		this.bcategory = bcategory;
+		this.bfile = bfile;
+		this.bwriterCode = bwriterCode;
 		this.status = status;
-		this.dpwd = dpwd;
 	}
-	
 
 
 	/**
-	 * @³»¿ë ±³À°ÀÏÁö µî·Ï¿ë
+	 * ê¸€ ë“±ë¡ìš©
+	 * @param btitle
+	 * @param bcontent
+	 * @param bwriter
+	 * @param bcategory
+	 * @param bfile
 	 */
-	public Daily(int dclass, String dtitle, String dcontent, String dwriter, String doardfile, String dpwd) {
+	public Daily(String btitle, String bcontent, String bwriter, int bwriterCode, int bcategory, String bfile) {
 		super();
-		this.dclass = dclass;
-		this.dtitle = dtitle;
-		this.dcontent = dcontent;
-		this.dwriter = dwriter;
-		this.doardfile = doardfile;
-		this.dpwd = dpwd;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bwriter = bwriter;
+		this.bwriterCode = bwriterCode;
+		this.bcategory = bcategory;
+		this.bfile = bfile;
 	}
 
 
-	public int getDno() {
-		return dno;
+	public int getBno() {
+		return bno;
 	}
 
 
-	public void setDno(int dno) {
-		this.dno = dno;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 
 
-	public int getDtype() {
-		return dtype;
+	public int getBclass() {
+		return bclass;
 	}
 
 
-	public void setDtype(int dtype) {
-		this.dtype = dtype;
+	public void setBclass(int bclass) {
+		this.bclass = bclass;
 	}
 
 
-	public int getDclass() {
-		return dclass;
+	public String getBtitle() {
+		return btitle;
 	}
 
 
-	public void setDclass(int dclass) {
-		this.dclass = dclass;
+	public void setBtitle(String btitle) {
+		this.btitle = btitle;
 	}
 
 
-	public String getDtitle() {
-		return dtitle;
+	public String getBcontent() {
+		return bcontent;
 	}
 
 
-	public void setDtitle(String dtitle) {
-		this.dtitle = dtitle;
+	public void setBcontent(String bcontent) {
+		this.bcontent = bcontent;
 	}
 
 
-	public String getDcontent() {
-		return dcontent;
+	public Date getBdate() {
+		return bdate;
 	}
 
 
-	public void setDcontent(String dcontent) {
-		this.dcontent = dcontent;
+	public void setBdate(Date bdate) {
+		this.bdate = bdate;
 	}
 
 
-	public String getDwriter() {
-		return dwriter;
+	public String getBwriter() {
+		return bwriter;
 	}
 
 
-	public void setDwriter(String dwriter) {
-		this.dwriter = dwriter;
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
 	}
 
 
-	public String getTeacherCode() {
-		return teacherCode;
+	public int getBcategory() {
+		return bcategory;
 	}
 
 
-	public void setTeacherCode(String teacherCode) {
-		this.teacherCode = teacherCode;
+	public void setBcategory(int bcategory) {
+		this.bcategory = bcategory;
 	}
 
 
-	public String getDoardfile() {
-		return doardfile;
+	public String getBfile() {
+		return bfile;
 	}
 
 
-	public void setDoardfile(String doardfile) {
-		this.doardfile = doardfile;
+	public void setBfile(String bfile) {
+		this.bfile = bfile;
 	}
 
 
-	public Date getDdate() {
-		return ddate;
+	public int getBwriterCode() {
+		return bwriterCode;
 	}
 
 
-	public void setDdate(Date ddate) {
-		this.ddate = ddate;
-	}
-
-
-	public int getDcount() {
-		return dcount;
-	}
-
-
-	public void setDcount(int dcount) {
-		this.dcount = dcount;
+	public void setBwriterCode(int bwriterCode) {
+		this.bwriterCode = bwriterCode;
 	}
 
 
@@ -173,22 +174,23 @@ public class Daily implements Serializable{
 	}
 
 
-	public String getDpwd() {
-		return dpwd;
-	}
-
-
-	public void setDpwd(String dpwd) {
-		this.dpwd = dpwd;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Daily [dno=" + dno + ", dtype=" + dtype + ", dclass=" + dclass + ", dtitle=" + dtitle + ", dcontent="
-				+ dcontent + ", dwriter=" + dwriter + ", teacherCode=" + teacherCode + ", doardfile=" + doardfile
-				+ ", ddate=" + ddate + ", dcount=" + dcount + ", status=" + status + ", dpwd=" + dpwd + "]";
+		return "Daily [bno=" + bno + ", bclass=" + bclass + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bdate="
+				+ bdate + ", bwriter=" + bwriter + ", bcategory=" + bcategory + ", bfile=" + bfile + ", bwriterCode="
+				+ bwriterCode + ", status=" + status + "]";
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
