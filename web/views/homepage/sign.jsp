@@ -101,7 +101,7 @@
                    
                     <div class="int_mobile_area">
 						<span class="ps_box int_mobile">
-							<input type="tel" id="phoneNo" name="phoneNo" placeholder="전화번호 입력 - 제외" class="int" maxlength="16">
+							<input type="tel" id="phoneNo" name="phone" placeholder="전화번호 입력 - 제외" class="int" maxlength="16">
 							<label for="phoneNo" class="lbl"></label>
 						</span>
                         <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
@@ -141,7 +141,7 @@
                     </div>
                         <h3 class="join_title"><label for="child_bir">생년월일</label></h3>
                     <div class="addr_box child_bir">
-                        <input type="text" id="cName" class="int" name="cbit" placeholder="ex)1988-12-16">
+                        <input type="text" id="cName" class="int" name="cbdate" placeholder="ex)1988-12-16">
                     </div>
                         <h3 class="join_title"><label for="child_gender">성별</label></h3>
                     <div class="addr_box child_gender">
@@ -153,10 +153,10 @@
                     </div>
                     <h3 class="join_title"><label for="child_name">반</label></h3><br>
                         <div id="class_radio" style="text-align: center;">
-                            <label for="c_c1">꿈나무반</label>&nbsp;<input type="radio" name="c_class" id="c_c1"> &nbsp;
-                            <label for="c_c2">새싹반</label>&nbsp;<input type="radio" name="c_class" id="c_c2"> &nbsp; 
-                            <label for="c_c3">오징어반</label>&nbsp;<input type="radio" name="c_class" id="c_c3"> &nbsp;
-                            <label for="c_c4">고래반</label>&nbsp;<input type="radio" name="c_class" id="c_c4"> &nbsp;
+                            <label for="c_c1">꿈나무반</label>&nbsp;<input type="radio" name="cclass" id="c_c1"> &nbsp;
+                            <label for="c_c2">새싹반</label>&nbsp;<input type="radio" name="cclass" id="c_c2"> &nbsp; 
+                            <label for="c_c3">오징어반</label>&nbsp;<input type="radio" name="cclass" id="c_c3"> &nbsp;
+                            <label for="c_c4">고래반</label>&nbsp;<input type="radio" name="cclass" id="c_c4"> &nbsp;
                         </div><br>
 
                 </div>
