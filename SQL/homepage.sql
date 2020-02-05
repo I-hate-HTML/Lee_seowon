@@ -1,0 +1,118 @@
+CREATE TABLE MEMBER(
+    MNO NUMBER PRIMARY KEY,           --회원번호
+    USERID VARCHAR2(50) NOT NULL UNIQUE, --회원 아이디
+    USERPWD VARCHAR2(300) NOT NULL, -- 비밀번호
+    USERNAME VARCHAR2(10) NOT NULL, -- 회원이름
+    GENDER CHAR(1) CHECK (GENDER IN('M','F')),  --성별
+    EMAIL VARCHAR2(50) UNIQUE NOT NULL,     --이메일
+    PHONE VARCHAR2(50) UNIQUE NOT NULL,     --전화번호
+    ADDRESS VARCHAR2(300) NOT NULL,         --주소
+    ENROLLDATE DATE DEFAULT SYSDATE NOT NULL,--등록일
+    CHILD_CODE NUMBER,                      --자녀 번호
+    MSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK (MSTATUS IN('Y','N')), -- 회원상태 Y- 가입상태 N- 삭제상태
+    CONSTRAINT CH_CODE FOREIGN KEY(CHILD_CODE) REFERENCES CHILD(CHILD_CODE)
+);
+
+
+
+CREATE TABLE BOARD(
+    BNO NUMBER PRIMARY KEY,                     -- 게시판번호
+    BTITLE VARCHAR2(300) NOT NULL,              -- 게시판제목
+    BCONTENT VARCHAR2(3000) NOT NULL,           -- 게시판 내용
+    BWRITER VARCHAR2(50),                       -- 게시판 작성자
+    BCOUNT NUMBER,                              -- 조회수
+    BDATE DATE DEFAULT SYSDATE,                 -- 작성날짜
+    QDATE DATE,                                 -- 상담 날짜
+    BTYPE NUMBER,                               -- 게시판 타입(사진게시판, 공지사항, qna)
+    BFILE VARCHAR2(300),                         -- 첨부파일 or 사진
+    BSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK (BSTATUS IN('Y','N')),                       -- 게시글 삭제 상태(Y-삭제안됨 N-삭제됨)
+    CONSTRAINT BO_WRITER FOREIGN KEY(BWRITER)REFERENCES MEMBER(USERID),
+    CONSTRAINT BOARD_TYPE FOREIGN KEY(BTYPE) REFERENCES BOARDTYPE(BTYPE)
+);
+
+CREATE TABLE BOARDTYPE(
+    BTYPE NUMBER PRIMARY KEY,
+    BNAME VARCHAR2(20) NOT NULL UNIQUE
+);
+
+
+INSERT INTO BOARDTYPE VALUES(1,'공지사항');
+INSERT INTO BOARDTYPE VALUES(2,'앨범');
+INSERT INTO BOARDTYPE VALUES(3,'문의보내기');
+
+
+CREATE TABLE ALIMNOTE(
+    AL_NO NUMBER PRIMARY KEY,       --  알림장번호
+    AL_CNO NUMBER,                  -- 자녀번호
+    AL_CONTENT VARCHAR2(1000),      -- 알림장내용
+    AL_FEEL VARCHAR2(20),           -- 기분
+    AL_HEATH VARCHAR2(20),          -- 건강
+    AL_TEMP VARCHAR2(20),           -- 체온
+    AL_MEAL VARCHAR2(20),           -- 식사여부
+    AL_SLEEP VARCHAR2(20),          -- 수면시간
+    AL_POOP VARCHAR2(20),           -- 배변상태
+    CONSTRAINT AL_CNO FOREIGN KEY(AL_CNO) REFERENCES CHILD(CHILD_CODE)
+);
+
+CREATE TABLE ALIMHOME(              -- 귀가 통지서
+    ALHM_NO NUMBER PRIMARY KEY,     -- 통지서 번호
+    ALHM_CNO NUMBER,                -- 자녀 번호
+    ALHM_WAYHOME VARCHAR2(20),      -- 귀가방법
+    ALHM_TIME VARCHAR2(20),         -- 귀가시간
+    ALHM_STAUTS VARCHAR2(20),       -- 보호자 관계
+    ALHM_PHONE VARCHAR2(20),        -- 보호자 전화번호
+    ALHM_STATUS2 VARCHAR2(20),      -- 비상연락망 관계
+    ALHM_PHONE2 VARCHAR2(20),       -- 비상연락망 전화번호
+    CONSTRAINT ALHM_CNO FOREIGN KEY(ALHM_CNO) REFERENCES CHILD(CHILD_CODE)
+);
+
+
+CREATE TABLE ALIMMEDI(              -- 투약 통지서
+    ALMD_NO NUMBER PRIMARY KEY,     -- 투약 통지서 번호
+    ALMD_CNO NUMBER,                -- 자녀 번호
+    ALMD_CON VARCHAR2(30),          -- 증상
+    ALMD_TYPE VARCHAR2(30),         -- 약의 종류
+    ALMD_VOL VARCHAR2(30),          -- 투약 용량
+    ALMD_NUM VARCHAR2(30),          -- 투약 횟수
+    ALMD_TIME VARCHAR2(30),         -- 투약 시간
+    ALMD_TEMP VARCHAR2(30),         -- 보관 방법
+    ALMD_PS VARCHAR2(100),          -- 특이사항
+    CONSTRAINT ALMD_CNO FOREIGN KEY(ALMD_CNO) REFERENCES CHILD(CHILD_CODE)
+);
+  
+CREATE SEQUENCE SEQ_BNO
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+  
+CREATE SEQUENCE SEQ_MEMNO
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+  
+CREATE SEQUENCE SEQ_ALIM
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+  
+CREATE SEQUENCE SEQ_ALHM
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+CREATE SEQUENCE SEQ_ALMD
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+
+
+
