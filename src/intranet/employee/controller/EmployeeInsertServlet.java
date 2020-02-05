@@ -44,6 +44,7 @@ public class EmployeeInsertServlet extends HttpServlet {
 		
 		EmployeeService es = new EmployeeService();
 		 
+		
 		/*try {
 			es.insertEmployee(em);
 			System.out.println("등록 성공!");
