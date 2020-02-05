@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
 <html lang="ko">
@@ -12,18 +13,24 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
   
-
+  
   <!-- Custom fonts for this template-->
-  <link href="../../resources/intranet/intranet/all.min.css" rel="stylesheet" type="text/css">
-  <link href="../../resources/intranet/intranet/css" rel="stylesheet">
-  <link href="../../resources/intranet/intranet/1_content" rel="stylesheet">
-  
-
+  <link href="/intranetProject/resource/intranet/all.min.css" rel="stylesheet" type="text/css"/>
+ <!--  <link href="/intranetProject/resource/intranet/css.css" rel="stylesheet">
+  <link href="/intranetProject/resource/intranet/1_content.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+ -->
   <!-- Custom styles for this template-->
-  <link href="../../resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <link href="/intranetProject/resource/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
+  
+  <title>꿈나라어린이집 # 인트라넷</title>
+  
 </head>
 
 <body id="page-top">
@@ -60,7 +67,7 @@
         메뉴
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - 등록 -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" data-toggle="collapse" data-target="#collapseRegister" aria-expanded="true" aria-controls="collapseRegister">
           <i class="fa fa-address-book fa-2x"></i>
@@ -75,6 +82,30 @@
           </div>
         </div>
       </li>
+      
+      <!-- Nav Item - 게시판 -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" data-toggle="collapse" data-target="#collapseCommon" aria-expanded="true" aria-controls="collapseRegister">
+           <i class="fa fa-desktop fa-2x"></i>
+          <span>게시판</span>
+        </a>
+        <div id="collapseCommon" class="collapse" aria-labelledby="headingRegister" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">상세 메뉴</h6>
+            <a class="collapse-item" href="#">공지사항</a>
+            <a class="collapse-item" href="/intranetProject/dList.da">교육일지</a>
+          </div>
+        </div>
+      </li>
+      
+      
+       <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- 메뉴 -->
+      <div class="sidebar-heading">
+        	개인페이지
+      </div>
 
            
       <!-- Nav Item - 반 관리 -->
@@ -86,7 +117,6 @@
         <div id="collapseClass" class="collapse" aria-labelledby="headingClass" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
-            <a class="collapse-item" href="intranetDailyBoard.jsp">교육일지</a>
             <a class="collapse-item" href="intranetNotice.jsp">알림장 확인</a>            
             <a class="collapse-item" href="intranetAdviceBoard.jsp">상담확인</a>            
           </div>
@@ -240,7 +270,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="../../resources/intranet/resource/image/a.png" alt="">
+                    <img class="rounded-circle" src="/intranetProject/resource/image/a.png" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -250,7 +280,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src=../../resources/intranet/resource/image/woo.png" alt="">
+                    <img class="rounded-circle" src="/intranetProject/resource/image/woo.png" alt="">
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -260,7 +290,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="../../resources/intranet/resource/image/woo.png" alt="">
+                    <img class="rounded-circle" src="/intranetProject/resource/image/woo.png" alt="">
                     <div class="status-indicator bg-warning"></div>
                   </div>
                   <div>
@@ -280,7 +310,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">차은우 선생님</span>
-                <img class="img-profile rounded-circle" src="../../resources/intranet/resource/image/woo.png">
+                <img class="img-profile rounded-circle" src="/intranetProject/resource/image/woo.png">
               </a>
 
               <!-- Dropdown - 선생님 인포메이션 -->
@@ -307,8 +337,3 @@
 
         </nav>
         <!-- End of Topbar -->
-
-
-
-
-</body></html>
