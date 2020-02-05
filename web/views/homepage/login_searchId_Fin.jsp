@@ -272,9 +272,9 @@ vertical-align: middle;}
 					</div>
 				</div>
 			<div class="btna">
-				<a href="mainpage.html">HOME</a>
-				<a href="login.html">로그인</a>
-				<a href="join.html">회원가입</a>
+				<a href="mainpage.jsp">HOME</a>
+				<a href="login.jsp">로그인</a>
+				<a href="join.jsp">회원가입</a>
 
 			</div>
 			<!-- footer -->
