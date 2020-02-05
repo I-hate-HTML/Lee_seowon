@@ -61,7 +61,7 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-						<form>
+						<form id="loginForm" action="/semi/login.me" method="post">
 							<div class="inputgroup">
 								<div class="input-groupp">
 
@@ -91,8 +91,7 @@
 
 
 							<div class="button-area d-flex justify-content-center ">
-								<input type="button" value="로그인" class="btn login_btn"
-									onclick="location='mainpage.html'">
+								<input type="submit" value="로그인" class="btn login_btn">
 								<!-- 나중에 submit으로 변경 -->
 							</div>
 							<div class="button-area d-flex justify-content-center ">
