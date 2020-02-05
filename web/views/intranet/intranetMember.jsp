@@ -151,7 +151,7 @@
                 </tr>
                 <tr><td><br></td></tr>
                 </table>
-                </td></tr></table     
+                </td></tr></table>     
         </div>
 
           <!-- 승인 후 회원 -->
