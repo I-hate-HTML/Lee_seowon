@@ -1,5 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="com.kh.jsp.home.model.vo.Member"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
+
+<%
+	Member m = (Member)session.getAttribute("member");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,9 +84,14 @@
                 <a class="dropdown-item" href="qna.html">문의신청</a>
               </div>
             </li>
+         <%if (m == null) { %>  
            <li class="nav-item dropdown show">
               <a class="nav-link" href="login.html" id="dropdown01" >로그인</a>
               </div>
+          <%}else{ %>  
+          
+          
+          <%} %>
             </li>
         </ul>
       </div>
