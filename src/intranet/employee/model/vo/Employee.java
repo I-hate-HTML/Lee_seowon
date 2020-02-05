@@ -22,7 +22,7 @@ public class Employee implements Serializable{
 	private Date entDate;
 	private String empClass;
 	private int hobong;
-	
+	 
 	public Employee() {}
 
 	public Employee(String empName, String empJob, String empNo, String empPhone, String empAddr,

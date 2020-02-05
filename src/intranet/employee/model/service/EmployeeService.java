@@ -9,7 +9,7 @@ public class EmployeeService {
 
 	private Connection con;
 	private EmployeeDao mDao = new EmployeeDao();
-	public void insertEmployee(Employee e) {
+	public void insertEmployee(Employee  e) {
 		
 		
 	}

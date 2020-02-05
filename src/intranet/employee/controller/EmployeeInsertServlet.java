@@ -43,7 +43,7 @@ public class EmployeeInsertServlet extends HttpServlet {
 		Employee em = new Employee(empName,empJob,empNo,empPhone,empAddr,empClass);
 		
 		EmployeeService es = new EmployeeService();
-		
+		 
 		/*try {
 			es.insertEmployee(em);
 			System.out.println("등록 성공!");
