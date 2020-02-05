@@ -78,17 +78,13 @@
 
 							<div class="chkinfo">
 								<div class="chkType2">
-									<input type="checkbox" id="chk1" name="saveid"> <label
-										for="chk1">아이디 저장</label>
+									<input type="checkbox" id="chk1" name="saveid"> <labelfor="chk1">아이디 저장</label>
 									<div class="linkBtn">
-										<a id="idFind" href="./login_searchId.jsp" style="color: black;">아이디
-											찾기</a> <a id="pwdFind" href="./login_searchPwd.jsp" style="color: black;">비밀번호
-											찾기</a>
+										<a id="idFind" href="./login_searchId.jsp" style="color: black;">아이디 찾기</a> 
+										<a id="pwdFind" href="./login_searchPwd.jsp" style="color: black;">비밀번호 찾기</a>
 									</div>
 								</div>
 							</div>
-
-
 
 							<div class="button-area d-flex justify-content-center ">
 								<input type="button" value="로그인" class="btn login_btn"
@@ -112,6 +108,7 @@
 			</div>
 			
 			<script>
+			
 			function login(){
 				
 				$('#Loginform').submit();
