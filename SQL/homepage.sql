@@ -25,7 +25,7 @@ CREATE TABLE BOARD(
     BWRITER VARCHAR2(50),                       -- 게시판 작성자
     BCOUNT NUMBER,                              -- 조회수
     BDATE DATE DEFAULT SYSDATE,                 -- 작성날짜
-    BTIME VARCHAR2(50),                         -- (qna에서 날짜 선택, 보낼때 사용할예정)
+    QDATE DATE,                                 -- 상담 날짜
     BTYPE NUMBER,                               -- 게시판 타입(사진게시판, 공지사항, qna)
     BFILE VARCHAR2(300),                         -- 첨부파일 or 사진
     BSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK (BSTATUS IN('Y','N')),                       -- 게시글 삭제 상태(Y-삭제안됨 N-삭제됨)
@@ -39,10 +39,49 @@ CREATE TABLE BOARDTYPE(
 );
 
 
-INSERT INTO BOARDTYPE VALUES(1,'공자사항');
+INSERT INTO BOARDTYPE VALUES(1,'공지사항');
 INSERT INTO BOARDTYPE VALUES(2,'앨범');
 INSERT INTO BOARDTYPE VALUES(3,'문의보내기');
 
+
+CREATE TABLE ALIMNOTE(
+    AL_NO NUMBER PRIMARY KEY,       --  알림장번호
+    AL_CNO NUMBER,                  -- 자녀번호
+    AL_CONTENT VARCHAR2(1000),      -- 알림장내용
+    AL_FEEL VARCHAR2(20),           -- 기분
+    AL_HEATH VARCHAR2(20),          -- 건강
+    AL_TEMP VARCHAR2(20),           -- 체온
+    AL_MEAL VARCHAR2(20),           -- 식사여부
+    AL_SLEEP VARCHAR2(20),          -- 수면시간
+    AL_POOP VARCHAR2(20),           -- 배변상태
+    CONSTRAINT AL_CNO FOREIGN KEY(AL_CNO) REFERENCES CHILD(CHILD_CODE)
+);
+
+CREATE TABLE ALIMHOME(              -- 귀가 통지서
+    ALHM_NO NUMBER PRIMARY KEY,     -- 통지서 번호
+    ALHM_CNO NUMBER,                -- 자녀 번호
+    ALHM_WAYHOME VARCHAR2(20),      -- 귀가방법
+    ALHM_TIME VARCHAR2(20),         -- 귀가시간
+    ALHM_STAUTS VARCHAR2(20),       -- 보호자 관계
+    ALHM_PHONE VARCHAR2(20),        -- 보호자 전화번호
+    ALHM_STATUS2 VARCHAR2(20),      -- 비상연락망 관계
+    ALHM_PHONE2 VARCHAR2(20),       -- 비상연락망 전화번호
+    CONSTRAINT AL_CNO FOREIGN KEY(ALHM_CNO) REFERENCES CHILD(CHILD_CODE)
+);
+
+
+CREATE TABLE ALIMMEDI(              -- 투약 통지서
+    ALMD_NO NUMBER PRIMARY KEY,     -- 투약 통지서 번호
+    ALMD_CNO NUMBER,                -- 자녀 번호
+    ALMD_CON VARCHAR2(30),          -- 증상
+    ALMD_TYPE VARCHAR2(30),         -- 약의 종류
+    ALMD_VOL VARCHAR2(30),          -- 투약 용량
+    ALMD_NUM VARCHAR2(30),          -- 투약 횟수
+    ALMD_TIME VARCHAR2(30),         -- 투약 시간
+    ALMD_TEMP VARCHAR2(30),         -- 보관 방법
+    ALMD_PS VARCHAR2(100),          -- 특이사항
+    CONSTRAINT AL_CNO FOREIGN KEY(ALMD_CNO) REFERENCES CHILD(CHILD_CODE)
+);
   
 CREATE SEQUENCE SEQ_BNO
 START WITH 1
@@ -52,6 +91,26 @@ NOCACHE;
 
   
 CREATE SEQUENCE SEQ_MEMNO
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+  
+CREATE SEQUENCE SEQ_ALIM
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+  
+CREATE SEQUENCE SEQ_ALHM
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
+CREATE SEQUENCE SEQ_ALMD
 START WITH 1
 INCREMENT BY 1
 NOCYCLE
