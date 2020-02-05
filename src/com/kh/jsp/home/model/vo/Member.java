@@ -5,6 +5,10 @@ import java.sql.Date;
 
 public class Member implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6979929713683275604L;
 	private String userId;
 	private String userPwd;
 	private String userName;
