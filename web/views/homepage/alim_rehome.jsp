@@ -153,7 +153,7 @@ vertical-align: middle;}
                     <tr>
                         <th style="border-right: none;">귀가 방법</th>
                         <td colspan="3"style="border-left: none;">
-                            <select name="wayhome" id="bob" style="width: 70%;">
+                            <select name="alhm_wayhome" id="bob" style="width: 70%;">
                                 <option value="도보">귀가방법선택</option>
                                 <option value="도보">도보</option>
                                 <option value="차량">차량</option>
@@ -165,7 +165,7 @@ vertical-align: middle;}
                     <tr>
                         <th style="border-right: none;">귀가요청시간</th>
                         <td colspan="3"style="border-left: none;">
-                            <select name="wayhometime" id="bob" style="width: 70%;">
+                            <select name="alhm_time" id="bob" style="width: 70%;">
                                 <option value="도보">시간 선택</option>
                                 <option value="오전">오전(12:00)</option>
                                 <option value="오전">오후(15:00)</option>
@@ -175,15 +175,15 @@ vertical-align: middle;}
                     <tr>
                         <th style="border-right: none;">보호자</th>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="status" style="width: 70%;" placeholder="원아와의 관계">
-                            <input type="text" name="st_phone" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
+                            <input type="text" name="alhm_status" style="width: 70%;" placeholder="원아와의 관계">
+                            <input type="text" name="alhm_phone" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
                     </tr>
                     <tr>
                         <th style="border-right: none;">비상 연락망</th>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="status2" style="width: 70%;" placeholder="원아와의 관계">
-                            <input type="text" name="st_phone2" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
+                            <input type="text" name="alhm_status2" style="width: 70%;" placeholder="원아와의 관계">
+                            <input type="text" name="alhm_phone2" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
                     </tr>
                     <tr>

@@ -153,25 +153,25 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">증상</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="medi_con" style="width: 70%;" placeholder="예) 감기, 몸살, 술병">
+                            <input type="text" name="almd_con" style="width: 70%;" placeholder="예) 감기, 몸살, 술병">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">약의 종류</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" style="width: 70%;" placeholder="예) 물약, 가루약, 마약">
+                            <input type="text" name="almd_type" style="width: 70%;" placeholder="예) 물약, 가루약, 마약">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">투약 용량</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="medi_vol" style="width: 70%;" placeholder="예) 한 봉, 6ml">
+                            <input type="text" name="almd_vol" style="width: 70%;" placeholder="예) 한 봉, 6ml">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">투약 횟수</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="medi_num" id="bob" style="width: 70%;">
+                            <select name="almd_num" id="bob" style="width: 70%;">
                                 <option value="1회">1회</option>
                                 <option value="2회">2회</option>
                                 <option value="3회">3회</option>
@@ -182,18 +182,18 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">투약 시간</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="medi_time" style="width: 70%;" placeholder="예) 오전 9시, 식후 30분">
+                            <input type="text" name="almd_time" style="width: 70%;" placeholder="예) 오전 9시, 식후 30분">
                         </td>
                     </tr>
                      <tr> 
                         <td style="border-right: none;">보관 방법</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="medi_temp"><label for="alim_giboon1">실온</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="medi_temp"><label for="alim_giboon2">냉장</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="almd_temp"><label for="alim_giboon1">실온</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="almd_temp"><label for="alim_giboon2">냉장</label></td>
                     </tr>
                     <tr>
                         <td style="border-right: none;">특이사항</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="medi_ps" style="width: 70%;" placeholder="예) 보드카와 함께 줘야 좋아합니다, 약을 먹기 싫어해요">
+                            <input type="text" name="almd_ps" style="width: 70%;" placeholder="예) 보드카와 함께 줘야 좋아합니다, 약을 먹기 싫어해요">
                         </td>
                     </tr>
                     <tr>

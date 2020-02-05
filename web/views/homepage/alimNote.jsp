@@ -142,7 +142,7 @@ vertical-align: middle;}
         <form>
             <table class="table table-bordered">
                     <tr>
-                        <td colspan="4"><textarea name="alim_text" id="alim_text" cols="30" rows="10" placeholder="가정에서 이렇게 지냄" style="width: 100%; resize: none;"></textarea></td>                    
+                        <td colspan="4"><textarea name="al_content" id="alim_text" cols="30" rows="10" placeholder="가정에서 이렇게 지냄" style="width: 100%; resize: none;"></textarea></td>                    
                     </tr>
                     <tr align="center">
                         <td style="width: 25%;"><a href=""><i class="fas fa-images" style="font-size: 30px;"></i></a></td>
@@ -154,26 +154,26 @@ vertical-align: middle;}
                     </tr>
                     <tr> 
                         <td style="border-right: none;">기분</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="giboon"><label for="alim_giboon1">좋음</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="giboon"><label for="alim_giboon2">보통</label></td>
-                        <td style="border-left: none; "><input type="radio" id="alim_giboon3" name="giboon"><label for="alim_giboon3">나쁨</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="al_feel"><label for="alim_giboon1">좋음</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="al_feel"><label for="alim_giboon2">보통</label></td>
+                        <td style="border-left: none; "><input type="radio" id="alim_giboon3" name="al_feel"><label for="alim_giboon3">나쁨</label></td>
                     </tr>
                     <tr> 
                         <td style="border-right: none;">건강</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="health1" name="health"><label for="health1">좋음</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="health2" name="health"><label for="health2">보통</label></td>
-                        <td style="border-left: none; "><input type="radio" id="health3" name="health"><label for="health3">나쁨</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="health1" name="al_health"><label for="health1">좋음</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="health2" name="al_health"><label for="health2">보통</label></td>
+                        <td style="border-left: none; "><input type="radio" id="health3" name="al_health"><label for="health3">나쁨</label></td>
                     </tr>
                     <tr> 
                         <td style="border-right: none;">체온체크</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo1" name="ondo"><label for="ondo1">정상</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo2" name="ondo"><label for="ondo2">미열</label></td>
-                        <td style="border-left: none; "><input type="radio" id="ondo3" name="ondo"><label for="ondo3">고열</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo1" name="al_temp"><label for="ondo1">정상</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo2" name="al_temp"><label for="ondo2">미열</label></td>
+                        <td style="border-left: none; "><input type="radio" id="ondo3" name="al_temp"><label for="ondo3">고열</label></td>
                     </tr>
                     <tr>
                         <td style="border-right: none;">식사여부</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="bob" id="bob" style="width: 70%;">
+                            <select name="al_meal" id="bob" style="width: 70%;">
                                 <option value="선택안함">선택안함</option>
                                 <option value="약간">약간</option>
                                 <option value="보통">보통</option>
@@ -184,7 +184,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">수면시간</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="sleep" id="sleep" style="width: 70%;">
+                            <select name="al_sleep" id="sleep" style="width: 70%;">
                                 <option value="선택안함">선택안함</option>
                                 <option value="8시간">8시간 이상</option>
                                 <option value="6~8시간">6~8시간</option>
@@ -196,7 +196,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">배변상태</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="dong" id="dong" style="width: 70%;">
+                            <select name="al_poop" id="dong" style="width: 70%;">
                                 <option value="선택안함">선택안함</option>
                                 <option value="좋음">좋음</option>
                                 <option value="보통">보통</option>
