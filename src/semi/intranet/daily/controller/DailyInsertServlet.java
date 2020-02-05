@@ -1,11 +1,15 @@
 package semi.intranet.daily.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import semi.intranet.daily.model.service.DailyService;
+import semi.intranet.daily.model.vo.Daily;
 
 /**
  * Servlet implementation class DailyInsertServlet
@@ -26,8 +30,31 @@ public class DailyInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		int bcategory = Integer.parseInt(request.getParameter("category"));
+		String bwriter = request.getParameter("writer");
+		int bwriterCode = Integer.parseInt(request.getParameter("writerId"));
+		String btitle = request.getParameter("subject");
+		String bcontent = request.getParameter("content");
+		String bfile = request.getParameter("filename");
+		
+		
+		DailyService ds = new DailyService();
+		
+		Daily b = new Daily(btitle, bcontent, bwriter, bwriterCode, bcategory, bfile);
+		
+		int result = ds.dailyInsert(b);
+		
+		if(result > 0) {
+			
+		} else {
+			
+		}
+		
+		
+		
+		
+	
 	}
 
 	/**
