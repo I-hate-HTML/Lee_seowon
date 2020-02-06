@@ -17,7 +17,7 @@ public class Employee implements Serializable{
 	private String empNo;
 	private String empPhone;
 	private String empAddr;
-	private Date hireDate;
+	private Date hireDate; 
 	private int entYN;
 	private Date entDate;
 	private String empClass;

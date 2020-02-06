@@ -18,7 +18,7 @@ public class EmployeeService {
 		result=mDao.insertEmployee(con,em);
 		
 		if(result>0) commit(con);
-		else rollback(con);
+		else rollback(con); 
 		
 		close(con);
 		 

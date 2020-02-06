@@ -23,7 +23,7 @@ public class EmployeeInsertServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public EmployeeInsertServlet() {
-        super();
+        super();  
         // TODO Auto-generated constructor stub
     }
 
