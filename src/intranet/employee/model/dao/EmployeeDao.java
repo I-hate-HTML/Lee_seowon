@@ -31,7 +31,7 @@ public class EmployeeDao {
 		int result = 0;
 		PreparedStatement pstmt  = null;
 		String sql = prop.getProperty("insertEmployee");
-		
+		 
 		try {
 			pstmt = con.prepareStatement(sql);
 			
