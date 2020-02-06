@@ -16,13 +16,13 @@ import semi.home.jsp.model.vo.Member;
  * Servlet implementation class HomePgaeLogin
  */
 @WebServlet("/homelogin")
-public class HomePageLoginServlet extends HttpServlet {
+public class HomeLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomePageLoginServlet() {
+    public HomeLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
