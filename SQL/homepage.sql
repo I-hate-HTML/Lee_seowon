@@ -11,6 +11,7 @@ CREATE TABLE MEMBER(
     ADDRESS VARCHAR2(300) NOT NULL,         --주소
     ENROLLDATE DATE DEFAULT SYSDATE NOT NULL,--등록일
     CNO NUMBER UNIQUE,                      --자녀 번호
+    CNAME VARCHAR2(20),						-- 자녀 이름
     CBDATE DATE,                    -- 자녀 생일
     CGENDER CHAR(1) CHECK (CGENDER IN ('M','F')),                    -- 자녀 성별
     CCLASS NUMBER CHECK (CCLASS IN (1,2,3,4)),                          -- 자녀 반
