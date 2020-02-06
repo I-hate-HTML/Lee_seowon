@@ -20,7 +20,7 @@ public class EmployeeDao {
 	public EmployeeDao() {
 		try {
 			prop.load(new FileReader(url));
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) { 
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
