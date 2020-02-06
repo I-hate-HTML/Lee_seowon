@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.employee.model.exception.EmployeeException;
 import semi.intranet.employee.model.service.EmployeeService;
 import semi.intranet.employee.model.vo.Employee;
 

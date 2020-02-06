@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
-import intranet.employee.model.vo.Employee;
+import semi.intranet.employee.model.vo.Employee;
 
 public class EmployeeDao {
 	private Properties prop = new Properties();
