@@ -176,7 +176,7 @@
           <a target="_blank" href="fjords.jpg" style="margin-bottom: 30px;">
             <img src="<%=request.getContextPath()%>/resources/homepage/images/1.jpg" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">
             </a>
-              <b style="">꼬꼬닭반</b>
+              <b style="">씨앗반</b>
                 <p style="margin: 20px; font-size: 13px;">크리스마스에 있었던 파티</p>
         </div>
 
@@ -186,7 +186,7 @@
           <a target="_blank" href="fjords.jpg" style="margin-bottom: 30px;">
             <img src="<%=request.getContextPath()%>/resources/homepage/images/2.jpg" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">
             </a> 
-              <b>올챙이반</b>
+              <b>떡잎반</b>
                 <p style="margin: 20px; font-size: 13px;">자기전에 땡깡을 부리고 있는 모습</p>
         </div>
 
@@ -196,7 +196,7 @@
           <a target="_blank" href="fjords.jpg" style="margin-bottom: 30px;">
             <img src="<%=request.getContextPath()%>/resources/homepage/images/3.jpg" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">
             </a>
-              <b>개구리반</b>
+              <b>새싹반</b>
                 <p style="margin: 20px; font-size: 13px;">잠에 골아 떨어진 모습</p>
         </div>
 
