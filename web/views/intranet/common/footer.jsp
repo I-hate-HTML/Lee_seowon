@@ -13,22 +13,22 @@
 
 <!-- Bootstrap core JavaScript-->
 <!-- <script src="/intranetProject/resource/intranet/jquery.min.js"></script> -->
-<script src="../../resources/intranet/intranet/bootstrap.bundle.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/intranet/intranet/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="../../resources/intranet/intranet/jquery.easing.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/intranet/intranet/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="../../resources/intranet/intranet/sb-admin-2.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/intranet/intranet/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<!-- <script src="../../resources/intranet/intranet/Chart.min.js"></script> -->
+<!-- <script src="<%=request.getContextPath()%>/resources/intranet/intranet/Chart.min.js"></script> -->
 
 <!-- Page level custom scripts -->
-<!-- <script src="../../resources/intranet/intranet/chart-area-demo.js"></script>
-<script src="../../resources/intranet/intranet/chart-pie-demo.js"></script> -->
+<!-- <script src="<%=request.getContextPath()%>/resources/intranet/intranet/chart-area-demo.js"></script>
+<script src="<%=request.getContextPath()%>/resources/intranet/intranet/chart-pie-demo.js"></script> -->
 
 
 
-<script src="../../resources/intranet/intranet/intranet.js"></script>
+<script src="<%=request.getContextPath()%>/resources/intranet/intranet/intranet.js"></script>
 </body></html>

@@ -33,7 +33,7 @@ public static Connection getConnection() {
 		return con;
 	} 
 	
-	// ¿À¹ö·Îµù ±â¼ú Àû¿ë!
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
 	public static void close(Connection con) {
 		try {
 			if(con != null && !con.isClosed()) 
