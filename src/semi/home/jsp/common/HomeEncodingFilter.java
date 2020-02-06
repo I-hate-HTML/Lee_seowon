@@ -1,4 +1,4 @@
-package com.kh.jsp.home.common;
+package semi.home.jsp.common;
 
 import java.io.IOException;
 import javax.servlet.Filter;

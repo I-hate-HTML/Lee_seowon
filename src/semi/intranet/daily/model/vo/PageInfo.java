@@ -9,14 +9,13 @@ public class PageInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int currentPage; 	// ÇöÀç ÆäÀÌÁö
-	private int listCount;		// ÃÑ °Ô½Ã±Û ¼ö
-	private int limitContent;	// ÆäÀÌÁö´ç °Ô½Ã±Û ¼ö
-	private int limitPage;		// ÇÑ¹ø¿¡ º¸¿©ÁÙ ÆäÀÌÁö ¼ö
-	private int maxPage;		// ÀüÃ¼ ÆäÀÌÁö Áß ¸¶Áö¸· ÆäÀÌÁö
-	private int startPage;		// ÇÑ¹ø¿¡ Ç¥½ÃÇÒ ÆäÀÌÁö Áß ¾Õ ÆäÀÌÁö
-	private int endPage;		// ÇÑ¹ø¿¡ Ç¥½ÃÇÒ ÆäÀÌÁö Áß ¸¶Áö¸· ÆäÀÌÁö
-	
+	private int currentPage; 	// í˜„ì¬ í˜ì´ì§€
+	private int listCount;		// ì´ ê²Œì‹œê¸€ ìˆ˜
+	private int limitContent;	// í˜ì´ì§€ë‹¹ ê²Œì‹œê¸€ ìˆ˜
+	private int limitPage;		// í•œë²ˆì— ë³´ì—¬ì¤„ í˜ì´ì§€ ìˆ˜
+	private int maxPage;		// ì „ì²´ í˜ì´ì§€ ì¤‘ ë§ˆì§€ë§‰ í˜ì´ì§€
+	private int startPage;		// í•œë²ˆì— í‘œì‹œí•  í˜ì´ì§€ ì¤‘ ì• í˜ì´ì§€
+	private int endPage;		// í•œë²ˆì— í‘œì‹œí•  í˜ì´ì§€ ì¤‘ ë§ˆì§€ë§‰ í˜ì´ì§€
 	
 	
 	public PageInfo() {}

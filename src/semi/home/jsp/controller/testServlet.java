@@ -1,4 +1,4 @@
-package com.kh.jsp.controller;
+package semi.home.jsp.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
