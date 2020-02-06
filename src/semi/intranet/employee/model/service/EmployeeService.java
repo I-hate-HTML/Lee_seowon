@@ -1,11 +1,14 @@
-package intranet.employee.model.service;
+package semi.intranet.employee.model.service;
+
+import static semi.common.JDBCTemplate.close;
+import static semi.common.JDBCTemplate.commit;
+import static semi.common.JDBCTemplate.getConnection;
+import static semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
-import static semi.common.JDBCTemplate.*; 
-
-import intranet.employee.model.dao.EmployeeDao;
-import intranet.employee.model.vo.Employee;
+import semi.intranet.employee.model.dao.EmployeeDao;
+import semi.intranet.employee.model.vo.Employee;
 
 public class EmployeeService {
 

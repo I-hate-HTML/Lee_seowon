@@ -1,4 +1,4 @@
-package intranet.employee.model.exception;
+package semi.intranet.employee.model.exception;
 
 public class EmployeeException extends Exception{
 	
@@ -9,5 +9,5 @@ public class EmployeeException extends Exception{
 	
 	public EmployeeException(String msg) {
 		super(msg);
-	}
+	} 
 }

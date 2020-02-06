@@ -1,4 +1,4 @@
-package intranet.employee.model.vo;
+package semi.intranet.employee.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -10,7 +10,7 @@ public class Employee implements Serializable{
 	 */
 	private static final long serialVersionUID = -7734435700357772483L;
 	
-	// �������
+	// 占쏙옙占쏙옙占쏙옙占�
 	private int empCode;
 	private String empName;
 	private String empJob;
@@ -22,7 +22,7 @@ public class Employee implements Serializable{
 	private Date entDate;
 	private String empClass;
 	private int hobong;
-	 
+	  
 	 
 	public Employee() {}
 
