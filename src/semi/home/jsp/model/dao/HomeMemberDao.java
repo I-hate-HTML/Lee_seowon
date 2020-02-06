@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
+import static semi.common.JDBCTemplate.*;
 import semi.home.jsp.model.vo.Member;
 
 public class HomeMemberDao {
@@ -58,15 +58,48 @@ public class HomeMemberDao {
 				result.setCname(rset.getString("cname"));
 				result.setCbdate(rset.getDate("cbdate"));
 				result.setCgender(rset.getString("cgender"));
-				result.setCclass(rset.getString("cclass"));
+				result.setCclass(rset.getInt("cclass"));
 				
 				
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		
+		return result;
+	}
+
+
+	public int homeMemberInsert(Connection con, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("homeMemberInsert");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getGender());
+			pstmt.setString(5, m.getEmail());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setString(7, m.getAddress());
+			pstmt.setString(8, m.getCname());
+			pstmt.setDate(9, m.getCbdate());
+			pstmt.setString(10, m.getCgender());
+			pstmt.setInt(11, m.getCclass());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

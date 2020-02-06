@@ -153,10 +153,10 @@
                     </div>
                     <h3 class="join_title"><label for="child_name">반</label></h3><br>
                         <div id="class_radio" style="text-align: center;">
-                            <label for="c_c1">꿈나무반</label>&nbsp;<input type="radio" name="cclass" id="c_c1"> &nbsp;
-                            <label for="c_c2">새싹반</label>&nbsp;<input type="radio" name="cclass" id="c_c2"> &nbsp; 
-                            <label for="c_c3">오징어반</label>&nbsp;<input type="radio" name="cclass" id="c_c3"> &nbsp;
-                            <label for="c_c4">고래반</label>&nbsp;<input type="radio" name="cclass" id="c_c4"> &nbsp;
+                            <label for="c_c1">꿈나무반</label>&nbsp;<input type="radio" name="cclass" id="c_c1" value="1"> &nbsp;
+                            <label for="c_c2">새싹반</label>&nbsp;<input type="radio" name="cclass" id="c_c2" value="2"> &nbsp; 
+                            <label for="c_c3">오징어반</label>&nbsp;<input type="radio" name="cclass" id="c_c3" value="3"> &nbsp;
+                            <label for="c_c4">고래반</label>&nbsp;<input type="radio" name="cclass" id="c_c4" value="4"> &nbsp;
                         </div><br>
 
                 </div>

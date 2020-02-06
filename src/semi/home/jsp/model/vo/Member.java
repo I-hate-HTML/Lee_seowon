@@ -23,7 +23,7 @@ public class Member implements Serializable{
 	private String cname;
 	private Date cbdate;
 	private String cgender;
-	private String cclass;
+	private int cclass;
 	private String mstatus;
 	
 	// 기본생성자
@@ -39,7 +39,7 @@ public class Member implements Serializable{
 
 	// 회원 가입
 	public Member(String userId, String userPwd, String userName, String gender, String email, String phone,
-			String address, String cname, Date cbdate, String cgender, String cclass) {
+			String address, String cname, Date cbdate, String cgender, int cclass) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -56,7 +56,7 @@ public class Member implements Serializable{
 	
 	// 전체 데이터 조회
 	public Member(int mno, String userId, String userPwd, String userName, String gender, String email, String phone,
-			String address, Date enrolldate, int cno, String cname, Date cbdate, String cgender, String cclass,
+			String address, Date enrolldate, int cno, String cname, Date cbdate, String cgender, int cclass,
 			String mstatus) {
 		super();
 		this.mno = mno;
@@ -180,11 +180,11 @@ public class Member implements Serializable{
 		this.cgender = cgender;
 	}
 
-	public String getCclass() {
+	public int getCclass() {
 		return cclass;
 	}
 
-	public void setCclass(String cclass) {
+	public void setCclass(int cclass) {
 		this.cclass = cclass;
 	}
 

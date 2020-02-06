@@ -26,4 +26,19 @@ public class HomeMemberService {
 		return result;
 	}
 
-}
+
+	public int homeMemberInsert(Member m) {
+		con = getConnection();
+		
+		int result = hmDao.homeMemberInsert(con,m);
+		
+		if(result > 0) commit(con); 
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		}
+	}
+
+
