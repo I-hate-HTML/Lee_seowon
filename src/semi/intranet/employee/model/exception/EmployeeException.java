@@ -1,4 +1,4 @@
-package intranet.employee.model.exception;
+package semi.intranet.employee.model.exception;
 
 public class EmployeeException extends Exception{
 	

@@ -1,4 +1,4 @@
-package intranet.employee.model.service;
+package semi.intranet.employee.model.service;
 
 import java.sql.Connection;
 

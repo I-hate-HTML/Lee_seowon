@@ -1,4 +1,4 @@
-package intranet.employee.controller;
+package semi.intranet.employee.controller;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import intranet.employee.model.exception.EmployeeException;
-import intranet.employee.model.service.EmployeeService;
-import intranet.employee.model.vo.Employee;
+import semi.intranet.employee.model.exception.EmployeeException;
+import semi.intranet.employee.model.service.EmployeeService;
+import semi.intranet.employee.model.vo.Employee;
 
 /**
  * Servlet implementation class EmployeeInsertServlet

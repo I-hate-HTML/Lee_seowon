@@ -1,4 +1,4 @@
-package intranet.employee.model.dao;
+package semi.intranet.employee.model.dao;
 
 import static semi.common.JDBCTemplate.close;
 
