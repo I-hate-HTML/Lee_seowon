@@ -1,23 +1,28 @@
-package semi.intranet.daily.controller;
+package semi.home.jsp.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import semi.home.jsp.model.service.HomeMemberService;
+import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class DailyListServlet
+ * Servlet implementation class HomePgaeLogin
  */
-@WebServlet("/dList.da")
-public class DailyListServlet extends HttpServlet {
+@WebServlet("/HomePgaeLogin")
+public class HomePgaeLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DailyListServlet() {
+    public HomePgaeLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +31,29 @@ public class DailyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		
+		Member m = new Member(userId,userPwd);
+		
+		HomeMemberService hms = new HomeMemberService();
+		
+		try {
+			m = hms.selectMember(m);
+			System.out.println("홈페이지 로그인 성공!!");
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("member", m);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	
+	
+	
+	
 	}
 
 	/**
