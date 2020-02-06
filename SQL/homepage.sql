@@ -1,4 +1,4 @@
--- INTRANET 부터 생성할것!
+-- INTRANET 부터 생성할것!!
 
 CREATE TABLE MEMBER(
     MNO NUMBER PRIMARY KEY,           --회원번호
