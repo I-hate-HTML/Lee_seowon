@@ -43,10 +43,22 @@ public class HomeMemberDao {
 			
 			if(rset.next()) {
 				result = new Member();
+				
+				
 				result.setUserId(m.getUserId());
 				result.setUserPwd(m.getUserPwd());
 				
-				
+				result.setUserName(rset.getString("username"));
+				result.setGender(rset.getString("gender"));
+				result.setEmail(rset.getString("email"));
+				result.setPhone(rset.getString("phone"));
+				result.setAddress(rset.getString("address"));
+				result.setEnrolldate(rset.getDate("enrolldate"));
+			
+				result.setCname(rset.getString("cname"));
+				result.setCbdate(rset.getDate("cbdate"));
+				result.setCgender(rset.getString("cgender"));
+				result.setCclass(rset.getString("cclass"));
 				
 				
 			}
