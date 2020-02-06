@@ -1,6 +1,8 @@
 package semi.home.jsp.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +29,22 @@ public class HomeMemberInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		String username = request.getParameter("username");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String cname = request.getParameter("cname");
+		String cgender = request.getParameter("cgender");
+		String cclass = request.getParameter("cclass");
+		String cdate = request.getParameter("cdate");
 		
-	
+		Date writerData = null;
+		
+		String [] dateArr = cdate.split(regex);
+		
 	
 	}
 

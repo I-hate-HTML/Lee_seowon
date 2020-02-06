@@ -111,6 +111,5 @@
 					href="/semi/views/homepage/join.jsp">회원가입</a>
 			</div>
 			<%@ include file="views/homepage/common/loginfooter.jsp"%>
-			
 </body>
 </html>
