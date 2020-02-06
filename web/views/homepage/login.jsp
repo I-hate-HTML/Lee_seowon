@@ -61,44 +61,40 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-						<form>
+						<form id="Loginform" action="" method="post">
 							<div class="inputgroup">
 								<div class="input-groupp">
 
 									<input type="text" class="input_area"
-										placeholder="아이디를 입력해주세요.">
+										placeholder="아이디를 입력해주세요." name="userId">
 
 								</div>
 								<div class="input-group">
 
 									<input type="password" class="input_area"
-										placeholder="비밀번호를 입력해주세요.">
+										placeholder="비밀번호를 입력해주세요." name="userPwd">
 								</div>
 							</div>
 
 							<div class="chkinfo">
 								<div class="chkType2">
-									<input type="checkbox" id="chk1" name="saveid"> <label
-										for="chk1">아이디 저장</label>
+									<input type="checkbox" id="chk1" name="saveid"> <labelfor="chk1">아이디 저장</label>
 									<div class="linkBtn">
-										<a id="idFind" href="./login1.html" style="color: black;">아이디
-											찾기</a> <a id="pwdFind" href="./login2.html" style="color: black;">비밀번호
-											찾기</a>
+										<a id="idFind" href="./login_searchId.jsp" style="color: black;">아이디 찾기</a> 
+										<a id="pwdFind" href="./login_searchPwd.jsp" style="color: black;">비밀번호 찾기</a>
 									</div>
 								</div>
 							</div>
 
-
-
 							<div class="button-area d-flex justify-content-center ">
 								<input type="button" value="로그인" class="btn login_btn"
-									onclick="location='mainpage.html'">
+									onclick='login()'>
 								<!-- 나중에 submit으로 변경 -->
 							</div>
 							<div class="button-area d-flex justify-content-center ">
 								<input type="btn" id="btnsign" value="회원가입"
 									class="btn login_btn" style="margin-top: 10px;"
-									onclick="location='/semi/views/homepage/join.jsp'">
+									onclick='memberJoin()'>
 							</div>
 						</form>
 					</div>
@@ -107,9 +103,25 @@
 			</div>
 
 			<div class="btna">
-				<a href="/semi/index.jsp">HOME</a> <a
-					href="/semi/views/homepage/join.jsp">회원가입</a>
+				<a href="/semi/views/homepage/homeindex.jsp">HOME</a> 
+				<a href="/semi/views/homepage/join.jsp">회원가입</a>
 			</div>
+			
+			<script>
+			
+			function login(){
+				
+				$('#Loginform').submit();
+			}
+			
+			function memberJoin(){
+				location.href='/semi/views/homepage/join.jsp';
+			}
+			
+			
+			</script>
+			
+			
 			<%@ include file="common/loginfooter.jsp"%>
 </body>
 </html>

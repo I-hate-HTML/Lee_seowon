@@ -12,7 +12,7 @@
         <script src = "../signup/js/jquery.selectbox.js"></script>
 
      
-      	<!-- 개별페이지 CSS -->
+      	<!-- 개별페이지 CSS --> 
       	<!-- 이것만 위치 맞춰주면됨 -->
         <link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
           
