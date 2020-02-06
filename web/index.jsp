@@ -61,11 +61,8 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-<<<<<<< HEAD
-						<form id="loginForm" action="/semi/login.me" method="post">
-=======
 						<form>
->>>>>>> branch 'master' of https://github.com/I-hate-HTML/Lee_seowon.git
+
 							<div class="inputgroup">
 								<div class="input-groupp">
 
@@ -95,12 +92,10 @@
 
 
 							<div class="button-area d-flex justify-content-center ">
-<<<<<<< HEAD
 								<input type="submit" value="로그인" class="btn login_btn">
-=======
 								<input type="button" value="로그인" class="btn login_btn"
 									onclick="location='mainpage.html'">
->>>>>>> branch 'master' of https://github.com/I-hate-HTML/Lee_seowon.git
+
 								<!-- 나중에 submit으로 변경 -->
 							</div>
 							<div class="button-area d-flex justify-content-center ">
