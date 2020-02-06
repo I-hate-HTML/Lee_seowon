@@ -1,4 +1,4 @@
-package com.kh.jsp.home.model.vo;
+package semi.home.jsp.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
