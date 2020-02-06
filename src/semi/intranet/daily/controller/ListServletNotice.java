@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DailyListServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/dList.da")
-public class DailyListServlet extends HttpServlet {
+@WebServlet("/nList.da")
+public class ListServletNotice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DailyListServlet() {
+    public ListServletNotice() {
         super();
         // TODO Auto-generated constructor stub
     }

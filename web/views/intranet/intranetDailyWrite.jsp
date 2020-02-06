@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../intranet/common/nav.jsp" %>
+<%@ include file = "common/nav.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +63,6 @@
 
       </div>
       <!-- End of Main Content -->
-<%@ include file = "../intranet/common/footer.jsp" %>
+<%@ include file = "common/footer.jsp" %>
 </body>
 </html>

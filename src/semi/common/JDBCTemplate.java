@@ -1,6 +1,7 @@
 package semi.common;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +12,7 @@ import javax.sql.DataSource;
 
 public class JDBCTemplate {
 	
-	public static Connection getConnection() {
+public static Connection getConnection() {
 		
 		Connection con = null;
 		
@@ -25,59 +26,57 @@ public class JDBCTemplate {
 			
 			con.setAutoCommit(false);
 			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 		
 		return con;
-		
+	} 
+	
+	// ø¿πˆ∑Œµ˘ ±‚º˙ ¿˚øÎ!
+	public static void close(Connection con) {
+		try {
+			if(con != null && !con.isClosed()) 
+				con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	// Ïò§Î≤ÑÎ°úÎî© Í∏∞Ïà† Ï†ÅÏö©!
-		public static void close(Connection con) {
-			try {
-				if(con != null && !con.isClosed()) 
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	public static void close(Statement stmt) {
+		try {
+			if(stmt != null && ! stmt.isClosed())
+				stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public static void close(Statement stmt) {
-			try {
-				if(stmt != null && ! stmt.isClosed())
-					stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	}
+	
+	public static void close(ResultSet rset) {
+		try {
+			
+			if(rset != null && ! rset.isClosed())
+				rset.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public static void close(ResultSet rset) {
-			try {
-				
-				if(rset != null && ! rset.isClosed())
-					rset.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
+	}
+	
+	public static void commit(Connection con) {
+		try {
+			if(con != null && ! con.isClosed())
+				con.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public static void commit(Connection con) {
-			try {
-				if(con != null && ! con.isClosed())
-					con.commit();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	}
+	
+	public static void rollback(Connection con) {
+		try {
+			if(con != null && ! con.isClosed())
+				con.rollback();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public static void rollback(Connection con) {
-			try {
-				if(con != null && ! con.isClosed())
-					con.rollback();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
+	}
 }
