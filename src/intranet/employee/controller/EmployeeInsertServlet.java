@@ -44,18 +44,8 @@ public class EmployeeInsertServlet extends HttpServlet {
 		
 		EmployeeService es = new EmployeeService();
 		 
+		int result  = es.insertEmployee(em);
 		
-		/*try {
-			es.insertEmployee(em);
-			System.out.println("등록 성공!");
-			
-			response.sendRedirect("views/inranet/intranetRegisterTeacher.jsp");
-		}catch(EmployeeException e) {
-			request.setAttribute("msg", "직원 등록 실패");
-			request.setAttribute("exception", e);
-			
-			request.getRequestDispatcher("views/intranet/common/errorPage.jsp");
-		}*/
 	}
 
 	/**
