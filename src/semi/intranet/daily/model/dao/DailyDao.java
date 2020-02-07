@@ -287,22 +287,86 @@ public class DailyDao {
 	}
 	
 
+	
+
 	/**
-	 * 글 수정용
+	 * 수정할 게시글 가져오기 (수정 입력창에 띄울 것)
 	 * @param con
 	 * @param dno
 	 * @param category
 	 * @return
 	 */
-	public Daily dailyModify(Connection con, int dno, int category) {
+	public Daily dailyModifyView(Connection con, int dno, int category) {
 		
 		Daily d = null;
 		
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		String sql = prop.getProperty("dailyModify");
+		String sql = prop.getProperty("dailyModifyView");
 		
 		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dno);
+			pstmt.setInt(2, category);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				d = new Daily();
+				
+				d.setBno(rset.getInt("DAILY_NO"));
+				d.setBclass(rset.getInt("DAILY_CLASS"));
+				d.setBcategory(rset.getInt("DAILY_CATEGORY"));
+				d.setBtitle(rset.getString("DAILY_TITLE"));
+				d.setBdate(rset.getDate("DAILY_DATE"));
+				d.setBwriter(rset.getString("DAILY_EMP_NAME"));
+				d.setBwriterCode(rset.getInt("DAILY_EMP"));
+				d.setBfile(rset.getString("DAILY_FILE"));
+				d.setBcontent(rset.getString("DAILY_CONTENT"));
+				d.setBcount(rset.getInt("DAILY_COUNT"));
+				d.setStatus(rset.getString("IS_DELETE"));	
+
+			}
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return d;
+	}
+
+	/**
+	 * 수정할 게시글 저장하기
+	 * @param con
+	 * @param dno
+	 * @param b
+	 * @return
+	 */
+	public int dailyModifySave(Connection con, int dno, Daily d) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("dailyModifySave");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d.getBtitle());
+			pstmt.setString(2, d.getBcontent());
+			pstmt.setString(3, d.getBfile());
+			pstmt.setInt(4, dno);
+			
+			result = pstmt.executeUpdate();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -310,7 +374,7 @@ public class DailyDao {
 			close(pstmt);
 		}
 		
-		return d;
+		return result;
 	}
 
 	

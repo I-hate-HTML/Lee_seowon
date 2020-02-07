@@ -21,7 +21,7 @@
         		<h6 class="m-0 font-weight-bold text-primary">교육일지확인</h6>
             </td>
             <td align="right">
-              <button class = "btn btn-primary btn-sm" onclick="location.href='dModify.da?dno=<%= d.getBno() %>'">수정</button>
+              <button class = "btn btn-primary btn-sm" onclick="location.href='dModifyView.da?dno=<%= d.getBno() %>'">수정</button>
               <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath() %>/dDelete.da?dno=<%= d.getBno() %>'">삭제</button>                              
             </td>
           </tr>

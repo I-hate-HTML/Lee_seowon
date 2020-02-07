@@ -1,7 +1,6 @@
 package semi.intranet.daily.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import semi.intranet.daily.model.service.DailyService;
 import semi.intranet.daily.model.vo.Daily;
 
 /**
- * Servlet implementation class ModifyServletDaily
+ * Servlet implementation class DeleteServletNotice
  */
-@WebServlet("/dModify.da")
-public class ModifyServletDaily extends HttpServlet {
+@WebServlet("/nDelete.da")
+public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyServletDaily() {
+    public NoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +30,17 @@ public class ModifyServletDaily extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int category = 2;
+		int category = 1;
+		
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		
-		Daily d = new DailyService().selectOne(dno, category);
+		Daily d = new Daily();
 		
-		String page = "";
+		int result = new DailyService().dailyDelete(dno, category);
 		
-		if(d != null ) {
-			page = "views/intranet/intranetDailyModify.jsp";
-			response.sendRedirect(page);
+		if(result > 0) {
+			response.sendRedirect("nList.da");
 		}
-			
-		
-		
-	
 	}
 
 	/**

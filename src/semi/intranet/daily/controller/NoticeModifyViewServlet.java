@@ -1,29 +1,31 @@
 package semi.intranet.daily.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import semi.intranet.daily.model.service.DailyService;
 import semi.intranet.daily.model.vo.Daily;
-import semi.intranet.daily.model.vo.PageInfo;
 
 /**
- * Servlet implementation class DailyReadServlet
+ * Servlet implementation class ModifyViewServletDaily
  */
-@WebServlet("/dRead.da")
-public class ReadServletDaily extends HttpServlet {
+@WebServlet("/nModifyView.da")
+public class NoticeModifyViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReadServletDaily() {
+    public NoticeModifyViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +35,20 @@ public class ReadServletDaily extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 구별을 위한 카테고리 --> 교육일지 2
-		int category = 2;
-		
+		int category = 1;
 		
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		
-		DailyService ds = new DailyService();
+		Daily d = new DailyService().dailyModifyView(dno, category);
 		
-		Daily d = ds.selectOne(dno, category);
-		
-		System.out.println(d);
 		
 		String page = "";
-		
 		if(d != null) {
-			page = "views/intranet/intranetDailyRead.jsp";
+			page = "views/intranet/intranetNoticeModify.jsp";
 			request.setAttribute("daily", d);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

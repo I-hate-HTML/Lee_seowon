@@ -1,6 +1,8 @@
 package semi.intranet.daily.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.intranet.daily.model.service.DailyService;
 import semi.intranet.daily.model.vo.Daily;
+import semi.intranet.daily.model.vo.PageInfo;
 
 /**
- * Servlet implementation class DeleteServletNotice
+ * Servlet implementation class DailyReadServlet
  */
-@WebServlet("/nDelete.da")
-public class DeleteServletNotice extends HttpServlet {
+@WebServlet("/dRead.da")
+public class DailyReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteServletNotice() {
+    public DailyReadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +33,25 @@ public class DeleteServletNotice extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int category = 1;
+		// 구별을 위한 카테고리 --> 교육일지 2
+		int category = 2;
+		
 		
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		
-		Daily d = new Daily();
+		DailyService ds = new DailyService();
 		
-		int result = new DailyService().dailyDelete(dno, category);
+		Daily d = ds.selectOne(dno, category);
 		
-		if(result > 0) {
-			response.sendRedirect("nList.da");
+		String page = "";
+		
+		if(d != null) {
+			page = "views/intranet/intranetDailyRead.jsp";
+			request.setAttribute("daily", d);
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

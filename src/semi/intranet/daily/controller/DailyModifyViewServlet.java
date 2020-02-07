@@ -7,19 +7,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import semi.intranet.daily.model.service.DailyService;
+import semi.intranet.daily.model.vo.Daily;
 
 /**
- * Servlet implementation class ModifyServletNotice
+ * Servlet implementation class ModifyViewServletDaily
  */
-@WebServlet("/nModify.da")
-public class ModifyServletNotice extends HttpServlet {
+@WebServlet("/dModifyView.da")
+public class DailyModifyViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyServletNotice() {
+    public DailyModifyViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +35,20 @@ public class ModifyServletNotice extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int category = 1;
-		
-		String title = request.getParameter("title");
-		
+		int category = 2;
 		
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		
-		int result = new DailyService().dailyModify(dno, category);
+		Daily d = new DailyService().dailyModifyView(dno, category);
 		
-		if(result > 0) {
-			response.sendRedirect("nRead.da?dno=" + dno);
+		
+		String page = "";
+		if(d != null) {
+			page = "views/intranet/intranetDailyModify.jsp";
+			request.setAttribute("daily", d);
 		}
 		
-	
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

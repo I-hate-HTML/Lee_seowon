@@ -13,7 +13,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">교육일지 글수정</h1>
+          <h1 class="h3 mb-4 text-gray-800">공지사항 글수정</h1>
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">                  
@@ -64,7 +64,7 @@
                   </table>
                   <div class="float-right">
                   	<button type="submit" class="btn btn-link btn-primary btn-sm text-gray-400"  class="pull-right">수정</button>
-           			<input type ="button" class="btn btn-link btn-primary btn-sm text-gray-400" onclick="location.href = 'dRead.da?dno=<%= d.getBno() %>'" value="취소">             
+           			<input type ="button" class="btn btn-link btn-primary btn-sm text-gray-400" onclick="location.href = 'nRead.da?dno=<%= d.getBno() %>'" value="취소">             
            		  </div>
          		 </form>
    			</div>

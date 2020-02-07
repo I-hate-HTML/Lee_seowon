@@ -14,16 +14,16 @@ import semi.intranet.daily.model.vo.Daily;
 import semi.intranet.daily.model.vo.PageInfo;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class DailyListServlet
  */
-@WebServlet("/nList.da")
-public class ListServletNotice extends HttpServlet {
+@WebServlet("/dList.da")
+public class DailyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListServletNotice() {
+    public DailyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +32,12 @@ public class ListServletNotice extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-ArrayList<Daily> list = new ArrayList<Daily>();
+		
+		ArrayList<Daily> list = new ArrayList<Daily>();
 		
 		DailyService ds = new DailyService();
 		
-		int category = 1; // 카테고리 구별을 위한 변수 --> 공지사항
+		int category = 2; // 카테고리 구별을 위한 변수 --> 교육일지
 		
 		int currentPage; 	// 현재 페이지                 
 		int listCount;		// 총 게시글 수                 
@@ -82,13 +82,12 @@ ArrayList<Daily> list = new ArrayList<Daily>();
 			endPage = maxPage;
 		}
 		
-		
 		list = ds.selectList(currentPage, limitContent, category);
 		
 		String page = "";
 		
 		if(list != null) {
-			page = "views/intranet/intranetNoticeBoard.jsp";
+			page = "views/intranet/intranetDailyBoard.jsp";
 			request.setAttribute("list", list);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
@@ -96,6 +95,7 @@ ArrayList<Daily> list = new ArrayList<Daily>();
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 		
 	}
 

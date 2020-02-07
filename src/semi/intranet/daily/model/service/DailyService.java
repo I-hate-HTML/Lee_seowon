@@ -124,20 +124,44 @@ public class DailyService {
 	}
 	
 	/**
-	 * 글 수정용
+	 * 수정할 게시글 가져오기 (수정 입력창에 띄울 것)
 	 * @param dno
 	 * @param category
 	 * @return
 	 */
-	public Daily dailyModify(int dno, int category) {
+	public Daily dailyModifyView(int dno, int category) {
 		
 		Connection con = getConnection();
 		
-		Daily d = dd.dailyModify(con, dno, category);
+		Daily d = dd.dailyModifyView(con, dno, category);
 		
 		close(con);
 		
 		return d;
+	}
+
+	
+	/**
+	 * 수정한 게시글 저장하기
+	 * @param dno
+	 * @param b
+	 * @return
+	 */
+	public int dailyModifySave(int dno, Daily d) {
+		
+		Connection con = getConnection();
+		
+		int result = dd.dailyModifySave(con, dno, d);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 
 }
