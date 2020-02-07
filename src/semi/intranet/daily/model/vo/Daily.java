@@ -20,10 +20,11 @@ public class Daily implements Serializable{
 	private String bfile;	// 첨부파일
 	private int bwriterCode;// 작성자 직원코드
 	private String status;	// 글상태
+	private int bcount;		// 글카운트
+	private int rownum;		// 글 정렬용
 	
 	
 	public Daily() {}
-
 
 
 	/**
@@ -38,9 +39,10 @@ public class Daily implements Serializable{
 	 * @param bfile
 	 * @param bwriterCode
 	 * @param status
+	 * @param bcount
 	 */
 	public Daily(int bno, int bclass, String btitle, String bcontent, Date bdate, String bwriter, int bcategory,
-			String bfile, int bwriterCode, String status) {
+			String bfile, int bwriterCode, String status, int bcount, int rownum) {
 		super();
 		this.bno = bno;
 		this.bclass = bclass;
@@ -52,9 +54,12 @@ public class Daily implements Serializable{
 		this.bfile = bfile;
 		this.bwriterCode = bwriterCode;
 		this.status = status;
+		this.bcount = bcount;
+		this.rownum = rownum;
 	}
 
 
+	
 	/**
 	 * 글 등록용
 	 * @param btitle
@@ -62,15 +67,16 @@ public class Daily implements Serializable{
 	 * @param bwriter
 	 * @param bcategory
 	 * @param bfile
+	 * @param bwriterCode
 	 */
-	public Daily(String btitle, String bcontent, String bwriter, int bwriterCode, int bcategory, String bfile) {
+	public Daily(String btitle, String bcontent, String bwriter, int bcategory, String bfile, int bwriterCode) {
 		super();
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bwriter = bwriter;
-		this.bwriterCode = bwriterCode;
 		this.bcategory = bcategory;
 		this.bfile = bfile;
+		this.bwriterCode = bwriterCode;
 	}
 
 
@@ -174,23 +180,41 @@ public class Daily implements Serializable{
 	}
 
 
+	public int getBcount() {
+		return bcount;
+	}
+
+
+	public void setBcount(int bcount) {
+		this.bcount = bcount;
+	}
+
+	
+
+	public int getRownum() {
+		return rownum;
+	}
+
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Daily [bno=" + bno + ", bclass=" + bclass + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bdate="
 				+ bdate + ", bwriter=" + bwriter + ", bcategory=" + bcategory + ", bfile=" + bfile + ", bwriterCode="
-				+ bwriterCode + ", status=" + status + "]";
+				+ bwriterCode + ", status=" + status + ", bcount=" + bcount + ", rownum=" + rownum + "]";
 	}
+
+
+	
+
+
 	
 	
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

@@ -16,21 +16,21 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">                  
-                 <form action="<%=request.getContextPath()%>/dWrite.da" method="post">
+                 <form action="<%= request.getContextPath() %>/dWrite.da" method="post" enctype="multipart/form-data">
                   <table class="table table-bordered">
                     <tbody>                      
                       <tr>
                       	  <th style="text-align:center">게시판</th>
                       	  <td>
                       	  	<select name = "category">
-                      	  		<option value=1>공지사항</option>
-                      	  		<option value=2>교육일지</option>
+                      	  		<option value="1">공지사항</option>
+                      	  		<option value="2">교육일지</option>
                       	  	</select>
                       	  </td>
                           <th style="text-align:center">작성자</th>
-                          <td style="text-align:center" name="writer">
-                          		차은우
-                      		<input type = "hidden" name = "writerId">
+                          <td style="text-align:center">
+                         	<input type = "text" style="width:100%" name = "writer" value="차은우">
+                      		<input type = "hidden" name = "writerId" value="2015001">
                           </td>
                       </tr>
                       <tr>
@@ -43,8 +43,9 @@
                       </tr>
                       <tr>
                           <th style="text-align:center">첨부파일</th>
-                          <td colspan="3"><input type="text" placeholder="파일을 선택하세요. " name="filename" class="form-control"/>
-                          <span><input type="file"></span>
+                          <td colspan="3">
+                          	<input type="text" placeholder="파일을 선택하세요. " name="filename" class="form-control"/>
+                          <span><input type="file" name="file" id="file"/></span>
                           </td>
                       </tr>                         
                     </tbody>

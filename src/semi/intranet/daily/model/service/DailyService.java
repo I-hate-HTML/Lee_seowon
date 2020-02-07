@@ -3,6 +3,7 @@ package semi.intranet.daily.model.service;
 import static semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import semi.intranet.daily.model.dao.DailyDao;
 import semi.intranet.daily.model.vo.Daily;
@@ -23,30 +24,80 @@ public class DailyService {
 		
 		int result = dd.dailyInsert(con, b);
 				
-		close(con);
-		
 		if(result > 0) {
 			commit(con);
 		} else {
 			rollback(con);
 		}
 		
+		close(con);
+
 		return result;
 	}
 
 	/**
-	 * 교육일지 총 게시글 확인
+	 * 총 게시글 확인
+	 * @param category --> 1 공지사항 / 2 교육일지 
 	 * @return
 	 */
-	public int getListCount() {
+	public int getListCount(int category) {
 
 		Connection con = getConnection();
 		
-		int result = dd.getListCount(con);
+		int result = dd.getListCount(con, category);
 		
 		close(con);
 		
 		return result;
+	}
+	
+	
+	/**
+	 * 게시판 목록 불러오기 + 페이징 처리
+	 * @param currentPage
+	 * @param limitContent
+	 * @return
+	 */
+	public ArrayList<Daily> selectList(int currentPage, int limitContent, int category) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Daily> list = dd.selectList(con, currentPage, limitContent, category);
+		
+		close(con);
+		
+		return list;
+	}
+
+	
+	/**
+	 * 게시물 읽기 + 카운트 올리기
+	 * @param dno
+	 * @param category
+	 * @return
+	 */
+	public Daily selectOne(int dno, int category) {
+		
+		
+		Connection con = getConnection();
+		
+		Daily d = dd.selectOne(con, dno, category);
+		
+		// 게시글 상세보기를 하면
+		if(d != null) {
+			// 글 수 카운트 올리기
+			int result = dd.updateReadCount(con, dno, category);
+			
+			if(result > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		}
+		
+		close(con);
+		
+		return d;
 	}
 
 }

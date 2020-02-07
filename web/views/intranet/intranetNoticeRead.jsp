@@ -12,13 +12,13 @@
   <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">교육일지</h1>
+    <h1 class="h3 mb-4 text-gray-800">공지사항</h1>
     <div class="card shadow mb-4">
       <div class="card-header py-3">
       <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
           <tr>
             <td>
-        		<h6 class="m-0 font-weight-bold text-primary">교육일지확인</h6>
+        		<h6 class="m-0 font-weight-bold text-primary">공지사항확인</h6>
             </td>
             <td align="right">
               <button class = "btn btn-primary btn-sm" onclick="studentModify();">수정</button>
@@ -35,8 +35,6 @@
              <td colspan="5"><%= d.getBtitle() %></td>
            </tr>
            <tr>
-             <th style="text-align: center;">반</th>
-             <td><%= d.getBclass() %></td>
              <th style="text-align: center;">작성자</th>
              <td><%= d.getBwriter() %></td>
              <th style="text-align: center;">날짜</th>
@@ -53,7 +51,7 @@
              <td colspan = "5"><%= d.getBfile() %></td>
            </tr>
          </table>
-    	<a class="btn btn-secondary btn-sm pull-right" href="<%= request.getContextPath() %>/dList.da">목록</a>
+    	<a class="btn btn-secondary btn-sm pull-right" href="<%= request.getContextPath() %>/nList.da">목록</a>
 	  </div>
      </div>
      </div>

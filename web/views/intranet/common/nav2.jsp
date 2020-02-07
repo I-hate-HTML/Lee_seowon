@@ -92,8 +92,8 @@
         <div id="collapseCommon" class="collapse" aria-labelledby="headingRegister" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
-            <a class="collapse-item" href="#">공지사항</a>
-            <a class="collapse-item" href="/intranetProject/dList.da">교육일지</a>
+            <a class="collapse-item" href="/semi/nList.da">공지사항</a>
+            <a class="collapse-item" href="/semi/dList.da">교육일지</a>
           </div>
         </div>
       </li>

@@ -19,18 +19,17 @@
 <!-- Begin Page Content -->
   <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">교육일지</h1>
+    <h1 class="h3 mb-4 text-gray-800">공지사항</h1>
 
     <div class="card shadow mb-4">
-      <div class="card-header py-3"> 
-         <a class="btn btn-primary btn-sm" href="<%= request.getContextPath() %>/views/intranet/intranetDailyWrite.jsp">글쓰기</a>
+      <div class="card-header py-3">        
+        <a class="btn btn-primary btn-sm" href="<%= request.getContextPath() %>/views/intranet/intranetDailyWrite.jsp">글쓰기</a>
       </div>
       <div class="card-body">
         <div class="table-responsive"> 
             <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
               <tr>
                 <th width = "10%">번호</th>
-                <th width = "5%">반</th>
                 <th width = "35%">제목</th>
                 <th width = "15%">작성자</th>
                 <th width = "20%">작성일</th>
@@ -39,10 +38,9 @@
               <% for(Daily d : list) { %>
               <tr>
                 <td>
-                	<input type = "hidden" name = "dno" value="<%= d.getBno() %>"/>
+	              	<input type = "hidden" name="dno" value="<%=d.getBno()%>"/>
                 	<%= d.getRownum() %>
                 </td>
-                <td><%= d.getBclass() %></td>
                 <td><%= d.getBtitle() %></td>
                 <td><%= d.getBwriter() %></td>
                 <td><%= d.getBdate() %></td>     
@@ -60,14 +58,14 @@
                 <!-- 현재 페이지가 1페이지면 이전 페이지 버튼 disabled -->
                 <% if(currentPage <= 1){ %>
                 <li class="page-item disabled">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=1" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/nList.da?currentPage=1" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                  </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%=currentPage -1 %>" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/nList.da?currentPage=<%=currentPage -1 %>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
@@ -81,7 +79,7 @@
                 %>               
                 	<li class="page-item disabled"><a class="page-link"><%= p %></a></li>
                 <%		} else {%>	
-                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%= p %>"><%= p %></a></li>	
+                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/nList.da?currentPage=<%= p %>"><%= p %></a></li>	
                 <%		} %>
                 <%	} %>
                 		
@@ -94,7 +92,7 @@
                 </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%=currentPage +1 %>" aria-label="Next">
+                  <a class="page-link" href="<%= request.getContextPath() %>/nList.da?currentPage=<%=currentPage +1 %>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
@@ -114,9 +112,8 @@
 <script>
   $(function(){
     $('#viewTable td').click(function(){
-    	
-      var dno = $(this).parent().find("input").val();
-      location.href = "<%= request.getContextPath() %>/dRead.da?dno=" + dno;
+    var dno = $(this).parent().find("input").val();
+      location.href = "<%= request.getContextPath() %>/nRead.da?dno=" + dno;
     });
   });
 </script>

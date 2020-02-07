@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.intranet.daily.model.service.DailyService;
 import semi.intranet.daily.model.vo.Daily;
+import semi.intranet.daily.model.vo.PageInfo;
 
 /**
  * Servlet implementation class DailyListServlet
@@ -35,6 +36,8 @@ public class ListServletDaily extends HttpServlet {
 		ArrayList<Daily> list = new ArrayList<Daily>();
 		
 		DailyService ds = new DailyService();
+		
+		int category = 2; // 카테고리 구별을 위한 변수 --> 교육일지
 		
 		int currentPage; 	// 현재 페이지                 
 		int listCount;		// 총 게시글 수                 
@@ -61,8 +64,37 @@ public class ListServletDaily extends HttpServlet {
 		
 		// 페이징 처리
 		
-		// 총 페이지 수
-		listCount = ds.getListCount();
+		// 총 글 수
+		listCount = ds.getListCount(category);
+		
+		
+		// 가장 마지막 페이지
+		maxPage = (int)((double)listCount / limitContent + 0.9);
+		
+		// 시작 페이지
+		startPage = ((int)((double)currentPage/limitPage + 0.9) - 1) * limitPage + 1;
+		
+		// 한번에 보이는 마지막 페이지
+		endPage = startPage + limitPage - 1;
+		
+		// 만약 마지막 페이지보다 현재 게시글이 끝나는 페이지가 적다면
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		list = ds.selectList(currentPage, limitContent, category);
+		
+		String page = "";
+		
+		if(list != null) {
+			page = "views/intranet/intranetDailyBoard.jsp";
+			request.setAttribute("list", list);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 	}

@@ -69,28 +69,35 @@ public class DailyInsertServlet extends HttpServlet {
 					
 				// 파일 업로드 실시
 				// 기본 전송값 처리하기
-				int bcategory = Integer.parseInt(mrequest.getParameter("category"));
-				String bwriter = mrequest.getParameter("writer");
-				int bwriterCode = Integer.parseInt(mrequest.getParameter("writerId"));
-				String btitle = mrequest.getParameter("subject");
-				String bcontent = mrequest.getParameter("content");
+		
+		/*
+		 * String[] categoryArr = mrequest.getParameterValues("category"); String
+		 * category = ""; for(String category2 : categoryArr) { category = category2; }
+		 */
+		 
+				int category = Integer.parseInt(mrequest.getParameter("category"));
+			
+				String title = mrequest.getParameter("subject");
+				String writer = mrequest.getParameter("writer");
+				int writerCode = Integer.parseInt(mrequest.getParameter("writerId"));
+				String content = mrequest.getParameter("content");
 				
 				// 전달받은 파일을 먼저 저장하고, 그 파일의 이름을 가져오는 메소드를 실행한다.
-				String bfile = mrequest.getFilesystemName("filename");
+				String bfile = mrequest.getFilesystemName("file");
 				
 				
 				DailyService ds = new DailyService();
 				
-				Daily b = new Daily(btitle, bcontent, bwriter, bwriterCode, bcategory, bfile);
+				Daily b = new Daily(title, content, writer, category, bfile, writerCode);
+				
 				
 				int result = ds.dailyInsert(b);		
 				
 				if(result > 0) {
-					
-					if(bcategory == 1) {
-						response.sendRedirect("dList.da");						
-					} else if (bcategory == 2) {
-						response.sendRedirect("nList.da");	
+					if(category == 1) { // 공지사항
+						response.sendRedirect("nList.da");						
+					} else if (category == 2) { // 교육일지
+						response.sendRedirect("dList.da");	
 					}
 					
 					
