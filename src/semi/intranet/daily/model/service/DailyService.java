@@ -100,4 +100,44 @@ public class DailyService {
 		return d;
 	}
 
+	/**
+	 * 글 삭제용
+	 * @param dno
+	 * @param category
+	 * @return
+	 */
+	public int dailyDelete(int dno, int category) {
+		
+		Connection con = getConnection();
+		
+		int result = dd.dailyDelete(con, dno, category);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+	
+	/**
+	 * 글 수정용
+	 * @param dno
+	 * @param category
+	 * @return
+	 */
+	public Daily dailyModify(int dno, int category) {
+		
+		Connection con = getConnection();
+		
+		Daily d = dd.dailyModify(con, dno, category);
+		
+		close(con);
+		
+		return d;
+	}
+
 }

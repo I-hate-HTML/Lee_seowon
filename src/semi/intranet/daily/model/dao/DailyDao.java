@@ -207,7 +207,6 @@ public class DailyDao {
 				d.setBcount(rset.getInt("DAILY_COUNT"));
 				d.setStatus(rset.getString("IS_DELETE"));	
 				
-				System.out.println(d);
 			}
 			
 		} catch(SQLException e) {
@@ -252,6 +251,66 @@ public class DailyDao {
 		
 		return result;
 		
+	}
+
+	/**
+	 * 게시글 삭제 is_delete N --> Y
+	 * @param con
+	 * @param dno
+	 * @param category
+	 * @return
+	 */
+	public int dailyDelete(Connection con, int dno, int category) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteDaily");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dno);
+			pstmt.setInt(2, category);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}	
+		
+		return result;
+	}
+	
+
+	/**
+	 * 글 수정용
+	 * @param con
+	 * @param dno
+	 * @param category
+	 * @return
+	 */
+	public Daily dailyModify(Connection con, int dno, int category) {
+		
+		Daily d = null;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("dailyModify");
+		
+		try {
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return d;
 	}
 
 	

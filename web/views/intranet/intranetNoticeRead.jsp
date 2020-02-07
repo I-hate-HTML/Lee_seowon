@@ -21,8 +21,8 @@
         		<h6 class="m-0 font-weight-bold text-primary">공지사항확인</h6>
             </td>
             <td align="right">
-              <button class = "btn btn-primary btn-sm" onclick="studentModify();">수정</button>
-              <button class = "btn btn-primary btn-sm" onclick="studentDelete();">삭제</button>                              
+            	<button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath() %>/nModify.da?dno=<%= d.getBno() %>'">수정</button>
+              	<button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath() %>/nDelete.da?dno=<%= d.getBno() %>'">삭제</button>                                                        
             </td>
           </tr>
         </table>
@@ -48,7 +48,16 @@
            </tr>
            <tr>
              <th style="text-align: center;">첨부파일</th>
-             <td colspan = "5"><%= d.getBfile() %></td>
+             <td colspan = "5">
+             	<% if(d.getBfile() != null) {%>
+	             	<a href="<%= request.getContextPath()%>/resources/intranet/uploadFiles/Notice/<%= d.getBfile() %>"
+	             	download="<%= d.getBfile()%>">
+		             	<%= d.getBfile() %>
+	             	</a>             
+             	<% } else {%>
+             		첨부파일 없음
+             	<% } %>
+             </td>
            </tr>
          </table>
     	<a class="btn btn-secondary btn-sm pull-right" href="<%= request.getContextPath() %>/nList.da">목록</a>
