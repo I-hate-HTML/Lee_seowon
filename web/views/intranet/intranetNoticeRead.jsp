@@ -61,6 +61,10 @@
            </tr>
          </table>
     	<a class="btn btn-secondary btn-sm pull-right" href="<%= request.getContextPath() %>/nList.da">목록</a>
+    	
+    	<%-- 댓글 --%>
+    	
+	  	<%@ include file = "../intranet/common/comment.jsp" %> 
 	  </div>
      </div>
      </div>

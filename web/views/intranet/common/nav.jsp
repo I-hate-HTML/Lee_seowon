@@ -126,7 +126,7 @@
 
       <!-- Nav Item - 품의관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="intranetForm.jsp">
+        <a class="nav-link" href="/semi/fSignList.fo">
           <i class="fa fa-file-alt fa-2x"></i>
           <span>품의관리</span></a>
       </li>

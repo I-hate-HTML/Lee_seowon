@@ -29,6 +29,4 @@
 <script src="<%=request.getContextPath()%>/resources/intranet/intranet/chart-pie-demo.js"></script> -->
 
 
-
-<script src="<%=request.getContextPath()%>/resources/intranet/intranet/intranet.js"></script>
 </body></html>
