@@ -11,15 +11,20 @@ public class SignList implements Serializable{
 	private String sname;
 	private int sposition;
 	private int scode;
+	private int sclass;
 	
 	public SignList() {}
 
-	public SignList(String sname, int sposition, int scode) {
+
+	public SignList(String sname, int sposition, int scode, int sclass) {
 		super();
 		this.sname = sname;
 		this.sposition = sposition;
 		this.scode = scode;
+		this.sclass = sclass;
 	}
+
+
 
 	public String getSname() {
 		return sname;
@@ -44,13 +49,23 @@ public class SignList implements Serializable{
 	public void setScode(int scode) {
 		this.scode = scode;
 	}
+	
+	public int getSclass() {
+		return sclass;
+	}
+
+	public void setSclass(int sclass) {
+		this.sclass = sclass;
+	}
+
 
 	@Override
 	public String toString() {
-		return "SginList [sname=" + sname + ", sposition=" + sposition + ", scode=" + scode + "]";
+		return "SignList [sname=" + sname + ", sposition=" + sposition + ", scode=" + scode + ", sclass=" + sclass
+				+ "]";
 	}
 
-	
+
 	
 	
 }

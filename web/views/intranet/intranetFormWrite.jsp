@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav2.jsp" %>
-<%@ page import="semi.intranet.form.model.vo.SignList, java.util.ArrayList" %>
+<%@ page import="semi.intranet.form.model.vo.SignList, java.util.ArrayList, semi.intranet.form.model.vo.Form" %>
 
 <%
 	ArrayList<SignList> list = (ArrayList<SignList>)request.getAttribute("sign");
+	ArrayList<Form> flist = (ArrayList<Form>)request.getAttribute("list");
 %>
 
 
@@ -22,7 +23,6 @@
     <div class="table-responsive"> 
       <table id = "viewTable" class="table table-striped">
         <tr>
-          <th></th>
           <th>품의번호</th>
           <th>분류</th>
           <th>상태</th>
@@ -30,15 +30,19 @@
           <th>기안자</th>               
           <th>작성일</th>
         </tr>
+        	<% for(Form f : flist) {%>
         <tr>
-          <td style="text-align: center"><input type = "checkbox"></td>
-          <td style="text-align: center">2020-001</td>
-          <td style="text-align: center">휴가신청</td>
-          <td style="text-align: center">검토</td>
-          <td style="text-align: center">휴가 신청의 건</td>
-          <td style="text-align: center">김선생</td>
-          <td style="text-align: center">2020-01-20</td>
-         </tr>                              
+          <td style="text-align: center"><%= f.getFno() %></td>          
+          <td style="text-align: center"><%= f.getFcategory() %></td>
+          <td style="text-align: center"><%= f.getFstatus() %></td>
+          <td style="text-align: center"><%= f.getFtitle() %></td>
+          <td style="text-align: center">
+          	<%= f.getFwriter() %>
+          	<input type = "hidden" value ="<%= f.getfWriterId() %>"/>
+          </td>
+          <td style="text-align: center"><%= f.getFdate() %></td>    
+        </tr>
+        <% } %>                              
        </table>
 
           <nav aria-label="Page navigation example">
@@ -65,7 +69,7 @@
   </div>
  
     
-<form action="<%=request.getContextPath() %>/fWrite.fo" method="post">
+<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
     <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
@@ -75,7 +79,7 @@
     </td>
     <td align="right">
       <button type="submit" class = "btn btn-primary btn-sm">등록</button>
-      <button type="reset" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/views/intranet/intranetFormWrite.jsp'">취소</button>    
+      <button type="reset" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fSignList.fo'">취소</button>    
               
     </td>
   </tr>
@@ -86,11 +90,12 @@
         <tr>
           <th>품의번호</th>
           <td>
-            <input type = "text" style="padding-left: 0.2rem;"name="formNum" value = "2020-001" readonly>
+            <input type = "text" style="padding-left: 0.2rem;"name="formNum" value = "자동 입력" disabled>
           </td>
           <th>분류</th>
           <td>
             <select id = "formCategory" name="formCategory" onchange="contentChange();">
+              <option value = "">선택</option>
               <option value = "1">지출결의서</option>
               <option value = "2">휴가신청서</option>
               <option value = "3">교구신청서</option>
@@ -117,13 +122,18 @@
             				case 2 : position = "부원장"; break;
             				case 3 : position = "정교사"; break;
             				case 4 : position = "영양사"; break;
-            				case 5 : position = "계약직"; break;
             			}
             	%>
             		
-            		<option>
-	            		<%= position%> <%= a.getSname() %>
-	            		<input type ="hidden" name="signCode" value="<%= a.getScode() %>">
+            		<option value="<%= a.getScode() %>"
+            		
+            		<% if(a.getSposition() == 3) { %>
+            				label ="<%= a.getSclass() %> 반 <%= a.getSname() %>"
+            		<% } else { %>
+            				label ="<%= position %> <%= a.getSname() %>"
+            		<% } %>>
+            			
+            			<input type ="hidden" name="signCode" value="<%= a.getScode() %>">
 	            		<input type ="hidden" name="signPosition" value="<%= a.getSposition()%>">
 	            	</option>
             	<% } %>
@@ -134,8 +144,8 @@
               <option value="5">조리원 오조리원</option> -->
             </select>
             <select name = "formLineP" style="display: none;">
-              <option>승인</option>
-              <option>반려</option>
+              <option value="Y">승인</option>
+              <option value="N">반려</option>
             </select> 
           </td>
           <th>결재자</th>
@@ -148,8 +158,8 @@
               <option value="5">조리원 오조리원</option>
             </select>
             <select  name = "formLineP" style="display: none;">
-              <option>승인</option>
-              <option>반려</option>
+              <option value="Y">승인</option>
+              <option value="N">반려</option>
             </select> 
           </td>
           <th>결재자</th>
@@ -162,8 +172,8 @@
               <option value="5">조리원 오조리원</option>
             </select>
             <select  name = "formLineP" style="display: none;">
-              <option>승인</option>
-              <option>반려</option>
+              <option value="Y">승인</option>
+              <option value="N">반려</option>
             </select> 
           </td>
           <td style="text-align: center;"colspan="2">
@@ -174,7 +184,7 @@
         <tr>
           <th>반려이유</th>
           <td colspan="7">
-            <input type="text" name = "formPN" style = "width: 99%;">
+            <input type="text" name = "formReturn" style = "width: 99%;" disabled>
           </td>
         </tr>
         <tr>
@@ -211,21 +221,21 @@
     var option = document.getElementById("formCategory");
     var content = document.getElementById("formContent");
 
-    if(option.value == '지출결의서') {
+    if(option.value == '1') {
         content.value = '';
         content.value += '지출결의서\n\n\n';
         content.value += '내역 :    외 \n\n';
         content.value += '합계 금액 :    원\n\n\n';
         content.value += '위 금액을 청구하오니 결재 바랍니다.\n\n';
         content.value += '** 지출결의서 파일을 첨부해주세요 ';
-    }else if(option.value == '휴가신청서') {
+    }else if(option.value == '2') {
         content.value = '';
         content.value += '휴가신청서\n\n\n';
         content.value += '휴가 기간 :  년  월  일  ~   년  월  일 \n\n';
         content.value += '휴가 사유 :  \n\n\n';
         content.value += '위와 같이 휴가를 신청하오니 결재 바랍니다.\n\n';
         content.value += '** 휴가신청서 파일을 첨부해주세요 ';
-    }else if(option.value == '교구신청서') {
+    }else if(option.value == '3') {
         content.value = '';
         content.value += '교구신청서\n\n\n';
         content.value += '품목 :    외   개 \n\n';
@@ -233,7 +243,7 @@
         content.value += '위와 같이 교재 교구의 구입을 신청하오니 결재 바랍니다.\n\n';
         content.value += '** 교구신청서 파일을 첨부해주세요 ';
 
-    }else if(option.value == '기타') {
+    }else if(option.value == '4') {
         content.value = '';
         content.value += '품의서\n\n\n';
         content.value += '내용 :  \n\n\n';

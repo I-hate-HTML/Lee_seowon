@@ -64,7 +64,7 @@
     	
     	<%-- 댓글 --%>
     	
-	  	<%@ include file = "../intranet/common/comment.jsp" %> 
+	  	<%-- <%@ include file = "../intranet/common/comment.jsp" %>  --%>
 	  </div>
      </div>
      </div>

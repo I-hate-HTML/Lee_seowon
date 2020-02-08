@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.intranet.form.model.service.FormService;
+import semi.intranet.form.model.vo.Form;
 import semi.intranet.form.model.vo.SignList;
 
 /**
- * Servlet implementation class FormSignListServlet
+ * Servlet implementation class FormListServlet
  */
-@WebServlet("/fSignList.fo")
-public class FormSignListServlet extends HttpServlet {
+@WebServlet("/fList.fo")
+public class FormListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSignListServlet() {
+    public FormListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +32,21 @@ public class FormSignListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int empNo = 2015001; // 나중에 바꾸기!!
 		
+		ArrayList<Form> flist = new ArrayList<Form>();
 		ArrayList<SignList> list = new ArrayList<SignList>();
 		
+		int empNo = 2015001; // 나중에 수정할 것!!
+		
+		flist = new FormService().listForm(empNo);
 		list = new FormService().getSignList(empNo);
 		
+				
 		String page = "";
-		if(list != null) {
+		
+		if(list != null && flist != null) {
 			page = "views/intranet/intranetFormWrite.jsp";
+			request.setAttribute("list", flist);
 			request.setAttribute("sign", list);
 		}
 		

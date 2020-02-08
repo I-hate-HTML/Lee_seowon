@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.intranet.form.model.dao.FormDao;
+import semi.intranet.form.model.vo.Form;
 import semi.intranet.form.model.vo.SignList;
 
 import static semi.common.JDBCTemplate.*;
@@ -24,6 +25,45 @@ public class FormService {
 		ArrayList<SignList> list = fd.getSignList(con, empNo);
 		
 		close(con);
+		
+		return list;
+	}
+
+	/**
+	 * 품의서 작성용
+	 * @param f
+	 * @return
+	 */
+	public int insertForm(Form f) {
+		
+		Connection con = getConnection();
+		
+		int result = fd.insertForm(con, f);
+		
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	/**
+	 * 품의서 게시판
+	 * @param empNum 
+	 * @return
+	 */
+	public ArrayList<Form> listForm(int empNum) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Form> list = fd.listForm(con, empNum);
+		
+		close(con);
+		
 		
 		return list;
 	}
