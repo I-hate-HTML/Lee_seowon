@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import="java.util.*, semi.home.board.model.vo.*"%>
+    
+    
+    <%
+    	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+    %>
+	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -79,66 +84,21 @@
                           </tr>
                       </thead>
                       <tbody>
+                      <% for (Board b : list){ %>
                           <tr>
-                              <td>110</td>
-                              <td>제목1번</td>
-                              <td>작성자1</td>
-                              <td>2020-01-16</td>
-                              <td>1</td>
+                              <td><% b.getBno();%></td>
+                              <td><% b.getBtitle(); %></td>
+                              <td><% b.getBwriter(); %></td>
+                              <td><% b.getBdate(); %></td>
+                              <td><% b.getBcount(); %></td>
                           </tr>
-                          <tr>
-                              <td>111</td>
-                              <td>제목2번</td>
-                              <td>작성자2</td>
-                              <td>2020-01-16</td>
-                              <td>2</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
-                          <tr>
-                              <td>112</td>
-                              <td>제목3번</td>
-                              <td>작성자3</td>
-                              <td>2020-01-16</td>
-                              <td>220</td>
-                          </tr>
+                          <% } %>
                       </tbody>
                   </table>
                   <hr><br>
+                  <% if(true){ %>
                   <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='boardwrite.html'">글작성</button>
+                  <% } %>
                   <div class="text-center d-flex justify-content-center">
                     <ul class="pagination">
 						<li class="page-item"><a class="page-link" href="#" >Previous</a></li>
