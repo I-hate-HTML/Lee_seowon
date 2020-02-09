@@ -5,15 +5,17 @@
 <%@ page import="semi.intranet.daily.model.vo.PageInfo" %>
 
 <%
-	ArrayList<SignList> list = (ArrayList<SignList>)request.getAttribute("sign");
-	ArrayList<Form> flist = (ArrayList<Form>)request.getAttribute("list");
 	
+	ArrayList<Form> flist = (ArrayList<Form>)request.getAttribute("list");
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	Form form = (Form)request.getAttribute("form");
 %>
 
 
@@ -119,9 +121,8 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button type="submit" class = "btn btn-primary btn-sm">등록</button>
-      <button type="reset" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fList.fo'">취소</button>    
-              
+      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fModifyView.fo'">수정</button>
+      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fDelete.fo'">삭제</button>             
     </td>
   </tr>
 </table>
@@ -131,120 +132,91 @@
         <tr>
           <th>품의번호</th>
           <td>
-            <input type = "text" style="padding-left: 0.2rem;"name="formNum" value = "자동 입력" disabled>
+            <input type = "text" style="padding-left: 0.2rem;"name="formNum" value = "<%= form.getFno() %>" disabled>
           </td>
           <th>분류</th>
           <td>
             <select id = "formCategory" name="formCategory" onchange="contentChange();">
-              <option value = "">선택</option>
-              <option value = "1">지출결의서</option>
-              <option value = "2">휴가신청서</option>
-              <option value = "3">교구신청서</option>
-              <option value = "4">기타</option>
+              <option value = "<%= form.getFcategory() %>" selected><%= form.getFcategory() %></option>
             </select>
           </td> 
           <th>기안자</th>
           <td>
-            <input type = "text" name="formName" value = "차은우" disabled>
-            <input type ="hidden" name = "writerId" value="2015001">
+           <%= form.getFwriter() %>
+            <input type ="hidden" name = "writerId" value="<%= form.getfWriterId() %>">
           </td>
           <th>기안날짜</th>
-          <td><input type = "date" name="formDate"></td>
+          <td><input type = "date" name="formDate" value="<%= form.getFdate() %>" disabled></td>
         </tr>
         <tr>  
           <th>결재자</th>
           <td>
             <select name="formLine" id = "formLine">
             	<option value="">결재자 선택</option>
-            	<% 
-            		for(SignList a : list) {
-            			String position = "";
-            			switch(a.getSposition()){
-            				case 1 : position = "원장"; break;
-            				case 2 : position = "부원장"; break;
-            				case 3 : position = "정교사"; break;
-            				case 4 : position = "영양사"; break;
-            			}
-            	%>
-            		
-            		<option value="<%= a.getScode() %>"
-            		
-            		<% if(a.getSposition() == 3) { %>
-            				label ="<%= a.getSclass() %> 반 <%= a.getSname() %>"
-            		<% } else { %>
-            				label ="<%= position %> <%= a.getSname() %>"
-            		<% } %>>
-            			
-            			<input type ="hidden" name="signCode" value="<%= a.getScode() %>">
-	            		<input type ="hidden" name="signPosition" value="<%= a.getSposition()%>">
+            		<option value="<%= form.getFsign() %>" selected>            		
+            			<input type ="hidden" name="signCode" value="<%= form.getFsignId() %>">
 	            	</option>
-            	<% } %>
-             <!--  <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option> -->
             </select>
-            <select name = "formLineP" style="display: none;">
+            <select name = "formLineP">
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine2" style="display: none;">
+            <select name="formLine" id = "formLine2">
               <option value="1">원장 김원장</option>
               <option value="2">부원장 박부원장</option>
               <option value="3">정교사 강교사</option>
               <option value="4">정교사 이교사</option>
               <option value="5">조리원 오조리원</option>
             </select>
-            <select  name = "formLineP" style="display: none;">
+            <select  name = "formLineP">
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine3" style="display: none;">
+            <select name="formLine" id = "formLine3">
               <option value="1">원장 김원장</option>
               <option value="2">부원장 박부원장</option>
               <option value="3">정교사 강교사</option>
               <option value="4">정교사 이교사</option>
               <option value="5">조리원 오조리원</option>
             </select>
-            <select  name = "formLineP" style="display: none;">
+            <select  name = "formLineP">
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select> 
           </td>
           <td style="text-align: center;"colspan="2">
-            <input type ="button" class="btn btn-primary btn-sm" onclick= "add();" value="결재자 추가">
-            <input type ="button" class="btn btn-primary btn-sm" onclick= "del();" value="결재자 삭제">
+            <input type ="button" class="btn btn-primary btn-sm" onclick= "add();" value="결재자 추가" disabled>
+            <input type ="button" class="btn btn-primary btn-sm" onclick= "del();" value="결재자 삭제" disabled>
           </td>
-        </tr>
-        <tr>
-          <th>반려이유</th>
-          <td colspan="7">
-            <input type="text" name = "formReturn" style = "width: 99%;" disabled>
-          </td>
-        </tr>
-        <tr>
-          <th>제목</th>
-          <td colspan="7">
-            <input type="text" name = "formTitle" style = "width: 99%;">
-          </td>
-        </tr>
-        <tr>
-          <th>내용</th>
-          <td colspan="7">
-            <textarea id = "formContent" name = "formContent" style="width: 99%;" rows="10"></textarea>
-              </td>
-            </tr>
+	        </tr>
+	        <tr>
+	          <th>반려이유</th>
+	          <td colspan="7">
+	            <input type="text" name = "formReturn" style = "width: 99%;">
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>제목</th>
+	          <td colspan="7">
+	            <%= form.getFtitle() %>
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>내용</th>
+	          <td colspan="7">
+	            <%= form.getFcontent() %>
+	          </td>
+	        </tr>
             <tr>
               <th>첨부파일</th>
               <td colspan="7">
-                <input type = "file" name="formFile">
+                <%= form.getFfile() %>
               </td>
             </tr>                
           </table>
@@ -318,12 +290,12 @@
  }
  
  $(function(){
-	$('#viewTable td').click(function(){
-		
-		var fno = $(this).parent().find("input").val();
-		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
-	});
- });
+		$('#viewTable td').click(function(){
+			
+			var fno = $(this).parent().find("input").val();
+			location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
+		});
+	 });
 </script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>

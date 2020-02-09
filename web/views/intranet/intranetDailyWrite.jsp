@@ -52,7 +52,7 @@
                   </table>
                   <div class="float-right">
                   	<button type="submit" class="btn btn-link btn-primary btn-sm text-gray-400"  class="pull-right">등록</button>
-           			<button type="reset" class="btn btn-link btn-primary btn-sm text-gray-400">글목록</button>             
+           			<input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="취소" onclick="history.back();">             
            		  </div>
          		 </form>
    			</div>

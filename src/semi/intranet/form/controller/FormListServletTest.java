@@ -17,14 +17,14 @@ import semi.intranet.form.model.vo.SignList;
 /**
  * Servlet implementation class FormListServlet
  */
-@WebServlet("/fList.fo")
-public class FormListServlet extends HttpServlet {
+@WebServlet("/fListTest.fo")
+public class FormListServletTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListServlet() {
+    public FormListServletTest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,7 @@ public class FormListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Form> flist = new ArrayList<Form>();
-		ArrayList<SignList> list = new ArrayList<SignList>();
+		Form f = (Form)request.getAttribute("form");
 		
 		int empNo = 2015001; // 나중에 수정할 것!!
 		
@@ -69,15 +69,13 @@ public class FormListServlet extends HttpServlet {
 		// 게시판 글목록 리스트
 		flist = new FormService().listForm(empNo, currentPage, limitContent);
 		
-		// 결재자 리스트
-		list = new FormService().getSignList(empNo);
 				
 		String page = "";
 		
-		if(list != null && flist != null) {
-			page = "views/intranet/intranetFormWrite.jsp";
+		if(f != null && flist != null) {
+			page = "views/intranet/intranetFormRead.jsp";
 			request.setAttribute("list", flist);
-			request.setAttribute("sign", list);
+			request.setAttribute("form", f);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);

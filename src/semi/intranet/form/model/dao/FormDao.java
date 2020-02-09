@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -129,12 +130,14 @@ public class FormDao {
 
 
 	/**
-	 * 품의서 게시판
+	 * 품의서 게시판 목록 읽기 + 페이징 처리
 	 * @param con
 	 * @param empNum 
+	 * @param limitContent 
+	 * @param currentPage 
 	 * @return
 	 */
-	public ArrayList<Form> listForm(Connection con, int empNum) {
+	public ArrayList<Form> listForm(Connection con, int empNum, int currentPage, int limitContent) {
 		
 		ArrayList<Form> list = new ArrayList<Form>();
 		
@@ -146,8 +149,14 @@ public class FormDao {
 		try {
 			
 			pstmt = con.prepareStatement(sql);
+			
+			int startContent = (currentPage -1) * limitContent +1;
+			int endContent = startContent + limitContent -1;
+			
 			pstmt.setInt(1, empNum);
 			pstmt.setInt(2, empNum);
+			pstmt.setInt(3, endContent);
+			pstmt.setInt(4, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -176,6 +185,94 @@ public class FormDao {
 		
 		return list;
 	}
+
+
+
+	/**
+	 * 총 페이지 가져오기
+	 * @param con
+	 * @return
+	 */
+	public int getListCount(Connection con) {
+		
+		int listCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+
+
+	/**
+	 * 품의서 읽기
+	 * @param con
+	 * @param fno
+	 * @return
+	 */
+	public Form readForm(Connection con, int fno) {
+
+		Form f = new Form();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, fno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				f.setFno(fno);
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setFcontent(rset.getString("DRAFT_CONTENT"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				f.setFfile(rset.getString("DRAFT_FILE"));
+				/* f.setFreturnmsg(rset.getString("RETURN_REASON")); */
+				f.setFsign(rset.getString("SNAME"));
+				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFwriter(rset.getString("WNAME"));
+				f.setfWriterId(rset.getInt("DRATF_EMP"));
+				f.setFsignId(rset.getInt("SIGN_EMP"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+				
+	
+		return f;
+	}
+
+
 	
 	
 	

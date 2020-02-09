@@ -42,7 +42,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - 로고 -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="intranetMain.jsp">      
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=request.getContextPath()%>/views/intranet/intranetMain.jsp">      
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fa fa-smile"></i>
         </div>
@@ -54,7 +54,7 @@
 
       <!-- Nav Item - 메인으로 -->
       <li class="nav-item">
-        <a class="nav-link"  href="intranetMain.jsp">
+        <a class="nav-link"  href="<%=request.getContextPath()%>/views/intranet/intranetMain.jsp">
           <i class="fa fa-home fa-2x"></i>
           <span>메인으로</span></a>
       </li>
@@ -69,27 +69,27 @@
 
       <!-- Nav Item - 등록 -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" data-toggle="collapse" data-target="#collapseRegister" aria-expanded="true" aria-controls="collapseRegister">
+        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/intranet/intranetRegisterStudent.jsp" data-toggle="collapse" data-target="#collapseRegister" aria-expanded="true" aria-controls="collapseRegister">
           <i class="fa fa-address-book fa-2x"></i>
           <span>등록</span>
         </a>
         <div id="collapseRegister" class="collapse" aria-labelledby="headingRegister" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
-            <a class="collapse-item" href="intranetRegisterStudent.jsp">원아등록</a>
-            <a class="collapse-item" href="intranetRegisterTeacher.jsp">교사등록</a>
-            <a class="collapse-item" href="intranetMember.jsp">회원 관리</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetRegisterStudent.jsp">원아등록</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetRegisterTeacher.jsp">교사등록</a>
+            <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetMember.jsp">회원 관리</a>
           </div>
         </div>
       </li>
       
       <!-- Nav Item - 게시판 -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" data-toggle="collapse" data-target="#collapseCommon" aria-expanded="true" aria-controls="collapseRegister">
+        <a class="nav-link collapsed" href="/semi/nList.da" data-toggle="collapse" data-target="#collapseBoard" aria-expanded="true" aria-controls="collapseBoard">
            <i class="fa fa-desktop fa-2x"></i>
           <span>게시판</span>
         </a>
-        <div id="collapseCommon" class="collapse" aria-labelledby="headingRegister" data-parent="#accordionSidebar">
+        <div id="collapseBoard" class="collapse" aria-labelledby="headingRegister" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
             <a class="collapse-item" href="/semi/nList.da">공지사항</a>

@@ -1,13 +1,16 @@
 package semi.intranet.form.model.service;
 
+import static semi.common.JDBCTemplate.close;
+import static semi.common.JDBCTemplate.commit;
+import static semi.common.JDBCTemplate.getConnection;
+import static semi.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.intranet.form.model.dao.FormDao;
 import semi.intranet.form.model.vo.Form;
 import semi.intranet.form.model.vo.SignList;
-
-import static semi.common.JDBCTemplate.*;
 
 public class FormService {
 	
@@ -52,15 +55,17 @@ public class FormService {
 	}
 
 	/**
-	 * 품의서 게시판
+	 * 품의서 게시판 목록 불러오기 + 페이징 처리
 	 * @param empNum 
+	 * @param limitContent 
+	 * @param currentPage 
 	 * @return
 	 */
-	public ArrayList<Form> listForm(int empNum) {
+	public ArrayList<Form> listForm(int empNum, int currentPage, int limitContent) {
 		
 		Connection con = getConnection();
 		
-		ArrayList<Form> list = fd.listForm(con, empNum);
+		ArrayList<Form> list = fd.listForm(con, empNum, currentPage, limitContent);
 		
 		close(con);
 		
@@ -68,4 +73,46 @@ public class FormService {
 		return list;
 	}
 
+	/**
+	 * 총 게시글 확인
+	 * @return
+	 */
+	public int getListCount() {
+		
+	Connection con = getConnection();
+	
+	int listCount = fd.getListCount(con);
+	
+	close(con);
+	
+		return listCount;
+	}
+
+	/**
+	 * 품의서 읽기
+	 * @param fno
+	 * @return
+	 */
+	public Form readForm(int fno) {
+		
+		Connection con = getConnection();
+		
+		Form f = fd.readForm(con, fno);
+		
+		close(con);
+		
+		return f;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
