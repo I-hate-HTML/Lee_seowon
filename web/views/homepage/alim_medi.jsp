@@ -86,6 +86,9 @@
         table.board-write td a.click2 { display:inline-block; padding:0 25px; font-size:13px; font-weight:600; color:#fff; background-color:#ffa800; }
         table.board-write td table.tbl4 { width:60%; }
         
+        .table-bordered{
+          font-size: 16px;
+        }        
       
 .tabbtn{width: 100%;table-layout: fixed;border-collapse: collapse;}
 .tabbtn a.alimtab3 {background-color: #002c5f; color: white;}

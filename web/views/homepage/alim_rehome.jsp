@@ -95,6 +95,9 @@
 .tabbtn a {display: table-cell;height: 60px;
 font-size: 18px;text-align: center;
 vertical-align: middle;}
+.table-bordered{
+          font-size: 16px;
+        }
 
 
 
