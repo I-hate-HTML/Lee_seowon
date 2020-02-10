@@ -8,12 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 	<title>요정의집 : 회원가입</title>
 	
-    <!-- <link rel="stylesheet" type="text/css" href="naversign.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./css/sign.css"> -->
-    
     <link href="<%=request.getContextPath()%>/resources/homepage/css/sign.css"
 	rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     
 
@@ -32,16 +29,12 @@
     </div>
 <!-- // header -->
 
-<form id="join_form">
+<form id="sign_form" action="${pageContext.request.contextPath}/homeinsert" method="post">
    
     <!-- container -->
     <div id="container">
         <div id="content">
         
-            
-
-
-    
             <div class="join_content">
                 
                 <!-- 아이디, 비밀번호 입력 -->
@@ -109,9 +102,9 @@
                 <div class="join_row join_mobile" id="mobDiv">
                     <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
                    
-                    <div class="int_mobile_area">
+                    <div>
 						<span class="ps_box int_mobile">
-							<input type="tel" id="phoneNo" name="phone" placeholder="전화번호 입력 - 제외" class="int" maxlength="16">
+							<input type="tel" id="phone" name="phone" placeholder="전화번호 입력 - 제외" class="int" maxlength="16">
 							<label for="phoneNo" class="lbl"></label>
 						</span>
                         
@@ -124,13 +117,14 @@
                 <div class="address_area child_info">
                     <h3 class="join_title"> <label for="addr">주소</label></h3>
                     <div class= "addr">
-                    <span class="ps_box int_arr"><input type="text" id="addrNo" placeholder="우편번호" class="int" disabled="" name="addrNo">
+                    <span class="ps_box int_arr"><input type="text" id="addrNo" placeholder="우편번호" class="int" name="addrNo"/>
                     </span>
-                    <a href="#" class="btn_arr" id="btnSend" onclick="addrSearch()">주소</a>
+                    <div class="btn_arr" id="btnSend" onclick="addrSearch()">주 소</div>
+                  <!--   <a href="#" class="btn_arr" id="btnSend" onclick="addrSearch()">주소</a> -->
                 </div>
                     
                      <div class="addr_box">
-                            <input type="text" id="addr1" placeholder="주소 입력" disabled="" class="int" name="addr1"  >
+                            <input type="text" id="addr1" placeholder="주소 입력" class="int" name="addr1"/>
                   
                     </div>
                     
@@ -152,8 +146,8 @@
                     <div class="addr_box child_gender">
                         <select id="c_gender" name="cgender" class="sel">
                             <option selected="">성별</option>
-                            <option value="M_c">남아</option>
-                            <option value="F_c">여아</option>
+                            <option value="M">남아</option>
+                            <option value="F">여아</option>
                         </select>
                     </div>
                     <h3 class="join_title"><label for="child_name">반</label></h3><br>
@@ -167,7 +161,7 @@
                 </div>
                
                 <div class="btn_area">
-                    <button type="button" id="btnJoin" class="btn_type btn_primary" onclick="location='join_Fin.jsp'"><span>가입하기</span></button>
+                    <button type="button" id="btnJoin" class="btn_type btn_primary" onclick="sign();"><span>가입하기</span></button>
                 </div>
             </div>
         </div>
@@ -175,6 +169,11 @@
     <!-- // container -->
 </form>
 		<script>
+		
+		
+		function sign(){
+			$('#sign_form').submit();
+		}
 		
 		// 참조 API : http://postcode.map.daum.net/guide
 		function addrSearch() {

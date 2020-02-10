@@ -32,30 +32,36 @@ public class HomeMemberInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-		String userName = request.getParameter("username");
+		String userName = request.getParameter("userName");
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		
+		System.out.println(request.getParameter("addrNo"));
+		
+		String address = request.getParameter("addrNo")+", "
+						+request.getParameter("addr1")+", "
+						+request.getParameter("addr2");
+		
 		String cname = request.getParameter("cname");
 		String cgender = request.getParameter("cgender");
 		int cclass = Integer.parseInt(request.getParameter("cclass"));
-		String cdate = request.getParameter("cdate");
+		String cbdate = request.getParameter("cbdate");
 		
 		Date writerDate = null;
 		
-		String [] dateArr = cdate.split("-"); 
+		String [] dateArr = cbdate.split("-"); 
 		int [] intArr = new int[dateArr.length];
 		
 		for(int i=0; i<dateArr.length;i++) {
 			intArr[i] = Integer.parseInt(dateArr[i]);
 		}
 		
-		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1], intArr[2]).getTimeInMillis());
-	
+		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
+		System.out.println(address);
 		Member m = new Member(userId,userPwd,userName,gender,email,phone,address,cname,writerDate,cgender,cclass);
 		
 		System.out.println("가입 회원 정보 확인 : " + m);

@@ -17,7 +17,7 @@ public class HomeMemberDao {
 	public HomeMemberDao() {
 		prop = new Properties();
 		
-		String filePath = HomeMemberDao.class.getResource("member-query.properties").getPath();
+		String filePath = HomeMemberDao.class.getResource("/config/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(filePath));
