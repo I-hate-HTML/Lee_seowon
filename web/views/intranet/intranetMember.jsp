@@ -38,7 +38,7 @@ button/* 눈여겨 볼 것 */
 /* 필수 */
 body, input, textarea,select, button, table {
     font-family: '돋움', Dotum, Helvetica, sans-serif;
-    font-size: 10px
+    font-size: 14px
 }
 
 /* 필수 */
@@ -97,18 +97,6 @@ table, th, td {
 
 
 /* Contents */
-/* 버튼 간격 */
-.action_in .btn_type {
-    margin-right: 1px
-}
-
-/* 이거 필요 윗 마진 */
-.section_top {
-    position: relative;
-    margin-top: 28px;
-    z-index: 30
-}
-
 /* 없으면 이상해짐 필수 */
 .board_action {
     position: relative;
@@ -131,26 +119,6 @@ input.check {
     _margin-top: 0 !important
 }
 
-/* 가입승인 버튼 왼쪽 줄 */
-.btn_type {
-    display: inline-block;
-    height: 21px;
-    padding-left: 1px;
-    background: url(https://cafe.pstatic.net/img/manage/sp_btn_141125.gif) no-repeat 0 -128px;
-    color: #404040;
-    text-decoration: none !important;
-    cursor: pointer
-}
-
-/* 버튼 두가지 쪼그라들지 않게 함 */
-.btn_type strong,
-.btn_type span {
-    display: inline-block;
-    height: 21px;
-    padding: 0 7px;
-    background: url(https://cafe.pstatic.net/img/manage/sp_btn_141125.gif) no-repeat 100% -128px;
-    line-height: 25px
-}
 </style>
         <div class="container-fluid">
 
@@ -200,7 +168,8 @@ input.check {
 				<col width="80"><!-- 자녀 성별 -->
 				<col width="80"><!-- 자녀 반 -->
 				</colgroup>
-				<thead>
+				
+				<thead style="text-align:center;">
 				<tr>
 				
 				<th scope="col" class="frst"><input type="checkbox" id="chkalltop" title="선택" class="check _click(ManageJoinApplication|AllJoinMember)"></th>
@@ -226,7 +195,7 @@ input.check {
 					<td class="tc">
 						<input type="checkbox" name="applyMemberCheck" value="hoon1489" id="c1" title="선택" class="check _click(ManageJoinApplication|Member|member1)">
 					</td>
-					<td>
+					<td class="tc">
 						<span class="img">hoon1489</span>
 					</td>
 					<td class="tc">
@@ -273,7 +242,7 @@ input.check {
 					<td class="tc">
 						<input type="checkbox" name="applyMemberCheck" value="hoon9185" id="c1" title="선택" class="check _click(ManageJoinApplication|Member|member2)">
 					</td>
-					<td>
+					<td class="tc">
 						<span class="img">hoon9185</span>
 					</td>					
 					<td class="tc">
@@ -318,7 +287,7 @@ input.check {
 					<td class="tc">
 						<input type="checkbox" name="applyMemberCheck" value="hoonihoon" id="c1" title="선택" class="check _click(ManageJoinApplication|Member|member3)">
 					</td>
-					<td>
+					<td class="tc">
 						<span class="img">hoonihoon</span>
 					</td>
 					<td class="tc">
