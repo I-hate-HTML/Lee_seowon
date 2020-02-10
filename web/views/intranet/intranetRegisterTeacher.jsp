@@ -121,7 +121,7 @@
                       <tr>
                      	<td colspan="8" style="padding:0.2rem">
                      		<input type="submit" value="교사 등록하기">
-                     		<input type="reset" value="초기화">
+                     		<input type="reset" value="초기화"> 
                      	</td>
                       </tr>
                     </table>
@@ -219,7 +219,7 @@
 	</script>
 	
 	<script type="text/javascript"></script>
-	
+	 
 	
 	
 

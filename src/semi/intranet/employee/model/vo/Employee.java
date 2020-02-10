@@ -24,7 +24,7 @@ public class Employee implements Serializable{
 	private String empClass;
 	private int hobong;
 	  
-	 
+	  
 	public Employee() {}
 
 	public Employee(String empName, String empJob, String empNo, String empPhone,String empEmail, String empAddr,
@@ -34,7 +34,7 @@ public class Employee implements Serializable{
 		this.empNo = empNo;
 		this.empPhone = empPhone;
 		this.empEmail = empEmail;
-		this.empAddr = empAddr;
+		this.empAddr = empAddr; 
 		this.empClass = empClass;
 	}
 
