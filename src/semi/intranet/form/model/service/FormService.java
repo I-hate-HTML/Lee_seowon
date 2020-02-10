@@ -104,6 +104,23 @@ public class FormService {
 		return f;
 	}
 
+	/**
+	 * 품의서 수정할 내용 불러오기
+	 * @param fno
+	 * @return
+	 */
+	public Form modifyViewForm(int fno) {
+		
+		Connection con = getConnection();
+		
+		Form f = fd.modifyViewForm(con, fno);
+		
+		close(con);
+
+		
+		return f;
+	}
+
 	
 	
 	

@@ -1,66 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav2.jsp" %>
+<%@ include file = "intranetFormList.jsp" %>
 
 
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
-
-  <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">품의 관리</h1>
-
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">품의목록</h6>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive"> 
-      <table id = "viewTable" class="table table-striped">
-        <tr>
-          <th></th>
-          <th>품의번호</th>
-          <th>분류</th>
-          <th>상태</th>
-          <th >제목</th>
-          <th>기안자</th>               
-          <th>작성일</th>
-        </tr>
-        <tr>
-          <td style="text-align: center"><input type = "checkbox"></td>
-          <td style="text-align: center">2020-001</td>
-          <td style="text-align: center">휴가신청</td>
-          <td style="text-align: center">검토</td>
-          <td style="text-align: center">휴가 신청의 건</td>
-          <td style="text-align: center">김선생</td>
-          <td style="text-align: center">2020-01-20</td>
-         </tr>                              
-       </table>
-
-          <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-sm justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>        
-        </div>
-      </div>
-  </div>
- 
-    
+  
 <form action="<%=request.getContextPath() %>/fWrite.fo" method="post">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 

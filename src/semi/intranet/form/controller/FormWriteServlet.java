@@ -93,7 +93,7 @@ public class FormWriteServlet extends HttpServlet {
 		int result = new FormService().insertForm(f);
 		
 		if(result > 0) {
-			response.sendRedirect("fList.fo");
+			response.sendRedirect("fListOnly.fo"); 
 		}
 	
 	}

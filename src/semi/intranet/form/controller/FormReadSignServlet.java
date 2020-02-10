@@ -17,13 +17,13 @@ import semi.intranet.form.model.vo.Form;
  * Servlet implementation class FormReadServlet
  */
 @WebServlet("/fRead.fo")
-public class FormReadServlet extends HttpServlet {
+public class FormReadSignServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FormReadServlet() {
+	public FormReadSignServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,10 +36,10 @@ public class FormReadServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int fno = Integer.parseInt(request.getParameter("fno"));
-		int empNo = 2015001; // 나중에 수정할 것!!
 
 		ArrayList<Form> flist = new ArrayList<Form>();
 
+		int empNo = 2015001; // 나중에 수정할 것!!
 
 		int currentPage;
 		int listCount;
@@ -75,7 +75,7 @@ public class FormReadServlet extends HttpServlet {
 
 		String page = "";
 		
-		  if(f != null && empNo == f.getfWriterId()) { // 
+		  if(f != null) { 
 			/* page = "views/intranet/intranetFormRead.jsp"; */ 
 			  page = "/fList.fo"; 
 		  

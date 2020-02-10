@@ -273,6 +273,38 @@ public class FormDao {
 	}
 
 
+
+	/**
+	 * 품의서 수정할 내용 불러오기
+	 * @param con
+	 * @param fno
+	 * @return
+	 */
+	public Form modifyViewForm(Connection con, int fno) {
+		
+		Form f = new Form();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("modifyViewForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return f;
+	}
+
+
 	
 	
 	
