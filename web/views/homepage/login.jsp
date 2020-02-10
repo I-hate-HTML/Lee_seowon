@@ -61,7 +61,7 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-						<form id="Loginform" action="" method="post">
+						<form id="Loginform" action="/semi/homelogin" method="post">
 							<div class="inputgroup">
 								<div class="input-groupp">
 

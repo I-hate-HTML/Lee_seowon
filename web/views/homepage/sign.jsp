@@ -13,6 +13,13 @@
     
     <link href="<%=request.getContextPath()%>/resources/homepage/css/sign.css"
 	rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    
+
+	<!-- HTTPS required. HTTP will give a 403 forbidden response -->
+	
+
     
     </head>
 <body>
@@ -32,6 +39,9 @@
         <div id="content">
         
             
+
+
+    
             <div class="join_content">
                 
                 <!-- 아이디, 비밀번호 입력 -->
@@ -104,14 +114,9 @@
 							<input type="tel" id="phoneNo" name="phone" placeholder="전화번호 입력 - 제외" class="int" maxlength="16">
 							<label for="phoneNo" class="lbl"></label>
 						</span>
-                        <a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
-                            <span class="">인증번호 받기</span>
-                        </a>
-                    </div>
-                    <div class="ps_box_disable box_right_space" id="authNoBox">
-                        <input type="tel" id="authNo" name="authNo" placeholder="인증번호 입력하세요"  class="int" disabled="" maxlength="4">
                         
                     </div>
+                   
                 </div>
                 <!--  휴대전화 번호, 인증번호 입력 -->
                 
@@ -119,18 +124,18 @@
                 <div class="address_area child_info">
                     <h3 class="join_title"> <label for="addr">주소</label></h3>
                     <div class= "addr">
-                    <span class="ps_box int_arr"><input type="text" id="addr" placeholder="우편번호" class="int" disabled="" name="addrNo">
+                    <span class="ps_box int_arr"><input type="text" id="addrNo" placeholder="우편번호" class="int" disabled="" name="addrNo">
                     </span>
-                    <a href="#" class="btn_arr" id="btnSend">주소</a>
+                    <a href="#" class="btn_arr" id="btnSend" onclick="addrSearch()">주소</a>
                 </div>
                     
-                     <div class="addr_box" style="background: #f7f7f7;">
-                            <input type="text" id="autoaddr" placeholder="주소 입력" disabled="" class="int" name="addr1"  style="background: #f7f7f7;" >
+                     <div class="addr_box">
+                            <input type="text" id="addr1" placeholder="주소 입력" disabled="" class="int" name="addr1"  >
                   
                     </div>
                     
                     <div class="addr_box">
-                            <input type="text" id="autoaddr" placeholder="상세 주소를 입력하세요" class="int" name="addr2" >
+                            <input type="text" id="addr2" placeholder="상세 주소를 입력하세요" class="int" name="addr2" >
                   
                     </div>
                     <br><br>
@@ -169,6 +174,56 @@
     </div>
     <!-- // container -->
 </form>
+		<script>
+		
+		// 참조 API : http://postcode.map.daum.net/guide
+		function addrSearch() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var fullAddr = ''; // 최종 주소 변수
+	                var extraAddr = ''; // 조합형 주소 변수
+
+	                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    fullAddr = data.roadAddress;
+
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    fullAddr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    //법정동명이 있을 경우 추가한다.
+	                    if(data.bname !== ''){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있을 경우 추가한다.
+	                    if(data.buildingName !== ''){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+	                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                $('#addrNo').val(data.zonecode); //5자리 새우편번호 사용
+	                
+	                $('#addr1').val(fullAddr);
+
+	                // 커서를 상세주소 필드로 이동한다.
+	                $('#addr2').focus();
+	            }
+	        }).open();
+	    };
+		
+		
+		
+		</script>
+
 
 
 	<!-- footer -->
