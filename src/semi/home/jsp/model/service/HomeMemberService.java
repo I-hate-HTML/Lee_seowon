@@ -53,6 +53,27 @@ public class HomeMemberService {
 		
 		return result;
 	}
+
+
+	
+	/** 회원 탈퇴
+	 * @param userId
+	 * @return
+	 */
+	public int homedeleteMember(String userId) {
+		con = getConnection();
+		
+		int result = hmDao.homeMemberDelete(con, userId);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;		
+	}
+
+
 	}
 
 

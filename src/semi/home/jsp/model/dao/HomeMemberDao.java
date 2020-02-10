@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 import static semi.common.JDBCTemplate.*;
 import semi.home.jsp.model.vo.Member;
@@ -125,6 +126,34 @@ public class HomeMemberDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+
+	/**
+	 * 회원 탈퇴
+	 * @param con
+	 * @param userId
+	 * @return
+	 */
+	public int homeMemberDelete(Connection con, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("homeMemberDelete");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}		
 		return result;
 	}
 

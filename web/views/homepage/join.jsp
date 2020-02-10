@@ -441,12 +441,12 @@
 					<div class="d-flex justify-content-center"
 						style="background-color: #f5f6f7;">
 						<button class="btn"
-							style="background: #002c5f; color: white; width: 150px;">
+							style="background: #002c5f; color: white; width: 150px;" onclick="location='homeindex.jsp'">
 							취소</button>
 						&nbsp;&nbsp;&nbsp;
 						<button class="btn"
 							style="background: #002c5f; color: white; width: 150px; height: 50px;"
-							onclick="location='sign.html'">다음</button>
+							onclick="location='sign.jsp'">다음</button>
 					</div>
 				</div>
 			</div>
