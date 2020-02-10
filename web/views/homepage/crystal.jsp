@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
+
+<%
+	Member m = (Member)session.getAttribute("member");
+%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -127,43 +132,33 @@
             <table class="board-write mgtop7">
                     <tbody>
                            <tr>
-                            <th>성명</th>
-                            <td><input type="text" id="name" name="name" class="width1" value="임도훈" disabled></td>
+                            <th>이름</th>
+                            <td><%= m.getUserName() %></td>
                         </tr>
                         <tr>
                             <th>회원아이디</th>
-                            <td>
-                                <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="JavaMaster" disabled>
-                            </td>
+                            <td><%= m.getUserId() %> </td>
                         </tr>
                         <tr>
                             <th>비밀번호 <span>*</span></th>
-                            <td><input type="password" id="userpw" name="userpw" value="" class="width1"><em>비밀번호는 6~16자리의 영문, 숫자, 특수문자의 혼합</em></td>
+                            <td><input type="password" id="userPwd" name="userPwd" value="" class="width1"><em>비밀번호는 6~16자리의 영문, 숫자, 특수문자의 혼합</em></td>
                         </tr>
                         <tr>
                             <th>비밀번호 확인 <span>*</span></th>
-                            <td><input type="password" id="userpw1" name="userpw1" value="" class="width1"><em>비밀번호를 한번 더 입력해 주세요</em></td>
+                            <td><input type="password" id="userPwd2" name="userPwd2" value="" class="width1"><em>비밀번호를 한번 더 입력해 주세요</em></td>
                         </tr>
                         <tr>
                             <th>이메일 <span>*</span></th>
                             <td>
                                 <input type="text" id="email1" name="email1" class="width4"> @ 
                                 <input type="text" id="email2" name="email2" class="width4">
-                                <select class="select1 ko" style="width:150px;" onchange="selectEmail(this.value);">
-                                    <option value="">직접입력</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="hanmail.net">hanmail.net</option>
-                                    <option value="gmail.com">gmail.com</option>
-                                    <option value="hotmail.com">hotmail.com</option>
-                                    <option value="korea.com">korea.com</option>
-                                    <option value="nate.com">nate.com</option>	  
-                                </select>
+                             
                             </td>
                         </tr>
                             <tr>
                             <th>핸드폰번호 <span>*</span></th>
                             <td>
-                                <select name="hp1" id="hp1" style="width:95px; font-size:13px; width:120px;" class="select1 ko">
+                                <select name="tel1" id="hp1" style="width:95px; font-size:13px; width:120px;" class="select1 ko">
                                     <option value="010">010</option>
                                     <option value="011">011</option>
                                     <option value="016">016</option>
@@ -171,8 +166,8 @@
                                     <option value="018">018</option>
                                     <option value="019">019</option>
                                 </select> 
-                                - <input type="text" id="hp2" name="hp2" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };"> 
-                                - <input type="text" id="hp3" name="hp3" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
+                                - <input type="text" id="tel2" name="tel2" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };"> 
+                                - <input type="text" id="tel3" name="tel3" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
                                 <a id="certiHpButton" style="cursor:pointer; background: #002c5f; color: white;" class="click" onclick="hpCerti();" >핸드폰 본인인증</a>
                                 <span id="certiHpResult" style="display:none;">핸드폰 인증 완료</span>
                             </td>
@@ -203,7 +198,7 @@
                             <col width="*">
                         </colgroup>
                         <thead>
-                            <tr><th class="first">이름</th>
+                            <tr><th class="first"></th>
                             <th>생년월일</th>
                             <th>성별</th>
                             <th>재원</th>
@@ -212,12 +207,8 @@
                         </tr></thead>
                         <tbody id="CHILD_ROWS">
                             <tr class="CHILD_ROW">
-                                <td style="border-left:0px solid #ddd;">
-                                    <input type="text" id="child_name_0" class="input_st child_name ko" style="width:85%; padding:3px 0 3px 0px; text-align:center; font-size:14px; ime-mode:active;" value="이승효" disabled>
-                                </td>
-                                <td>
-                                    &nbsp;&nbsp;<input type="date" class="child_birth ko k-input" id="child_birth_1" value="2015-01-10" style="width: 90%; margin-left: -5px; padding-left: 0px; padding-right: 5px; text-align: center;" data-role="datepicker" role="textbox" aria-haspopup="true" aria-expanded="false" aria-owns="child_birth_1_dateview" aria-disabled="false" aria-label="Current focused date is null" disabled></span>
-                                </td>
+                                <td style="border-left:0px solid #ddd;"><%=m.getCname() %></td>
+                                <td><%=m.getCbdate() %> </td>
                                 <td>
                                     <input type="radio" class="radio01 child_sex1" name="child_sex_0" value="남" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" disabled>&nbsp;&nbsp;&nbsp;남자
                                     <input type="radio" class="radio01 child_sex1" name="child_sex_0" value="여" style="width:20px; height:20px; margin-top:6px; margin-left:10px;"checked disabled>&nbsp;&nbsp;&nbsp;여자

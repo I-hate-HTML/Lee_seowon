@@ -103,4 +103,29 @@ public class HomeMemberDao {
 		return result;
 	}
 
+
+	public int homeMemberUpdate(Connection con, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("homeMemberUpdate");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getUserPwd());
+			pstmt.setString(2, m.getEmail());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getAddress());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
