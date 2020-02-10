@@ -10,12 +10,13 @@ public class Employee implements Serializable{
 	 */
 	private static final long serialVersionUID = -7734435700357772483L;
 	
-	// 占쏙옙占쏙옙占쏙옙占�
+	// �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占�
 	private int empCode;
 	private String empName;
 	private String empJob;
 	private String empNo;
 	private String empPhone;
+	private String empEmail;
 	private String empAddr;
 	private Date hireDate; 
 	private int entYN;
@@ -26,23 +27,25 @@ public class Employee implements Serializable{
 	 
 	public Employee() {}
 
-	public Employee(String empName, String empJob, String empNo, String empPhone, String empAddr,
+	public Employee(String empName, String empJob, String empNo, String empPhone,String empEmail, String empAddr,
 			 String empClass) {
 		this.empName = empName;
 		this.empJob = empJob;
 		this.empNo = empNo;
 		this.empPhone = empPhone;
+		this.empEmail = empEmail;
 		this.empAddr = empAddr;
 		this.empClass = empClass;
 	}
 
-	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empAddr,
-			Date hireDate, int entYN, Date entDate, String empClass) {
+	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empEmail, 
+			String empAddr,Date hireDate, int entYN, Date entDate, String empClass) {
 		this.empCode = empCode;
 		this.empName = empName;
 		this.empJob = empJob;
 		this.empNo = empNo;
 		this.empPhone = empPhone;
+		this.empEmail = empEmail;
 		this.empAddr = empAddr;
 		this.hireDate = hireDate;
 		this.entYN = entYN;
@@ -88,6 +91,14 @@ public class Employee implements Serializable{
 
 	public void setEmpPhone(String empPhone) {
 		this.empPhone = empPhone;
+	}
+
+	public String getEmpEmail() {
+		return empEmail;
+	}
+
+	public void setEmpEmail(String empEmail) {
+		this.empEmail = empEmail;
 	}
 
 	public String getEmpAddr() {
@@ -145,9 +156,12 @@ public class Employee implements Serializable{
 	@Override
 	public String toString() {
 		return "Employee [empCode=" + empCode + ", empName=" + empName + ", empJob=" + empJob + ", empNo=" + empNo
-				+ ", empPhone=" + empPhone + ", empAddr=" + empAddr + ", hireDate=" + hireDate + ", entYN=" + entYN
-				+ ", entDate=" + entDate + ", empClass=" + empClass + ", hobong=" + hobong + "]";
+				+ ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", empAddr=" + empAddr + ", hireDate="
+				+ hireDate + ", entYN=" + entYN + ", entDate=" + entDate + ", empClass=" + empClass + ", hobong="
+				+ hobong + "]";
 	}
+
+	
 	
 	
 	

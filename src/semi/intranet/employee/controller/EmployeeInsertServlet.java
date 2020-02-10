@@ -33,13 +33,12 @@ public class EmployeeInsertServlet extends HttpServlet {
 		String empName = request.getParameter("empName");
 		String empJob = request.getParameter("empJob");
 		String empNo = request.getParameter("empNo1")+"-"+request.getParameter("empNo2");
-		String empPhone = request.getParameter("empPhone1")+"-"
-						+request.getParameter("empPhone2")+"-"
-						+request.getParameter("empPhone3");
+		String empPhone = request.getParameter("empPhone");
+		String empEmail = request.getParameter("empEmail");
 		String empAddr = request.getParameter("empAddr1")+" "+request.getParameter("empAddr2")+" "+request.getParameter("empAddr3");
 		String empClass= request.getParameter("empClass");
 		
-		Employee em = new Employee(empName,empJob,empNo,empPhone,empAddr,empClass); 
+		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,empClass); 
 		
 		EmployeeService es = new EmployeeService();
 		 

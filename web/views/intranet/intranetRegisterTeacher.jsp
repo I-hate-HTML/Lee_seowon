@@ -20,72 +20,72 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                  <form action="" method="" name = "registerTeacher">
+                  <form action="" method="empInsert.em" name = "registerTeacher">
                     <table class="table table-bordered" id="dataTable" width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
                       <tr>
                         <th style="padding:0.2rem">이름</th>
                         <td style="padding:0.2rem">
-                          <input type = "text" id = "teacherName"name = "teacherName">
+                          <input type = "text" id = "empName"name = "empName">
                         </td>
                         <th style="padding:0.2rem">직급</th>
                         <td style="padding:0.2rem">
-                          <select id="teacherGrade" name = "teacherGrade">
-                            <option id="teacherGrade" name = "teacherGrade">원장</option> 
-                            <option id="teacherGrade" name = "teacherGrade">부원장</option> 
-                            <option id="teacherGrade" name = "teacherGrade">정교사</option> 
-                            <option id="teacherGrade" name = "teacherGrade">보조교사</option> 
-                            <option id="teacherGrade" name = "teacherGrade">조리원</option> 
+                          <select id="teacherGrade" name = "empJob">
+                            <option id="teacherGrade" name = "empJob" value='1'>원장</option> 
+                            <option id="teacherGrade" name = "empJob" value='2'>부원장</option> 
+                            <option id="teacherGrade" name = "empJob" value='3'>교사</option> 
+                            <option id="teacherGrade" name = "empJob" value='4'>영양사</option> 
+                            <option id="teacherGrade" name = "empJob" value='5'>계약직</option> 
                           </select>                  
                         </td>
                         <th style="padding:0.2rem">직원코드</th>
                         <td style="padding:0.2rem">
-                          <input type = "text" id = "teacherNum" name= "teacherNum">
+                          <input type = "text" id = "teacherNum" name= "teacherNum" disabled="disabled">
                         </td>
                         <td style="padding:0.2rem" colspan="2" rowspan = "5">
-                          <span class = "fa fa-smile fa-5x" style = "padding: 22%; padding-left: 29%;">
+                          <span class = "fa fa-smile fa-5x" id="empImage" style = "padding: 22%; padding-left: 29%;">
                           </span>
                         </td>
                       </tr>
                       <tr>
                         <th style="padding:0.2rem">주민번호</th>
                         <td style="padding:0.2rem">
-                          <input type="text" id = "teacherNo1" name = "teacherNo1" style="width: 46%;"> -
-                          <input type="text" id = "teacherNo" name = "teacherNo2" style="width: 46%;">
+                          <input type="text" id = "empNo1" name = "empNo1" style="width: 46%;"> -
+                          <input type="text" id = "empNo2" name = "empNo2" style="width: 46%;">
                         </td>
                         <th style="padding:0.2rem">연락처</th>
                         <td style="padding:0.2rem">
-                          <input type="text" id="teacherPhone" name = "teacherPhone">
+                          <input type="text" id="empPhone" name = "empPhone">
                         </td>
                         <th style="padding:0.2rem">이메일</th>
                         <td style="padding:0.2rem">
-                          <input type = "text" id = "teacherEmail" name="teacherEmail">
+                          <input type = "text" id = "empEmail" name="empEmail">
                         </td>
                       </tr>
                       <tr>
                         <th style="padding:0.2rem" rowspan="2">주소</th>
                         <td style="padding:0.2rem">
-                          <input type="text" id="postalCode" name = "postalCode">
-                        </td>
-                        <td style="padding:0.2rem">
+                          <input type="text" id="empAddr1" name = "empAddr1" disabled="disabled" style="width: 50%;">
+                          &nbsp;&nbsp;&nbsp;&nbsp;
                           <button type = "button" class = "btn btn-sm btn-primary ">우편번호</button>
                         </td>
-                        <td style="padding:0.2rem" colspan="3">
-                          <input type = "text" id = "teacherAddress1" name = "teacherAddress1">
+                       
+                        <td style="padding:0.2rem" colspan="4">
+                          <input type = "text" id = "empAddr2" name = "empAddr2" disabled="disabled">
                         </td>
                       </tr>
                       <tr>
                         <td style="padding:0.2rem" colspan="5">
-                          <input type = "text" id = "teacherAddress2" name = "teacherAddress2" style="width: 99%;">
+                          <input type = "text" id = "empAddr3" name = "empAddr3" style="width: 99%;">
                         </td>
                       </tr>
                       <tr>
                         <th style="padding:0.2rem">입사일</th>
                         <td style="padding:0.2rem">
-                          <input type="date" id = "teacherEnrollDate" name = "teacherEnrollDate">
+                          <input type="date" id = "hireDate" name = "hireDate">
                         </td>
                         <th style="padding:0.2rem"> 퇴사일</th>
                         <td style="padding:0.2rem">
-                          <input type = "date" id = "teacherResignDate" name = "teacherResignDate">
+                          <input type = "date" id = "entDate" name = "entDate">
                         </td>
                         <th style="padding:0.2rem">상태</th>
                         <td style="padding:0.2rem">
@@ -98,25 +98,31 @@
                       <tr>
                         <th style="padding:0.2rem">담임반</th>
                         <td style="padding:0.2rem">
-                          <input type = "radio" id = "teacherClass1" name = "teacherClass">
-                          <label for = "teacherClass1" style="display: initial;">1반</label>
-                          <input type = "radio" id = "teacherClass2" name = "teacherClass">
-                          <label for = "teacherClass2" style="display: initial;">2반</label>
-                          <input type = "radio" id = "teacherClass3" name = "teacherClass">
-                          <label for = "teacherClass3" style="display: initial;">3반</label>
-                          <input type = "radio" id = "teacherClass4" name = "teacherClass">
-                          <label for = "teacherClass4" style="display: initial;">4반</label>
+                          <input type = "radio" id = "empClass1" name = "empClass" value="1">
+                          <label for = "empClass" style="display: initial;">1반</label>
+                          <input type = "radio" id = "empClass2" name = "empClass" value="2">
+                          <label for = "empClass" style="display: initial;">2반</label>
+                          <input type = "radio" id = "empClass3" name = "empClass" value="3">
+                          <label for = "empClass" style="display: initial;">3반</label>
+                          <input type = "radio" id = "empClass4" name = "empClass" value="4">
+                          <label for = "empClass" style="display: initial;">4반</label>
                         </td>
                         <th style="padding:0.2rem">호봉</th>
                         <td style="padding:0.2rem" colspan = '3'>
-                          <input type = "number" id = "teacherSalary" name = "teacherSalary" min="1" max="29"> 호봉
+                          <input type = "number" id = "teacherSalary" name = "teacherSalary" min="1" max="29" disabled="disabled"> 호봉
                         </td>
                         <td style="text-align: center; padding:0.2rem">
-                          <button class="btn btn-primary btn-sm" onclick="updateImg();" id = "studentImgU">등록</button>
+                          <button class="btn btn-primary btn-sm" onclick="updateImg();" id = "studentImgU">사진</button>
                         </td>
                         <td style="text-align: center; padding:0.2rem">
                           <button class="btn btn-primary btn-sm" onclick="deleteImg();" id = "studentImgD">삭제</button>
                         </td>
+                      </tr>
+                      <tr>
+                     	<td colspan="8" style="padding:0.2rem">
+                     		<input type="submit" value="교사 등록하기">
+                     		<input type="reset" value="초기화">
+                     	</td>
                       </tr>
                     </table>
                   </form>
@@ -134,7 +140,6 @@
                     <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">교사확인창</h6>
                   </td>
                   <td align="right">
-                    <button class = "btn btn-primary btn-sm" onclick="studentRegister();">등록</button>
                     <button class = "btn btn-primary btn-sm" onclick="studentModify();">수정</button>
                     <button class = "btn btn-primary btn-sm" onclick="studentDelete();">삭제</button>
                     <button class = "btn btn-primary btn-sm" onclick="studentCancel();">취소</button>          
@@ -158,36 +163,6 @@
                     <th>호봉</th>
                     <th>상태</th>                
                   </tr>
-                  <tr>
-                    <td>
-                      <input type = "checkbox">
-                    </td>
-                    <td style="text-align: center;"><span class = "num">1</span></td>
-                    <td style="text-align: center;"><span class = "outputTNum">18-025</span></td>
-                    <td style="text-align: center;"><span class = "outputTGrade">정교사</span></td>
-                    <td style="text-align: center;"><span class = "outputTName">김선생</span></td>
-                    <td style="text-align: center;"><span class = "outputPPhone">01066130362</span></td>
-                    <td style="text-align: center;"><span class = "outputTEnroll">2018-03-01</span></td>
-                    <td style="text-align: center;"><span class = "outputTResing"></span></td>
-                    <td style="text-align: center;"><span class = "outputTClass">1반</span></td>
-                    <td style="text-align: center;"><span class = "outputTPay">2호봉</span></td>
-                    <td style="text-align: center;"><span class = "outputTState">재직</span></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type = "checkbox">
-                    </td>
-                    <td style="text-align: center;"> <span class = "num">2</span></td>
-                    <td style="text-align: center;"> <span class = "outputTNum">15-004</span></td>
-                    <td style="text-align: center;"> <span class = "outputTGrade">정교사</span></td>
-                    <td style="text-align: center;"> <span class = "outputTName">박선생</span></td>
-                    <td style="text-align: center;"> <span class = "outputPPhone">0105557777</span></td>
-                    <td style="text-align: center;"> <span class = "outputTEnroll">2015-01-01</span></td>
-                    <td style="text-align: center;"> <span class = "outputTResing">2019-12-31</span></td>
-                    <td style="text-align: center;"> <span class = "outputTClass">2반</span></td>
-                    <td style="text-align: center;"> <span class = "outputTPay">5호봉</span></td>
-                    <td style="text-align: center;"> <span class = "outputTState">퇴직</span></td>
-                  </tr>
                 </table>                 
               </div>
           </div>
@@ -199,7 +174,54 @@
       </div>
       <!-- End of Main Content -->
 	<%@ include file = "../intranet/common/footer.jsp" %>
-
+	
+	<!-- 직원정보 테이블로 불러오는 ajax -->
+	<script>
+	//직원정보 테이블로 불러오는 ajax
+		$(function(){
+			$.ajax({
+				url : "/ajax/empCall.do",
+				type :"get",
+				success:function(data){
+					$.each(data,function(index,value){
+   						var $tr = $('<tr>');
+   						var $empIndex = $('<td>').text(index+1);
+   						var $empCode = $('<td>').text(value.empCode);
+   						var $empJob = $('<td>').text(value.empJob);
+   						var $empName = $('<td>').text(value.empName);
+   						var $empPhone = $('<td>').text(value.empPhone);
+   						var $hireDate = $('<td>').text(value.hireDate);
+   						var $entDate = $('<td>').text(value.entDate);
+   						var $empClass = $('<td>').text(value.empClass);
+   						var $hobong = $('<td>').text(value.hobong);
+   						
+   						// 숫자로 받아오기 때문에 서블릿에서 변환과정이 필요함
+   						var $entYN = $('<td>').text(value.entYN);
+   						
+   						
+   						$tr.append($empIndex);
+   						$tr.append($empCode);
+   						$tr.append($empJob);
+   						$tr.append($empName);
+   						$tr.append($empPhone);
+   						$tr.append($hireDate);
+   						$tr.append($entDate);
+   						$tr.append($empClass);
+   						$tr.append($hobong);
+   						
+   						$('#viewable').append($tr);
+   					});
+   				},error:function(){
+   					console.log("에러입니다.");
+   				}
+			});
+		});
+	</script>
+	
+	<script type="text/javascript"></script>
+	
+	
+	
 
 </body>
 </html>
