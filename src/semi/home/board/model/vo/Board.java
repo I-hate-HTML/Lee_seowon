@@ -26,6 +26,20 @@ public class Board implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	public Board(int bno, String btitle, String bcontent, String bwriter, int bcount, Date bdate) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bwriter = bwriter;
+		this.bcount = bcount;
+		this.bdate = bdate;
+	}
+
+
+
 	public Board(int bno, String btitle, String bcontent, String bwriter, int bcount, Date bdate, int btype,
 			String bfile, String bstatus) {
 		super();

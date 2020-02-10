@@ -1,16 +1,17 @@
 package semi.home.board.model.dao;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCTemplate.*;
 
 import semi.home.board.model.vo.Board;
-import semi.home.jsp.model.dao.HomeMemberDao;
 
 public class BoardDao {
 	private Properties prop;
@@ -19,28 +20,32 @@ public class BoardDao {
 		
 		prop = new Properties();
 		
-		String filePath = HomeMemberDao.class.getResource("board-query.properties").getPath();
+		String filePath = Board.class.getResource("/config/board-query.properties").getPath();
 		
+		try {
+			prop.load(new FileReader(filePath));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<Board> selectList(Connection con) {
 
-		ArrayList<Board> list = new ArrayList<Board>();
-		PreparedStatement pstmt =null;
+		ArrayList<Board> list = null;
+		Statement stmt =null;
 		ResultSet rset = null;
-		Board b = null;
+		String sql = prop.getProperty("SelectList");
 		
-		String sql = prop.getProperty("");
 		
 		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			list = new ArrayList<Board>();
 			
 			while(rset.next()) {
-				b = new Board();
-				b.setBno(rset.getInt("bno"));
+				Board b = new Board();
+				
+				b.setBno(rset.getInt(1));
 				b.setBtitle(rset.getString("btitle"));
 				b.setBcontent(rset.getString("bcontent"));
 				b.setBwriter(rset.getString("bwriter"));
@@ -54,11 +59,8 @@ public class BoardDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(pstmt);
-		}
-		
-		
+			close(stmt);
+		}		
 		return list;
 	}
-
 }

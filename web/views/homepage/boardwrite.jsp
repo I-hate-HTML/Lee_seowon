@@ -63,7 +63,7 @@
     	<div class="row">
       		<div class="col-lg-8 col-md-12 mx-auto">
             <br><br>
-            <form action="" >
+            <form action="<%= request.getContextPath() %>/bwrite.do" >
               <table class="table table-bordered" style="background: white;">
                   <tbody>
                           <tr>
@@ -87,7 +87,7 @@
                       
                       <div class="float-right">
                         <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>
-                        <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="취소" onclick="location='board.html'"/>
+                        <input type="reset" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="취소" />
                       </div>
               </form>
       		</div>

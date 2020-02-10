@@ -1,28 +1,23 @@
 package semi.home.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.home.board.model.vo.Board;
-import semi.home.board.service.BoardService;
-
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class BoardWriteServlet
  */
-@WebServlet("/boardlsit.do")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/bwrite.do")
+public class BoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +27,11 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Board> list = new ArrayList<Board>();
 		
-		list = new BoardService().selectList();
-		
-		String page = "";
-		
-		if(list!= null) {
-			page = "views/homepage/board.jsp";
-			request.setAttribute("list", list);
-		}else {
-			request.setAttribute("msg", "에러발생");
-			page = "views/homepage/board.jsp";
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		String btitle = request.getParameter("btitle");
+		String bwriter = request.getParameter("userId");
+		String bcontent = request.getParameter("bcontent");
+		String bfile = request.getParameter("bfile");
 		
 	}
 

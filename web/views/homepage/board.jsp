@@ -86,18 +86,18 @@
                       <tbody>
                       <% for (Board b : list){ %>
                           <tr>
-                              <td><% b.getBno();%></td>
-                              <td><% b.getBtitle(); %></td>
-                              <td><% b.getBwriter(); %></td>
-                              <td><% b.getBdate(); %></td>
-                              <td><% b.getBcount(); %></td>
+                              <td><%= b.getBno()%></td>
+                              <td><%= b.getBtitle() %></td>
+                              <td><%= b.getBwriter() %></td>
+                              <td><%= b.getBdate() %></td>
+                              <td><%= b.getBcount() %></td>
                           </tr>
                           <% } %>
                       </tbody>
                   </table>
                   <hr><br>
                   <% if(true){ %>
-                  <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='boardwrite.html'">글작성</button>
+                  <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
                   <% } %>
                   <div class="text-center d-flex justify-content-center">
                     <ul class="pagination">

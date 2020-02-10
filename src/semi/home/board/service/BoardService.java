@@ -16,9 +16,6 @@ public class BoardService {
 		
 		ArrayList<Board> list = bDao.selectList(con);
 		
-		if(list != null) commit(con);
-		else rollback(con);
-		
 		close(con);
 		
 		return list;
