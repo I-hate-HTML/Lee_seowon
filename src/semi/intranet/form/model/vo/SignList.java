@@ -10,25 +10,35 @@ public class SignList implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String sname;
 	private int sposition;
+	private String position;
 	private int scode;
 	private int sclass;
 	
 	public SignList() {}
 
-
-	public SignList(String sname, int sposition, int scode, int sclass) {
+	
+	public SignList(String sname, int sposition, String position, int scode, int sclass) {
 		super();
 		this.sname = sname;
 		this.sposition = sposition;
+		this.position = position;
 		this.scode = scode;
 		this.sclass = sclass;
 	}
 
-
-
 	public String getSname() {
 		return sname;
 	}
+
+	public String getPosition() {
+		return position;
+	}
+
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 
 	public void setSname(String sname) {
 		this.sname = sname;
@@ -61,10 +71,12 @@ public class SignList implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SignList [sname=" + sname + ", sposition=" + sposition + ", scode=" + scode + ", sclass=" + sclass
-				+ "]";
+		return "SignList [sname=" + sname + ", sposition=" + sposition + ", position=" + position + ", scode=" + scode
+				+ ", sclass=" + sclass + "]";
 	}
 
+
+	
 
 	
 	

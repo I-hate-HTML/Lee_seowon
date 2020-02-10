@@ -35,7 +35,6 @@ public class FormListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Form> flist = new ArrayList<Form>();
-		ArrayList<SignList> list = new ArrayList<SignList>();
 		
 		int empNo = 2015001; // 나중에 수정할 것!!
 		
@@ -69,15 +68,11 @@ public class FormListServlet extends HttpServlet {
 		// 게시판 글목록 리스트
 		flist = new FormService().listForm(empNo, currentPage, limitContent);
 		
-		// 결재자 리스트
-		list = new FormService().getSignList(empNo);
-				
 		String page = "";
 		
-		if(list != null && flist != null) {
+		if(flist != null) {
 			page = "views/intranet/intranetFormWrite.jsp";
 			request.setAttribute("list", flist);
-			request.setAttribute("sign", list);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);

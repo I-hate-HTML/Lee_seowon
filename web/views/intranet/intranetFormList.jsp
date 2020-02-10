@@ -139,8 +139,6 @@
 	var type = $('#listCategory').val();
 	/* var table = $('#viewTable td').eq(1).text(); */
 	var table = $('#typeChage').text();
-	console.log(type);
-	console.log($('#typeChage').text());
 	
 	if(type = '1') table = '지출결의서';	
 	else if(type = '2') table = '휴가신청서';
@@ -159,7 +157,6 @@
 		break;
 	} */
 	
-		console.log(table);
 	}); 
  
 

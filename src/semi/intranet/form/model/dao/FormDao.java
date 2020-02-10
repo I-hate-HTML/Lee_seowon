@@ -71,8 +71,10 @@ public class FormDao {
 				s.setScode(rset.getInt("EMP_CODE"));
 				s.setSposition(rset.getInt("EMP_JOB"));
 				s.setSclass(rset.getInt("EMP_CLASS"));
+				s.setPosition(rset.getString("JOB"));
 				
-				list.add(s);			
+				list.add(s);	
+				
 			}
 			
 			

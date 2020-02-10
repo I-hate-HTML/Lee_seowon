@@ -55,37 +55,7 @@
         <tr>  
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine">
-            	<option value="">결재자 선택</option>
-            	<% 
-            		for(SignList a : list) {
-            			String position = "";
-            			switch(a.getSposition()){
-            				case 1 : position = "원장"; break;
-            				case 2 : position = "부원장"; break;
-            				case 3 : position = "정교사"; break;
-            				case 4 : position = "영양사"; break;
-            			}
-            	%>
-            		
-            		<option value="<%= a.getScode() %>"
-            		
-            		<% if(a.getSposition() == 3) { %>
-            				label ="<%= a.getSclass() %> 반 <%= a.getSname() %>"
-            		<% } else { %>
-            				label ="<%= position %> <%= a.getSname() %>"
-            		<% } %>>
-            			
-            			<input type ="hidden" name="signCode" value="<%= a.getScode() %>">
-	            		<input type ="hidden" name="signPosition" value="<%= a.getSposition()%>">
-	            	</option>
-            	<% } %>
-             <!--  <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option> -->
-            </select>
+            <select name="formLine" id = "formLine"></select>
             <select name = "formLineP" style="display: none;">
               <option value="Y">승인</option>
               <option value="N">반려</option>
@@ -93,13 +63,7 @@
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine2" style="display: none;">
-              <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option>
-            </select>
+            <select name="formLine" id = "formLine2" style="display: none;"></select>
             <select  name = "formLineP" style="display: none;">
               <option value="Y">승인</option>
               <option value="N">반려</option>
@@ -107,21 +71,15 @@
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine3" style="display: none;">
-              <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option>
-            </select>
+            <select name="formLine" id = "formLine3" style="display: none;"></select>
             <select  name = "formLineP" style="display: none;">
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select> 
           </td>
           <td style="text-align: center;"colspan="2">
-            <input type ="button" class="btn btn-primary btn-sm" onclick= "add();" value="결재자 추가">
-            <input type ="button" class="btn btn-primary btn-sm" onclick= "del();" value="결재자 삭제">
+            <input type ="button" id="addBnt" class="btn btn-primary btn-sm" onclick= "add();" value="결재자 추가">
+            <input type ="button" id="delBnt" class="btn btn-primary btn-sm" onclick= "del();" value="결재자 삭제">
           </td>
         </tr>
         <tr>
@@ -196,7 +154,7 @@
  }
 
 
- var i = 0;
+var i = 0;
  function add(){
     var line2 = document.getElementById('formLine2');
     var line3 = document.getElementById('formLine3');
@@ -204,19 +162,95 @@
     if(line2.style.display == 'none'){
         line2.style.display = 'block';
         i = 2;
+        
+        $.ajax({
+    		url:"/semi/fSignList.fo",
+    		type:"post",
+    		success:function(data){
+    			console.log(data);
+    			
+    			var $select = $('#formLine2');
+    			
+    			$select.find('option').remove();
+    			
+    			for(var i=0; i<data.length; i++) {
+    				var $option = $('<option>');
+    				
+    				$option.val(data[i].sname);
+    				$option.text(data[i].position + data[i].sname);
+    				
+    				$select.append($option);
+    				
+    			}
+    		}, error:function(){
+    			console.log("에러");
+    		}
+    	});
+        
     }else if(line3.style.display == 'none'){
         line3.style.display = 'block';
-        i = 3;
+        i= 3;
+        
+        $.ajax({
+    		url:"/semi/fSignList.fo",
+    		type:"post",
+    		success:function(data){
+    			console.log(data);
+    			
+    			var $select = $('#formLine3');
+    			
+    			$select.find('option').remove();
+    			
+    			for(var i=0; i<data.length; i++) {
+    				var $option = $('<option>');
+    				
+    				$option.val(data[i].sname);
+    				$option.text(data[i].position + data[i].sname);
+    				
+    				$select.append($option);
+    			}
+    		}, error:function(){
+    			console.log("에러");
+    		}
+    	});
+        
     } 
-     
+    console.log(option.val());
  }
 
  function del(){
      
-     $('#formLine'+i).css('display','none');
+     $('#formLine'+i).css('display','none').val("");
      i = i-1;
    
  }
+ 
+
+$(function(){
+	console.log("기능실행")
+	$.ajax({
+		url:"/semi/fSignList.fo",
+		type:"post",
+		success:function(data){
+			
+			var $select = $('#formLine');
+			
+			$select.find('option').remove();
+			
+			for(var i=0; i<data.length; i++) {
+				var $option = $('<option>');
+				
+				$option.val(data[i].sname);
+				$option.text(data[i].position + data[i].sname);
+				
+				$select.append($option);
+				console	
+			}
+		}, error:function(){
+			console.log("에러");
+		}
+	});
+});
  
 </script>
 

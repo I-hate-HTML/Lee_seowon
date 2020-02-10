@@ -14,8 +14,15 @@ public class Form implements Serializable{
 	private String fwriter;	// 작성자
 	private int fWriterId;	// 작성자 코드
 	private Date fdate;		// 기안날짜
-	private String fsign;	// 결재자
-	private int fsignId;	// 결재자 코드
+	private String fsign1;	// 결재자
+	private int fsignId1;	// 결재자 코드
+	private String fsignck1; // 결재자 확인
+	private String fsign2;	// 결재자
+	private int fsignId2;	// 결재자 코드
+	private String fsignck2; // 결재자 확인
+	private String fsign3;	// 결재자
+	private int fsignId3;	// 결재자 코드
+	private String fsignck3; // 결재자 확인
 	private String freturnmsg;	// 반려 이유
 	private String ftitle;		// 제목
 	private String fcontent;	// 내용
@@ -26,32 +33,30 @@ public class Form implements Serializable{
 	public Form() {}
 
 
+	
 	/**
 	 * 품의 작성용
 	 * @param fcategory
 	 * @param fwriter
 	 * @param fWriterId
 	 * @param fdate
-	 * @param fsign
-	 * @param fsignId
+	 * @param fsign1
 	 * @param ftitle
 	 * @param fcontent
 	 * @param ffile
 	 */
-	public Form(int fcategory, String fwriter, int fWriterId, Date fdate, String fsign, int fsignId,
-			String ftitle, String fcontent, String ffile) {
+	public Form(int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, String ftitle,
+			String fcontent, String ffile) {
 		super();
 		this.fcategory = fcategory;
 		this.fwriter = fwriter;
 		this.fWriterId = fWriterId;
 		this.fdate = fdate;
-		this.fsign = fsign;
-		this.fsignId = fsignId;
+		this.fsign1 = fsign1;
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
 		this.ffile = ffile;
 	}
-
 
 	/**
 	 * 품의 보기용
@@ -60,29 +65,45 @@ public class Form implements Serializable{
 	 * @param fwriter
 	 * @param fWriterId
 	 * @param fdate
-	 * @param fsign
-	 * @param fsignId
+	 * @param fsign1
+	 * @param fsignId1
+	 * @param fsignck1
+	 * @param fsign2
+	 * @param fsignId2
+	 * @param fsignck2
+	 * @param fsign3
+	 * @param fsignId3
+	 * @param fsignck3
 	 * @param freturnmsg
 	 * @param ftitle
 	 * @param fcontent
 	 * @param ffile
+	 * @param fstatus
 	 */
-	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fsign, int fsignId,
-			String freturnmsg, String ftitle, String fcontent, String ffile) {
+	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, int fsignId1,
+			String fsignck1, String fsign2, int fsignId2, String fsignck2, String fsign3, int fsignId3, String fsignck3,
+			String freturnmsg, String ftitle, String fcontent, String ffile, String fstatus) {
 		super();
 		this.fno = fno;
 		this.fcategory = fcategory;
 		this.fwriter = fwriter;
 		this.fWriterId = fWriterId;
 		this.fdate = fdate;
-		this.fsign = fsign;
-		this.fsignId = fsignId;
+		this.fsign1 = fsign1;
+		this.fsignId1 = fsignId1;
+		this.fsignck1 = fsignck1;
+		this.fsign2 = fsign2;
+		this.fsignId2 = fsignId2;
+		this.fsignck2 = fsignck2;
+		this.fsign3 = fsign3;
+		this.fsignId3 = fsignId3;
+		this.fsignck3 = fsignck3;
 		this.freturnmsg = freturnmsg;
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
 		this.ffile = ffile;
+		this.fstatus = fstatus;
 	}
-
 
 
 	public int getFno() {
@@ -135,23 +156,93 @@ public class Form implements Serializable{
 	}
 
 
-	public String getFsign() {
-		return fsign;
+	public String getFsign1() {
+		return fsign1;
 	}
 
 
-	public void setFsign(String fsign) {
-		this.fsign = fsign;
+	public void setFsign1(String fsign1) {
+		this.fsign1 = fsign1;
 	}
 
 
-	public int getFsignId() {
-		return fsignId;
+	public int getFsignId1() {
+		return fsignId1;
 	}
 
 
-	public void setFsignId(int fsignId) {
-		this.fsignId = fsignId;
+	public void setFsignId1(int fsignId1) {
+		this.fsignId1 = fsignId1;
+	}
+
+
+	public String getFsignck1() {
+		return fsignck1;
+	}
+
+
+	public void setFsignck1(String fsignck1) {
+		this.fsignck1 = fsignck1;
+	}
+
+
+	public String getFsign2() {
+		return fsign2;
+	}
+
+
+	public void setFsign2(String fsign2) {
+		this.fsign2 = fsign2;
+	}
+
+
+	public int getFsignId2() {
+		return fsignId2;
+	}
+
+
+	public void setFsignId2(int fsignId2) {
+		this.fsignId2 = fsignId2;
+	}
+
+
+	public String getFsignck2() {
+		return fsignck2;
+	}
+
+
+	public void setFsignck2(String fsignck2) {
+		this.fsignck2 = fsignck2;
+	}
+
+
+	public String getFsign3() {
+		return fsign3;
+	}
+
+
+	public void setFsign3(String fsign3) {
+		this.fsign3 = fsign3;
+	}
+
+
+	public int getFsignId3() {
+		return fsignId3;
+	}
+
+
+	public void setFsignId3(int fsignId3) {
+		this.fsignId3 = fsignId3;
+	}
+
+
+	public String getFsignck3() {
+		return fsignck3;
+	}
+
+
+	public void setFsignck3(String fsignck3) {
+		this.fsignck3 = fsignck3;
 	}
 
 
@@ -193,8 +284,8 @@ public class Form implements Serializable{
 	public void setFfile(String ffile) {
 		this.ffile = ffile;
 	}
-	
-	
+
+
 	public String getFstatus() {
 		return fstatus;
 	}
@@ -208,14 +299,14 @@ public class Form implements Serializable{
 	@Override
 	public String toString() {
 		return "Form [fno=" + fno + ", fcategory=" + fcategory + ", fwriter=" + fwriter + ", fWriterId=" + fWriterId
-				+ ", fdate=" + fdate + ", fsign=" + fsign + ", fsignId=" + fsignId + ", freturnmsg=" + freturnmsg
-				+ ", ftitle=" + ftitle + ", fcontent=" + fcontent + ", ffile=" + ffile + ", fstatus=" + fstatus + "]";
+				+ ", fdate=" + fdate + ", fsign1=" + fsign1 + ", fsignId1=" + fsignId1 + ", fsignck1=" + fsignck1
+				+ ", fsign2=" + fsign2 + ", fsignId2=" + fsignId2 + ", fsignck2=" + fsignck2 + ", fsign3=" + fsign3
+				+ ", fsignId3=" + fsignId3 + ", fsignck3=" + fsignck3 + ", freturnmsg=" + freturnmsg + ", ftitle="
+				+ ftitle + ", fcontent=" + fcontent + ", ffile=" + ffile + ", fstatus=" + fstatus + "]";
 	}
 
 
 	
-
-
 	
 	
 	

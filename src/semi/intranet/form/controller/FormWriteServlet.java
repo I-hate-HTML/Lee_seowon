@@ -2,6 +2,7 @@ package semi.intranet.form.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
@@ -24,78 +25,84 @@ import semi.intranet.form.model.vo.Form;
 @WebServlet("/fWrite.fo")
 public class FormWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FormWriteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FormWriteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		int maxSize = 1024 * 1024 * 10;
-		
+
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			System.out.println("파일 전송 오류");
 		}
-		
+
 		String root = request.getServletContext().getRealPath("/");
-		
+
 		String savePath = root + "resources/intranet/uploadFiles/FormFile";
-		
+
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",new DefaultFileRenamePolicy());
-		
-		
-		
+
+
+
 		int category = Integer.parseInt(mrequest.getParameter("formCategory"));
 		String writer = mrequest.getParameter("formName");
 		int writerId = Integer.parseInt(mrequest.getParameter("writerId"));
 		String date = mrequest.getParameter("formDate");
-		
+
 		Date writeDate = null;
-		
+
 		if(date != "" && date != null) {
 			// 날짜가 들어오면
-			
+
 			// String --> int
 			String[] dateArr = date.split("-"); 
 			int[] intArr = new int[dateArr.length];
-			
+
 			// split한 String 문자들을 생성한 int 배열의 각 인덱스에 각각 대입하기
-			
+
 			for(int i = 0; i < dateArr.length; i++) {
 				intArr[i] = Integer.parseInt(dateArr[i]);
 			}
-			
+
 			writeDate = new Date(new GregorianCalendar(
 					intArr[0],intArr[1]-1,intArr[2]
 					).getTimeInMillis());
-			
+
 		} else {
 			// 날짜가 들어오지 않으면
 			writeDate = new Date(new GregorianCalendar().getTimeInMillis());
-			
+
 		}
+
+
 		
-		String sign = mrequest.getParameter("formLine");
-		int signId = Integer.parseInt(mrequest.getParameter("signCode"));
-		String title = mrequest.getParameter("formTitle");
-		String content = mrequest.getParameter("formContent");
+		String[] signIdArr = mrequest.getParameterValues("formLine"); // 결재자 Name 배열
+		String signName = "";
+		for(String sign : signIdArr) { //결재자 String으로 이세례,이세례,이세례 형태로 변경
+			signName += sign + ",";
+		}
+
+
+		String title = mrequest.getParameter("formTitle"); 
+		String content = mrequest.getParameter("formContent"); 
 		String file = mrequest.getParameter("formFile");
-		
-		Form f = new Form(category, writer, writerId, writeDate, sign, signId, title, content, file);
-		
+
+		Form f = new Form(category, writer, writerId, date, signName, title, content, file);
+
 		int result = new FormService().insertForm(f);
-		
-		if(result > 0) {
-			response.sendRedirect("fListOnly.fo"); 
-		}
-	
+
+		if(result > 0) { response.sendRedirect("fListOnly.fo"); }
+
+
 	}
 
 	/**
