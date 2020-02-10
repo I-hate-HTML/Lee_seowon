@@ -10,9 +10,8 @@
     
     <!-- v1.0 -->
 	<!-- 개별페이지 CSS -->
-<link
-	href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css"
-	rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
   
 	<!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -30,13 +29,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-
 	
-	<!-- 이것만 위치 맞춰주면됨 -->
-<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"
-	rel="stylesheet">
-
-
+	
 
   <style>
       .tatd{
@@ -69,17 +63,17 @@
                   <table class="table table-bordered" style="background: white;">
                         <tbody>
                                 <tr>
-                                    <th class="tatd">제목: </th>
+                                    <th class="tatd">제목 </th>
                                     <th colspan="3"><%// b.getBtitle() %></th>
                                 </tr>
                                 <tr>
-                                    <th class="tatd">작성자: </th>
+                                    <th class="tatd">작성자 </th>
                                     <th><%// b.getBwriter() %></th>
-                                    <th class="tatd">작성날짜 : </th>
+                                    <th class="tatd">작성일  </th>
                                     <th><%// b.getDate() %></th>
                                 </tr>
                                 <tr>
-                                    <th class="tatd">내용: </th>
+                                    <th class="tatd">내용 </th>
                                     <td colspan="3">
                                     <div style="height: 500px;">
                                         게시글 내용 영역입니다.영역확이니ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
@@ -93,10 +87,10 @@
                 <div class="float-right">
                 
                 <%// if(){ %>
-                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location='boardcheck.html'" class="pull-right"/>
+                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="" class="pull-right"/>
                 <%//} %>  
                   
-                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location='board.html'" class="pull-right"/>
+                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location='board.jsp'" class="pull-right"/>
               </div>
       		</div>
     	</div>

@@ -9,8 +9,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>식샤를 합시다</title>
-        <script src = "../signup/js/jquery-3.4.1.min.js"></script>
-        <script src = "../signup/js/jquery.selectbox.js"></script>
+        <!-- <script src = "../signup/js/jquery-3.4.1.min.js"></script>
+        <script src = "../signup/js/jquery.selectbox.js"></script> -->
     
       	<!-- 개별페이지 CSS -->
       	<!-- 이것만 위치 맞춰주면됨 -->

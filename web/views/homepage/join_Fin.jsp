@@ -8,8 +8,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>가입완료</title>
-        <script src = "../signup/js/jquery-3.4.1.min.js"></script>
-        <script src = "../signup/js/jquery.selectbox.js"></script>
+        <!-- <script src = "../signup/js/jquery-3.4.1.min.js"></script>
+        <script src = "../signup/js/jquery.selectbox.js"></script> -->
 
      
       	<!-- 개별페이지 CSS --> 
@@ -28,19 +28,19 @@
       	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
           
       	<!-- 폰트 -->
-          <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
       	<link href="https://fonts.googleapis.com/css?family=Cute+Font&display=swap" rel="stylesheet">
       	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
         
+       	<link href="<%=request.getContextPath()%>/resources/css/homepage/nav.css" rel="stylesheet">
         
-       <link href="<%=request.getContextPath()%>/resources/css/homepage/nav.css" rel="stylesheet">
 
     </head>
     <body>
 
         <!-- Navigation -->
-        <%@ include file="common/nav.jsp"%>
+        <%@ include file = "common/nav.jsp" %>
 
       <div style="border-top: 3px solid gray; border-bottom: 3px solid gray; text-align: center; font-size: 3em;" >
           회원가입완료
