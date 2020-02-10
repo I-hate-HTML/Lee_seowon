@@ -229,7 +229,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <h5>자녀 <em>자녀정보를 입력해주세요.</em></h5>
+                <h5>자녀 <em>자녀정보 입력해</em></h5>
                     <table class="board-write2">
                         <colgroup>
                             <col style="width:15%;">
@@ -243,7 +243,7 @@
                             <tr><th class="first">이름</th>
                             <th>생년월일</th>
                             <th>성별</th>
-                            <th>반</th>
+                            <th>재원</th>
                             
                             
                         </tr></thead>
@@ -260,40 +260,27 @@
                                     <input type="radio" class="radio01 child_sex1" name="child_sex_0" value="여" style="width:20px; height:20px; margin-top:6px; margin-left:10px;"checked disabled>&nbsp;&nbsp;&nbsp;여자
                                 </td>
                                 <td>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" value="1번" name="where" checked disabled><label> 씨앗반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="2번" name="where"disabled><label> 떡잎반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="3번" name="where"disabled><label> 새싹반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="4번" name="where"disabled><label> 꽃잎반</label>
+                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" value="1번" name="where" checked disabled><label> 1번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="2번" name="where"disabled><label> 2번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="3번" name="where"disabled><label> 3번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="4번" name="where"disabled><label> 4번반</label>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
-                    <input type="submit" value="   저장   " class="btn " style="margin-left: 35%; background: #002c5f; color: white;" onclick="">
+                    <input type="submit" value="   저장   " class="btn " style="margin-left: 40%; background: #002c5f; color: white;" onclick="">
                     <input type="reset" value="   취소   " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return ">
-                    <input type="button" value="   탈퇴   " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="deleteMember();">
-                    
 
                 </form>
       </div>
     </div>
   </div>
-  
-  <%-- function deleteMember(){
-  	location.href = "/semi/homedelete.hm?mid=<%=m.getUserId() %>";
-  } --%>
-  
-  
-  
-  
-  
-  
-  
 
-  <hr> 
+  <hr>
 
   <!-- Footer -->
-  <%@ include file="common/footer.jsp" %>  
+  <%@ include file="common/footer.jsp" %>
 
 </body>
 
