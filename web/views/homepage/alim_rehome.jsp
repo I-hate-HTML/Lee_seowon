@@ -148,14 +148,14 @@ vertical-align: middle;}
                         <td colspan="4" style="background-color: #002c5f; color: white;">기본입력</td>
                     </tr>
                     <tr>
-                        <th style="border-right: none;">대상아이</th>
-                        <td colspan="3" style="border-left: none; border-right: none;">
+                        <td style="border-right: none;">대상아이</td>
+                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
                             <input type="text" name="child" style="width: 70%;">
                         </td>
                     </tr>
                     <tr>
-                        <th style="border-right: none;">귀가 방법</th>
-                        <td colspan="3"style="border-left: none;">
+                        <td style="border-right: none;">귀가 방법</td>
+                        <td colspan="3"style="border-left: none; text-align: center;"">
                             <select name="alhm_wayhome" id="bob" style="width: 70%;">
                                 <option value="도보">귀가방법선택</option>
                                 <option value="도보">도보</option>
@@ -166,8 +166,8 @@ vertical-align: middle;}
                         </td>
                     </tr>
                     <tr>
-                        <th style="border-right: none;">귀가요청시간</th>
-                        <td colspan="3"style="border-left: none;">
+                        <td style="border-right: none;">귀가요청시간</td>
+                        <td colspan="3"style="border-left: none; text-align: center;"">
                             <select name="alhm_time" id="bob" style="width: 70%;">
                                 <option value="도보">시간 선택</option>
                                 <option value="오전">오전(12:00)</option>
@@ -176,15 +176,15 @@ vertical-align: middle;}
                         </td>
                     </tr>
                     <tr>
-                        <th style="border-right: none;">보호자</th>
-                        <td colspan="3" style="border-left: none; border-right: none;">
+                        <td style="border-right: none;">보호자</td>
+                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
                             <input type="text" name="alhm_status" style="width: 70%;" placeholder="원아와의 관계">
                             <input type="text" name="alhm_phone" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
                     </tr>
                     <tr>
-                        <th style="border-right: none;">비상 연락망</th>
-                        <td colspan="3" style="border-left: none; border-right: none;">
+                        <td style="border-right: none;">비상 연락망</td>
+                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
                             <input type="text" name="alhm_status2" style="width: 70%;" placeholder="원아와의 관계">
                             <input type="text" name="alhm_phone2" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
