@@ -20,8 +20,7 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fModifyView.fo'">수정</button>
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fDelete.fo'">삭제</button>             
+      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fSign.fo'">완료</button>            
     </td>
   </tr>
 </table>

@@ -17,14 +17,14 @@ import semi.intranet.form.model.vo.SignList;
 /**
  * Servlet implementation class FormListServlet
  */
-@WebServlet("/fListTest.fo")
-public class FormListServletTest extends HttpServlet {
+@WebServlet("/fListRead.fo")
+public class FormListServletRead extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListServletTest() {
+    public FormListServletRead() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -71,9 +71,18 @@ public class FormListServletTest extends HttpServlet {
 		
 				
 		String page = "";
-		
-		if(f != null && flist != null) {
+	
+		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
+		if(f != null && flist != null && empNo == f.getfWriterId() ) { // 기안자 일 경우
 			page = "views/intranet/intranetFormRead.jsp";
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		} else if (f != null && flist != null && empNo == f.getfWriterId()) {// 결재자 일 경우
+			page = "views/intranet/intranetFormSign.jsp";
+			
 			request.setAttribute("list", flist);
 			request.setAttribute("form", f);
 			

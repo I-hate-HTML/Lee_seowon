@@ -76,8 +76,8 @@ public class FormReadServlet extends HttpServlet {
 		String page = "";
 		
 		  if(f != null && empNo == f.getfWriterId()) { // 
-			/* page = "views/intranet/intranetFormRead.jsp"; */ 
-			  page = "/fList.fo"; 
+			/* page = "views/intranet/intranetFormRead.jsp"; */
+			page = "/fListRead.fo";
 		  
 			  request.setAttribute("form", f); 
 		 }

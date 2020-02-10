@@ -257,7 +257,7 @@ public class FormDao {
 				f.setFstatus(rset.getString("DRAFT_PROCESS"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFwriter(rset.getString("WNAME"));
-				f.setfWriterId(rset.getInt("DRATF_EMP"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
 				f.setFsignId(rset.getInt("SIGN_EMP"));
 			}
 			

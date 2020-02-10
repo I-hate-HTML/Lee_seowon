@@ -16,7 +16,7 @@ import semi.intranet.form.model.vo.Form;
 /**
  * Servlet implementation class FormReadServlet
  */
-@WebServlet("/fRead.fo")
+@WebServlet("/fReadSign.fo")
 public class FormReadSignServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

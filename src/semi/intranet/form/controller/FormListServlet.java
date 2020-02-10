@@ -17,7 +17,7 @@ import semi.intranet.form.model.vo.SignList;
 /**
  * Servlet implementation class FormListServlet
  */
-@WebServlet("/fList.fo")
+@WebServlet("/fListOnly.fo")
 public class FormListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
