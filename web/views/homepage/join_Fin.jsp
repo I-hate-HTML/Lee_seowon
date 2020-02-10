@@ -59,7 +59,7 @@
                   </ul>
               	</div>
               <div class="d-flex justify-content-center">
-                  <button class="btn" style="background: #002c5f; color: white; width: 150px; height: 50px; margin: 50px;" onclick="location='mainpage.html'">
+                  <button class="btn" style="background: #002c5f; color: white; width: 150px; height: 50px; margin: 50px;" onclick="location='homeindex.jsp'">
                       메인으로 가기
                   </button>
                 </div>   
