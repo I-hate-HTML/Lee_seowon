@@ -41,7 +41,7 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 		try {
 			hms.homedeleteMember(userId);			
 			
-			response.sendRedirect("homeindex.jsp");
+			response.sendRedirect("views/homepage/homeindex.jsp");
 			
 			session.invalidate();
 		} catch (Exception e) {
