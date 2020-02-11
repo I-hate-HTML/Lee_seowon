@@ -3,6 +3,10 @@ package semi.intranet.form.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * @author SERYE
+ *
+ */
 public class Form implements Serializable{
 	
 	/**
@@ -33,7 +37,7 @@ public class Form implements Serializable{
 	public Form() {}
 
 
-	
+
 	/**
 	 * 품의 작성용
 	 * @param fcategory
@@ -41,22 +45,32 @@ public class Form implements Serializable{
 	 * @param fWriterId
 	 * @param fdate
 	 * @param fsign1
+	 * @param fsignId1
+	 * @param fsign2
+	 * @param fsignId2
+	 * @param fsign3
+	 * @param fsignId3
 	 * @param ftitle
 	 * @param fcontent
-	 * @param ffile
 	 */
-	public Form(int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, String ftitle,
-			String fcontent, String ffile) {
+	public Form(int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, int fsignId1, String fsign2,
+			int fsignId2, String fsign3, int fsignId3, String ftitle, String fcontent) {
 		super();
 		this.fcategory = fcategory;
 		this.fwriter = fwriter;
 		this.fWriterId = fWriterId;
 		this.fdate = fdate;
 		this.fsign1 = fsign1;
+		this.fsignId1 = fsignId1;
+		this.fsign2 = fsign2;
+		this.fsignId2 = fsignId2;
+		this.fsign3 = fsign3;
+		this.fsignId3 = fsignId3;
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
-		this.ffile = ffile;
 	}
+
+
 
 	/**
 	 * 품의 보기용

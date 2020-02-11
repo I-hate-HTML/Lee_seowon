@@ -176,7 +176,7 @@ var i = 0;
     			for(var i=0; i<data.length; i++) {
     				var $option = $('<option>');
     				
-    				$option.val(data[i].sname);
+    				$option.val(data[i].scode);
     				$option.text(data[i].position + data[i].sname);
     				
     				$select.append($option);
@@ -204,7 +204,7 @@ var i = 0;
     			for(var i=0; i<data.length; i++) {
     				var $option = $('<option>');
     				
-    				$option.val(data[i].sname);
+    				$option.val(data[i].scode);
     				$option.text(data[i].position + data[i].sname);
     				
     				$select.append($option);
@@ -240,11 +240,11 @@ $(function(){
 			for(var i=0; i<data.length; i++) {
 				var $option = $('<option>');
 				
-				$option.val(data[i].sname);
+				$option.val(data[i].scode);
 				$option.text(data[i].position + data[i].sname);
 				
 				$select.append($option);
-				console	
+				
 			}
 		}, error:function(){
 			console.log("에러");

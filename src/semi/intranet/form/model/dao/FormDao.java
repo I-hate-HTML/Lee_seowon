@@ -74,7 +74,7 @@ public class FormDao {
 				s.setPosition(rset.getString("JOB"));
 				
 				list.add(s);	
-				
+				System.out.println(list);
 			}
 			
 			
@@ -112,10 +112,12 @@ public class FormDao {
 			pstmt.setInt(1, f.getFcategory());
 			pstmt.setInt(2, f.getfWriterId());
 			pstmt.setDate(3, f.getFdate());
-			pstmt.setInt(4, f.getFsignId());
+			pstmt.setInt(4, f.getFsignId1());
 			pstmt.setString(5, f.getFtitle());
 			pstmt.setString(6, f.getFcontent());
 			pstmt.setString(7, f.getFfile());
+			pstmt.setInt(8, f.getFsignId2());
+			pstmt.setInt(8, f.getFsignId3());
 			
 			result = pstmt.executeUpdate();
 			
@@ -130,6 +132,53 @@ public class FormDao {
 	}
 
 
+	/**
+	 * id에 맞는 결재자 정보 불러오기
+	 * @param signId1
+	 * @param signId2
+	 * @param signId3
+	 * @return
+	 */
+	public ArrayList<SignList> findSignId(Connection con, int signId1, int signId2, int signId3) {
+
+		ArrayList<SignList> s = new ArrayList<SignList>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findSignId");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, signId1);
+			pstmt.setInt(2, signId2);
+			pstmt.setInt(3, signId3);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				SignList sign = new SignList();
+				
+				sign.setScode(rset.getInt("EMP_CODE"));
+				sign.setSposition(rset.getInt("EMP_JOB"));
+				sign.setSname(rset.getString("EMP_NAME"));
+				
+				s.add(sign);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return s;
+	}
+
+	
 
 	/**
 	 * 품의서 게시판 목록 읽기 + 페이징 처리
@@ -255,12 +304,12 @@ public class FormDao {
 				f.setFdate(rset.getDate("DRAFT_DATE"));
 				f.setFfile(rset.getString("DRAFT_FILE"));
 				/* f.setFreturnmsg(rset.getString("RETURN_REASON")); */
-				f.setFsign(rset.getString("SNAME"));
+				f.setFsign1(rset.getString("SNAME"));
 				f.setFstatus(rset.getString("DRAFT_PROCESS"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFwriter(rset.getString("WNAME"));
 				f.setfWriterId(rset.getInt("DRAFT_EMP"));
-				f.setFsignId(rset.getInt("SIGN_EMP"));
+				f.setFsignId1(rset.getInt("SIGN_EMP"));
 			}
 			
 		} catch (SQLException e) {
@@ -305,6 +354,13 @@ public class FormDao {
 		
 		return f;
 	}
+
+
+
+
+
+
+	
 
 
 	

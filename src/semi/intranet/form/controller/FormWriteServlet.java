@@ -2,7 +2,7 @@ package semi.intranet.form.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
@@ -18,6 +18,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import semi.intranet.form.model.service.FormService;
 import semi.intranet.form.model.vo.Form;
+import semi.intranet.form.model.vo.SignList;
 
 /**
  * Servlet implementation class FormWriteServlet
@@ -85,18 +86,17 @@ public class FormWriteServlet extends HttpServlet {
 
 
 		
-		String[] signIdArr = mrequest.getParameterValues("formLine"); // 결재자 Name 배열
-		String signName = "";
-		for(String sign : signIdArr) { //결재자 String으로 이세례,이세례,이세례 형태로 변경
-			signName += sign + ",";
-		}
-
+		String[] signIdArr = mrequest.getParameterValues("formLine"); // 결재자 ID 배열
+		
+		SignList sList = new FormService().findSignId(signIdArr);
+		SignList s = new SignList();		
 
 		String title = mrequest.getParameter("formTitle"); 
 		String content = mrequest.getParameter("formContent"); 
 		String file = mrequest.getParameter("formFile");
 
-		Form f = new Form(category, writer, writerId, date, signName, title, content, file);
+		Form f = new Form(category, writer, writerId, writeDate, s.getSname(),s.getScode(),
+						 s.getSname2(),s.getScode2(),s.getSname3(),s.getScode3(),title, content);
 
 		int result = new FormService().insertForm(f);
 
