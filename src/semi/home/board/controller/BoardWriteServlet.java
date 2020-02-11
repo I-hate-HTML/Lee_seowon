@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.home.board.model.vo.Board;
+import semi.home.board.service.BoardService;
+
 /**
  * Servlet implementation class BoardWriteServlet
  */
@@ -29,9 +32,25 @@ public class BoardWriteServlet extends HttpServlet {
 
 		
 		String btitle = request.getParameter("btitle");
-		String bwriter = request.getParameter("userId");
+		String bwriter = "admin";//request.getParameter("userId");
 		String bcontent = request.getParameter("bcontent");
 		String bfile = request.getParameter("bfile");
+		
+		Board b = new Board();
+		
+		b.setBtitle(btitle);
+		b.setBwriter(bwriter);
+		b.setBcontent(bcontent);
+		b.setBfile(bfile);
+		
+		int result = new BoardService().BoardWrite(b);
+		
+		if(result>0) {
+			response.sendRedirect("boardlsit.do");
+		}else {
+			System.out.println("오류발생");
+		}
+		
 		
 	}
 

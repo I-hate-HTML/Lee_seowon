@@ -1,4 +1,4 @@
-package semi.home.board.controller;
+package semi.intranet.employee.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.home.board.model.vo.Board;
-import semi.home.board.service.BoardService;
-
 /**
- * Servlet implementation class BoardSelectOne
+ * Servlet implementation class EmployeeEditServlet
  */
-@WebServlet("/selectOne.bo")
-public class BoardSelectOne extends HttpServlet {
+@WebServlet("/empEdit.em")
+public class EmployeeEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSelectOne() {
+    public EmployeeEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,21 +26,9 @@ public class BoardSelectOne extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		Board b  = new BoardService().selectOne(bno);
 		
-		String path="";
-		if(b != null) {
-			path="views/homepage/boardread.jsp";
-			request.setAttribute("board", b);
-			request.getRequestDispatcher(path).forward(request, response);
-			
-		}else {
-			path="views/homepage/boardread.jsp";
-			request.setAttribute("board", b);
-			request.getRequestDispatcher(path).forward(request, response);
-		}
+		
 		
 	}
 
