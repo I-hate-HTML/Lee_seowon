@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import semi.home.alimjang.model.service.AlimjangService;
-import semi.home.alimjang.model.vo.AlimNote;
+import semi.home.alimjang.model.vo.AlimHome;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class AlimNoteInsertServlet
+ * Servlet implementation class AlimHomeInsertServlet
  */
-@WebServlet("/anInsert.al")
-public class AlimNoteInsertServlet extends HttpServlet {
+@WebServlet("/ahInsert.al")
+public class AlimHomeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlimNoteInsertServlet() {
+    public AlimHomeInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +32,28 @@ public class AlimNoteInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");		
+		Member m = (Member)session.getAttribute("member");
 		
+		String alhm_wayhome = request.getParameter("alhm_wayhome");
+		String alhm_time= request.getParameter("alhm_time");
+		String alhm_status = request.getParameter("alhm_status");
+		String alhm_phone = request.getParameter("alhm_phone");
+		String alhm_status2 = request.getParameter("alhm_status2");
+		String alhm_phone2 = request.getParameter("alhm_phone2");
 		
-		String al_content = request.getParameter("al_content");
-		String al_feel = request.getParameter("al_feel");
-		String al_health = request.getParameter("al_health");
-		String al_temp = request.getParameter("al_temp");
-		String al_meal = request.getParameter("al_meal");
-		String al_sleep = request.getParameter("al_sleep");
-		String al_poop = request.getParameter("al_poop");		
+		AlimHome ah = new AlimHome();
 		
-		AlimNote an = new AlimNote();
+		ah.setAlhm_wayhome(alhm_wayhome);
+		ah.setAlhm_time(alhm_time);
+		ah.setAlhm_status(alhm_status);
+		ah.setAlhm_phone(alhm_phone);
+		ah.setAlhm_status2(alhm_status2);
+		ah.setAlhm_phone2(alhm_phone2);
+//		ah.setAlhm_writer(m.getUserId());
 		
-		an.setAl_content(al_content);
-		an.setAl_feel(al_feel);
-		an.setAl_health(al_health);
-		an.setAl_temp(al_temp);
-		an.setAl_meal(al_meal);
-		an.setAl_sleep(al_sleep);
-		an.setAl_poop(al_poop);
-//		an.setAl_writer(m.getUserId());
+		System.out.println(ah);
 		
-		System.out.println(an);
-		
-		int result = new AlimjangService().insertAlimNote(m, an);
+		int result = new AlimjangService().insertAlimHome(m, ah);
 		
 		/*if(result > 0) {
 			// 알림장 등록완료
@@ -67,6 +64,10 @@ public class AlimNoteInsertServlet extends HttpServlet {
 			request.setAttribute("msg", "알림장 등록 실패");
 			request.getRequestDispatcher("에러페이지").forward(request, response);
 		}*/
+		
+		
+		
+		
 		
 	}
 
