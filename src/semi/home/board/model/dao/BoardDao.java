@@ -140,5 +140,34 @@ public class BoardDao {
 		return result;
 	}
 
+	public Board updateView(Connection con, int pbno) {
+		
+		Board b = new Board();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateview");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pbno);
+			rset= pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b.setBno(rset.getInt("bno"));
+				b.setBtitle(rset.getString("btitle"));
+				b.setBcontent(rset.getString("bcontent"));
+				b.setBfile(rset.getString("bfile"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+
 
 }

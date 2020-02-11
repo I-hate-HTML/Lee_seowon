@@ -46,7 +46,18 @@ public class BoardService {
 		if(result>0)commit(con);
 		else rollback(con);
 		
+		close(con);
+		
 		return result;
+	}
+
+	public Board updateView(int pbno) {
+		Connection con = getConnection();
+		
+		Board b = bDao.updateView(con,pbno);
+		
+		close(con);
+		return b;
 	}
 }
 	
