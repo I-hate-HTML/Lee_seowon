@@ -74,7 +74,6 @@ public class FormDao {
 				s.setPosition(rset.getString("JOB"));
 				
 				list.add(s);	
-				System.out.println(list);
 			}
 			
 			
@@ -106,7 +105,7 @@ public class FormDao {
 		String sql = prop.getProperty("insertForm");
 		
 		try {
-			
+
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, f.getFcategory());
@@ -117,7 +116,7 @@ public class FormDao {
 			pstmt.setString(6, f.getFcontent());
 			pstmt.setString(7, f.getFfile());
 			pstmt.setInt(8, f.getFsignId2());
-			pstmt.setInt(8, f.getFsignId3());
+			pstmt.setInt(9, f.getFsignId3());
 			
 			result = pstmt.executeUpdate();
 			

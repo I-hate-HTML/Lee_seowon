@@ -60,7 +60,7 @@
           <td style="text-align: center"><%= f.getFtitle() %></td>
           <td style="text-align: center">
           	<%= f.getFwriter() %>
-          	<input type = "hidden" value ="<%= f.getfWriterId() %>"/>
+          	<input type = "hidden" id="writerId" value ="<%= f.getfWriterId() %>"/>
           </td>
           <td style="text-align: center"><%= f.getFdate() %></td>    
         </tr>
@@ -128,9 +128,24 @@
 	$('#viewTable td').click(function(){
 		
 		var fno = $(this).parent().find("input").val();
+		var fwriterId = $('#writerId').val();
 		
-		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
+		$.ajax({
+			url:"/semi/fRead.fo",
+			type:"post",
+			data{
+				fno:fno,
+				fwriterId:fwriterId
+			}, success:function(page:"page", f:"form"){
+		
+				
+			}
+		});
+		
+		
+		
 	});
+				location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
  });
  
  
@@ -144,32 +159,7 @@
 	else if(type = '2') table = '휴가신청서';
 	else if(type = '3') table = '교구신청서';
 	else if(type = '4') table = '기타';
-	
 
-	/* switch(type){
-	case 1 : table = '지출결의서';	
-		break;
-	case 2 : table = '휴가신청서';	
-		break;
-	case 3 :table = '교구신청서';
-		break;
-	case 4 :table = '기타';
-		break;
-	} */
-	
-	}); 
- 
-
-	/* $(document).ready(function() {
-		var typeArr = new Array();
-		
-		$('#listCategory').each(function(index, item){
-			typeArr.push($(item).val());
-		});
-		
-		console.log(typeArr);
-		
-	}); */
 	</script>
  
  

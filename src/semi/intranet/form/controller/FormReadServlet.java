@@ -36,7 +36,7 @@ public class FormReadServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int fno = Integer.parseInt(request.getParameter("fno"));
-		int empNo = 2015001; // 나중에 수정할 것!!
+		int empNo = Integer.parseInt(request.getParameter("fwriterId"));
 
 		ArrayList<Form> flist = new ArrayList<Form>();
 

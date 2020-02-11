@@ -53,6 +53,10 @@ public class FormService {
 		// 2. Dao로 보내서 해당 결재자 정보 가져오기
 		ArrayList<SignList> sInfo = fd.findSignId(con, signId1, signId2, signId3);
 
+
+		close(con);
+		
+		
 		// 3. 결재자 정렬 --> 직급순 & ID 순
 		Collections.sort(sInfo, new Comparator<SignList>() {
 
@@ -62,7 +66,13 @@ public class FormService {
 					return 1;
 				} else if (sInfo1.getSposition() < sInfo2.getSposition()){
 					return -1;
-				} 
+				} else if(sInfo1.getSposition() == sInfo2.getSposition()) {
+					if(sInfo1.getScode() > sInfo2.getScode()) {
+						return -1;
+					} else if(sInfo1.getScode() < sInfo2.getScode()) {
+						return 1;
+					}
+				}
 				return 0;
 			}
 		});
@@ -74,10 +84,10 @@ public class FormService {
 
 		s.setSname(sInfo.get(0).getSname());
 		s.setScode(sInfo.get(0).getScode()); 
-		s.setSname(sInfo.get(1).getSname()); 
-		s.setScode(sInfo.get(1).getScode()); 
-		s.setSname(sInfo.get(2).getSname()); 
-		s.setScode(sInfo.get(2).getScode());
+		s.setSname2(sInfo.get(1).getSname()); 
+		s.setScode2(sInfo.get(1).getScode()); 
+		s.setSname3(sInfo.get(2).getSname()); 
+		s.setScode3(sInfo.get(2).getScode());
 
 		return s;
 	}

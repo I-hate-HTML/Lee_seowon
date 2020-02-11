@@ -88,8 +88,7 @@ public class FormWriteServlet extends HttpServlet {
 		
 		String[] signIdArr = mrequest.getParameterValues("formLine"); // 결재자 ID 배열
 		
-		SignList sList = new FormService().findSignId(signIdArr);
-		SignList s = new SignList();		
+		SignList s = new FormService().findSignId(signIdArr);	
 
 		String title = mrequest.getParameter("formTitle"); 
 		String content = mrequest.getParameter("formContent"); 
