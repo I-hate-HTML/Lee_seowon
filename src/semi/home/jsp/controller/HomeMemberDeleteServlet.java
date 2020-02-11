@@ -35,15 +35,15 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 		
 		String userId = ((Member)session.getAttribute("member")).getUserId();
 		
-		HomeMemberService hms = new HomeMemberService();
+		HomeMemberService hms = new HomeMemberService();		
+		
 		
 		try {
-			hms.homedeleteMember(userId);
-			
-			session.invalidate();
+			hms.homedeleteMember(userId);			
 			
 			response.sendRedirect("homeindex.jsp");
 			
+			session.invalidate();
 		} catch (Exception e) {
 			request.setAttribute("msg", "회원 탈퇴 중 에러발생");
 			request.setAttribute("exception", e);

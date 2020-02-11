@@ -232,8 +232,9 @@
                         </tbody>
                     </table>
                     <br>
-                    <input type="submit" value="저장  " class="btn " style="margin-left: 40%; background: #002c5f; color: white;" onclick="">
+                    <input type="submit" value="저장  " class="btn " style="margin-left: 35%; background: #002c5f; color: white;" onclick="">
                     <input type="reset" value="취소  " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return ">
+                    <input type="submit" value="탈퇴 " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="location='homeindex.jsp'">
 
                 </form>
                	<script>
