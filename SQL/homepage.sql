@@ -9,8 +9,8 @@ CREATE TABLE MEMBER(
     EMAIL VARCHAR2(50) UNIQUE NOT NULL,     --이메일
     PHONE VARCHAR2(50) UNIQUE NOT NULL,     --전화번호
     ADDRESS VARCHAR2(300) NOT NULL,         --주소
-    ENROLLDATE DATE DEFAULT SYSDATE NOT NULL,--등록일
-    CNO NUMBER UNIQUE,                      --자녀 번호
+    ENROLLDATE DATE DEFAULT SYSDATE,--등록일
+    CNO NUMBER ,                      --자녀 번호
     CNAME VARCHAR2(20),						-- 자녀 이름
     CBDATE DATE,                    -- 자녀 생일
     CGENDER CHAR(1) CHECK (CGENDER IN ('M','F')),                    -- 자녀 성별
