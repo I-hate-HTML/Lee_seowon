@@ -11,16 +11,16 @@ import semi.home.board.model.vo.Board;
 import semi.home.board.service.BoardService;
 
 /**
- * Servlet implementation class BoardWriteServlet
+ * Servlet implementation class BoardSelectOne
  */
-@WebServlet("/bwrite.do")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/selectOne.bo")
+public class BoardSelectOne extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteServlet() {
+    public BoardSelectOne() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +29,21 @@ public class BoardWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String btitle = request.getParameter("btitle");
-		String bwriter = "admin";//request.getParameter("userId");
-		String bcontent = request.getParameter("bcontent");
-		String bfile = request.getParameter("bfile");
+		Board b  = new BoardService().selectOne(bno);
 		
-		Board b = new Board();
-		
-		b.setBtitle(btitle);
-		b.setBwriter(bwriter);
-		b.setBcontent(bcontent);
-		b.setBfile(bfile);
-		
-		int result = new BoardService().BoardWrite(b);
-		
-		if(result>0) {
-			response.sendRedirect("boardlsit.do");
+		String path="";
+		if(b != null) {
+			path="views/homepage/boardread.jsp";
+			request.setAttribute("board", b);
+			request.getRequestDispatcher(path).forward(request, response);
+			
 		}else {
-			System.out.println("오류발생");
+			path="views/homepage/boardread.jsp";
+			request.setAttribute("board", b);
+			request.getRequestDispatcher(path).forward(request, response);
 		}
-		
 		
 	}
 

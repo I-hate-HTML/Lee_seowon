@@ -11,16 +11,16 @@ import semi.home.board.model.vo.Board;
 import semi.home.board.service.BoardService;
 
 /**
- * Servlet implementation class BoardWriteServlet
+ * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/bwrite.do")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/bupdateview.bo")
+public class BoardUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteServlet() {
+    public BoardUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +29,17 @@ public class BoardWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-		String btitle = request.getParameter("btitle");
-		String bwriter = "admin";//request.getParameter("userId");
-		String bcontent = request.getParameter("bcontent");
-		String bfile = request.getParameter("bfile");
+		int pbno = Integer.parseInt(request.getParameter("pbno"));
 		
 		Board b = new Board();
+		b = new BoardService().updateView(pbno);
 		
-		b.setBtitle(btitle);
-		b.setBwriter(bwriter);
-		b.setBcontent(bcontent);
-		b.setBfile(bfile);
-		
-		int result = new BoardService().BoardWrite(b);
-		
-		if(result>0) {
-			response.sendRedirect("boardlsit.do");
+		if( b != null) {
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("views/homepage/boardupdate.jsp").forward(request, response);
 		}else {
-			System.out.println("오류발생");
+			System.out.println("Board가 비어있다");
 		}
-		
 		
 	}
 
