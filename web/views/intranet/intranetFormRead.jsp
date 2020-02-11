@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav2.jsp" %>
-<%@ include file = "intranetFormList.jsp" %>
+<%-- <%@ include file = "intranetFormList.jsp" %> --%>
+<%@ include file = "intranetFormListAjax.jsp" %>
 <%@ page import="semi.intranet.form.model.vo.Form" %>
 
 <%
@@ -36,7 +37,7 @@
           <th>분류</th>
           <td>
             <select id = "formCategory" name="formCategory" onchange="contentChange();" disabled>
-              <option value = "<%= form.getFcategory() %>" selectedz><%= form.getFcategory() %></option>
+              <option value = "<%= form.getFcategory() %>" selected><%= form.getCategory() %></option>
             </select>
           </td> 
           <th>기안자</th>
@@ -52,8 +53,8 @@
           <td>
             <select name="formLine" id = "formLine" disabled>
             	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign() %>" selected>            		
-            			<input type ="hidden" name="signCode" value="<%= form.getFsignId() %>">
+            		<option value="<%= form.getFsign1() %>" selected><%= form.getFsign1() %> 		
+            			<input type ="hidden" name="signCode" value="<%= form.getFsignId1() %>">
 	            	</option>
             </select>
             <select name = "formLineP" disabled >            
@@ -64,12 +65,11 @@
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine2" disabled>
-              <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option>
+            <select name="formLine" id = "formLine" disabled>
+            	<option value="">결재자 선택</option>
+            		<option value="<%= form.getFsign2() %>" selected><%= form.getFsignId2() %>    		
+            			<input type ="hidden" name="signCode" value="<%= form.getFsignId2() %>">
+	            	</option>
             </select>
             <select  name = "formLineP" disabled>
               <option value="Y">승인</option>
@@ -78,12 +78,11 @@
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine3" disabled>
-              <option value="1">원장 김원장</option>
-              <option value="2">부원장 박부원장</option>
-              <option value="3">정교사 강교사</option>
-              <option value="4">정교사 이교사</option>
-              <option value="5">조리원 오조리원</option>
+            <select name="formLine" id = "formLine" disabled>
+            	<option value="">결재자 선택</option>
+            		<option value="<%= form.getFsign3() %>" selected><%= form.getFsignId3() %>      		
+            			<input type ="hidden" name="signCode" value="<%= form.getFsignId3() %>">
+	            	</option>
             </select>
             <select  name = "formLineP" disabled>
               <option value="Y">승인</option>
@@ -132,3 +131,4 @@
 
 
 <%@ include file = "../intranet/common/footer.jsp" %>
+
