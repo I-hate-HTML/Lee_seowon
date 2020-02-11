@@ -115,5 +115,30 @@ public class BoardDao {
 		return result;
 	}
 
+	public int BoardWrite(Connection con, Board b) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("boardwrite");
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, b.getBtitle());
+			pstmt.setString(2, b.getBcontent());
+			pstmt.setString(3, b.getBwriter());
+			pstmt.setString(4, b.getBfile());
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }

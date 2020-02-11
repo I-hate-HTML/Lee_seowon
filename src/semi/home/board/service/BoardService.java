@@ -37,5 +37,16 @@ public class BoardService {
 		
 		return b;
 	}
+
+	public int BoardWrite(Board b) {
+		Connection con = getConnection();
+		
+		int result = bDao.BoardWrite(con,b);
+		
+		if(result>0)commit(con);
+		else rollback(con);
+		
+		return result;
+	}
 }
 	
