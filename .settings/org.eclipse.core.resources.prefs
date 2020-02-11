@@ -1,11 +1,11 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/I-hate-HTML/Lee_seowon.git
 eclipse.preferences.version=1
 encoding//src/config/board-query.properties=UTF-8
 encoding//src/config/intranetDaily-query.properties=UTF-8
 encoding//src/config/intranetForm-query.properties=UTF-8
-<<<<<<< HEAD
-encoding//src/semi/intranet/employee/model/vo/Employee.java=UTF-8
-=======
 encoding//src/config/member-query.properties=UTF-8
->>>>>>> branch 'master' of https://github.com/I-hate-HTML/Lee_seowon.git
+encoding//src/semi/intranet/employee/model/vo/Employee.java=UTF-8
 encoding//web/resources/intranet/ajax/data.json=UTF-8
 encoding/<project>=UTF-8
