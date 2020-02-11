@@ -88,6 +88,8 @@ public class FormService {
 		s.setScode2(sInfo.get(1).getScode()); 
 		s.setSname3(sInfo.get(2).getSname()); 
 		s.setScode3(sInfo.get(2).getScode());
+		
+		System.out.println(s);
 
 		return s;
 	}
@@ -131,7 +133,44 @@ public class FormService {
 		ArrayList<Form> list = fd.listForm(con, empNum, currentPage, limitContent);
 
 		close(con);
+		
+		System.out.println();
+		
+		Form f = new Form();
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getFcategory() == 1) {
+				f = list.get(i);
+				f.setCategory("지출결의서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 2) {
+				f = list.get(i);
+				f.setCategory("휴가신청서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 3) {
+				f = list.get(i);
+				f.setCategory("교구신청서");
+				list.set(i, f);
+			} else {
+				f = list.get(i);
+				f.setCategory("기타");
+				list.set(i, f);
+			}
+			
+			
+		}
 
+		return list;
+	}
+	
+	public ArrayList<Form> listAjax(int empNo) {
+		
+		Connection con = getConnection();
+
+		ArrayList<Form> list = fd.listAjax(con, empNo);
+
+		close(con);
+		
 
 		return list;
 	}
@@ -161,6 +200,16 @@ public class FormService {
 		Connection con = getConnection();
 
 		Form f = fd.readForm(con, fno);
+		
+		if(f.getFcategory() == 1) {
+			f.setCategory("지출결의서");
+		} else if(f.getFcategory() == 2) {
+			f.setCategory("휴가신청서");
+		} else if(f.getFcategory() == 3) {
+			f.setCategory("교구신청서");
+		} else {
+			f.setCategory("기타");
+		}
 
 		close(con);
 

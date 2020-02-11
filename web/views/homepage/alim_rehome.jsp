@@ -1,5 +1,9 @@
+<%@page import="semi.home.jsp.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	Member m = (Member)session.getAttribute("member");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,17 +146,17 @@ vertical-align: middle;}
             	<a href="alim_medi.jsp" class="alimtab3">투약 통지서</a>
             </div>
         </div>
-        <form>
+        <form action="<%= request.getContextPath() %>/ahInsert.al" method="post">
             <table class="table table-bordered">
                     <tr>
                         <td colspan="4" style="background-color: #002c5f; color: white;">기본입력</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>  삭제
                         <td style="border-right: none;">대상아이</td>
                         <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
                             <input type="text" name="child" style="width: 70%;">
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td style="border-right: none;">귀가 방법</td>
                         <td colspan="3"style="border-left: none; text-align: center;"">
@@ -191,7 +195,7 @@ vertical-align: middle;}
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><img src="" alt="">임시저장</div>
+                            <div style="text-align: center;" onclick=""><input type="submit" value="확인" style="background: none; border: none; color: white;"></div>
                         </td>
                     </tr>
                     <tr>

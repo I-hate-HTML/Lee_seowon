@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
+
+<%
+ Member m = (Member)session.getAttribute("member"); 
+%>    
+
 
 	<header class="header">
 		<nav class="navbar navbar-expand-lg navbar-light fixed-top "
 			id="mainNav" style="background-color: white;">
 			<div class="container">
-				<a class="navbar-brand" href="/semi/index.jsp"
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/views/homepage/homeindex.jsp"
 					style="font-size: 28px; color: black;">무슨무슨유치원</a>
 				<button class="navbar-toggler navbar-toggler-right" type="button"
 					data-toggle="collapse" data-target="#navbarResponsive"
@@ -30,8 +35,13 @@
 								<a class="dropdown-item" href="./alimNote.jsp">알림장작성</a>
 								<a class="dropdown-item" href="./qna.jsp">문의신청</a>
 							</div></li>
-						<li class="nav-item dropdown show"><a class="nav-link"
-							href="./login.jsp" id="dropdown01">로그인</a>
+						<li class="nav-item dropdown show">
+								
+							<%if (m == null) { %>  
+             				 <a class="nav-link" href="/semi/views/homepage/login.jsp" id="dropdown01">로그인</a>
+         					    <%}else{ %>  
+          	  				<a class="nav-link" href="/semi/homelogout" id="dropdown01">로그아웃</a>
+          						<%} %>
 				
 				</li>
 				</ul>

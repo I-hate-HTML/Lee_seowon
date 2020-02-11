@@ -250,6 +250,14 @@ $(function(){
 			console.log("에러");
 		}
 	});
+	
+
+// 게시물 이동용 스크립트 
+$('#viewTable td').click(function(){
+		
+		var fno = $(this).parent().find("input").val();
+		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
+	});
 });
  
 </script>

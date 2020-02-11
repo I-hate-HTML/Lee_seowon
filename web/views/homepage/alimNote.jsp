@@ -122,7 +122,7 @@ vertical-align: middle;}
 
 
   <!-- Main Content -->
-
+  	
   <div class="top_bg">
    <a class="top_p"> 알림장 </a>
     <p>아이들 소식을 전하는 공간</p>
@@ -139,7 +139,7 @@ vertical-align: middle;}
             <a href="alim_medi.jsp" class="alimtab3">투약 통지서</a>
         </div>
         </div>
-        <form>
+        <form action="<%= request.getContextPath() %>/anInsert.al" method="post">
             <table class="table table-bordered">
                     <tr>
                         <td colspan="4"><textarea name="al_content" id="alim_text" cols="30" rows="10" placeholder="가정에서 이렇게 지냄" style="width: 100%; resize: none;"></textarea></td>                    
@@ -154,21 +154,21 @@ vertical-align: middle;}
                     </tr>
                     <tr> 
                         <td style="border-right: none;">기분</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="al_feel"><label for="alim_giboon1">좋음</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="al_feel"><label for="alim_giboon2">보통</label></td>
-                        <td style="border-left: none; "><input type="radio" id="alim_giboon3" name="al_feel"><label for="alim_giboon3">나쁨</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon1" name="al_feel" value="좋음"><label for="alim_giboon1">좋음</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="alim_giboon2" name="al_feel" value="보통"><label for="alim_giboon2">보통</label></td>
+                        <td style="border-left: none; "><input type="radio" id="alim_giboon3" name="al_feel" value="나쁨"><label for="alim_giboon3">나쁨</label></td>
                     </tr>
                     <tr> 
                         <td style="border-right: none;">건강</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="health1" name="al_health"><label for="health1">좋음</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="health2" name="al_health"><label for="health2">보통</label></td>
-                        <td style="border-left: none; "><input type="radio" id="health3" name="al_health"><label for="health3">나쁨</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="health1" name="al_health" value="좋음"><label for="health1">좋음</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="health2" name="al_health" value="보통"><label for="health2">보통</label></td>
+                        <td style="border-left: none; "><input type="radio" id="health3" name="al_health" value="나쁨"><label for="health3">나쁨</label></td>
                     </tr>
                     <tr> 
                         <td style="border-right: none;">체온체크</td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo1" name="al_temp"><label for="ondo1">정상</label></td>
-                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo2" name="al_temp"><label for="ondo2">미열</label></td>
-                        <td style="border-left: none; "><input type="radio" id="ondo3" name="al_temp"><label for="ondo3">고열</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo1" name="al_temp" value="정상"><label for="ondo1">정상</label></td>
+                        <td style="border-left: none; border-right: none;"><input type="radio" id="ondo2" name="al_temp" value="미열"><label for="ondo2">미열</label></td>
+                        <td style="border-left: none; "><input type="radio" id="ondo3" name="al_temp" value="고열"><label for="ondo3">고열</label></td>
                     </tr>
                     <tr>
                         <td style="border-right: none;">식사여부</td>
@@ -207,7 +207,7 @@ vertical-align: middle;}
                     
                     <tr>
                         <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><img src="" alt="">임시저장</div>
+                            <div style="text-align: center;" onclick=""><input type="submit" value="확인" style="background: none; border: none; color: white;"></div>
                         </td>
                     </tr>
                     <tr>
@@ -223,7 +223,8 @@ vertical-align: middle;}
   </div>
 
   <hr>
-
+  
+  
   <!-- Footer -->
   <%@ include file="common/footer.jsp"%>
 

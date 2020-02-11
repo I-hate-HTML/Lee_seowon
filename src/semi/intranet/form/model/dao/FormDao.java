@@ -1,5 +1,7 @@
 package semi.intranet.form.model.dao;
 
+import static semi.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,11 +13,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.intranet.daily.model.dao.DailyDao;
-import semi.intranet.employee.model.vo.Employee;
 import semi.intranet.form.model.vo.Form;
 import semi.intranet.form.model.vo.SignList;
-
-import static semi.common.JDBCTemplate.*;
 
 public class FormDao {
 	
@@ -205,8 +204,10 @@ public class FormDao {
 			
 			pstmt.setInt(1, empNum);
 			pstmt.setInt(2, empNum);
-			pstmt.setInt(3, endContent);
-			pstmt.setInt(4, startContent);
+			pstmt.setInt(3, empNum);
+			pstmt.setInt(4, empNum);
+			pstmt.setInt(5, endContent);
+			pstmt.setInt(6, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -236,7 +237,52 @@ public class FormDao {
 		return list;
 	}
 
-
+	
+	public ArrayList<Form> listAjax (Connection con, int empNo) {
+		
+		ArrayList<Form> list = new ArrayList<Form>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listAjax");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, empNo);
+			pstmt.setInt(2, empNo);
+			pstmt.setInt(3, empNo);
+			pstmt.setInt(4, empNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Form f = new Form();
+				
+				f.setFno(rset.getInt("DRAFT_NO"));
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFwriter(rset.getString("TNAME"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				
+				list.add(f);
+			}
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 
 	/**
 	 * 총 페이지 가져오기
@@ -299,16 +345,21 @@ public class FormDao {
 				
 				f.setFno(fno);
 				f.setFcategory(rset.getInt("DRAFT_TYPE"));
-				f.setFcontent(rset.getString("DRAFT_CONTENT"));
-				f.setFdate(rset.getDate("DRAFT_DATE"));
-				f.setFfile(rset.getString("DRAFT_FILE"));
-				/* f.setFreturnmsg(rset.getString("RETURN_REASON")); */
-				f.setFsign1(rset.getString("SNAME"));
-				f.setFstatus(rset.getString("DRAFT_PROCESS"));
-				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFwriter(rset.getString("WNAME"));
 				f.setfWriterId(rset.getInt("DRAFT_EMP"));
-				f.setFsignId1(rset.getInt("SIGN_EMP"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				f.setFsign1(rset.getString("SNAME1"));
+				f.setFsignId1(rset.getInt("SIGN_EMP1"));
+				f.setFsign2(rset.getString("SNAME2"));
+				f.setFsignId2(rset.getInt("SIGN_EMP2"));
+				f.setFsign3(rset.getString("SNAME3"));
+				f.setFsignId3(rset.getInt("SIGN_EMP3"));
+				f.setFreturnmsg(rset.getString("RETURN_REASON"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFcontent(rset.getString("DRAFT_CONTENT"));
+				f.setFfile(rset.getString("DRAFT_FILE"));
+				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				
 			}
 			
 		} catch (SQLException e) {

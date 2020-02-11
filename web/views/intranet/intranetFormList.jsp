@@ -54,7 +54,7 @@
           </td>          
           <td style="text-align: center">
           	<input type="hidden" id="listCategory" name = "category" value="<%= f.getFcategory() %>">        
-          	<span id = "typeChage"><%= f.getFcategory() %></span>
+          	<span id = "typeChage"><%= f.getCategory() %></span>
           </td>
           <td style="text-align: center"><%= f.getFstatus() %></td>
           <td style="text-align: center"><%= f.getFtitle() %></td>
@@ -65,8 +65,8 @@
           <td style="text-align: center"><%= f.getFdate() %></td>    
         </tr>
         
-        <% } %>                              
-       </table>
+        <% } %>                           
+       </table> 
        
           <nav aria-label="Page navigation example">
               <ul class="pagination pagination-sm justify-content-center">
@@ -123,31 +123,11 @@
   
   
  <script>
+                             
+
  
- $(function(){
-	$('#viewTable td').click(function(){
-		
-		var fno = $(this).parent().find("input").val();
-		var fwriterId = $('#writerId').val();
-		
-		$.ajax({
-			url:"/semi/fRead.fo",
-			type:"post",
-			data{
-				fno:fno,
-				fwriterId:fwriterId
-			}, success:function(page:"page", f:"form"){
-		
-				
-			}
-		});
-		
-		
-		
-	});
-				location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
- });
  
+
  
   $(function(){
 	
@@ -159,6 +139,7 @@
 	else if(type = '2') table = '휴가신청서';
 	else if(type = '3') table = '교구신청서';
 	else if(type = '4') table = '기타';
+  }
 
 	</script>
  

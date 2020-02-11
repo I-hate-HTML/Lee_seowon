@@ -137,8 +137,10 @@
 									</div>
 								</td>
 								<td style="text-align: center; padding: 0.2rem">
-									<button class="btn btn-primary btn-sm" onclick="deleteImg();"
+									<div class="filebox">
+										<button class="btn btn-primary btn-sm" onclick="deleteImg();"
 										id="studentImgD">삭제</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -169,9 +171,8 @@
 								style="width: 100px">교사확인창</h6>
 						</td>
 						<td align="right">
-							<button class="btn btn-primary btn-sm" onclick="studentModify();">수정</button>
+							<button class="btn btn-primary btn-sm" onclick="editPop();">수정</button>
 							<button class="btn btn-primary btn-sm" onclick="studentDelete();">삭제</button>
-							<button class="btn btn-primary btn-sm" onclick="studentCancel();">취소</button>
 						</td>
 					</tr>
 				</table>
@@ -261,6 +262,15 @@
 		}
 		function deleteImg(){
 			$('#empImg').attr('src', '기본이미지');
+		}
+	</script>
+	
+	<script>
+		function editPop(){
+			// 임시로 window open사용
+			// 서블렛에서 데이터 선택한 강사 데이터 담아서 아래 주소로 보내야함
+			
+			 window.open("intranetEditTeacher.jsp", "교사정보 수정", "width=1500px, height=600px, left=100, top=50");
 		}
 	</script>
 

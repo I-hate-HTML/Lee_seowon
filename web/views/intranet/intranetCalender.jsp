@@ -8,15 +8,13 @@
 <title>꿈나라어린이집 # 인트라넷</title>
 <link rel=" shortcut icon" href="image/favicon.ico">
 
-    <link rel="stylesheet" href="../../resource/vendor/css/fullcalendar.min.css" />
-    <link rel="stylesheet" href="../../resource/vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href='../../resource/vendor/css/select2.min.css' />
-    <link rel="stylesheet" href='../../resource/vendor/css/bootstrap-datetimepicker.min.css' />
+    <link rel="stylesheet" href="../../resources/intranet/vendor/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href='../../resources/intranet/vendor/css/select2.min.css' />
+    <link rel="stylesheet" href='../../resources/intranet/vendor/css/bootstrap-datetimepicker.min.css' />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="../../resource/css/main.css">
 </head>
 <body>
 <!-- Begin Page Content -->
@@ -35,7 +33,7 @@
                 <!-- 일자 클릭시 메뉴오픈 -->
                 <div id="contextMenu" class="dropdown clearfix">
                     <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                        style="display:block;position:static;margin-bottom:5px;">
+                        style="display:block;position:static;margin-bottom:5px;" hidden="">
                         <li><a tabindex="-1" href="#">원내행사</a></li>
                         <li><a tabindex="-1" href="#">교사일정</a></li>
                         <li><a tabindex="-1" href="#">체험학습</a></li>
@@ -136,44 +134,7 @@
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
         
-                <div class="panel panel-default">
-        
-                    <div class="panel-heading">
-                        <h3 class="panel-title">필터</h3>
-                    </div>
-        
-                    <div class="panel-body">
-        
-                        <div class="col-lg-6">
-                            <label for="calendar_view">구분별</label>
-                            <div class="input-group">
-                                <select class="filter" id="type_filter" multiple="multiple">
-                                    <option value="원내행사">원내행사</option>
-                                    <option value="교사일정">교사일정</option>
-                                    <option value="체험학습">체험학습</option>
-                                    <option value="행정일정">체험학습</option>
-                                </select>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-6">
-                            <label for="calendar_view">등록자별</label>
-                            <div class="input-group">
-                                <label class="checkbox-inline"><input class='filter' type="checkbox" value="공통"
-                                        checked>공통</label>
-                                <label class="checkbox-inline"><input class='filter' type="checkbox" value="원장"
-                                        checked>원장</label>
-                                <label class="checkbox-inline"><input class='filter' type="checkbox" value="교사"
-                                        checked>교사</label>
-                                <label class="checkbox-inline"><input class='filter' type="checkbox" value="영양사"
-                                        checked>영양사</label>
-                                <label class="checkbox-inline"><input class='filter' type="checkbox" value="시설관리자"
-                                        checked>시설관리자</label>
-                            </div>
-                        </div>
-        
-                    </div>
-                </div>
+               
                 <!-- /.filter panel -->
             </div>
 
@@ -181,18 +142,16 @@
 
       </div>
       <!-- End of Main Content -->
-      
-    <script src="../../resource/vendor/js/jquery.min.js"></script>
-    <script src="../../resource/vendor/js/bootstrap.min.js"></script>
-    <script src="../../resource/vendor/js/moment.min.js"></script>
-    <script src="../../resource/vendor/js/fullcalendar.min.js"></script>
-    <script src="../../resource/vendor/js/ko.js"></script>
-    <script src="../../resource/vendor/js/select2.min.js"></script>
-    <script src="../../resource/vendor/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../resource/js/main.js"></script>
-    <script src="../../resource/js/addEvent.js"></script>
-    <script src="../../resource/js/editEvent.js"></script>
-    <script src="../../resource/js/etcSetting.js"></script>
+      	
+    <script src="../../resources/intranet/vendor/js/moment.min.js"></script>
+    <script src="../../resources/intranet/vendor/js/fullcalendar.min.js"></script>
+    <script src="../../resources/intranet/vendor/js/ko.js"></script>
+    <script src="../../resources/intranet/vendor/js/select2.min.js"></script>
+    <script src="../../resources/intranet/vendor/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../resources/intranet/js/main.js"></script>
+    <script src="../../resources/intranet/js/addEvent.js"></script>
+    <script src="../../resources/intranet/js/editEvent.js"></script>
+    <script src="../../resources/intranet/js/etcSetting.js"></script>
       
       
 <%@ include file = "../intranet/common/footer.jsp" %>

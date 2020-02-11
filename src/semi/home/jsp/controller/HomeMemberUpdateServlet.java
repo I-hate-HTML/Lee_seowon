@@ -33,15 +33,14 @@ public class HomeMemberUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userPwd = request.getParameter("userPwd");
-		String email = request.getParameter("email1")
-					+"@" + request.getParameter("email2");
+		String email = request.getParameter("email");
 		String phone = request.getParameter("tel1")+"-"
 					+ request.getParameter("tel2")+"-"
 					+ request.getParameter("tel3");
 		
-		String address = request.getParameter("homezipcode")+", "
-						+ request.getParameter("homeaddress")+", "
-						+ request.getParameter("homeaddress2");
+		String address = request.getParameter("addrNo")+", "
+						+ request.getParameter("addr1")+", "
+						+ request.getParameter("addr2");
 		
 		
 		HttpSession session = request.getSession(false);
@@ -60,6 +59,8 @@ public class HomeMemberUpdateServlet extends HttpServlet {
 		try {
 			hms.homeMemberUpdate(m);
 			System.out.println("회원정보 수정 완료!");
+			
+			response.sendRedirect("views/homepage/homeindex.jsp");
 			
 		}catch (Exception e) {
 			System.out.println("회원정보 수정 실패!");

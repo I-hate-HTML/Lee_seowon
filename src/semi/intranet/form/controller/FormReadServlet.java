@@ -36,51 +36,18 @@ public class FormReadServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int fno = Integer.parseInt(request.getParameter("fno"));
-		int empNo = Integer.parseInt(request.getParameter("fwriterId"));
+		int empNo = 2015001; // 나중에 바꿀 것
 
-		ArrayList<Form> flist = new ArrayList<Form>();
-
-
-		int currentPage;
-		int listCount;
-		int limitContent;
-		int limitPage;
-		int maxPage;
-		int startPage;
-		int endPage;
-
-		currentPage = 1;
-		limitContent = 5;
-		limitPage = 3;
-
-		if (request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-
-		listCount = new FormService().getListCount();
-
-		maxPage = (int) ((double) listCount / limitContent + 0.9);
-		startPage = ((int) ((double) currentPage / limitPage + 0.9) - 1) * limitPage + 1;
-
-		endPage = startPage + limitPage - 1;
-
-		if (endPage > maxPage) {
-			endPage = maxPage;
-		}
-
-		// 게시판 글목록 리스트
-		flist = new FormService().listForm(empNo, currentPage, limitContent);
-
+		
 		Form f = new FormService().readForm(fno);
 
 		String page = "";
 		
-		  if(f != null && empNo == f.getfWriterId()) { // 
-			/* page = "views/intranet/intranetFormRead.jsp"; */
-			page = "/fListRead.fo";
+		  if(f != null) {
+			page = "fListRead.fo";
 		  
-			  request.setAttribute("form", f); 
-		 }
+			request.setAttribute("form", f); 
+		 } 
 		  
 		 request.getRequestDispatcher(page).forward(request, response);
 		
