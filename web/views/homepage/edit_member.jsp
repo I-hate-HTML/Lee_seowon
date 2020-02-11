@@ -1,22 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
     
+
+   
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  
   <title>개인정보수정</title>
 
   	<!-- 개별페이지 CSS -->
 	<!-- 이것만 위치 맞춰주면됨 -->
 	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
+	
 	
 	
 	<!-- 부트스트랩 -->
@@ -36,7 +39,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
   
-  
+  <link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"rel="stylesheet">
 
 
   <style>
@@ -72,7 +75,7 @@
         table.board-write td em { display:inline-block; margin-left:8px; font-size:13px; color:#333; }
         table.board-write td strong { color:#333; }
         table.board-write td span { margin-left:8px; font-weight:600; color:#ffa800; }
-        table.board-write td input { height:24px; margin:0; padding-left:7px; font-family:"NanumGothic","Nanum Gothic"; font-size:14px; color:#666; vertical-align:top; border:1px solid #ddd; }
+        table.board-write td input {  margin:0; padding-left:7px; font-family:"NanumGothic","Nanum Gothic"; font-size:14px; color:#666; vertical-align:top; border:1px solid #ddd; }
         table.board-write td input.radio { width:auto; height:auto; margin:9px 5px 0 0; padding:0; vertical-align:top; border:none; }
         table.board-write td input.file { width:500px; height:30px; margin:0; padding:0; vertical-align:top; border:none; background:none; }
         table.board-write td select { height:30px; padding-left:5px; font-family:"NanumGothic","Nanum Gothic"; font-size:14px; color:#666; vertical-align:top; border:1px solid #ddd; }
@@ -81,12 +84,12 @@
         table.board-write td .mg2 { margin-left:20px !important; }
         table.board-write td .mg3 { margin-left:20px !important; }
         table.board-write td .mg4 { margin-top:5px !important; }
-        table.board-write td .width1 { width:322px; }
+        table.board-write td .width1 { width:90%; }
         table.board-write td .width2 { width:100px; }
         table.board-write td .width3 { width:56px; }
-        table.board-write td .width4 { width:200px; }
+        table.board-write td .width4 { width:90%; }
         table.board-write td .width5 { width:500px; }
-        table.board-write td a.click { display:inline-block; margin-left:8px; padding:0 25px; font-size:13px; font-weight:600; color:#fff; background-color:#666; }
+        table.board-write td div.click { display:inline-block; margin-left:8px; padding:0 25px; font-size:13px; font-weight:600; color:#fff; background-color:#666; }
         table.board-write td a.click2 { display:inline-block; padding:0 25px; font-size:13px; font-weight:600; color:#fff; background-color:#ffa800; }
         table.board-write td table.tbl4 { width:60%; }
         
@@ -117,77 +120,36 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form>
+        <form id="edit_form" action="${pageContext.request.contextPath}/homeupdate" method="post">
             <table class="board-write mgtop7">
                     <tbody>
                            <tr>
                             <th>성명</th>
-                            <td><input type="text" id="name" name="name" class="width1" value="임도훈" disabled></td>
+                            <td><%=m.getUserName()%></td>
                         </tr>
                         <tr>
                             <th>회원아이디</th>
-                            <td>
-                                <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="JavaMaster" disabled>
-                            </td>
+                            <td><%=m.getUserId()%></td>
                         </tr>
                         <tr>
                             <th>비밀번호 <span>*</span></th>
-                            <td><input type="password" id="userpw" name="userpw" value="" class="width1"><em>비밀번호는 6~16자리의 영문, 숫자, 특수문자의 혼합</em></td>
+                            <td><input type="password" id="userPwd" name="userPwd"  class="width1"><em>비밀번호는 6~16자리의 영문, 숫자, 특수문자의 혼합</em></td>
                         </tr>
                         <tr>
                             <th>비밀번호 확인 <span>*</span></th>
-                            <td><input type="password" id="userpw1" name="userpw1" value="" class="width1"><em>비밀번호를 한번 더 입력해 주세요</em></td>
+                            <td><input type="password" id="userpw1" name="userpw1"  class="width1"><em>비밀번호를 한번 더 입력해 주세요</em></td>
                         </tr>
                         <tr>
                             <th>이메일 <span>*</span></th>
                             <td>
-                                <input type="text" id="email1" name="email1" class="width4"> @ 
-                                <input type="text" id="email2" name="email2" class="width4">
-                                <select class="select1 ko" style="width:150px;" onchange="selectEmail(this.value);">
-                                    <option value="">직접입력</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="hanmail.net">hanmail.net</option>
-                                    <option value="gmail.com">gmail.com</option>
-                                    <option value="hotmail.com">hotmail.com</option>
-                                    <option value="korea.com">korea.com</option>
-                                    <option value="nate.com">nate.com</option>	  
-                                </select>
+                                <input type="text" id="email" name="email" class="width4">                  
                             </td>
                         </tr>
-                        <tr>
-                                <th>전화번호</th>
-                                <td>
-                                    <select name="tel1" id="tel1" class="select1 ko" style="width:120px;">
-                                        <option value="">서울(02)</option>
-                                        <option value="02">서울(02)</option>
-                                        <option value="031">경기(031)</option>
-                                        <option value="032">인천(032)</option>
-                                        <option value="033">강원(033)</option>
-                                        <option value="041">충남(041)</option>
-                                        <option value="042">대전(042)</option>
-                                        <option value="043">충북(043)</option>
-                                        <option value="051">부산(051)</option>
-                                        <option value="052">울산(052)</option>
-                                        <option value="053">대구(053)</option>
-                                        <option value="054">경북(054)</option>
-                                        <option value="055">경남(055)</option>
-                                        <option value="061">전남(061)</option>
-                                        <option value="062">광주(062)</option>
-                                        <option value="063">전북(063)</option>
-                                        <option value="064">제주(064)</option>
-                                        <option value="070">070</option>
-                                    </select>
-                                    - <input type="text" id="tel2" name="tel2" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
-                                    - <input type="text" id="tel3" name="tel3" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
-                
-                                    <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:20px;" name="telType" id="telType1" value="H" class="radio01" checked=""> 집</label>
-                                    <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:10px;" name="telType" id="telType2" value="O" class="radio01"> 직장</label>
-                                </td>
-                            </tr>
+                      
                             <tr>
                             <th>핸드폰번호 <span>*</span></th>
                             <td>
-                                <select name="hp1" id="hp1" style="width:95px; font-size:13px; width:120px;" class="select1 ko">
+                                <select name="tel1" id="hp1" style="width:95px; font-size:13px; width:120px;" class="select1 ko">
                                     <option value="">국번선택</option>
                                     <option value="010">010</option>
                                     <option value="011">011</option>
@@ -196,20 +158,19 @@
                                     <option value="018">018</option>
                                     <option value="019">019</option>
                                 </select> 
-                                - <input type="text" id="hp2" name="hp2" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };"> 
-                                - <input type="text" id="hp3" name="hp3" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
-                                <a id="certiHpButton" style="cursor:pointer; background: #002c5f; color: white;" class="click" onclick="hpCerti();" >핸드폰 본인인증</a>                                
-                                <span id="certiHpResult" style="display:none;">핸드폰 인증 완료</span>
+                                - <input type="text" id="hp2" name="tel2" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };"> 
+                                - <input type="text" id="hp3" name="tel3" maxlength="4" value="" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
+                                
                             </td>
                         </tr>
                         <tr>
                             <th>주소 <span>*</span></th>
                             <td>
-                                <input type="text" name="homezipcode" id="homezipcode" class="width4" style="width:80px;" readonly="">
-                                <a style="cursor:pointer; background: #002c5f; color: white;" class="click" onclick="goPopup();" >주소찾기</a>
+                                <input type="text" name="addrNo" id="addrNo" class="width4" style="width:200px;" >
+                                <div style="cursor:pointer; background: #002c5f; color: white;" class="click" onclick="addrSearch()">주소찾기</div>
                                 <p class="mg4">
-                                    <input type="text" name="homeaddress" id="homeaddress" class="width1" style="width:50%;"><br>
-                                    <input type="text" name="homeaddress2" id="homeaddress2" class="width1" style="width:50%; margin-top:5px;">
+                                    <input type="text" name="addr1" id="addr1" class="width1" ><br>
+                                    <input type="text" name="addr2" id="addr2" class="width1" style="margin-top:10px;">
                                 </p>
                             </td>
                         </tr>
@@ -229,7 +190,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <h5>자녀 <em>자녀정보 입력해</em></h5>
+                <br><br>
+                <h5 style="text-align:center;">자녀정보</h5>
+                <br>
                     <table class="board-write2">
                         <colgroup>
                             <col style="width:15%;">
@@ -243,36 +206,113 @@
                             <tr><th class="first">이름</th>
                             <th>생년월일</th>
                             <th>성별</th>
-                            <th>재원</th>
+                            <th>반</th>
                             
                             
                         </tr></thead>
                         <tbody id="CHILD_ROWS">
                             <tr class="CHILD_ROW">
                                 <td style="border-left:0px solid #ddd;">
-                                    <input type="text" id="child_name_0" class="input_st child_name ko" style="width:85%; padding:3px 0 3px 0px; text-align:center; font-size:14px; ime-mode:active;" value="이승효" disabled>
+                               		<%=m.getCname()%>
                                 </td>
                                 <td>
-                                    &nbsp;&nbsp;<input type="date" class="child_birth ko k-input" id="child_birth_1" value="2015-01-10" style="width: 90%; margin-left: -5px; padding-left: 0px; padding-right: 5px; text-align: center;" data-role="datepicker" role="textbox" aria-haspopup="true" aria-expanded="false" aria-owns="child_birth_1_dateview" aria-disabled="false" aria-label="Current focused date is null" disabled></span>
+                                	<%=m.getCbdate()%>
                                 </td>
                                 <td>
-                                    <input type="radio" class="radio01 child_sex1" name="child_sex_0" value="남" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" disabled>&nbsp;&nbsp;&nbsp;남자
-                                    <input type="radio" class="radio01 child_sex1" name="child_sex_0" value="여" style="width:20px; height:20px; margin-top:6px; margin-left:10px;"checked disabled>&nbsp;&nbsp;&nbsp;여자
+                                    <input type="radio" class="radio01 child_sex1" id="M" name="child_sex_0" value="남" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" disabled>&nbsp;&nbsp;&nbsp;남자
+                                    <input type="radio" class="radio01 child_sex1" id="F" name="child_sex_0" value="여" style="width:20px; height:20px; margin-top:6px; margin-left:10px;"disabled>&nbsp;&nbsp;&nbsp;여자
                                 </td>
                                 <td>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" value="1번" name="where" checked disabled><label> 1번반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="2번" name="where"disabled><label> 2번반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="3번" name="where"disabled><label> 3번반</label>
-                                    <input type="radio" class="radio01 child_nursery1" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="4번" name="where"disabled><label> 4번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" id="1" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" value="1" name="where"disabled><label> 1번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" id="2" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="2" name="where"disabled><label> 2번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" id="3" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="3" name="where"disabled><label> 3번반</label>
+                                    <input type="radio" class="radio01 child_nursery1" id="4" style="width:20px; height:20px; margin-top:6px; margin-left:7px;" value="4" name="where"disabled><label> 4번반</label>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
-                    <input type="submit" value="   저장   " class="btn " style="margin-left: 40%; background: #002c5f; color: white;" onclick="">
-                    <input type="reset" value="   취소   " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return ">
+                    <input type="submit" value="저장  " class="btn " style="margin-left: 35%; background: #002c5f; color: white;" onclick="">
+                    <input type="reset" value="취소  " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return ">
+                    <input type="button" value="탈퇴 " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="location='${pageContext.request.contextPath}/homedelete.hm'">
 
                 </form>
+               	<script>
+		
+		function sign(){
+			$('#edit_form').submit();
+		}
+		
+		// 참조 API : http://postcode.map.daum.net/guide
+		function addrSearch() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var fullAddr = ''; // 최종 주소 변수
+	                var extraAddr = ''; // 조합형 주소 변수
+
+	                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    fullAddr = data.roadAddress;
+
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    fullAddr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    //법정동명이 있을 경우 추가한다.
+	                    if(data.bname !== ''){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있을 경우 추가한다.
+	                    if(data.buildingName !== ''){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+	                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                $('#addrNo').val(data.zonecode); //5자리 새우편번호 사용
+	                
+	                $('#addr1').val(fullAddr);
+
+	                // 커서를 상세주소 필드로 이동한다.
+	                $('#addr2').focus();
+	            }
+	        }).open();
+	    };
+		
+	    $(function(){
+	      	var str = <%= m.getGender() %>; 
+	      	var cclass = <%= m.getCclass() %>;
+	      	if(str.id.indexOf('M') >-1){
+	    			$('#M').attr("checked",true);			
+	    		}else{
+	    			$('#F').attr("checked",true);
+	    		}
+	      	if(cclass == 4){
+	      		$('#4').attr("checked",true);
+	      	}
+	      	if(cclass == 3){
+	      		$('#3').attr("checked",true);
+	      	}
+	      	if(cclass == 2){
+	      		$('#2').attr("checked",true);
+	      	}
+	      	if(cclass == 1){
+	      		$('#1').attr("checked",true);
+	      	}
+	      	
+	      });
+		
+		
+		</script>
+                
       </div>
     </div>
   </div>

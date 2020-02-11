@@ -35,8 +35,7 @@
   
 	<!-- 개별페이지 CSS -->
 	<!-- 이것만 위치 맞춰주면됨 -->
-<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"
-	rel="stylesheet">
+	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"rel="stylesheet">
 
 	
 

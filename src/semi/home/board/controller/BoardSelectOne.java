@@ -1,28 +1,26 @@
-package semi.home.jsp.controller;
+package semi.home.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import semi.home.jsp.model.service.HomeMemberService;
-import semi.home.jsp.model.vo.Member;
+import semi.home.board.model.vo.Board;
+import semi.home.board.service.BoardService;
 
 /**
- * Servlet implementation class HomeMemberDeleteServlet
+ * Servlet implementation class BoardSelectOne
  */
-@WebServlet("/homedelete.hm")
-public class HomeMemberDeleteServlet extends HttpServlet {
+@WebServlet("/selectOne.bo")
+public class BoardSelectOne extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeMemberDeleteServlet() {
+    public BoardSelectOne() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +29,21 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String userId = ((Member)session.getAttribute("member")).getUserId();
+		Board b  = new BoardService().selectOne(bno);
 		
-		HomeMemberService hms = new HomeMemberService();		
-		
-		
-		try {
-			hms.homedeleteMember(userId);			
+		String path="";
+		if(b != null) {
+			path="views/homepage/boardread.jsp";
+			request.setAttribute("board", b);
+			request.getRequestDispatcher(path).forward(request, response);
 			
-			response.sendRedirect("views/homepage/homeindex.jsp");
-			
-			session.invalidate();
-		} catch (Exception e) {
-			request.setAttribute("msg", "회원 탈퇴 중 에러발생");
-			request.setAttribute("exception", e);
-			
-			/*에러 페이지 만들건가요??*/
+		}else {
+			path="views/homepage/boardread.jsp";
+			request.setAttribute("board", b);
+			request.getRequestDispatcher(path).forward(request, response);
 		}
-		
 		
 	}
 

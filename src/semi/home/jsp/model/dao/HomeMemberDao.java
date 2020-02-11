@@ -17,12 +17,10 @@ public class HomeMemberDao {
 	public HomeMemberDao() {
 		prop = new Properties();
 		
-		String filePath = HomeMemberDao.class.getResource("/config/member-query.properties").getPath();
+		String filePath = Member.class.getResource("/config/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(filePath));
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -78,7 +76,8 @@ public class HomeMemberDao {
 	public int homeMemberInsert(Connection con, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("homeMemberInsert");
+		String sql = prop.getProperty("homeMemberInsert"); 
+				//"INSERT INTO MEMBER VALUES(SEQ_BNO.NEXTVAL,?,?,?,?,?,?,?,DEFAULT,NULL,?,?,?,?,DEFAULT)";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -117,6 +116,7 @@ public class HomeMemberDao {
 			pstmt.setString(2, m.getEmail());
 			pstmt.setString(3, m.getPhone());
 			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getUserId());
 			
 			result = pstmt.executeUpdate();
 			

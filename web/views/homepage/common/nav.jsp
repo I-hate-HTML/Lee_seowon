@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
+
+<%
+ Member m = (Member)session.getAttribute("member"); 
+%>    
+
 
 	<header class="header">
 		<nav class="navbar navbar-expand-lg navbar-light fixed-top "
 			id="mainNav" style="background-color: white;">
 			<div class="container">
-				<a class="navbar-brand" href="/semi/index.jsp"
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/views/homepage/homeindex.jsp"
 					style="font-size: 28px; color: black;">무슨무슨유치원</a>
 				<button class="navbar-toggler navbar-toggler-right" type="button"
 					data-toggle="collapse" data-target="#navbarResponsive"
@@ -23,15 +28,20 @@
 									class="dropdown-item" href="./event_calender.jsp">행사 안내</a>
 							</div></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="./gallaryBoard.jsp" id="dropdown01">앨범</a></li>
-						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="./board.jsp" id="dropdown01">커뮤니티</a></li>
+						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/boardlsit.do" id="dropdown01">커뮤니티</a></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">마이페이지</a>
 							<div class="dropdown-menu " aria-labelledby="dropdown01">
 								<a class="dropdown-item" href="./edit_member.jsp">개인정보수정</a>
 								<a class="dropdown-item" href="./alimNote.jsp">알림장작성</a>
 								<a class="dropdown-item" href="./qna.jsp">문의신청</a>
 							</div></li>
-						<li class="nav-item dropdown show"><a class="nav-link"
-							href="./login.jsp" id="dropdown01">로그인</a>
+						<li class="nav-item dropdown show">
+								
+							<%if (m == null) { %>  
+             				 <a class="nav-link" href="/semi/views/homepage/login.jsp" id="dropdown01">로그인</a>
+         					    <%}else{ %>  
+          	  				<a class="nav-link" href="/semi/homelogout" id="dropdown01">로그아웃</a>
+          						<%} %>
 				
 				</li>
 				</ul>

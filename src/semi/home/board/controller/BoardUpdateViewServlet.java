@@ -1,28 +1,26 @@
-package semi.home.jsp.controller;
+package semi.home.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import semi.home.jsp.model.service.HomeMemberService;
-import semi.home.jsp.model.vo.Member;
+import semi.home.board.model.vo.Board;
+import semi.home.board.service.BoardService;
 
 /**
- * Servlet implementation class HomeMemberDeleteServlet
+ * Servlet implementation class BoardUpdateServlet
  */
-@WebServlet("/homedelete.hm")
-public class HomeMemberDeleteServlet extends HttpServlet {
+@WebServlet("/bupdateview.bo")
+public class BoardUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeMemberDeleteServlet() {
+    public BoardUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +29,17 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		int pbno = Integer.parseInt(request.getParameter("pbno"));
 		
-		String userId = ((Member)session.getAttribute("member")).getUserId();
+		Board b = new Board();
+		b = new BoardService().updateView(pbno);
 		
-		HomeMemberService hms = new HomeMemberService();		
-		
-		
-		try {
-			hms.homedeleteMember(userId);			
-			
-			response.sendRedirect("views/homepage/homeindex.jsp");
-			
-			session.invalidate();
-		} catch (Exception e) {
-			request.setAttribute("msg", "회원 탈퇴 중 에러발생");
-			request.setAttribute("exception", e);
-			
-			/*에러 페이지 만들건가요??*/
+		if( b != null) {
+			request.setAttribute("board", b);
+			request.getRequestDispatcher("views/homepage/boardupdate.jsp").forward(request, response);
+		}else {
+			System.out.println("Board가 비어있다");
 		}
-		
 		
 	}
 
