@@ -1,5 +1,7 @@
+<%@page import="semi.home.board.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, semi.home.board.model.vo.*"%>
+    pageEncoding="UTF-8" %>
     
     
     <%
@@ -73,7 +75,7 @@
             
         
             
-				  <table class="table table-hover" style="background: white;">
+				  <table id="boardtable" class="table table-hover" style="background: white;">
                       <thead>
                           <tr>
                               <th>번호</th>
@@ -121,9 +123,13 @@
 	<%@ include file = "common/footer.jsp" %>
 
     <script>
-      $('tr').click(function(){
-        location='boardread.html';
-      });
+    $(function(){
+    	  $('#boardtable td').click(function(){
+        	  var bno = $(this).parent().children().eq(0).text();
+    			location.href="<%=request.getContextPath()%>/selectOne.bo?bno=" + bno;	
+          });
+    });
+    
     </script>
 		
 </body>

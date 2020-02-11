@@ -1,5 +1,11 @@
+<%@page import="semi.home.board.model.vo.Board"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	Board b = (Board)request.getAttribute("board");
+    %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +17,7 @@
     <!-- v1.0 -->
 	<!-- 개별페이지 CSS -->
 	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
+
   
 	<!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -30,6 +36,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 	
+	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
 	
 
   <style>
@@ -64,20 +71,19 @@
                         <tbody>
                                 <tr>
                                     <th class="tatd">제목 </th>
-                                    <th colspan="3"><%// b.getBtitle() %></th>
+                                    <th colspan="3"><%= b.getBtitle() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">작성자 </th>
-                                    <th><%// b.getBwriter() %></th>
+                                    <th><%= b.getBwriter() %></th>
                                     <th class="tatd">작성일  </th>
-                                    <th><%// b.getDate() %></th>
+                                    <th><%= b.getBdate() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">내용 </th>
                                     <td colspan="3">
-                                    <div style="height: 500px;">
-                                        게시글 내용 영역입니다.영역확이니ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ
-                                        <% //b.getBcontent() %>
+                                    <div style="height: 500px;">                 
+                                        <%= b.getBcontent() %>
                                     </div>
                                 </td>
                                 </tr>
@@ -90,7 +96,7 @@
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="" class="pull-right"/>
                 <%//} %>  
                   
-                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location='board.jsp'" class="pull-right"/>
+                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location.href='/semi/boardlsit.do'" class="pull-right"/>
               </div>
       		</div>
     	</div>
