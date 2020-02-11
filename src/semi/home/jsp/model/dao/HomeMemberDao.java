@@ -116,6 +116,7 @@ public class HomeMemberDao {
 			pstmt.setString(2, m.getEmail());
 			pstmt.setString(3, m.getPhone());
 			pstmt.setString(4, m.getAddress());
+			pstmt.setString(5, m.getUserId());
 			
 			result = pstmt.executeUpdate();
 			
