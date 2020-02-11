@@ -69,12 +69,12 @@
     	<div class="row">
       		<div class="col-lg-8 col-md-12 mx-auto">
             <br><br>
-            <form action="<%= request.getContextPath() %>/bwrite.do" >
+            <form action="<%= request.getContextPath() %>/bupdate.bo" >
               <table class="table table-bordered" style="background: white;">
                   <tbody>
                           <tr>
                               <th>제목: </th>
-                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control" value="<%= b.getBtitle() %>"/></td>
+                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control" value="<%= b.getBtitle() %>" readonly="readonly"/></td>
                           </tr>
                           <tr>
                               <th>내용: </th>
@@ -86,10 +86,11 @@
                               <span><input type="file" name="bfile" value="<%= b.getBfile() %>"></span>
                               </td>
                           </tr>
- 
+ 	
                           
                         </tbody>
                       </table>
+                      <input type="hidden" name="pbno" value="<%= b.getBno() %>">
                       
                       <div class="float-right">
                         <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>

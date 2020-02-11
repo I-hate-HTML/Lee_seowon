@@ -1,3 +1,4 @@
+<%@page import="semi.home.board.model.vo.PageInfo"%>
 <%@page import="semi.home.board.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,14 @@
     
     
     <%
-    	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+    ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+    
     %>
 	
 <!DOCTYPE html>
@@ -103,13 +111,26 @@
                   <% } %>
                   <div class="text-center d-flex justify-content-center">
                     <ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#" >Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <% if(currentPage <=1){ %>
+                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=1" >Previous</a></li>                	
+                    <%}else{ %>
+                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=currentPage - 1 %>" >Previous</a></li>
+                    <%} %>
+                    
+                    <% for(int p = startPage; p <= endPage; p++){
+    						if(p == currentPage){	 %>
+    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=p%>" ><%=p %></a></li>
+    				<%		}else{ %>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=p %>"><%=p %></a></li>
+					<%	    } %>
+					<%	 } %>
+					
+					<% if(currentPage >= maxPage){ %>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%= maxPage %>">Next</a></li>
+					<% 		}else{ %>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%= currentPage + 1 %>">Next</a></li>
+					<% } %>					
+					
 					</ul>
                   </div>
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.home.board.model.vo.Board;
+import semi.home.board.model.vo.PageInfo;
 import semi.home.board.service.BoardService;
 
 /**
@@ -32,15 +33,41 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<Board> list = new ArrayList<Board>();
+		ArrayList<Board> list = null;
+		BoardService bs = new BoardService();
 		
-		list = new BoardService().selectList();
+		int startPage;
+		int endPage;
+		int maxPage;
+		int currentPage;
+		int limit;
+		currentPage = 1;
+		limit = 10;
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int listCount = bs.getListCount();
+		
+		maxPage = (int)((double)listCount/limit + 0.9);
+		startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit+1;
+		endPage = startPage + limit -1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		list = bs.selectList(currentPage,limit);
 		
 		String page = "";
 		
 		if(list!= null) {
+			System.out.println("여긴 서블릿" + list);
 			page = "views/homepage/board.jsp";
 			request.setAttribute("list", list);
+			
+			PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+			request.setAttribute("pi",pi);
 		}else {
 			request.setAttribute("msg", "에러발생");
 			page = "views/homepage/board.jsp";

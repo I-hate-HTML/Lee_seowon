@@ -30,7 +30,7 @@ public class BoardDao {
 		}
 	}
 
-	public ArrayList<Board> selectList(Connection con) {
+	/*public ArrayList<Board> selectList(Connection con) {
 
 		ArrayList<Board> list = null;
 		Statement stmt =null;
@@ -63,7 +63,7 @@ public class BoardDao {
 			close(stmt);
 		}		
 		return list;
-	}
+	}*/
 
 	public Board selectOne(Connection con, int bno) {
 		Board b = new Board();
@@ -167,6 +167,95 @@ public class BoardDao {
 		}
 		
 		return b;
+	}
+
+	public int updateBoard(Connection con, int pbno, String bcontent) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBoard");
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bcontent);
+			pstmt.setInt(2, pbno);
+			
+			result= pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getListCount(Connection con) {
+		
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("listCount"); 
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> selectList(Connection con, int currentPage, int limit, int listCount) {
+		ArrayList<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		
+		String sql = prop.getProperty("selectList");
+		try {
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit -1;
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			rset = pstmt.executeQuery();
+			list= new ArrayList<Board>();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				
+				b.setBno(listCount - rset.getInt("RNUM")+1);
+				b.setBtitle(rset.getString("btitle"));
+				b.setBcontent(rset.getString("bcontent"));
+				b.setBwriter(rset.getString("bwriter"));
+				b.setBcount(rset.getInt("bcount"));
+				b.setBdate(rset.getDate("bdate"));
+				
+				System.out.println(b);
+				list.add(b);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 
 

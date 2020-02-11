@@ -11,7 +11,7 @@ public class BoardService {
 	
 	private BoardDao bDao = new BoardDao();
 
-	public ArrayList<Board> selectList() {
+	/*public ArrayList<Board> selectList() {
 		Connection con = getConnection();
 		
 		ArrayList<Board> list = bDao.selectList(con);
@@ -19,7 +19,7 @@ public class BoardService {
 		close(con);
 		
 		return list;
-	}
+	}*/
 
 	public Board selectOne(int bno) {
 		Connection con = getConnection();
@@ -58,6 +58,41 @@ public class BoardService {
 		
 		close(con);
 		return b;
+	}
+
+	public int updateBoard(int pbno, String bcontent) {
+		Connection con = getConnection();
+		
+		int result = bDao.updateBoard(con,pbno,bcontent);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = bDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+	
+
+	public ArrayList<Board> selectList(int currentPage, int limit) {
+			Connection con = getConnection();
+			int listCount = bDao.getListCount(con);
+			
+			ArrayList<Board> list = bDao.selectList(con,currentPage,limit,listCount);
+			
+			close(con);
+			
+			return list;
+		
 	}
 }
 	
