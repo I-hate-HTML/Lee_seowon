@@ -17,6 +17,7 @@
 <script src="../../resources/js/fullcal/interaction/main.min.js"></script>
 <script src='../../resources/js/fullcal/core/locales/ko.js'></script>
 <script src="../../resources/js/fullcal/timegrid/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <meta charset="UTF-8">
 <title>꿈나라어린이집 # 인트라넷</title>
 
@@ -154,14 +155,16 @@
 			});
 
 			var calendar = new Calendar(calendarEl, {
-				plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
+				plugins : [ 'interaction', 'dayGrid', 'timeGrid','list' ],
 				header : {
 					left : 'prev,next today',
 					center : 'title',
-					right : 'dayGridMonth,timeGridWeek,timeGridDay'
+					right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 				},
+				navLinks :true,
 				editable : true,
 				droppable : true,
+				allDaySlot : false,
 				drop : function(info) {
 
 					if (checkbox.checked) {
@@ -171,8 +174,9 @@
 				},
 				locale : 'ko',
 				dateClick : function() {
-
+	
 				}
+				
 			});
 
 			calendar.render();
@@ -185,7 +189,11 @@
 
 		});
 		
-		
+		$(function(){
+			if(<%= msg %> !=null){
+				alert(<%= msg %>);		
+			};
+		})
 	</script>
 
 
