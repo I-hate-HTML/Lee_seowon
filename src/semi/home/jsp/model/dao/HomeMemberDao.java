@@ -157,4 +157,34 @@ public class HomeMemberDao {
 		return result;
 	}
 
+
+	public int idDupCheck(Connection con, String id) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idDupCheck");
+		System.out.println(id);
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}
+			System.out.println(result);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

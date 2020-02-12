@@ -10,9 +10,9 @@
 	
     <link href="<%=request.getContextPath()%>/resources/homepage/css/sign.css"
 	rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type="text/javascript"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 
 	<!-- HTTPS required. HTTP will give a 403 forbidden response -->
 	
@@ -41,11 +41,14 @@
                 <div class="row_group">
                     <div class="join_row">
                         <h3 class="join_title"><label for="id">아이디</label></h3>
-                        <span class="ps_box int_id">
-							<input type="text" id="id" name="userId" class="int" title="ID" maxlength="20">
+                        <div class= "addr">
+                        <span class="ps_box int_arr">
+							<input type="text" id="userId" name="userId" class="int"  maxlength="20">
                            </span>
+                           <div class="btn_arr" id="idCheck"><span style='font-weight:700; font-size:13px;'>중복확인</span></div>
                     </div>
 
+					
                     <div class="join_row">
                         <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
                         <span class="ps_box int_pass" id="pswd1Img">
@@ -119,7 +122,7 @@
                     <div class= "addr">
                     <span class="ps_box int_arr"><input type="text" id="addrNo" placeholder="우편번호" class="int" name="addrNo"/>
                     </span>
-                    <div class="btn_arr" id="btnSend" onclick="addrSearch()">주 소</div>
+                    <div class="btn_arr" id="btnSend" onclick="addrSearch()"><span style='font-weight:700; font-size:13px;'>주 소</span></div>
                   <!--   <a href="#" class="btn_arr" id="btnSend" onclick="addrSearch()">주소</a> -->
                 </div>
                     
@@ -219,7 +222,27 @@
 	        }).open();
 	    };
 		
-		
+		$('#idCheck').click(function(){
+			$.ajax({
+				url:"/semi/idDup",
+				type:"post",
+				data:{
+					userId:$('#userId').val()
+				},
+				success:function(data){
+					console.log(data);
+					
+					if(data == 'ok'){
+						alert("사용 가능한 아이디 입니다.");
+					}else{
+						alert("이미 사용 중인 아이디 입니다.");
+						$('#userId').select();
+					}
+				},error:function(){
+					console.log("---ERROR---")
+				}
+			});
+		});
 		
 		</script>
 
