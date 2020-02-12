@@ -76,8 +76,8 @@
 									<input type="checkbox" id="chk1" name="saveid"> <label
 										for="chk1">아이디 저장</label>
 									<div class="linkBtn">
-									<a id="idFind" href="./login1.html" style="color: black;">아이디찾기</a> 
-									<a id="pwdFind" href="./login2.html" style="color: black;">비밀번호찾기</a>
+									<a id="idFind" href="<%=request.getContextPath()%>/views/homepage/login_searchId.jsp" style="color: black;">아이디찾기</a> 
+									<a id="pwdFind" href="<%=request.getContextPath()%>/views/homepage/login_searchPwd.jsp" style="color: black;">비밀번호찾기</a>
 									</div>
 								</div>
 							</div>
@@ -95,15 +95,15 @@
 									onclick='memberJoin()'>
 							</div>
 						</form>
-					</div>
-
+			<div class="btna" style="margin-top: 50px;">
+				<a href="/semi/index.jsp">HOME</a> 
+				<a href="/semi/views/homepage/join.jsp">회원가입</a>
+			</div>
+			<%@ include file="views/homepage/common/loginfooter.jsp"%>
 				</div>
 			</div>
+					</div>
 
-			<div class="btna">
-				<a href="/semi/index.jsp">HOME</a> <a
-					href="/semi/views/homepage/join.jsp">회원가입</a>
-			</div>
 			
 			<script>
 			
@@ -118,8 +118,9 @@
 			
 			
 			</script>
+			</div>
+			</div>
 			
-			
-			<%@ include file="views/homepage/common/loginfooter.jsp"%>
+		
 </body>
 </html>
