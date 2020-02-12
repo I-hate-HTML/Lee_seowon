@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import semi.home.alimjang.model.service.AlimjangService;
-import semi.home.alimjang.model.vo.AlimNote;
+import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class AlimNoteInsertServlet
+ * Servlet implementation class AlimMediInsertServlet
  */
-@WebServlet("/anInsert.al")
-public class AlimNoteInsertServlet extends HttpServlet {
+@WebServlet("/amInsert.al")
+public class AlimMediInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlimNoteInsertServlet() {
+    public AlimMediInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,31 +32,30 @@ public class AlimNoteInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");		
+		Member m = (Member)session.getAttribute("member");
 		
+		String almd_con = request.getParameter("almd_con");
+		String almd_type = request.getParameter("almd_type");
+		String almd_vol = request.getParameter("almd_vol");
+		String almd_num = request.getParameter("almd_num");
+		String almd_time = request.getParameter("almd_time");
+		String almd_temp = request.getParameter("almd_temp");
+		String almd_ps = request.getParameter("almd_ps");
 		
-		String al_content = request.getParameter("al_content");
-		String al_feel = request.getParameter("al_feel");
-		String al_health = request.getParameter("al_health");
-		String al_temp = request.getParameter("al_temp");
-		String al_meal = request.getParameter("al_meal");
-		String al_sleep = request.getParameter("al_sleep");
-		String al_poop = request.getParameter("al_poop");		
+		AlimMedi am = new AlimMedi();
 		
-		AlimNote an = new AlimNote();
+		am.setAlmd_con(almd_con);
+		am.setAlmd_type(almd_type);
+		am.setAlmd_vol(almd_vol);
+		am.setAlmd_num(almd_num);
+		am.setAlmd_time(almd_time);
+		am.setAlmd_temp(almd_temp);
+		am.setAlmd_ps(almd_ps);
+		am.setAlmd_writer(m.getUserId());
 		
-		an.setAl_content(al_content);
-		an.setAl_feel(al_feel);
-		an.setAl_health(al_health);
-		an.setAl_temp(al_temp);
-		an.setAl_meal(al_meal);
-		an.setAl_sleep(al_sleep);
-		an.setAl_poop(al_poop);
-		an.setAl_writer(m.getUserId());
+		System.out.println(am);
 		
-		System.out.println(an);
-		
-		int result = new AlimjangService().insertAlimNote(m, an);
+		int result = new AlimjangService().insertAlimMedi(m, am);
 		
 		if(result > 0) {
 			// 알림장 등록완료
@@ -65,8 +64,13 @@ public class AlimNoteInsertServlet extends HttpServlet {
 		}else {
 			// 알림장 등록 실패
 			request.setAttribute("msg", "알림장 등록 실패");			
-			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+			//request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response); 에러요놈안대내;;
 		}
+		
+		
+		
+		
+		
 		
 	}
 
