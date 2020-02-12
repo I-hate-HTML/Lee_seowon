@@ -40,8 +40,6 @@ public class HomeMemberInsertServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		
-		System.out.println(request.getParameter("addrNo"));
-		
 		String address = request.getParameter("addrNo")+", "
 						+request.getParameter("addr1")+", "
 						+request.getParameter("addr2");
@@ -61,7 +59,7 @@ public class HomeMemberInsertServlet extends HttpServlet {
 		}
 		
 		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
-		System.out.println(address);
+		
 		Member m = new Member(userId,userPwd,userName,gender,email,phone,address,cname,writerDate,cgender,cclass);
 		
 		System.out.println("가입 회원 정보 확인 : " + m);

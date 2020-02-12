@@ -164,7 +164,7 @@ public class HomeMemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("idDupCheck");
-		System.out.println(id);
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -175,7 +175,7 @@ public class HomeMemberDao {
 				
 				result = rset.getInt(1);
 			}
-			System.out.println(result);
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
