@@ -13,10 +13,10 @@
 <title>꿈나라어린이집 # 인트라넷_메인</title>
 <style type="text/css">
 /* 검정 줄 긋기 있어도 그만 없어도 그만 */
-/* .section_top .h_cont {
+.section_top .h_cont {
     height: 31px;
     border-bottom: 3px solid #565b62
-} */
+}
 
 /* 지긋지긋했던 맨밑줄 */
 .board_area {
@@ -136,7 +136,7 @@ input.check {
 					</div> 
 					<div class="section_cont">
 						<div class="board_area">
-							<form id="joinapplication" method="post">
+							<form id="joinapplication" method="post" overflow-x style="overflow: auto;">
 								<input type="hidden" name="clubid" value="30000177"> <input
 									type="hidden" name="page" value="1"> <input
 									type="hidden" name="perPage" value="30">
@@ -150,7 +150,7 @@ input.check {
 											id="membernonono">가입거절</button>
 									</div>
 								</div>
-								<table border="1" cellspacing="0" class="tbl_lst_type">
+								<table border="1" cellspacing="0" class="tbl_lst_type" style="width:100%;">
 
 									<colgroup>
 										<col width="50">
