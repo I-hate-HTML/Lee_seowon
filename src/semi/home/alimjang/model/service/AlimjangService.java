@@ -2,6 +2,7 @@ package semi.home.alimjang.model.service;
 
 import semi.home.alimjang.model.dao.AlimjangDao;
 import semi.home.alimjang.model.vo.AlimHome;
+import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.home.jsp.model.vo.Member;
 
@@ -38,6 +39,22 @@ public class AlimjangService {
 		
 		int result = aDao.insertAlimHome(con, m, ah);
 				
+		if(result > 0) commit(con);
+		else rollback(con);
+				
+		return result;
+	}
+
+	/** 투약의뢰서 작성
+	 * @param m
+	 * @param am
+	 * @return
+	 */
+	public int insertAlimMedi(Member m, AlimMedi am) {
+		Connection con = getConnection();
+		
+		int result = aDao.insertAlimMedi(con, m, am);
+		
 		if(result > 0) commit(con);
 		else rollback(con);
 				

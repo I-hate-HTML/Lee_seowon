@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import semi.home.alimjang.model.service.AlimjangService;
-import semi.home.alimjang.model.vo.AlimHome;
+import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class AlimHomeInsertServlet
+ * Servlet implementation class AlimMediInsertServlet
  */
-@WebServlet("/ahInsert.al")
-public class AlimHomeInsertServlet extends HttpServlet {
+@WebServlet("/amInsert.al")
+public class AlimMediInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlimHomeInsertServlet() {
+    public AlimMediInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +34,28 @@ public class AlimHomeInsertServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member");
 		
-		String alhm_wayhome = request.getParameter("alhm_wayhome");
-		String alhm_time= request.getParameter("alhm_time");
-		String alhm_status = request.getParameter("alhm_status");
-		String alhm_phone = request.getParameter("alhm_phone");
-		String alhm_status2 = request.getParameter("alhm_status2");
-		String alhm_phone2 = request.getParameter("alhm_phone2");
+		String almd_con = request.getParameter("almd_con");
+		String almd_type = request.getParameter("almd_type");
+		String almd_vol = request.getParameter("almd_vol");
+		String almd_num = request.getParameter("almd_num");
+		String almd_time = request.getParameter("almd_time");
+		String almd_temp = request.getParameter("almd_temp");
+		String almd_ps = request.getParameter("almd_ps");
 		
-		AlimHome ah = new AlimHome();
+		AlimMedi am = new AlimMedi();
 		
-		ah.setAlhm_wayhome(alhm_wayhome);
-		ah.setAlhm_time(alhm_time);
-		ah.setAlhm_status(alhm_status);
-		ah.setAlhm_phone(alhm_phone);
-		ah.setAlhm_status2(alhm_status2);
-		ah.setAlhm_phone2(alhm_phone2);
-//		ah.setAlhm_writer(m.getUserId());
+		am.setAlmd_con(almd_con);
+		am.setAlmd_type(almd_type);
+		am.setAlmd_vol(almd_vol);
+		am.setAlmd_num(almd_num);
+		am.setAlmd_time(almd_time);
+		am.setAlmd_temp(almd_temp);
+		am.setAlmd_ps(almd_ps);
+		am.setAlmd_writer(m.getUserId());
 		
-		System.out.println(ah);
+		System.out.println(am);
 		
-		int result = new AlimjangService().insertAlimHome(m, ah);
+		int result = new AlimjangService().insertAlimMedi(m, am);
 		
 		if(result > 0) {
 			// 알림장 등록완료
@@ -61,9 +63,10 @@ public class AlimHomeInsertServlet extends HttpServlet {
 			// 등록 완료 페이지 올릴까 말까
 		}else {
 			// 알림장 등록 실패
-			request.setAttribute("msg", "알림장 등록 실패");
-			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("msg", "알림장 등록 실패");			
+			//request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response); 에러요놈안대내;;
 		}
+		
 		
 		
 		

@@ -1,9 +1,5 @@
-<%@page import="semi.home.jsp.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	Member m = (Member)session.getAttribute("member");
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -151,12 +147,7 @@ vertical-align: middle;}
                     <tr>
                         <td colspan="4" style="background-color: #002c5f; color: white;">기본입력</td>
                     </tr>
-                    <!-- <tr>  삭제
-                        <td style="border-right: none;">대상아이</td>
-                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
-                            <input type="text" name="child" style="width: 70%;">
-                        </td>
-                    </tr> -->
+                    
                     <tr>
                         <td style="border-right: none;">귀가 방법</td>
                         <td colspan="3"style="border-left: none; text-align: center;"">
