@@ -29,7 +29,7 @@
     </div>
 <!-- // header -->
 
-<form id="sign_form" action="${pageContext.request.contextPath}/homeinsert" method="post">
+<form id="sign_form" action="${pageContext.request.contextPath}/homeinsert" method="post" onsubmit="return validate();">
    
     <!-- container -->
     <div id="container">
@@ -52,7 +52,7 @@
                     <div class="join_row">
                         <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
                         <span class="ps_box int_pass" id="pswd1Img">
-							<input type="password" id="pswd1" name="userPwd" class="int" title="비밀번호 입력"  maxlength="20">
+							<input type="password" id="userPwd" name="userPwd" class="int" title="비밀번호 입력"  maxlength="20">
                             <span class="lbl"><span id="pswd1Span" class="step_txt"></span></span>
 						</span>
                       
@@ -71,7 +71,7 @@
                     <div class="join_row">
                         <h3 class="join_title"><label for="name">이름</label></h3>
                         <span class="ps_box box_right_space">
-							<input type="text" id="name" name="userName" title="이름" class="int" maxlength="40">
+							<input type="text" id="userName" name="userName" title="이름" class="int" maxlength="40">
 						</span>
                       
                     </div>
@@ -139,11 +139,11 @@
                     <h2 class="" id="part2" style="text-align: center;">자녀정보입력</h2>
                         <h3 class="join_title"><label for="child_name">이름</label></h3>
                     <div class="addr_box child_name">
-                        <input type="text" id="cName" class="int" name="cname">
+                        <input type="text" id="cname" class="int" name="cname">
                     </div>
                         <h3 class="join_title"><label for="child_bir">생년월일</label></h3>
                     <div class="addr_box child_bir">
-                        <input type="text" id="cName" class="int" name="cbdate" placeholder="ex)1988-12-16">
+                        <input type="text" id="cbdate" class="int" name="cbdate" placeholder="ex)1988-12-16">
                     </div>
                         <h3 class="join_title"><label for="child_gender">성별</label></h3>
                     <div class="addr_box child_gender">
@@ -164,7 +164,7 @@
                 </div>
                
                 <div class="btn_area">
-                    <button type="button" id="btnJoin" class="btn_type btn_primary" onclick="sign();"><span>가입하기</span></button>
+                    <button type="submit" id="btnJoin" class="btn_type btn_primary"><span>가입하기</span></button>
                 </div>
             </div>
         </div>
@@ -244,6 +244,50 @@
 			});
 		});
 		
+		var userId = document.getElementById('userId');
+		var userPwd = document.getElementById('userPwd');
+		var userName = document.getElementById('userName');
+		var phone = document.getElementById('phone');
+		var cname = document.getElementById('cname');
+		var cbdate = document.getElementById('cbdate');
+		
+		function validate(){
+		
+			if(!chk(/^[A-Za-z0-9]{4,12}$/,userId, "아이디는 영문 대,소문자,숫자만 입력 가능하고, 4~12자로 입력하세요.")){
+                return false;
+            }
+			
+			if(!chk(/^[A-Za-z0-9]{4,12}$/,userPwd, "비밀번호는 영문 대,소문자,숫자만 입력 가능하고, 4~12자로 입력하세요.")){
+                return false;
+            }
+		
+			if(!chk(/^[가-힣]{2,6}$/,userName,"이름은 한글로 입력해 주세요, 2~6자로 입력하세요.")){
+				return false;
+			}
+			
+			if(!chk(/^[0-9]{8,11}$/,phone,"전화번호는 숫자(-제외)만 입력해 주세요, 8~11자로 입력하세요.")){
+				return false;
+			}
+			
+			if(!chk(/^[가-힣]{2,6}$/,cname,"자녀이름은 한글로 입력해 주세요, 2~6자로 입력하세요.")){
+				return false;
+			}
+			
+			if(!chk(/^(20[2-9][0-9])-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,cbdate,"자녀생년월일은 2021-12-16 형식으로 입력해 주세요, 2020년생부터 가입이 가능합니다.")){  
+				return false;
+					
+			}
+		
+		
+		function chk(re,ele,msg){
+			if(!re.test(ele.value)){
+				alert(msg);
+				ele.select();
+				return false;
+			}
+			return true;
+		}
+	}
 		</script>
 
 
