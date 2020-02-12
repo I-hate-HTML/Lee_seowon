@@ -33,7 +33,7 @@
 							<div class="dropdown-menu " aria-labelledby="dropdown01">
 								<a class="dropdown-item" href="./edit_member.jsp">개인정보수정</a>
 								<a class="dropdown-item" href="./alimNote.jsp">알림장작성</a>
-								<a class="dropdown-item" href="./qna.jsp">문의신청</a>
+								<a class="dropdown-item" href="/semi/qList.qna">문의신청</a>
 							</div></li>
 						<li class="nav-item dropdown show">
 								

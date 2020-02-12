@@ -127,7 +127,7 @@
                 </div>
                     
                      <div class="addr_box">
-                            <input type="text" id="addr1" placeholder="주소 입력" class="int" name="addr1"/>
+                            <input type="text" id="addr1" placeholder="주소 입력" class="int" name="addr1" />
                   
                     </div>
                     

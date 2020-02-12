@@ -122,7 +122,7 @@ margin-right: 5px;
 .login_btn{
 color: white;
 background-color: #002c5f;
-margin-top:50px;
+margin-top:40px;
 width: 70%;
 height: 60px;
 }
@@ -222,9 +222,9 @@ vertical-align: middle;}
 @media screen and (max-width: 1023px){.tabbtn {display: table;}}
 @media screen and (min-width: 1023px){.tabbtn a {display: table-cell;width: 300px;}}
 
-.tabCon {padding: 60px 20px;background: #e9ecef;text-align: center;}
+.tabCon {padding: 20px 20px;background: #e9ecef;text-align: center;}
 .txtmt{margin-top: 8px; line-height: 26px;}  
- 
+.txt{margin-top:20px;}
 .btna a{margin-right: 10px;}
   
 @media screen and (max-width: 758px){.btna {margin-top: 20px;text-align: center;}}
@@ -241,7 +241,7 @@ vertical-align: middle;}
 <body>
 	
 	
-<div class="wrapper">
+<div class="wrapper" style="overflow: scroll;">
 	
 
         
@@ -253,14 +253,18 @@ vertical-align: middle;}
 		<div class="card" style="width: 600px;">
 			<div class="card-body">
 				<div class="tabbtn">
-					<a href="./login1.html" class="on">아이디찾기</a>
-					<a href="./login2.html">비밀번호찾기</a>
+					<a class="on">아이디찾기</a>
+					<a href="/semi/views/homepage/login_searchPwd.jsp">비밀번호찾기</a>
 				</div>
 				<div class="tabParent">
 					<div class="tabCon on">
 						<div class="iconArea">
+						<form action="/semi/homesearchid" method="post">
+							<input type="text" class="input_area" name="cname" placeholder="자녀이름 입력">
+                            <input type="text" class="input_area" name="email" placeholder="이메일 입력">
+                        </form>    
 							<p class="txt"><Strong class="black">
-								본인 명의의 휴대폰을 통해 본인인증 후 아이디를 찾으실 수 있습니다.</Strong></p>
+								입력한 정보를 통해 본인인증 후 아이디를 찾으실 수 있습니다.</Strong></p>
 							<p class="txtmt">본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하므로<br>
 								인증 이외의 용도 또는 저장되지 않습니다.</p>
 						</div>
