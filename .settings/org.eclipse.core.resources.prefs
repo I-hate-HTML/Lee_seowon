@@ -5,6 +5,7 @@ eclipse.preferences.version=1
 encoding//src/config/alimjang-query.properties=UTF-8
 encoding//src/config/board-query.properties=UTF-8
 encoding//src/config/intranetDaily-query.properties=UTF-8
+encoding//src/config/intranetEvent-query.properties=UTF-8
 encoding//src/config/intranetForm-query.properties=UTF-8
 encoding//src/config/member-query.properties=UTF-8
 encoding//src/semi/intranet/employee/model/vo/Employee.java=UTF-8
