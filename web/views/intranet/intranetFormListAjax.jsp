@@ -172,19 +172,19 @@ var endPage;
 			for(var p = data.pi.startPage; p <= data.pi.endPage; p++){
 				console.log(p);
 				
-				if(p == data.pi.currentPage){
+				 if(p == data.pi.currentPage){
 					$cuA.text(p);
 					$cuLi.attr('disabled', true);
 					
 					$cuLi.append($cuA);
-					$('#pageBtn').append($cuLi);
+					$("#pageBtn").append($cuLi);
 					
 				} else if(p != data.pi.currentPage){
 					$cuA.text(p);
 					$cuA.attr('href', '#');
 					
 					$cuLi.append($cuA);
-					$('#pageBtn').append($cuLi);
+					$("#pageBtn").append($cuLi);
 				}	
 			}
 			
