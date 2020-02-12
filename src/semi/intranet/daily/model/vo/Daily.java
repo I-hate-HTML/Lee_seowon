@@ -8,13 +8,13 @@ public class Daily implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -7526365370075270878L;
+
 	private int bno;		// 글번호
 	private int bclass;		// 반
 	private String btitle;	// 글제목
 	private String bcontent; // 글내용
-	private Date bdate;		// 글번호
+	private Date bdate;		// 작성 날짜
 	private String bwriter;	// 작성자
 	private int bcategory;	// 카테고리 (1-공지사항 / 2-교육일지)
 	private String bfile;	// 첨부파일

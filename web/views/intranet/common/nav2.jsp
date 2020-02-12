@@ -117,7 +117,7 @@
         <div id="collapseClass" class="collapse" aria-labelledby="headingClass" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
-            <a class="collapse-item" href="intranetNotice.jsp">알림장 확인</a>            
+            <a class="collapse-item" href="/semi/aListClass.al">알림장 확인</a>            
             <a class="collapse-item" href="intranetAdviceBoard.jsp">상담확인</a>            
           </div>
         </div>

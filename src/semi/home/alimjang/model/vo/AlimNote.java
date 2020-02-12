@@ -9,7 +9,7 @@ public class AlimNote implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8768683683514038596L;
-	private int al_no;
+	private int al_no; 
 	private int al_code;
 	private int cno;
 	private String al_content;
@@ -47,11 +47,44 @@ public class AlimNote implements Serializable{
 		this.al_writer = al_writer;
 	}
 
-	// 조회는 인트라넷에서~~
+	// 조회는 인트라넷에서~~ --> 오키오키
+	/**
+	 * 알림장 읽기용
+	 * @param al_no
+	 * @param al_code
+	 * @param cno
+	 * @param al_content
+	 * @param al_feel
+	 * @param al_health
+	 * @param al_temp
+	 * @param al_meal
+	 * @param al_sleep
+	 * @param al_poop
+	 * @param al_writer
+	 * @param al_date
+	 */
+	public AlimNote(int al_no, int al_code, int cno, String al_content, String al_feel, String al_health,
+			String al_temp, String al_meal, String al_sleep, String al_poop, String al_writer, Date al_date) {
+		super();
+		this.al_no = al_no;
+		this.al_code = al_code;
+		this.cno = cno;
+		this.al_content = al_content;
+		this.al_feel = al_feel;
+		this.al_health = al_health;
+		this.al_temp = al_temp;
+		this.al_meal = al_meal;
+		this.al_sleep = al_sleep;
+		this.al_poop = al_poop;
+		this.al_writer = al_writer;
+		this.al_date = al_date;
+	}
+	
 	
 	public int getAl_no() {
 		return al_no;
 	}
+
 
 	public void setAl_no(int al_no) {
 		this.al_no = al_no;
