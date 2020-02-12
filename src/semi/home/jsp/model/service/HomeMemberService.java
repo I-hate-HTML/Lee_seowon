@@ -74,6 +74,16 @@ public class HomeMemberService {
 	}
 
 
+	public int idDupCheck(String id) {
+		con = getConnection();
+		
+		int result = hmDao.idDupCheck(con,id);
+		close(con);
+		
+		return result;
+	}
+
+
 	}
 
 
