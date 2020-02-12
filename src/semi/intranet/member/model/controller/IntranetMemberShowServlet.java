@@ -1,6 +1,7 @@
 package semi.intranet.member.model.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +31,17 @@ public class IntranetMemberShowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("nno"));
+	
+		ArrayList<Member> list = new ArrayList<Member>();
 		
 		IntranetMemberService ims = new IntranetMemberService();
 		
-		Member m = ims.selectOne(nno);
+		list = ims.selectList();
 		
 		String page = "";
-		if(m != null) {
+		if(list != null) {
 			page = "views/intranet/intranetMember.jsp";
-			request.setAttribute("Member", m);
+			request.setAttribute("Member", list);
 		}else {
 			page = "views/common/errorPage.jsp";//이거 안 돼있나
 			request.setAttribute("msg", "공지사항 상세보기 실패!");
