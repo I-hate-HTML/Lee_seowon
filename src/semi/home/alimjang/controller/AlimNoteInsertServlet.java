@@ -58,15 +58,15 @@ public class AlimNoteInsertServlet extends HttpServlet {
 		
 		int result = new AlimjangService().insertAlimNote(m, an);
 		
-		/*if(result > 0) {
+		if(result > 0) {
 			// 알림장 등록완료
-			response.sendRedirect(null); // 인트라넷으로 보내주기
+			response.sendRedirect("views/homepage/homeindex.jsp");
 			// 등록 완료 페이지 올릴까 말까
 		}else {
 			// 알림장 등록 실패
-			request.setAttribute("msg", "알림장 등록 실패");
-			request.getRequestDispatcher("에러페이지").forward(request, response);
-		}*/
+			request.setAttribute("msg", "알림장 등록 실패");			
+			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+		}
 		
 	}
 
