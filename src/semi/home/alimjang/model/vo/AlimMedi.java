@@ -5,6 +5,10 @@ import java.sql.Date;
 
 public class AlimMedi implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2232575405097349150L;
 	private int almd_no;
 	private int al_code;
 	private int cno;
