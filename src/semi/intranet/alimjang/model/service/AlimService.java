@@ -1,10 +1,12 @@
 package semi.intranet.alimjang.model.service;
 
-import static semi.common.JDBCTemplate.*;
+import static semi.common.JDBCTemplate.close;
+import static semi.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.dao.AlimDao;
 import semi.intranet.alimjang.model.vo.Alim;
 
@@ -57,6 +59,35 @@ public class AlimService {
 		close(con);
 		
 		return list;
+	}
+
+	/**
+	 * 알림장 게시글 읽기
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimNote readAlim(int empNo, int ano) {
+		
+		Connection con = getConnection();
+		
+		AlimNote a = ad.readAlim(con, empNo, ano);
+		
+		close(con);
+		
+		return a;
+		
+	}
+
+	public Alim readAlimCommon(int empNo, int ano, String table, String culumn) {
+		
+		Connection con = getConnection();
+		
+		Alim b = ad.readAlimCommon(con, empNo, ano, table, culumn);
+		
+		close(con);
+		
+		return b;
 	}
 
 }

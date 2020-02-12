@@ -46,7 +46,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive"> 
-                  <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
+                  <table id = "viewTable" class="table table-striped" style="font-size:.8rem; text-align: center;">
                     <tr>
                       <th style="width:10%">번호</th>
                       <th style="width:20%">구분</th>
@@ -59,8 +59,8 @@
                     <% for(Alim a : list) {%>
                     <tr>
 	                  <td> 
-	                    <input type = "hidden" name = "ano" value="<%= a.getAcategory() %>">
-	                  	<%= a.getAno() %>
+	                    <input type = "hidden" name = "ano" value="<%= a.getAno() %>">
+	                  	<%= a.getArownum()%>
 	                  </td>
 	                  <td>
 	                  	<input type = "hidden" name = "category" value="<%= a.getAcategory() %>">
@@ -141,7 +141,18 @@
 
       </div>
       <!-- End of Main Content -->
+      
+<script>
+$(function(){
+    $('#viewTable td').click(function(){
+    	var ano = $(this).parent().children().find("input[type=hidden]").val(); 
+    	var category = $(this).parent().children().eq(1).find("input[type=hidden]").val();
+      location.href = "<%= request.getContextPath() %>/aRead.al?ano=" + ano + "&category=" + category;
+    });
+  });
+</script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>
+
 </body>
 </html>
