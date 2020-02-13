@@ -193,6 +193,9 @@
 			if(<%= msg %> !=null){
 				alert(<%= msg %>);		
 			};
+		});
+		
+		
 		})
 	</script>
 
@@ -202,3 +205,16 @@
 	<%@ include file="../intranet/common/footer.jsp"%>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
