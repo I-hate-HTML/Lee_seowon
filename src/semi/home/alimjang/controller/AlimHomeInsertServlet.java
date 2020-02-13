@@ -1,4 +1,4 @@
-package semi.home.alimjang.controller;
+spackage semi.home.alimjang.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -62,7 +62,7 @@ public class AlimHomeInsertServlet extends HttpServlet {
 		}else {
 			// 알림장 등록 실패
 			request.setAttribute("msg", "알림장 등록 실패");
-			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+			//request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
 		}
 		
 		
