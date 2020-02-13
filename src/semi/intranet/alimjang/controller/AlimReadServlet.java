@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.home.alimjang.model.vo.AlimHome;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.service.AlimService;
 import semi.intranet.alimjang.model.vo.Alim;
@@ -52,16 +53,31 @@ public class AlimReadServlet extends HttpServlet {
 			AlimNote a = new AlimNote();
 			Alim b = new Alim();
 			
-			a = new AlimService().readAlim(empNo, ano);
+			a = new AlimService().readAlimNote(empNo, ano);
 			b = new AlimService().readAlimCommon(empNo, ano, table, culumn);
 			
 			System.out.println("a : " + a);
 			System.out.println("b : " + b);
-			page = "views/intranet/intranetAlimNoteRead.jsp";
+			page = "views/intranet/intranetAlimReadNote.jsp";
 			request.setAttribute("a", a);
 			request.setAttribute("b", b);
 			
 		} else if(category == 2) { // 귀가 통지서
+			
+			table = "ALIMHOME";
+			culumn = "ALHM";
+			
+			AlimHome a = new AlimHome();
+			Alim b = new Alim();
+			
+			a = new AlimService().readAlimHome(empNo, ano);
+			b = new AlimService().readAlimCommon(empNo, ano, table, culumn);
+			
+			System.out.println("a : " + a);
+			System.out.println("b : " + b);
+			page = "views/intranet/intranetAlimReadHome.jsp";
+			request.setAttribute("a", a);
+			request.setAttribute("b", b);
 			
 		} else { // 투약 통지서
 			

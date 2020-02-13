@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import semi.home.alimjang.model.vo.AlimHome;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.vo.Alim;
 
@@ -196,7 +197,7 @@ public class AlimDao {
 	 * @param ano
 	 * @return
 	 */
-	public AlimNote readAlim(Connection con, int empNo, int ano) {
+	public AlimNote readAlimNote(Connection con, int empNo, int ano) {
 		
 		AlimNote a = new AlimNote();
 		
@@ -229,12 +230,65 @@ public class AlimDao {
 				
 			}
 			
+			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
+		
+		return a;
+	}
+	
+	/**
+	 * 알림장 귀가 의뢰서 읽기
+	 * @param con
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimHome readAlimHome(Connection con, int empNo, int ano) {
+		
+		AlimHome a = new AlimHome();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimHome");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ano);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				a.setAlhm_no(rset.getInt("ALHM_NO"));
+				a.setAl_code(rset.getInt("AL_CODE"));
+				a.setCno(rset.getInt("CNO"));
+				a.setAlhm_wayhome(rset.getString("ALHM_WAYHOME"));
+				a.setAlhm_time(rset.getString("ALHM_TIME"));
+				a.setAlhm_status(rset.getString("ALHM_STAUTS"));
+				a.setAlhm_phone(rset.getString("ALHM_PHONE"));
+				a.setAlhm_status2(rset.getString("ALHM_STATUS2"));
+				a.setAlhm_phone2(rset.getString("ALHM_PHONE2"));
+				a.setAlhm_writer(rset.getString("ALHM_WRITER"));
+				a.setAlhm_date(rset.getDate("ALHM_DATE"));
+			}
+			
+			
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		
 		return a;
 	}
@@ -298,6 +352,9 @@ public class AlimDao {
 		
 		return b;
 	}
+
+
+
 	
 
 }

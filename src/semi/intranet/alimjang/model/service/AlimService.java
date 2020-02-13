@@ -6,6 +6,7 @@ import static semi.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import semi.home.alimjang.model.vo.AlimHome;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.dao.AlimDao;
 import semi.intranet.alimjang.model.vo.Alim;
@@ -62,16 +63,34 @@ public class AlimService {
 	}
 
 	/**
-	 * 알림장 게시글 읽기
+	 * 알림장 노트 게시글 읽기
 	 * @param empNo
 	 * @param ano
 	 * @return
 	 */
-	public AlimNote readAlim(int empNo, int ano) {
+	public AlimNote readAlimNote(int empNo, int ano) {
 		
 		Connection con = getConnection();
 		
-		AlimNote a = ad.readAlim(con, empNo, ano);
+		AlimNote a = ad.readAlimNote(con, empNo, ano);
+		
+		close(con);
+		
+		return a;
+		
+	}
+	
+	/**
+	 * 알림 귀가의뢰서 게시글 읽기
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimHome readAlimHome(int empNo, int ano) {
+		
+		Connection con = getConnection();
+		
+		AlimHome a = ad.readAlimHome(con, empNo, ano);
 		
 		close(con);
 		
@@ -90,4 +109,5 @@ public class AlimService {
 		return b;
 	}
 
+	
 }
