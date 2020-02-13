@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
+<%
+	Member m = (Member)request.getAttribute("member");
+%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -261,7 +265,7 @@ vertical-align: middle;}
 						<div class="iconArea">
                            
                             <p class="txt"><Strong class="black">
-								고객님의 아이디는 ***** 입니다.</Strong></p>
+								고객님의 아이디는 <%=m.getUserId() %> 입니다.</Strong></p>
 								<!-- **********userId가져오기********** -->
 							<p class="txtmt">이용해주셔서 감사합니다.</p>
 							
