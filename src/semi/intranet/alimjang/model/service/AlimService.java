@@ -121,16 +121,14 @@ public class AlimService {
 	 * 알림장 읽기 커먼 정보
 	 * @param empNo
 	 * @param ano
-	 * @param table
-	 * @param culumn
 	 * @param category 
 	 * @return
 	 */
-	public Alim readAlimCommon(int empNo, int ano, String table, String culumn, int category) {
+	public Alim readAlimCommon(int empNo, int ano, int category) {
 		
 		Connection con = getConnection();
 		
-		Alim b = ad.readAlimCommon(con, empNo, ano, table, culumn, category);
+		Alim b = ad.readAlimCommon(con, empNo, ano, category);
 		
 		close(con);
 		

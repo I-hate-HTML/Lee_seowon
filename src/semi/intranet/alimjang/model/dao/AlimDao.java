@@ -158,8 +158,8 @@ public class AlimDao {
 			
 			
 			pstmt.setInt(1, endContent);
-			pstmt.setInt(2, startContent);
-			pstmt.setInt(3, empNo);
+			pstmt.setInt(2, empNo);
+			pstmt.setInt(3, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -353,33 +353,33 @@ public class AlimDao {
 	 * @param con
 	 * @param empNo
 	 * @param ano
-	 * @param table
-	 * @param culumn
 	 * @param category 
 	 * @return
 	 */
-	public Alim readAlimCommon(Connection con, int empNo, int ano, String table, String culumn, int category) {
+	public Alim readAlimCommon(Connection con, int empNo, int ano, int category) {
 		
 		Alim b = new Alim();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("readAlimCommon");
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCommon");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCommon");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCommon");
+		}
 		
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-			
-			
-			  pstmt.setString(1, culumn); 
-			  pstmt.setString(2, culumn); 
-			  pstmt.setString(3, culumn); 
-			  pstmt.setString(4, table); 
-			  pstmt.setString(5, culumn);
-			  pstmt.setInt(6, ano);
-			  pstmt.setInt(7, category);
+			  
+			  pstmt.setInt(1, ano);
 			 
 			
 			 

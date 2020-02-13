@@ -42,20 +42,16 @@ public class AlimReadServlet extends HttpServlet {
 		
 		int empNo = 2015001;
 		
-		String table ="";
-		String culumn = "";
 		String page = "";
 		
 		if(category == 1) { // 아이 알림장
 			
-			table = "ALIMNOTE";
-			culumn = "AL";
 			
 			AlimNote a = new AlimNote();
 			Alim b = new Alim();
 			
 			a = new AlimService().readAlimNote(empNo, ano);
-			b = new AlimService().readAlimCommon(empNo, ano, table, culumn, category);
+			b = new AlimService().readAlimCommon(empNo, ano, category);
 			
 			page = "views/intranet/intranetAlimReadNote.jsp";
 			request.setAttribute("a", a);
@@ -63,14 +59,11 @@ public class AlimReadServlet extends HttpServlet {
 			
 		} else if(category == 2) { // 귀가 통지서
 			
-			table = "ALIMHOME";
-			culumn = "ALHM";
-			
 			AlimHome a = new AlimHome();
 			Alim b = new Alim();
 			
 			a = new AlimService().readAlimHome(empNo, ano);
-			b = new AlimService().readAlimCommon(empNo, ano, table, culumn, category);
+			b = new AlimService().readAlimCommon(empNo, ano, category);
 			
 			page = "views/intranet/intranetAlimReadHome.jsp";
 			request.setAttribute("a", a);
@@ -78,14 +71,11 @@ public class AlimReadServlet extends HttpServlet {
 			
 		} else if(category == 3) { // 투약 통지서
 			
-			table = "ALIMMEDI";
-			culumn = "ALMD";
-			
 			AlimMedi a = new AlimMedi();
 			Alim b = new Alim();
 			
 			a = new AlimService().readAlimMedi(empNo, ano);
-			b = new AlimService().readAlimCommon(empNo, ano, table, culumn, category);
+			b = new AlimService().readAlimCommon(empNo, ano, category);
 
 			page = "views/intranet/intranetAlimReadMedi.jsp";
 			request.setAttribute("a", a);
