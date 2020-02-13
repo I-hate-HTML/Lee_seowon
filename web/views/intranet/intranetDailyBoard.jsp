@@ -27,7 +27,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive"> 
-            <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
+            <table id = "viewTable" class="table table-striped" style="font-size:.8rem; text-align: center;">
               <tr>
                 <th width = "10%">번호</th>
                 <th width = "5%">반</th>
