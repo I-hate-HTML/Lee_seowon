@@ -1,6 +1,7 @@
 package semi.home.jsp.model.dao;
 
-import java.io.FileNotFoundException;
+import static semi.common.JDBCTemplate.*;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-import static semi.common.JDBCTemplate.*;
+
 import semi.home.jsp.model.vo.Member;
 
 public class HomeMemberDao {
@@ -61,7 +62,6 @@ public class HomeMemberDao {
 				
 				
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -176,6 +176,70 @@ public class HomeMemberDao {
 				result = rset.getInt(1);
 			}
 			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public Member searchId(Connection con, Member m) {
+		Member result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchId");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = new Member();
+				
+				result.setUserId(rset.getString("userId"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return result;
+	}
+
+
+	public Member serchPwd(Connection con, Member m) {
+		Member result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("serchPwd");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setDate(2, m.getCbdate());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = new Member();
+				
+				result.setUserPwd(rset.getString("userpwd"));
+				
+			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();

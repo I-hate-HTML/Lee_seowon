@@ -1,28 +1,29 @@
 package semi.home.jsp.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class HomePgaeLogin
+ * Servlet implementation class HomeMemberSearchIdServlet
  */
-@WebServlet("/homelogin")
-public class HomeLoginServlet extends HttpServlet {
+@WebServlet("/searchPwd")
+public class HomeMemberSearchPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeLoginServlet() {
+    public HomeMemberSearchPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,34 +33,36 @@ public class HomeLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String cbdate = request.getParameter("cbdate");
 		
-		Member m = new Member(userId,userPwd);
+		Date writerDate = null;
 		
-		HomeMemberService hms = new HomeMemberService();
+		String [] dateArr = cbdate.split("-"); 
+		int [] intArr = new int[dateArr.length];
 		
-		m = hms.selectMember(m);
-		
-		if(m != null) {
-		
-			System.out.println("홈페이지 로그인 성공!!");
-			
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("member", m);
-		
-			response.sendRedirect("views/homepage/homeindex.jsp");
-		
-		} else {
-			String error = "";
-			
-			request.setAttribute("error", "아이디랑 비번을 확인해 주세요!");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+		for(int i=0; i<dateArr.length;i++) {
+			intArr[i] = Integer.parseInt(dateArr[i]);
 		}
 		
-
+		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
+		
+		Member m = new Member(userId,writerDate);
+		
+		
 	
-	
+		HomeMemberService hms = new HomeMemberService();
+		String page ="";
+		if(m != null){
+			page = "views/homepage/login_searchPwd_Fin.jsp";
+			m = hms.searchPwd(m);
+			System.out.println(m);
+			request.setAttribute("member", m);
+			
+		}else{
+			
+		}
+		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

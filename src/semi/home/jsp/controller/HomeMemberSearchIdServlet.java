@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class HomeMemberSerchIdServlet
+ * Servlet implementation class HomeMemberSearchIdServlet
  */
-@WebServlet("/homesearchid")
-public class HomeMemberSerchIdServlet extends HttpServlet {
+@WebServlet("/searchId")
+public class HomeMemberSearchIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeMemberSerchIdServlet() {
+    public HomeMemberSearchIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +30,25 @@ public class HomeMemberSerchIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 
 		String cname = request.getParameter("cname");
 		String email = request.getParameter("email");
 		
 		Member m = new Member(cname,email);
 		
-		System.out.println("아이디찾기 확인 : " + m);
+		System.out.println(m);
+	
+		HomeMemberService hms = new HomeMemberService();
+		String page ="";
+		if(m != null){
+			page = "views/homepage/login_searchId_Fin.jsp";
+			m = hms.searchId(m);
+			System.out.println(m);
+			request.setAttribute("member", m);
+			
+		}else{
+			
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

@@ -11,10 +11,9 @@ public class HomeMemberService {
 	private Connection con;
 	private HomeMemberDao hmDao = new HomeMemberDao();
 	
-	
-	public Member selectMember(Member m) {
+	public Member selectMember(Member m){
 		con = getConnection();
-		
+	
 		Member result = hmDao.selectMember(con,m);
 		
 		close(con);
@@ -78,6 +77,27 @@ public class HomeMemberService {
 		con = getConnection();
 		
 		int result = hmDao.idDupCheck(con,id);
+		close(con);
+		
+		return result;
+	}
+
+
+	public Member searchId(Member m) {
+		con = getConnection();
+		
+		Member result = hmDao.searchId(con,m);
+		close(con);
+		
+		
+		return result;
+	}
+
+
+	public Member searchPwd(Member m) {
+		con = getConnection();
+		
+		Member result = hmDao.serchPwd(con,m);
 		close(con);
 		
 		return result;
