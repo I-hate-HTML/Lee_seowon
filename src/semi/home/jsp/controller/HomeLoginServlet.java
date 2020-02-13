@@ -35,7 +35,7 @@ public class HomeLoginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 		
 		Member m = new Member(userId,userPwd);
-		
+		System.out.println(m);
 		HomeMemberService hms = new HomeMemberService();
 		
 		m = hms.selectMember(m);
