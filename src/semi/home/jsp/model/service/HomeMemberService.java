@@ -5,13 +5,14 @@ import static semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 
 import semi.home.jsp.model.dao.HomeMemberDao;
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.vo.Member;
 public class HomeMemberService {
 
 	private Connection con;
 	private HomeMemberDao hmDao = new HomeMemberDao();
 	
-	public Member selectMember(Member m){
+	public Member selectMember(Member m) throws MemberException{
 		con = getConnection();
 	
 		Member result = hmDao.selectMember(con,m);
@@ -19,14 +20,14 @@ public class HomeMemberService {
 		close(con);
 		
 		if(result == null) {
-			System.out.println("회원 아이디나 비번이 올바르지 않습니다.");
+			throw new MemberException("회원 아이디나 비밀번호가 올바르지 않습니다.");
 		}
 		
 		return result;
 	}
 
 
-	public int homeMemberInsert(Member m) {
+	public int homeMemberInsert(Member m) throws MemberException {
 		con = getConnection();
 		
 		int result = hmDao.homeMemberInsert(con,m);
@@ -40,7 +41,7 @@ public class HomeMemberService {
 		}
 
 
-	public int homeMemberUpdate(Member m) {
+	public int homeMemberUpdate(Member m) throws MemberException {
 		con = getConnection();
 		
 		int result = hmDao.homeMemberUpdate(con,m);
@@ -58,8 +59,9 @@ public class HomeMemberService {
 	/** 회원 탈퇴
 	 * @param userId
 	 * @return
+	 * @throws MemberException 
 	 */
-	public int homedeleteMember(String userId) {
+	public int homedeleteMember(String userId) throws MemberException {
 		con = getConnection();
 		
 		int result = hmDao.homeMemberDelete(con, userId);
@@ -83,7 +85,7 @@ public class HomeMemberService {
 	}
 
 
-	public Member searchId(Member m) {
+	public Member searchId(Member m) throws MemberException {
 		con = getConnection();
 		
 		Member result = hmDao.searchId(con,m);
@@ -94,7 +96,7 @@ public class HomeMemberService {
 	}
 
 
-	public Member searchPwd(Member m) {
+	public Member searchPwd(Member m) throws MemberException {
 		con = getConnection();
 		
 		Member result = hmDao.serchPwd(con,m);

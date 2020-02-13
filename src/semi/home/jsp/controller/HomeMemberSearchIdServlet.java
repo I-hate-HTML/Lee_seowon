@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
@@ -39,14 +40,16 @@ public class HomeMemberSearchIdServlet extends HttpServlet {
 	
 		HomeMemberService hms = new HomeMemberService();
 		String page ="";
-		if(m != null){
+		try{
 			page = "views/homepage/login_searchId_Fin.jsp";
 			m = hms.searchId(m);
 			System.out.println(m);
 			request.setAttribute("member", m);
 			
-		}else{
-			
+		} catch(MemberException e) {
+			page = "views/homepage/common/errorPage.jsp";
+			request.setAttribute("error", "아이디 찾기중 오류 발생!!");
+			request.setAttribute("exception", e);
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		

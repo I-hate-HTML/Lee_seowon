@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="semi.home.jsp.controller.*" %>
-<%
- String error = (String)request.getAttribute("error");
- System.out.println(error);
- 
-%>
+
 	
 <!DOCTYPE html>
 <html>

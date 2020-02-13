@@ -1,6 +1,6 @@
 package semi.home.jsp.model.dao;
 
-import static semi.common.JDBCTemplate.*;
+import static semi.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.vo.Member;
 
 public class HomeMemberDao {
@@ -29,7 +30,7 @@ public class HomeMemberDao {
 	}
 	
 	
-	public Member selectMember(Connection con, Member m) {
+	public Member selectMember(Connection con, Member m) throws MemberException {
 		Member result = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -63,7 +64,7 @@ public class HomeMemberDao {
 				
 			}
 		}catch(Exception e) {
-			e.printStackTrace();
+			throw new MemberException(e.getMessage());
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -73,7 +74,7 @@ public class HomeMemberDao {
 	}
 
 
-	public int homeMemberInsert(Connection con, Member m) {
+	public int homeMemberInsert(Connection con, Member m) throws MemberException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("homeMemberInsert"); 
@@ -96,7 +97,7 @@ public class HomeMemberDao {
 			
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
-			e.printStackTrace();
+			throw new MemberException(e.getMessage());
 		}finally {
 			close(pstmt);
 		}
@@ -104,7 +105,7 @@ public class HomeMemberDao {
 	}
 
 
-	public int homeMemberUpdate(Connection con, Member m) {
+	public int homeMemberUpdate(Connection con, Member m) throws MemberException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("homeMemberUpdate");
@@ -121,7 +122,7 @@ public class HomeMemberDao {
 			result = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
-			e.printStackTrace();
+			throw new MemberException(e.getMessage());
 		}finally {
 			close(pstmt);
 		}
@@ -135,8 +136,9 @@ public class HomeMemberDao {
 	 * @param con
 	 * @param userId
 	 * @return
+	 * @throws MemberException 
 	 */
-	public int homeMemberDelete(Connection con, String userId) {
+	public int homeMemberDelete(Connection con, String userId) throws MemberException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("homeMemberDelete");
@@ -149,8 +151,8 @@ public class HomeMemberDao {
 			
 			result = pstmt.executeUpdate();		
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}catch(Exception e) {
+			throw new MemberException(e.getMessage());
 		} finally {
 			close(pstmt);
 		}		
@@ -188,7 +190,7 @@ public class HomeMemberDao {
 	}
 
 
-	public Member searchId(Connection con, Member m) {
+	public Member searchId(Connection con, Member m) throws MemberException {
 		Member result = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -209,8 +211,8 @@ public class HomeMemberDao {
 				result.setUserId(rset.getString("userId"));
 			}
 			
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(Exception e) {
+			throw new MemberException(e.getMessage());
 		}finally {
 			close(rset);
 			close(pstmt);
@@ -220,7 +222,7 @@ public class HomeMemberDao {
 	}
 
 
-	public Member serchPwd(Connection con, Member m) {
+	public Member serchPwd(Connection con, Member m) throws MemberException {
 		Member result = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -241,8 +243,8 @@ public class HomeMemberDao {
 				
 			}
 			
-		}catch(SQLException e) {
-			e.printStackTrace();
+		}catch(Exception e) {
+			throw new MemberException(e.getMessage());
 		}finally {
 			close(rset);
 			close(pstmt);

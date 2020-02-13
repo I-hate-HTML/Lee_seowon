@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
@@ -38,9 +39,9 @@ public class HomeLoginServlet extends HttpServlet {
 		System.out.println(m);
 		HomeMemberService hms = new HomeMemberService();
 		
-		m = hms.selectMember(m);
 		
-		if(m != null) {
+		try {
+			m = hms.selectMember(m);
 		
 			System.out.println("홈페이지 로그인 성공!!");
 			
@@ -50,11 +51,10 @@ public class HomeLoginServlet extends HttpServlet {
 		
 			response.sendRedirect("views/homepage/homeindex.jsp");
 		
-		} else {
-			String error = "";
-			
+		} catch(MemberException e) {
 			request.setAttribute("error", "아이디랑 비번을 확인해 주세요!");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.setAttribute("exception", e);
+			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
 		}
 		
 

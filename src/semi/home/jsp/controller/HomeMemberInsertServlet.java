@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
@@ -72,8 +73,8 @@ public class HomeMemberInsertServlet extends HttpServlet {
 		 System.out.println("회원 가입 완료!");	
 		 
 		 response.sendRedirect("views/homepage/homeindex.jsp");
-		}catch(Exception e) {
-			request.setAttribute("msg", "회원 가입 실패");
+		} catch(MemberException e) {
+			request.setAttribute("error", "회원가입실패!!");
 			request.setAttribute("exception", e);
 			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
 		}
