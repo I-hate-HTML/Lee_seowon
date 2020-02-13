@@ -77,7 +77,7 @@
                           <tr>
                               <th>첨부파일: </th>
                               <td>
-                              <span><input type="file" name="bfile"></span>
+                              <span id="filearea"><input type="file" name="bfile1" id="bfile1"></span>
                               </td>
                           </tr>
  
@@ -99,6 +99,18 @@
 
 
 	<%@ include file = "common/footer.jsp" %>
+	
+	<script>
+	 $(function(){
+		 var count = 2;
+         $('#bfile1').change(function(){
+             $(this).clone(true).appendTo('#filearea').attr('name','bfile'+count);
+             $('input[name=bfile'+count+']').val('');
+             count++;
+         });
+	 });
+	
+	</script>
 
 		
 </body>

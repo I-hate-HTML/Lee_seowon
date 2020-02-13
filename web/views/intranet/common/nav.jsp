@@ -111,7 +111,7 @@
            
       <!-- Nav Item - 반 관리 -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" data-toggle="collapse" data-target="#collapseClass" aria-expanded="true" aria-controls="collapseClass">
+        <a class="nav-link collapsed" href="/semi/aListClass.al" data-toggle="collapse" data-target="#collapseClass" aria-expanded="true" aria-controls="collapseClass">
           <i class="fa fa-smile fa-2x"></i>
           <span>반관리</span>
         </a>
@@ -155,7 +155,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="../../login.jsp" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="index.jsp" data-toggle="modal" data-target="#logoutModal">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -165,7 +165,7 @@
 
       <!-- Nav Item - 홈페이지 -->
       <li class="nav-item">
-        <a class="nav-link" href="../homepage/mainpage.html">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/homepage/homeindex.jsp">
           <i class="fa fa-check-circle fa-2x"></i>
           <span>홈페이지</span></a>
       </li>

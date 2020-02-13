@@ -18,7 +18,7 @@
       <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
           <tr>
             <td>
-        		<h6 class="m-0 font-weight-bold text-primary">교육일지확인</h6>
+        		<h6 class="m-0 font-weight-bold text-primary">교육일지</h6>
             </td>
             <td align="right">
               <button class = "btn btn-primary btn-sm" onclick="location.href='dModifyView.da?dno=<%= d.getBno() %>'">수정</button>
@@ -29,7 +29,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-         <table class="table table-bordered" style="font-size: 12px;">
+         <table class="table table-bordered" style="font-size: .9rem;">
            <tr>
              <th style="text-align: center;">제목</th>
              <td colspan="5"><%= d.getBtitle() %></td>
@@ -44,8 +44,8 @@
            </tr>
            <tr>
              <th style="text-align: center;">내용</th>
-             <td colspan = "5" style="hieht:300px">
-               <%= d.getBcontent() %>
+             <td colspan = "5" style="height:300px">
+               <pre style="height:90%; width:90%"><%= d.getBcontent() %></pre>
              </td>
            </tr>
            <tr>

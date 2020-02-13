@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../intranet/common/nav.jsp"%>
 <%= request.getContextPath() %>
-<%
-	String msg = (String)request.getAttribute("msg");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,16 +86,11 @@
 							<span aria-hidden="true">x</span>
 						</button>
 					</div>
-					<form action="/semi/insertEvent.ev" method="post" role="form"
-						class="form-horizontal">
+					<form class="form-horizontal">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="eventTitle">제목</label> <input type="text"
+								<label for="eventTitle">내용</label> <input type="text"
 									id="eventTitle" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="eventContent">내용</label>
-								<textarea class="form-control" id="eventContent" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label>시작일</label> <input class="form-control" type="date"
@@ -109,7 +101,7 @@
 									id="endDate">
 							</div>
 							<div class="form-group">
-								<label>대상</label> <select class="form-control" id="eventType">
+								<label>종류</label> <select class="form-control" id="eventType">
 									<option>원내행사</option>
 									<option>교사일정</option>
 									<option>체험학습</option>
@@ -122,10 +114,10 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" class="btn btn-primary" id="insertEvent1"
-								value="등록">
+							<button type="submit" class="btn btn-primary" id="insertEvent1">등록</button>
 							<button type="button" class="btn btn-primary"
 								data-dismiss="modal">취소</button>
+							<input type="reset" id="resetInsert" hidden="">
 						</div>
 					</form>
 				</div>
@@ -165,6 +157,7 @@
 				editable : true,
 				droppable : true,
 				allDaySlot : false,
+				events:"../../resources/intranet/ajax/data.json",
 				drop : function(info) {
 
 					if (checkbox.checked) {
@@ -189,11 +182,35 @@
 
 		});
 		
-		$(function(){
-			if(<%= msg %> !=null){
-				alert(<%= msg %>);		
-			};
-		})
+		$('#insertEvent1').click(function(){
+			var event = new Object();
+			event.title = $('#eventTitle').val();
+			event.start = $('#startDate').val();
+			event.end = $('#endDate').val();
+			event.type= $('#eventType').val();
+			event.username = $('#user').val();
+			
+			
+			
+			var jsonData = JSON.stringfy(obj);
+			
+			$.ajax({
+				type:"POST",
+				dataType : "json",
+				url : "/semi/insertEvent.ev",
+				data : {
+					json : jsonData
+				},
+				success : function(data){
+					alert('등록 성공');
+					location.reload();
+				},error : function(){
+					alert('등록 실패');
+					$('#eventTitle').select();
+				}
+			});
+		});
+		
 	</script>
 
 
@@ -202,3 +219,16 @@
 	<%@ include file="../intranet/common/footer.jsp"%>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

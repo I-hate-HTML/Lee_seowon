@@ -1,6 +1,8 @@
 package semi.intranet.alimjang.model.dao;
 
 
+import static semi.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,8 +13,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import semi.home.alimjang.model.vo.AlimHome;
+import semi.home.alimjang.model.vo.AlimMedi;
+import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.vo.Alim;
-import static semi.common.JDBCTemplate.close;
 
 public class AlimDao {
 
@@ -82,15 +86,22 @@ public class AlimDao {
 		
 		ArrayList<Alim> list = new ArrayList<Alim>();
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListAll");
 		
 		try {
 			
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(sql);
+			pstmt = con.prepareStatement(sql);
+			
+			int startContent = (currentPage -1) * limitContent + 1;
+			int endContent = startContent + limitContent -1;
+			
+			pstmt.setInt(1, endContent);
+			pstmt.setInt(2, startContent);
+			
+			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Alim a = new Alim();
@@ -104,6 +115,7 @@ public class AlimDao {
 				a.setAdate(rset.getDate("CDATE"));
 				a.setAwriter(rset.getString("WRITER"));
 				a.setAck(rset.getString("CK"));
+				a.setArownum(rset.getInt("RNUM"));
 				
 				list.add(a);
 			}
@@ -112,7 +124,7 @@ public class AlimDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 				
 		
@@ -138,9 +150,18 @@ public class AlimDao {
 		String sql = prop.getProperty("selectListClass");
 		
 		try {
+
+			int startContent = (currentPage -1) * limitContent + 1;
+			int endContent = startContent + limitContent -1;
 			
 			pstmt = con.prepareStatement(sql);
 			
+			
+			pstmt.setInt(1, endContent);
+			pstmt.setInt(2, startContent);
+			pstmt.setInt(3, empNo);
+			
+			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Alim a = new Alim();
@@ -154,6 +175,7 @@ public class AlimDao {
 				a.setAdate(rset.getDate("CDATE"));
 				a.setAwriter(rset.getString("WRITER"));
 				a.setAck(rset.getString("CK"));
+				a.setArownum(rset.getInt("RNUM"));
 				
 				list.add(a);
 			}
@@ -168,6 +190,230 @@ public class AlimDao {
 		
 		return list;
 	}
+
+
+	/**
+	 * 알림 노트 게시글 읽기
+	 * @param con 
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimNote readAlimNote(Connection con, int empNo, int ano) {
+		
+		AlimNote a = new AlimNote();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimNote");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ano);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				a.setAl_code(rset.getInt("AL_CODE"));
+				a.setAl_content(rset.getString("AL_CONTENT"));
+				a.setAl_date(rset.getDate("AL_DATE"));
+				a.setAl_feel(rset.getString("AL_FEEL"));
+				a.setAl_health(rset.getString("AL_HEALTH"));
+				a.setAl_meal(rset.getString("AL_MEAL"));
+				a.setAl_no(rset.getInt("AL_NO"));
+				a.setAl_poop(rset.getString("AL_POOP"));
+				a.setAl_sleep(rset.getString("AL_SLEEP"));
+				a.setAl_temp(rset.getString("AL_TEMP"));
+				a.setAl_writer(rset.getString("AL_WRITER"));
+				a.setCno(rset.getInt("CNO"));
+				
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return a;
+	}
+	
+	/**
+	 * 알림장 귀가 의뢰서 읽기
+	 * @param con
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimHome readAlimHome(Connection con, int empNo, int ano) {
+		
+		AlimHome a = new AlimHome();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimHome");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ano);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				a.setAlhm_no(rset.getInt("ALHM_NO"));
+				a.setAl_code(rset.getInt("AL_CODE"));
+				a.setCno(rset.getInt("CNO"));
+				a.setAlhm_wayhome(rset.getString("ALHM_WAYHOME"));
+				a.setAlhm_time(rset.getString("ALHM_TIME"));
+				a.setAlhm_status(rset.getString("ALHM_STAUTS"));
+				a.setAlhm_phone(rset.getString("ALHM_PHONE"));
+				a.setAlhm_status2(rset.getString("ALHM_STATUS2"));
+				a.setAlhm_phone2(rset.getString("ALHM_PHONE2"));
+				a.setAlhm_writer(rset.getString("ALHM_WRITER"));
+				a.setAlhm_date(rset.getDate("ALHM_DATE"));
+			}
+			
+			
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return a;
+	}
+	
+	/**
+	 * 알림장 투약의뢰서 읽기
+	 * @param con
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimMedi readAlimMedi(Connection con, int empNo, int ano) {
+		
+		AlimMedi a = new AlimMedi();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimMedi");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ano);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				a.setAlmd_no(rset.getInt("ALMD_NO"));
+				a.setAl_code(rset.getInt("AL_CODE"));
+				a.setCno(rset.getInt("CNO"));
+				a.setAlmd_con(rset.getString("ALMD_CON"));
+				a.setAlmd_type(rset.getString("ALMD_TYPE"));
+				a.setAlmd_vol(rset.getString("ALMD_VOL"));
+				a.setAlmd_num(rset.getString("ALMD_NUM"));
+				a.setAlmd_time(rset.getString("ALMD_TIME"));
+				a.setAlmd_temp(rset.getString("ALMD_TEMP"));
+				a.setAlmd_ps(rset.getString("ALMD_PS"));
+				a.setAlmd_writer(rset.getString("ALMD_WRITER"));
+				a.setAlmd_date(rset.getDate("ALMD_DATE"));
+				
+				
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return a;
+	}
+
+
+	/**
+	 * 알림 게시판 읽기 common
+	 * @param con
+	 * @param empNo
+	 * @param ano
+	 * @param table
+	 * @param culumn
+	 * @param category 
+	 * @return
+	 */
+	public Alim readAlimCommon(Connection con, int empNo, int ano, String table, String culumn, int category) {
+		
+		Alim b = new Alim();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimCommon");
+		
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			
+			  pstmt.setString(1, culumn); 
+			  pstmt.setString(2, culumn); 
+			  pstmt.setString(3, culumn); 
+			  pstmt.setString(4, table); 
+			  pstmt.setString(5, culumn);
+			  pstmt.setInt(6, ano);
+			  pstmt.setInt(7, category);
+			 
+			
+			 
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				b.setAno(rset.getInt("ANO")); // 글번호
+				b.setCategory(rset.getString("ACATEGORY"));
+				b.setCclass(rset.getInt("CCLASS"));
+				b.setCcode(rset.getInt("CCODE"));
+				b.setAchild(rset.getString("CNAME"));
+				b.setAwriter(rset.getString("WRITER"));
+				b.setAdate(rset.getDate("CDATE"));
+				b.setAck(rset.getString("CK"));
+				
+				System.out.println(b);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+
+
+	
+
+
+
 	
 
 }

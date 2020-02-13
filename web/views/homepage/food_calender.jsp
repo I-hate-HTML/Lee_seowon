@@ -34,6 +34,17 @@
       	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
       	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
         
+        <link href='../../resources/js/fullcal/core/main.css' rel='stylesheet' />
+		<link href='../../resources/js/fullcal/daygrid/main.css'
+		rel='stylesheet' />
+
+		<script src='../../resources/js/fullcal/core/main.js'></script>
+		<script src='../../resources/js/fullcal/daygrid/main.js'></script>
+		<script src="../../resources/js/fullcal/interaction/main.min.js"></script>
+		<script src='../../resources/js/fullcal/core/locales/ko.js'></script>
+		<script src="../../resources/js/fullcal/timegrid/main.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        
 
         <style type="text/css">
             .cal_top{
@@ -53,6 +64,19 @@
                 border: 1px solid skyblue;
                 width: 100px;
             }
+            
+            #fileinput{
+	            	position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: 0px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
+            
+            }
+            
             </style>
     </head>
     <body>
@@ -78,11 +102,22 @@
             <div id="cal_tab" class="cal">
             </div>
             <div>
-                <img src="./img/food.jpg" style="width: 100%;" alt="음식 사진 들어갑니다">
+                <img src="" style="width: 100%;" alt="음식 사진 들어갑니다" id="foodimg">
             </div>
             </div>
             </div>
+            <% if(true){ %>
+            <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
+            	<input type="file"id="fileinput" class="btn btn-primary"
+               	style="background: #002c5f; color: white; width: 100px;"
+                accept=".jpg,.jpeg,.png,.gif"onchange="imageURL(this)">
+                	사진 업로드
+            </label>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="" >등록</button>               
+           <% } %>
         </div>
+           
         <br>
         <br>
         <hr>
@@ -90,6 +125,29 @@
 		<%@ include file="common/footer.jsp" %>
 
       <script type="text/javascript">
+      
+
+		function imageURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#foodimg').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+			
+			
+			
+			
+		}
+		
+		function deleteImg(){
+			$('#foodimg').attr('src','');
+			$('#fileinput').val('');
+		}
+      
 
         var lol = ["곱창","마라탕","소시지페스티벌","수소수","H2O가","산소라는건","문과인","나도안다"]
     
@@ -180,5 +238,7 @@
             drawDays();
         }
     </script>
+    
+    
     </body>
 </html>
