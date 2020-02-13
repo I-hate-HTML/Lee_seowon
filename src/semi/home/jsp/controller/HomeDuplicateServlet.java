@@ -34,7 +34,7 @@ public class HomeDuplicateServlet extends HttpServlet {
 		HomeMemberService hms = new HomeMemberService();
 		
 		int result = hms.idDupCheck(id);
-		System.out.println(result);
+		
 		response.getWriter().print((result > 0)? "no":"ok");
 	
 	}

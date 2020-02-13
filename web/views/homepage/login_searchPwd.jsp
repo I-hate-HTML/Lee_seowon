@@ -241,32 +241,35 @@ vertical-align: middle;}
 <body>
 	
 	
-<div class="wrapper">
+<div class="wrapper" style="overflow: scroll;">
 	
 
         
         
-        
+   
     <div class="container">
             <div class="loginlogo"><h2 class="loginArea">비밀번호찾기</h2></div>
 	<div class="d-flex justify-content-center h-100">
 		<div class="card" style="width: 600px;">
 			<div class="card-body">
 				<div class="tabbtn">
-					<a href="./login1.html" class="on">아이디찾기</a>
-					<a href="./login2.html">비밀번호찾기</a>
+					<a href="/semi/views/homepage/login_searchId.jsp" class="on">아이디찾기</a>
+					<a>비밀번호찾기</a>
 				</div>
 				<div class="tabParent">
 					<div class="tabCon on">
-						<div class="iconArea">
-                            <input type="text" class="input_area" placeholder="아이디를 입력해주세요.">
+					<div class="iconArea">
+						<form action="" method="post">
+                            <input type="text" class="input_area" name="userId" placeholder="아이디 입력">
+                            <input type="text" class="input_area" name="cbdate" placeholder="자녀생일 입력  ex)2011-12-11">
+                  	    </form>
                             <p class="txt"><Strong class="black">
-								본인 명의의 휴대폰을 통해 본인인증 후 비밀번호를 찾으실 수 있습니다.</Strong></p>
+								입력한 정보를 통해 본인인증 후 아이디를 찾으실 수 있습니다.</Strong></p>
 							<p class="txtmt">본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하므로<br>
 								인증 이외의 용도 또는 저장되지 않습니다.</p>
 						</div>
 						<div class="btnWrap">
-							<input type="button" value="인증하기" class="btn login_btn" onclick="location='login_searchPwd_Fin.jsp'">
+							<input type="button" value="인증하기" class="btn login_btn" onclick=>
 							<!-- 나중에 type submit으로 변경 해야함 -->
 						</div>
 					</div>
@@ -284,7 +287,7 @@ vertical-align: middle;}
 	
 	</div>
 	</div>	
-		
+	 	
 </div>
 </body>
 </html>

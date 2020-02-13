@@ -1,5 +1,11 @@
+<%@page import="semi.home.qna.model.vo.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -82,13 +88,28 @@
                           </tr>
                       </thead>
                       <tbody>
+                      <% for(QnA q : list) { %>
                           <tr>
-                              <td>1</td>
-                              <td>문의 1번입니다</td>
-                              <td>작성자 본인</td>
-                              <td>2020-01-16</td>
-                              <td>○</td>
+                              <td><%= q.getQno() %></td>
+                              <td><%= q.getQtitle() %></td>
+                              <td><%= q.getQwriter() %></td>
+                              <td><%= q.getQdate() %></td>
+                              <td>
+                              <%
+                              String chksymbol = "";
+                              if(q.getChk_status().equals("N")) {
+                            	  chksymbol = "O";
+                              }else{
+                            	  chksymbol = "X";
+                              }
+                              %>
+                              
+                              
+                              
+                              <%= chksymbol %>
+                              </td>
                           </tr>
+                          <% } %>
                       </tbody>
                   </table>
                
@@ -96,33 +117,35 @@
                   <hr>
                   <h1 class="d-flex justify-content-center">문의 작성</h1>
                   <hr>
+                  <form action="<%= request.getContextPath() %>/qInsert.qna" method="post"">
                   <table class="table table-bordered" style="background: white;">
                         <tbody>
                                 <tr>
                                     <th class="tatd">제목: </th>
-                                    <td><input type="text" placeholder="제목을 입력하세요. " name="subject" class="form-control"/></td>
+                                    <td><input type="text" placeholder="제목을 입력하세요. " name="qtitle" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <th class="tatd">내용: </th>
-                                    <td><textarea cols="10" rows="10" placeholder="내용을 입력하세요. " name="content" class="form-control "  style="resize : none;"></textarea></td>
+                                    <td><textarea cols="10" rows="10" placeholder="내용을 입력하세요. " name="qcontent" class="form-control "  style="resize : none;"></textarea></td>
                                 </tr>
                                 <tr>
                                   <th class="tatd">상담날짜</th>
-                                  <td><input type="date" name="qnadate" class="form-control"/> 
+                                  <td><input type="date" name="ask_date" class="form-control"/> 
                                   </td>
                               </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th class="tatd" class="form-control">첨부파일: </th>
                                     <td>
                                         <span><input type="file"></span>
                                     </td>
-                                </tr>
+                                </tr> -->
                              
                         </tbody>
                     </table>
                     <div class="float-right">
-                            <input class="btn btn-link" style="background: #002c5f; color: white;" type="button" value="문의 등록" onclick="sendData()" class="pull-right"/>
+                            <input class="btn btn-link" style="background: #002c5f; color: white;" type="submit" value="문의 등록" class="pull-right"/>
                     </div>
+                  </form>
       		</div>
     	</div>
   	</div>

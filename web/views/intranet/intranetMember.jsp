@@ -13,10 +13,10 @@
 <title>꿈나라어린이집 # 인트라넷_메인</title>
 <style type="text/css">
 /* 검정 줄 긋기 있어도 그만 없어도 그만 */
-/* .section_top .h_cont {
+.section_top .h_cont {
     height: 31px;
     border-bottom: 3px solid #565b62
-} */
+}
 
 /* 지긋지긋했던 맨밑줄 */
 .board_area {
@@ -136,7 +136,7 @@ input.check {
 					</div> 
 					<div class="section_cont">
 						<div class="board_area">
-							<form id="joinapplication" method="post">
+							<form id="joinapplication" method="post" overflow-x style="overflow: auto;">
 								<input type="hidden" name="clubid" value="30000177"> <input
 									type="hidden" name="page" value="1"> <input
 									type="hidden" name="perPage" value="30">
@@ -150,7 +150,7 @@ input.check {
 											id="membernonono">가입거절</button>
 									</div>
 								</div>
-								<table border="1" cellspacing="0" class="tbl_lst_type">
+								<table border="1" cellspacing="0" class="tbl_lst_type" style="width:100%;">
 
 									<colgroup>
 										<col width="50">
@@ -179,6 +179,8 @@ input.check {
 					<!-- 자녀 성별 -->
 					<col width="80">
 					<!-- 자녀 반 -->
+					<col width="80">
+					<!-- 승인 상태 -->
 					</colgroup>
 
 					<thead style="text-align: center;">
@@ -186,7 +188,8 @@ input.check {
 
 							<th scope="col" class="frst"><input type="checkbox"
 								id="chkalltop" title="선택"
-								class="check _click(ManageJoinApplication|AllJoinMember)"></th>
+								class="check _click(ManageJoinApplication|AllJoinMember)"
+								onclick="checkAll()"></th>
 							<!-- 12개 -->
 							<th scope="col"><strong class="line_r">아이디</strong></th>
 							<th scope="col"><strong class="line_r">회원이름</strong></th>
@@ -200,6 +203,7 @@ input.check {
 							<th scope="col"><strong class="line_r">자녀 생일</strong></th>
 							<th scope="col"><strong class="line_r">자녀 성별</strong></th>
 							<th scope="col"><strong class="line_r">자녀 반</strong></th>
+							<th scope="col"><strong class="line_r">승인 상태</strong></th>
 
 						</tr>
 					</thead>
@@ -210,7 +214,7 @@ input.check {
 										%>
 						<tr id="member1">
 							<td class="tc"><input type="checkbox"
-								name="applyMemberCheck" value="hoon1489" id="c1" title="선택"
+								name="applyMemberCheck" value="" id="c1" title="선택"
 								class="check _click"></td>
 							<td class="tc"><span class="img"><%=m.getUserId()%></span></td>
 							<td class="tc"><span class="txt"><%=m.getUserName()%></span>
@@ -228,6 +232,7 @@ input.check {
 							<td class="tc"><span class="num"><%=m.getCgender()%></span>
 							</td>
 							<td class="tc"><span class="num"><%=m.getCclass()%></span></td>
+							<td class="tc"><span class="num"><%=m.getMstatus()%></span></td>
 						</tr>
 
 
@@ -248,7 +253,18 @@ input.check {
 	<!-- /.container-fluid -->
 	</div>
 	</div>
-
+	
+	<script>
+		function checkAll(){
+			if($("#chkalltop").is(':checked')){
+				$("input[name=applyMemberCheck]").prop("checked", true);
+			}else{
+				$("input[name=applyMemberCheck]").prop("checked", false);
+			}
+		}
+		
+		function 
+	</script>
 	<!-- End of Main Content -->
 	<%@ include file="../intranet/common/footer.jsp"%>
 </body>
