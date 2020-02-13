@@ -11,6 +11,7 @@ public class Alim implements Serializable{
 	private static final long serialVersionUID = -7916288263869408526L;
 	
 	private int ano; 		// 글번호
+	private int arownum;	// 글번호 보여주기용
 	private int acategory; 	//  1-알림장 2-귀가 3-투약
 	private String category; // 카테고리 이름
 	private String achild;	// 아이 이름
@@ -23,9 +24,13 @@ public class Alim implements Serializable{
 	public Alim() {}
 
 	
+	
+
+
 	/**
 	 * 알림장 리스트 불러오기용
 	 * @param ano
+	 * @param arownum
 	 * @param acategory
 	 * @param category
 	 * @param achild
@@ -35,10 +40,11 @@ public class Alim implements Serializable{
 	 * @param adate
 	 * @param ack
 	 */
-	public Alim(int ano, int acategory, String category, String achild, int ccode, int cclass, String awriter,
-			Date adate, String ack) {
+	public Alim(int ano, int arownum, int acategory, String category, String achild, int ccode, int cclass,
+			String awriter, Date adate, String ack) {
 		super();
 		this.ano = ano;
+		this.arownum = arownum;
 		this.acategory = acategory;
 		this.category = category;
 		this.achild = achild;
@@ -48,6 +54,9 @@ public class Alim implements Serializable{
 		this.adate = adate;
 		this.ack = ack;
 	}
+
+
+
 
 
 	public int getAno() {
@@ -137,6 +146,16 @@ public class Alim implements Serializable{
 
 	public void setAck(String ack) {
 		this.ack = ack;
+	}
+	
+	
+	public int getArownum() {
+		return arownum;
+	}
+
+
+	public void setArownum(int arownum) {
+		this.arownum = arownum;
 	}
 
 

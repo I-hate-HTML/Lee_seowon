@@ -17,7 +17,7 @@
             <div class="card-body">
               <div class="table-responsive">                  
                  <form action="<%= request.getContextPath() %>/dWrite.da" method="post" enctype="multipart/form-data">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" style="font-size:.9rem;">
                     <tbody>                      
                       <tr>
                       	  <th style="text-align:center">게시판</th>
@@ -39,7 +39,7 @@
                       </tr>
                       <tr>
                           <th style="text-align:center">내용</th>
-                          <td colspan="3"><textarea cols="10" placeholder="내용을 입력하세요. " name="content" class="form-control" style="height: 300px; resize: none;"></textarea></td>
+                          <td colspan="3"><textarea cols="10" placeholder="내용을 입력하세요. " name="content" id = "textarea" class="form-control" style="height: 300px; resize: none;"></textarea></td>
                       </tr>
                       <tr>
                           <th style="text-align:center">첨부파일</th>
@@ -64,6 +64,14 @@
 
       </div>
       <!-- End of Main Content -->
+      
+      <script>
+	      var str = $('#textarea').val();
+	
+	      str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	
+	      $('#textarea').val(str);
+      </script>
 <%@ include file = "common/footer.jsp" %>
 </body>
 </html>

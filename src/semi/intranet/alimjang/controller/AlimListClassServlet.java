@@ -80,7 +80,9 @@ public class AlimListClassServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		
 		list = new AlimService().selectListClass(empNo, currentPage, limitContent);
+		
 		
 		String page = "";
 		

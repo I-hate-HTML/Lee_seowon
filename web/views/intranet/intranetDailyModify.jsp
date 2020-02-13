@@ -18,7 +18,7 @@
             <div class="card-body">
               <div class="table-responsive">                  
                  <form action="<%= request.getContextPath() %>/dModifySave.da" method="post" enctype="multipart/form-data">
-                  <table class="table table-bordered">
+                  <table class="table table-bordered" style="font-size:.9rem;">
                     <tbody>                      
                       <tr>
                       	  <th style="text-align:center">게시판</th>
