@@ -5,6 +5,7 @@ encoding//src/config/intranetAlim-query.properties=UTF-8
 encoding//src/config/intranetDaily-query.properties=UTF-8
 encoding//src/config/intranetEvent-query.properties=UTF-8
 encoding//src/config/intranetForm-query.properties=UTF-8
+encoding//src/config/intranetMember-query.properties=UTF-8
 encoding//src/config/member-query.properties=UTF-8
 encoding//src/config/qna-query.properties=UTF-8
 encoding//src/semi/intranet/employee/model/vo/Employee.java=UTF-8
