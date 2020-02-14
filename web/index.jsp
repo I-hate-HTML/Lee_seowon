@@ -96,10 +96,7 @@
 									onclick='memberJoin()'>
 							</div>
 						</form>
-			<div class="btna" style="margin-top: 50px;">
-				<a href="/semi/index.jsp">HOME</a> 
-				<a href="/semi/views/homepage/join.jsp">회원가입</a>
-			</div>
+			
 			<%@ include file="views/homepage/common/loginfooter.jsp"%>
 				</div>
 			</div>

@@ -3,10 +3,6 @@ package semi.home.jsp.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-/**
- * @author user2
- *
- */
 public class Member implements Serializable{
 	
 	/**
@@ -41,7 +37,8 @@ public class Member implements Serializable{
 		this.userPwd = userPwd;
 	}
 
-
+	
+	
 	public Member(String userId, Date cbdate) {
 		super();
 		this.userId = userId;

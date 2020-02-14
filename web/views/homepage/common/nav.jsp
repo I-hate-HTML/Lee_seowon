@@ -38,7 +38,7 @@
 						<li class="nav-item dropdown show">
 								
 							<%if (m == null) { %>  
-             				 <a class="nav-link" href="/semi/views/homepage/login.jsp" id="dropdown01">로그인</a>
+             				 <a class="nav-link" href="../../index.jsp" id="dropdown01">로그인</a>
          					    <%}else{ %>  
           	  				<a class="nav-link" href="/semi/homelogout" id="dropdown01">로그아웃</a>
           						<%} %>

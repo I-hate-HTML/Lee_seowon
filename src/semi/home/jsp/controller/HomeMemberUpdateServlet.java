@@ -61,7 +61,7 @@ public class HomeMemberUpdateServlet extends HttpServlet {
 			hms.homeMemberUpdate(m);
 			System.out.println("회원정보 수정 완료!");
 			
-			response.sendRedirect("views/homepage/edit_member.jsp");
+			response.sendRedirect("views/homepage/homeindex.jsp");
 			
 		} catch(MemberException e) {
 			request.setAttribute("error", "회원정보 수정 실패!!");
