@@ -53,7 +53,21 @@
                 border: 1px solid skyblue;
                 width: 100px;
             }
+            
+                
+            #fileinput{
+	            	position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: 0px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
+            
+            }
             </style>
+       <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script> 
     </head>
     <body>
 
@@ -78,10 +92,31 @@
             <div id="cal_tab" class="cal">
             </div>
             <div>
-                <img src="./img/food.jpg" style="width: 100%;" alt="교육일정 사진 들어갈예정">
+                <img src="" style="width: 100%;" id="eduimg" alt="교육일정 사진 들어갈예정" onclick="clickimg(this)">
             </div>
             </div>
             </div>
+           <% if(true){ %>
+            <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
+            	<input type="file"id="fileinput" class="btn btn-primary"
+               	style="background: #002c5f; color: white; width: 100px;"
+                accept=".jpg,.jpeg,.png,.gif,.jfif"onchange="imageURL(this)">
+                	사진 업로드
+            </label>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="" >등록</button>               
+           <% } %>
+           
+            <% if(true){ %>
+            <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
+            	<input type="file" id="fileinput" class="btn btn-primary"
+               	style="background: #002c5f; color: white; width: 100px;" name="imgsend"
+                accept=".jpg,.jpeg,.png,.gif,.jfif"onchange="imageURL(this)">
+                	사진 업로드
+            </label>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
+             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" id="sendimg" >등록</button>               
+           <% } %>
         </div>
         <br>
         <br>
@@ -92,6 +127,52 @@
 
 
       <script type="text/javascript">
+      
+
+      
+
+		$('#sendimg').click(function(){
+			
+		        $.ajax({
+		            type: "post",
+		            enctype: 'multipart/form-data',
+		            url: "/semi/fcalendar.me",
+		            data: {
+						imgsend:$('#fileinput')[0]
+					}, 
+					processData: false,
+		            contentType: false,
+		            cache: false,
+		            success: function (data) {
+		            	alert(data);
+		            },
+		            error: function () {
+		                alert("fail");
+		            }
+		        });
+		});
+
+		
+		function imageURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#eduimg').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		function deleteImg(){
+			$('#eduimg').attr('src','');
+			$('#fileinput').val('');
+		}
+		
+		function clickimg(input){
+			
+		}
 
         var lol = ["곱창","마라탕","소시지페스티벌","수소수","H2O가","산소라는건","문과인","나도안다"]
     
