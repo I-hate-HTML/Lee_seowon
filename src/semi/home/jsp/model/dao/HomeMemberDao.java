@@ -221,10 +221,9 @@ public class HomeMemberDao {
 	}
 
 
-	public Member serchPwd(Connection con, Member m) throws MemberException {
-		Member result = null;
+	public int serchPwd(Connection con, Member m) throws MemberException {
+		int result = 0;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		
 		String sql = prop.getProperty("serchPwd");
 		
@@ -233,19 +232,11 @@ public class HomeMemberDao {
 			pstmt.setString(1, m.getUserId());
 			pstmt.setDate(2, m.getCbdate());
 			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				result = new Member();
-				
-				result.setUserPwd(rset.getString("userpwd"));
-				
-			}
+			result = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
 			throw new MemberException(e.getMessage());
 		}finally {
-			close(rset);
 			close(pstmt);
 		}
 		

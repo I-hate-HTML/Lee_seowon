@@ -96,10 +96,12 @@ public class HomeMemberService {
 	}
 
 
-	public Member searchPwd(Member m) throws MemberException {
+	public int searchPwd(Member m) throws MemberException {
 		con = getConnection();
 		
-		Member result = hmDao.serchPwd(con,m);
+		int result = hmDao.serchPwd(con,m);
+		if(result > 0) commit(con);
+		else rollback(con);
 		close(con);
 		
 		return result;
