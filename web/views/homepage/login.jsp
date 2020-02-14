@@ -95,10 +95,7 @@
 									onclick='memberJoin()'>
 							</div>
 						</form>
-				<div class="btna" style="margin-top: 50px;">
-				<a href="/semi/index.jsp">HOME</a> 
-				<a href="/semi/views/homepage/join.jsp">회원가입</a>
-			</div>
+			
 			<%@ include file="common/loginfooter.jsp"%>
 				</div>
 			</div>
@@ -107,7 +104,7 @@
 			
 			<script>
 			
-		function checkValue(){
+			function checkValue(){
 				
 				inputForm = eval("document.LoginCheck");
 			        if(!inputForm.userId.value)
@@ -128,6 +125,8 @@
 			function memberJoin(){
 				location.href='/semi/views/homepage/join.jsp';
 			}
+			
+			
 			
 			</script>
 			</div>

@@ -269,16 +269,11 @@ vertical-align: middle;}
 							
 						</div>
 						<div class="btnWrap">
-							<input type="button" value="로그인하러가기" class="btn login_btn">
+							<input type="button" value="로그인하러가기" class="btn login_btn" onclick="location='/semi/index.jsp'">
 						</div>
 					</div>
 				</div>
-			<div class="btna">
-				<a href="mainpage.html">HOME</a>
-				<a href="login.html">로그인</a>
-				<a href="join.html">회원가입</a>
-
-			</div>
+			
 			<!-- footer -->
 			<%@ include file="common/loginfooter.jsp"%>
 			</div>
