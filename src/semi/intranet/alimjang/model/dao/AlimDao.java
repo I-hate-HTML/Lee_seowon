@@ -158,8 +158,8 @@ public class AlimDao {
 			
 			
 			pstmt.setInt(1, endContent);
-			pstmt.setInt(2, startContent);
-			pstmt.setInt(3, empNo);
+			pstmt.setInt(2, empNo);
+			pstmt.setInt(3, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -353,33 +353,33 @@ public class AlimDao {
 	 * @param con
 	 * @param empNo
 	 * @param ano
-	 * @param table
-	 * @param culumn
 	 * @param category 
 	 * @return
 	 */
-	public Alim readAlimCommon(Connection con, int empNo, int ano, String table, String culumn, int category) {
+	public Alim readAlimCommon(Connection con, int empNo, int ano, int category) {
 		
 		Alim b = new Alim();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("readAlimCommon");
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCommon");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCommon");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCommon");
+		}
 		
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-			
-			
-			  pstmt.setString(1, culumn); 
-			  pstmt.setString(2, culumn); 
-			  pstmt.setString(3, culumn); 
-			  pstmt.setString(4, table); 
-			  pstmt.setString(5, culumn);
-			  pstmt.setInt(6, ano);
-			  pstmt.setInt(7, category);
+			  
+			  pstmt.setInt(1, ano);
 			 
 			
 			 
@@ -396,7 +396,6 @@ public class AlimDao {
 				b.setAdate(rset.getDate("CDATE"));
 				b.setAck(rset.getString("CK"));
 				
-				System.out.println(b);
 			}
 			
 		} catch(SQLException e) {
@@ -407,6 +406,42 @@ public class AlimDao {
 		}
 		
 		return b;
+	}
+
+
+	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCheck");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCheck");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCheck");
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, read);
+			pstmt.setInt(2, ano);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
 	}
 
 

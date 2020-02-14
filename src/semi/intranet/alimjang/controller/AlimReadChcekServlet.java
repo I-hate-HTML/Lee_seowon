@@ -1,4 +1,4 @@
-package semi.home.jsp.controller;
+package semi.intranet.alimjang.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.home.jsp.model.vo.Member;
+import com.google.gson.Gson;
+
+import semi.intranet.alimjang.model.service.AlimService;
 
 /**
- * Servlet implementation class HomeMemberSerchIdServlet
+ * Servlet implementation class AlimReadChcekServlet
  */
-@WebServlet("/homesearchid")
-public class HomeMemberSerchIdServlet extends HttpServlet {
+@WebServlet("/aReadCk.al")
+public class AlimReadChcekServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeMemberSerchIdServlet() {
+    public AlimReadChcekServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +31,26 @@ public class HomeMemberSerchIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 
-		String cname = request.getParameter("cname");
-		String email = request.getParameter("email");
 		
-		Member m = new Member(cname,email);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		
-		System.out.println("아이디찾기 확인 : " + m);
+		int empNo = 2015001; // 나중에 수정할 것!!
 		
+		String read = request.getParameter("result");
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		int category = Integer.parseInt(request.getParameter("category"));
+		
+		System.out.println(read);
+		System.out.println(ano);
+		System.out.println(category);
+		
+		int result = new AlimService().readAlimCheck(empNo, read, ano, category);
+		
+		new Gson().toJson(result, response.getWriter());
+		
+	
+	
 	}
 
 	/**

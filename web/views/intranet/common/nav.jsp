@@ -155,7 +155,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="index.jsp" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -325,7 +325,7 @@
                   <i name = "className">1반</i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../../login.jsp" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
                   <i class="fa fa-sign-out text-gray-400"></i>
                   로그아웃
                 </a>

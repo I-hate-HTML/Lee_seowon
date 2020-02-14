@@ -29,7 +29,7 @@
                       	  </td>
                           <th style="text-align:center">작성자</th>
                           <td style="text-align:center">
-                         	<input type = "text" style="width:100%" name = "writer" value="차은우">
+                         	<input type = "text" style="width:100%" name = "writer" value="차은우" disabled>
                       		<input type = "hidden" name = "writerId" value="2015001">
                           </td>
                       </tr>
@@ -65,13 +65,6 @@
       </div>
       <!-- End of Main Content -->
       
-      <script>
-	      var str = $('#textarea').val();
-	
-	      str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-	
-	      $('#textarea').val(str);
-      </script>
 <%@ include file = "common/footer.jsp" %>
 </body>
 </html>
