@@ -21,6 +21,7 @@ public class AlimNote implements Serializable{
 	private String al_poop;
 	private String al_writer;
 	private Date al_date;
+	private String al_ck; // 알림 확인용
 	
 	public AlimNote() {} // 기본생성자
 

@@ -46,7 +46,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive"> 
-                  <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
+                  <table id = "viewTable" class="table table-striped" style="font-size:.8rem; text-align: center;">
                     <tr>
                       <th style="width:10%">번호</th>
                       <th style="width:20%">구분</th>
@@ -59,8 +59,8 @@
                     <% for(Alim a : list) {%>
                     <tr>
 	                  <td> 
-	                    <input type = "hidden" name = "ano" value="<%= a.getAcategory() %>">
-	                  	<%= a.getAno() %>
+	                    <input type = "hidden" name = "ano" value="<%= a.getAno() %>">
+	                  	<%= a.getArownum()%>
 	                  </td>
 	                  <td>
 	                  	<input type = "hidden" name = "category" value="<%= a.getAcategory() %>">
@@ -89,14 +89,14 @@
                 <!-- 현재 페이지가 1페이지면 이전 페이지 버튼 disabled -->
                 <% if(currentPage <= 1){ %>
                 <li class="page-item disabled">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=1" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=1" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                  </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%=currentPage -1 %>" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%=currentPage -1 %>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
@@ -110,7 +110,7 @@
                 %>               
                 	<li class="page-item disabled"><a class="page-link"><%= p %></a></li>
                 <%		} else {%>	
-                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%= p %>"><%= p %></a></li>	
+                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%= p %>"><%= p %></a></li>	
                 <%		} %>
                 <%	} %>
                 		
@@ -123,7 +123,7 @@
                 </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/dList.da?currentPage=<%=currentPage +1 %>" aria-label="Next">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%=currentPage +1 %>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
@@ -141,7 +141,18 @@
 
       </div>
       <!-- End of Main Content -->
+      
+<script>
+$(function(){
+    $('#viewTable td').click(function(){
+    	var ano = $(this).parent().children().find("input[type=hidden]").val(); 
+    	var category = $(this).parent().children().eq(1).find("input[type=hidden]").val();
+      location.href = "<%= request.getContextPath() %>/aRead.al?ano=" + ano + "&category=" + category;
+    });
+  });
+</script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>
+
 </body>
 </html>
