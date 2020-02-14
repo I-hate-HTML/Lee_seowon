@@ -10,7 +10,7 @@ import semi.intranet.calendar.model.vo.Calendar;
 public class EventService {
 
 	private Connection con;
-	private EventDao edao;
+	private EventDao edao = new EventDao();
 	public int InsertEvent(Calendar cc) {
 		int result = 0;
 		con = getConnection();
