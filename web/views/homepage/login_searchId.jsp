@@ -259,7 +259,8 @@ vertical-align: middle;}
 				<div class="tabParent">
 					<div class="tabCon on">
 						<div class="iconArea">
-						<form action="/semi/homesearchid" method="post">
+						
+						<form action="/semi/searchId" method="post">
 							<input type="text" class="input_area" name="cname" placeholder="자녀이름 입력">
                             <input type="text" class="input_area" name="email" placeholder="이메일 입력">
                         </form>    
