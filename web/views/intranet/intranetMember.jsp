@@ -144,7 +144,7 @@ input.check {
 								<div class="board_action">
 									<div class="action_in">
 										선택 회원을&nbsp;
-										<button class="btn btn-primary btn-sm" onclick="agreeMem();"
+										<button type="submit" class="btn btn-primary btn-sm" onclick="agreeMem();"
 											id="memberaccept">가입승인</button>
 										<button class="btn btn-primary btn-sm" onclick="denyMem();"
 											id="membernonono">가입거절</button>
@@ -214,7 +214,7 @@ input.check {
 										%>
 						<tr id="member1">
 							<td class="tc"><input type="checkbox"
-								name="applyMemberCheck" value="" id="c1" title="선택"
+								name="applyMemberCheck" value="<%=m.getUserId()%>" id="c1" title="선택"
 								class="check _click"></td>
 							<td class="tc"><span class="img"><%=m.getUserId()%></span></td>
 							<td class="tc"><span class="txt"><%=m.getUserName()%></span>
@@ -263,7 +263,14 @@ input.check {
 			}
 		}
 		
-		function 
+		function agreeMem(){
+			$("#joinapplication").submit();
+			alert('승인되었습니다!');
+		}
+		
+		function denyMem(){
+			alert('승인 거부되었습니다!');
+		}
 	</script>
 	<!-- End of Main Content -->
 	<%@ include file="../intranet/common/footer.jsp"%>

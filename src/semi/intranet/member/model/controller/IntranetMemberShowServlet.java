@@ -15,7 +15,7 @@ import semi.intranet.member.model.service.IntranetMemberService;
 /**
  * Servlet implementation class IntranetMemberShowServlet
  */
-@WebServlet("/showvisitor.mem")
+@WebServlet("/showmem.list")
 public class IntranetMemberShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
