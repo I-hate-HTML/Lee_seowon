@@ -174,6 +174,7 @@
 
 			calendar.render();
 
+			jQuery.noConflict();
 			calendar.on('dateClick', function(info) {
 				console.log('sibal' + info.dateStr);
 				$('#insertEvent').modal('show');
@@ -191,24 +192,32 @@
 			event.username = $('#user').val();
 			
 			
+			console.log(event.title);
+			var jsonData = JSON.stringify(event);
 			
-			var jsonData = JSON.stringfy(obj);
-			
-			$.ajax({
-				type:"POST",
-				dataType : "json",
-				url : "/semi/insertEvent.ev",
-				data : {
-					json : jsonData
-				},
-				success : function(data){
-					alert('등록 성공');
-					location.reload();
-				},error : function(){
-					alert('등록 실패');
-					$('#eventTitle').select();
-				}
-			});
+			if(event.title == ''||event.type==''){
+				alert('빈 항목이 있습니당')
+			}else{
+				if(event.end ==''){
+					event.end=event.start;
+				};
+				$.ajax({
+					type:"POST",
+					dataType : "json",
+					url : "/semi/InsertEvent.ev",
+					data : {
+						json : jsonData
+					},
+					success : function(data){
+						alert('등록 성공');
+						location.reload();
+					},error : function(){
+						alert('등록 실패');
+						$('#eventTitle').select();
+					}
+				});
+				
+			};
 		});
 		
 	</script>

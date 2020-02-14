@@ -11,17 +11,15 @@ public class Calendar implements Serializable{
 	private static final long serialVersionUID = -1681590146656378574L;
 	
 	private String title;
-	private String content;
-	private Date start;
-	private Date end;
+	private String start;
+	private String end;
 	private String type;
 	private String user;
 	
 	public Calendar() {}
 
-	public Calendar(String title, String content, Date start, Date end, String type, String user) {
+	public Calendar(String title, String start, String end, String type, String user) {
 		this.title = title;
-		this.content = content;
 		this.start = start;
 		this.end = end;
 		this.type = type;
@@ -36,27 +34,19 @@ public class Calendar implements Serializable{
 		this.title = title;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public String getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 
@@ -82,11 +72,10 @@ public class Calendar implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Calendar [title=" + title + ", content=" + content + ", start=" + start + ", end=" + end + ", type="
-				+ type + ", user=" + user + "]";
+		return "Calendar [title=" + title + ", start=" + start + ", end=" + end + ", type=" + type + ", user=" + user
+				+ "]";
 	}
-	
-	
+
 	
 	
 	

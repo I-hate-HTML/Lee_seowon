@@ -275,10 +275,10 @@
 
 				<div class="assent" align="right" style="font-size: 15px">
 					<em>위 내용에 동의 합니까? &nbsp;</em> <label><input type="radio"
-						class="agreeAY" name="agreeA" id="agreeA1" value="Y"
+						class="ay" name="agreeA" id="agreeA" value="Y"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 0px;"></label>
 					<label for="agreeA1">동의합니다.</label> <label><input
-						type="radio" class="agreeAN" name="agreeA" id="agreeA2" value="N"
+						type="radio" class="agreeAN" name="agreeA" id="agreeAN" value="N"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px;"></label>
 					<label for="agreeA2">동의하지 않습니다.</label>
 				</div>
@@ -340,10 +340,10 @@
 
 				<div class="assent" align="right" style="font-size: 15px">
 					<em>위 내용에 동의 합니까? &nbsp;</em> <label><input type="radio"
-						class="agreeBY" name="agreeB" id="agreeB1" value="Y"
+						class="ay" name="agreeB" id="agreeB" value="Y"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 0px;"></label>
 					<label for="agreeB1">동의합니다.</label> <label><input
-						type="radio" class="agreeBN" name="agreeB" id="agreeB2" value="N"
+						type="radio" class="agreeBN" name="agreeB" id="agreeBN" value="N"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px;"></label>
 					<label for="agreeB2">동의하지 않습니다.</label>
 				</div>
@@ -402,10 +402,10 @@
 				</div>
 				<div class="assent" align="right" style="font-size: 15px">
 					<em>위 내용에 동의 합니까? &nbsp; </em> <label><input type="radio"
-						class="agreeCY" name="agreeC" id="agreeC1" value="Y"
+						class="ay" name="agreeC" id="agreeC" value="Y"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 0px;"></label>
 					<label for="agreeC1">동의합니다.</label> <label><input
-						type="radio" class="agreeCN" name="agreeC" id="agreeC2" value="N"
+						type="radio" class="agreeCN" name="agreeC" id="agreeCN" value="N"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px;"></label>
 					<label for="agreeC2">동의하지 않습니다.</label>
 
@@ -420,10 +420,10 @@
 					중지할 수 있습니다.</div>
 				<div class="assent" align="right" style="font-size: 15px">
 					<em>위 내용에 동의 합니까? &nbsp;</em> <label><input type="radio"
-						class="agreeDY" name="agreeD" id="agreeD1" value="Y"
+						class="ay" name="agreeD" id="agreeD" value="Y"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 0px;"></label>
 					<label for="agreeD1">동의합니다.</label> <label><input
-						type="radio" class="agreeDN" name="agreeD" id="agreeD2" value="N"
+						type="radio" class="agreeDN" name="agreeD" id="agreeDN" value="N"
 						style="width: 20px; height: 20px; margin-top: 2px; margin-left: 10px;"></label>
 					<label for="agreeD2">동의하지 않습니다.</label>
 				</div>
@@ -446,12 +446,33 @@
 						&nbsp;&nbsp;&nbsp;
 						<button class="btn"
 							style="background: #002c5f; color: white; width: 150px; height: 50px;"
-							onclick="location='sign.jsp'">다음</button>
+							onclick="submit()">다음</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
+		
+		<script>
+			function submit(){
+				if($('#agreeA').prop("checked") == true && $('#agreeB').prop("checked") == true && $('#agreeC').prop("checked") == true &&
+					$('#agreeD').prop("checked") == true) {
+					location.href='/semi/views/homepage/sign.jsp';
+				}else{
+					alert("가입약관에 모두 동의해주세요.");
+				}
+				
+			}
+		
+		 $(function (){
+			$('#agreeAll').click(function(){
+				$('.ay').prop("checked",this.checked);
+				
+			});
+		 });
+		
+		</script>
+		
 		
 		<%@ include file="common/footer.jsp"%>
 		

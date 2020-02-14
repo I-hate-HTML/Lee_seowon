@@ -72,6 +72,7 @@ var limitPage;
 var maxPage;
 var startPage;
 var endPage;
+var empNo = '2015001'; //--> 나중에 바꾸기!!!!!!
 
  $(function(){
 	
@@ -79,7 +80,7 @@ var endPage;
 	$.ajax({
 		url:"/semi/fListAjax.fo",
 		type:"post",
-		data:{'empNo' : 2015001,
+		data:{'empNo' : empNo,
 			  'currentPage': currentPage, 
 			  'listCount': listCount, 
 			  'limitContent':limitContent, 
@@ -209,6 +210,7 @@ var endPage;
 				$neLi.append($neA);
 				
 				$('#pageBtn').append($neLi);
+				
 			
 			} else {
 				$neLi.attr('disabled', false);

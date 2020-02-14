@@ -37,6 +37,14 @@ public class Member implements Serializable{
 		this.userPwd = userPwd;
 	}
 
+	
+	
+	public Member(String userId, Date cbdate) {
+		super();
+		this.userId = userId;
+		this.cbdate = cbdate;
+	}
+
 	// 회원 가입
 	public Member(String userId, String userPwd, String userName, String gender, String email, String phone,
 			String address, String cname, Date cbdate, String cgender, int cclass) {
