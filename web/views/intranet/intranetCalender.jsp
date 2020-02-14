@@ -24,7 +24,6 @@
 	border: 1px solid #ccc;
 	background: #eee;
 }
-
 .demo-topbar+#external-events { /* will get stripped out */
 	top: 60px;
 }
