@@ -76,7 +76,6 @@ var empNo = '2015001'; //--> 나중에 바꾸기!!!!!!
 
  $(function(){
 	
-	console.log("기능실행");
 	$.ajax({
 		url:"/semi/fListAjax.fo",
 		type:"post",
@@ -90,7 +89,6 @@ var empNo = '2015001'; //--> 나중에 바꾸기!!!!!!
 			  'endPage':endPage	
 		},
 		success:function(data){
-			console.log(data);
 			
 			// 리스트 목록
 			$.each(data, function(index, value){
@@ -127,13 +125,13 @@ var empNo = '2015001'; //--> 나중에 바꾸기!!!!!!
 				}	
 			});
 			
-			console.log('currentPage :'+data.pi.currentPage);  
+			/* console.log('currentPage :'+data.pi.currentPage);  
 			console.log('listCount :'+data.pi.listCount);    
 			console.log('limitContent:'+data.pi.limitContent); 
 			console.log('limitPage :'+data.pi.limitPage);    
 			console.log('maxPage  :'+data.pi.maxPage);      
 			console.log('startPage :'+data.pi.startPage);    
-			console.log('endPage  :'+data.pi.endPage);      
+			console.log('endPage  :'+data.pi.endPage);       */
 			
 			
 			
@@ -171,7 +169,7 @@ var empNo = '2015001'; //--> 나중에 바꾸기!!!!!!
 		
 			// 페이지 버튼 만들고 현재 페이지는 버튼 disabled 
 			for(var p = data.pi.startPage; p <= data.pi.endPage; p++){
-				console.log(p);
+				
 				
 				 if(p == data.pi.currentPage){
 					$cuA.text(p);
