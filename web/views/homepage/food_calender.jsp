@@ -136,6 +136,21 @@
 		function deleteImg(){
 			$('#foodimg').attr('src','');
 			$('#fileinput').val('');
+			
+			$.ajax({
+				
+				url:"/semi/fcaldeltetimg.me",
+				type:"post",
+				data:{
+					fooddate : $("#fooddate").val()	
+				},
+				success:function(){
+					alert("삭제성공!");
+				},
+				error:function(){
+					alert("에러발생!");
+				}
+			});
 		}
 		
         var lol = ["곱창","마라탕","소시지페스티벌","수소수","H2O가","산소라는건","문과인","나도안다"]
@@ -175,6 +190,21 @@
             $("#foodyear").text(year);
             $("#foodmonth").text(month);
             $("#fooddate").val(String(year) + month);
+            
+            $.ajax({
+            	url : "/semi/fcalimg.me",
+            	type : "post",
+            	data:{
+            		fooddate : $("#fooddate").val()
+            	},success:function(data){
+            		$('#foodimg').attr('src','<%=request.getContextPath()%>/resources/homepage/images/foodimg/'+data);
+            	},error:function(){
+            		alert("에러났다 에베베벱베베벱ㅂ베벱");
+            	}
+            	
+            });
+            
+      		
 
         }
      
