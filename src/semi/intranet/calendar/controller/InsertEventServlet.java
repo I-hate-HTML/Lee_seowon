@@ -19,7 +19,7 @@ import semi.intranet.calendar.model.vo.Calendar;
 /**
  * Servlet implementation class InsertEventServlet
  */
-@WebServlet("/insertEvent.ev")
+@WebServlet("/InsertEvent.ev")
 public class InsertEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,14 +36,35 @@ public class InsertEventServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject obj = new JSONObject();
+		Calendar cl = null;
 		
 		String jsonParam = request.getParameter("json");
-		
-		if(jsonParam !=null) {
-			obj = (JSONObject)JSONValue.parse(jsonParam);
-		}
 
+		obj = (JSONObject)JSONValue.parse(jsonParam);
 		
+		String title = (String)obj.get("title");
+		String start = (String)obj.get("start");
+		String end = (String)obj.get("end");
+		String type = (String)obj.get("type");
+		String user = (String)obj.get("user");
+		
+		
+		cl = new Calendar(title,start,end,type,user);
+		
+		int result = new EventService().InsertEvent(cl);
+		
+		if(result > 0) {
+			
+			
+			request.getRequestDispatcher("views/intranet/intranetCalendar.jsp").forward(request, response);
+			
+		}else {
+			request.setAttribute("msg", "시발");
+			request.getRequestDispatcher("views/intranet/intranetCalendar.jsp").forward(request, response);
+		}
+		
+
+
 	}
 
 	/**
