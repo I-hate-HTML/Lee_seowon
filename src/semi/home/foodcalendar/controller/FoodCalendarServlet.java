@@ -12,6 +12,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import semi.home.foodcalendar.model.vo.FoodCalendar;
+import semi.home.foodcalendar.service.FoodCalendarService;
+
 /**
  * Servlet implementation class FoodCalendarServlet
  */
@@ -64,11 +67,15 @@ public class FoodCalendarServlet extends HttpServlet {
 		String fdate = mrequest.getParameter("fooddate");
 		String fcalimg = mrequest.getFilesystemName("fcalimg");
 		
-		System.out.println(fdate);
-		System.out.println(fcalimg);
+		int result = new FoodCalendarService().imginput(fdate,fcalimg);
 		
-		
-		
+		if(result>0) {
+			response.sendRedirect("/semi/views/homepage/food_calender.jsp");
+			
+		}else {
+			System.out.println("에러발생");
+			response.sendRedirect("/semi/views/homepage/food_calender.jsp");
+		}
 	
 	}
 

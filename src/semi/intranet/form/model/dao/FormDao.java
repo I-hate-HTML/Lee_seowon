@@ -350,10 +350,13 @@ public class FormDao {
 				f.setFdate(rset.getDate("DRAFT_DATE"));
 				f.setFsign1(rset.getString("SNAME1"));
 				f.setFsignId1(rset.getInt("SIGN_EMP1"));
+				f.setFsignck1(rset.getString("SIGN_YN1"));
 				f.setFsign2(rset.getString("SNAME2"));
 				f.setFsignId2(rset.getInt("SIGN_EMP2"));
+				f.setFsignck2(rset.getString("SIGN_YN2"));
 				f.setFsign3(rset.getString("SNAME3"));
 				f.setFsignId3(rset.getInt("SIGN_EMP3"));
+				f.setFsignck3(rset.getString("SIGN_YN3"));
 				f.setFreturnmsg(rset.getString("RETURN_REASON"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFcontent(rset.getString("DRAFT_CONTENT"));
