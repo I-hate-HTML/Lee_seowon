@@ -22,8 +22,8 @@
 		              <h6 class="m-0 font-weight-bold text-primary">알림 노트</h6>        		
 		            </td>
 		            <td align="right">
-		            	<button class = "btn btn-primary btn-sm" >읽음 확인</button>
-		              	<button class = "btn btn-primary btn-sm" >읽음 취소</button>                                                        
+		            	<button class = "btn btn-primary btn-sm readBtn" name="ck" value="Y">읽음 확인</button>
+		              	<button class = "btn btn-primary btn-sm readBtn" name="cs" value="N">읽음 취소</button>                                                        
 		            </td>
 		          </tr>
 		        </table>
@@ -42,8 +42,8 @@
                         <th style="text-align: center;">작성자</th>
                         <td style="text-align: center;"><%= a.getAl_writer() %></td>
                         <th style="text-align: center;">선생님확인</th>
-                        <td style="text-align: center;">
-                        	<input type="hidden" name="ck" value="<%= b.getAck() %>">
+                        <td style="text-align: center;" >
+                        	<input type="hidden" class="tCK" name="ck" value="<%= b.getAck() %>">
                         	<%= b.getAck() %>
                         </td>
                       </tr>
@@ -63,7 +63,9 @@
                       </tr>
                       <tr>
                         <th style="text-align: center; height:300px">내용</th>
-                        <td colspan="5"><%= a.getAl_content() %></td>
+                        <td colspan="5" style="height:300px">
+                        <pre style="height:90%; width:90%"><%= a.getAl_content() %></pre>
+                        </td>
                       </tr>
                       <tr>
                         <th style="text-align: center;">기분</th>
@@ -136,7 +138,8 @@
                     </tbody>
                   </table>
                   <div class="float-right">
-                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="목록" onclick="history.back()"/>
+                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="반 목록" onclick="location.href='/semi/aListClass.al'"/>
+                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="전체 목록" onclick="location.href='/semi/aListAll.al'"/>
                   </div>
               </form>
           
@@ -212,9 +215,37 @@ $(function(){
 	} else {
 		$('#toilet_3').attr('checked', true);
 	}
+});	
 	
+
+	$('.readBtn').click(function(){
+		console.log("버튼 클릭")
+		
+		var result = $(this).val();
+		var ano = '<%= a.getAl_no()%>';
+		var category = '<%= a.getAl_code() %>';
+		var text = $('.tCK').val(result);
+		
+		console.log(result);
+		console.log(ano);
+		console.log(category);
+
+		$.ajax({
+			url:"/semi/aReadCk.al",
+			type:"post",
+			data: {
+				'result' : result,
+				'ano' : ano,
+				'category' : category,
+			},
+			success:function(data){
+				$('.tCK').val(result);
+				$('.tCK').parent().text(result);
+			}
+		});
+	});
 	
-});
+
 
 </script>
 
