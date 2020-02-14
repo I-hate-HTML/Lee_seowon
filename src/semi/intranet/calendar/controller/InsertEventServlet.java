@@ -1,8 +1,7 @@
 package semi.intranet.calendar.controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-
 import semi.intranet.calendar.model.service.EventService;
-import semi.intranet.calendar.model.vo.Calendar;
 
 /**
  * Servlet implementation class InsertEventServlet
@@ -35,32 +30,29 @@ public class InsertEventServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject obj = new JSONObject();
-		Calendar cl = null;
+		EventService es = new EventService();
+		String cJson = request.getParameter("json");
+		FileWriter fw;
 		
-		String jsonParam = request.getParameter("json");
-
-		obj = (JSONObject)JSONValue.parse(jsonParam);
-		
-		String title = (String)obj.get("title");
-		String start = (String)obj.get("start");
-		String end = (String)obj.get("end");
-		String type = (String)obj.get("type");
-		String user = (String)obj.get("user");
-		
-		
-		cl = new Calendar(title,start,end,type,user);
-		
-		int result = new EventService().InsertEvent(cl);
+		int result = 0;
+		result = es.InsertEvent(cJson);
 		
 		if(result > 0) {
+			try {
+				fw = new FileWriter("../../resources/intranet/ajax/data.json",false);
+				fw.write(cJson);
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+				request.setAttribute("msg", "시발");
+				request.getRequestDispatcher("/views/intranet/intranetCalender.jsp").forward(request, response);
+			}
 			
-			
-			request.getRequestDispatcher("views/intranet/intranetCalendar.jsp").forward(request, response);
+			response.sendRedirect("/views/intranet/intranetCalender.jsp");
 			
 		}else {
 			request.setAttribute("msg", "시발");
-			request.getRequestDispatcher("views/intranet/intranetCalendar.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/intranet/intranetCalender.jsp").forward(request, response);
 		}
 		
 

@@ -27,20 +27,23 @@ public class EventDao {
 			e.printStackTrace();
 		}
 	}
-	public int InsertEvent(Connection con, Calendar cc) {
+	public int InsertEvent(Connection con, String cJson) {
 		int result = 0;
+		Statement stmt = null;
 		PreparedStatement pstmt = null;
+		String clear = prop.getProperty("clearEvent");
 		String sql = prop.getProperty("insertEvent");
 		
 		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,cc.getTitle());
-			pstmt.setString(2, cc.getStart());
-			pstmt.setString(3, cc.getEnd());
-			pstmt.setString(4, cc.getType());
-			pstmt.setString(5, cc.getUser());
+			stmt = con.createStatement();
+			result = stmt.executeUpdate(clear);
 			
-			result = pstmt.executeUpdate(sql);
+			if(result>0) {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cJson);
+			
+			result = pstmt.executeUpdate();
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
