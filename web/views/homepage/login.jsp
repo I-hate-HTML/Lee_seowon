@@ -61,7 +61,7 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-						<form name ="LoginCheck" id="Loginform" action="/semi/homelogin" method="post" onsubmit="return checkValue()">
+						<form id="Loginform" action="/semi/homelogin" method="post">
 							<div class="inputgroup">
 								<div class="input-groupp">
 
@@ -87,7 +87,9 @@
 							</div>
 
 							<div class="button-area d-flex justify-content-center ">
-								<input type="submit" value="로그인" class="btn login_btn">
+								<input type="button" value="로그인" class="btn login_btn"
+									onclick='login()'>
+								<!-- 나중에 submit으로 변경 -->
 							</div>
 							<div class="button-area d-flex justify-content-center ">
 								<input type="btn" id="btnsign" value="회원가입"
@@ -104,30 +106,24 @@
 			
 			<script>
 			
+<<<<<<< HEAD
 			function checkValue(){
+=======
+			function login(){
+>>>>>>> branch 'master' of https://github.com/I-hate-HTML/Lee_seowon.git
 				
-				inputForm = eval("document.LoginCheck");
-			        if(!inputForm.userId.value)
-			        {
-			            alert("아이디를 입력하세요");    
-			            inputForm.userId.focus();
-			            return false;
-			        }
-			        if(!inputForm.userPwd.value)
-			        {
-			            alert("비밀번호를 입력하세요");    
-			            inputForm.userPwd.focus();
-			            return false;
-			        }
-			        
-				}
+				$('#Loginform').submit();
+			}
 			
 			function memberJoin(){
 				location.href='/semi/views/homepage/join.jsp';
 			}
 			
 			
+<<<<<<< HEAD
 			
+=======
+>>>>>>> branch 'master' of https://github.com/I-hate-HTML/Lee_seowon.git
 			</script>
 			</div>
 			</div>
