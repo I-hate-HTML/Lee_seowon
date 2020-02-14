@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="semi.home.jsp.controller.*" %>
+
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +51,7 @@
 <link
 	href="<%=request.getContextPath()%>/resources/homepage/css/home_login.css"
 	rel="stylesheet">
-
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -61,7 +63,7 @@
 			<div class="d-flex justify-content-center h-100">
 				<div class="card" style="width: 600px;">
 					<div class="card-body">
-						<form id="Loginform" action="/semi/homelogin" method="post">
+						<form name ="LoginCheck" id="Loginform" action="/semi/homelogin" method="post" onsubmit="return checkValue()">
 							<div class="inputgroup">
 								<div class="input-groupp">
 									<input type="text" class="input_area"placeholder="아이디를 입력해주세요." name="userId">
@@ -85,8 +87,7 @@
 
 
 							<div class="button-area d-flex justify-content-center ">
-								<input type="button" value="로그인" class="btn login_btn"
-									onclick='login()'>
+								<input type="submit" value="로그인" class="btn login_btn" >
 								<!-- 나중에 submit으로 변경 -->
 							</div>
 							<div class="button-area d-flex justify-content-center ">
@@ -103,19 +104,31 @@
 				</div>
 			</div>
 					</div>
-
+			
 			
 			<script>
 			
-			function login(){
+			function checkValue(){
 				
-				$('#Loginform').submit();
-			}
+				inputForm = eval("document.LoginCheck");
+			        if(!inputForm.userId.value)
+			        {
+			            alert("아이디를 입력하세요");    
+			            inputForm.userId.focus();
+			            return false;
+			        }
+			        if(!inputForm.userPwd.value)
+			        {
+			            alert("비밀번호를 입력하세요");    
+			            inputForm.userPwd.focus();
+			            return false;
+			        }
+			        
+				}
 			
 			function memberJoin(){
 				location.href='/semi/views/homepage/join.jsp';
 			}
-			
 			
 			</script>
 			</div>

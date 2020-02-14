@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.home.alimjang.model.vo.AlimHome;
+import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.vo.Alim;
 
@@ -149,15 +150,16 @@ public class AlimDao {
 		String sql = prop.getProperty("selectListClass");
 		
 		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
+
 			int startContent = (currentPage -1) * limitContent + 1;
 			int endContent = startContent + limitContent -1;
 			
+			pstmt = con.prepareStatement(sql);
+			
+			
 			pstmt.setInt(1, endContent);
-			pstmt.setInt(2, startContent);
-			pstmt.setInt(3, empNo);
+			pstmt.setInt(2, empNo);
+			pstmt.setInt(3, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -292,6 +294,58 @@ public class AlimDao {
 		
 		return a;
 	}
+	
+	/**
+	 * 알림장 투약의뢰서 읽기
+	 * @param con
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimMedi readAlimMedi(Connection con, int empNo, int ano) {
+		
+		AlimMedi a = new AlimMedi();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("readAlimMedi");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ano);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				a.setAlmd_no(rset.getInt("ALMD_NO"));
+				a.setAl_code(rset.getInt("AL_CODE"));
+				a.setCno(rset.getInt("CNO"));
+				a.setAlmd_con(rset.getString("ALMD_CON"));
+				a.setAlmd_type(rset.getString("ALMD_TYPE"));
+				a.setAlmd_vol(rset.getString("ALMD_VOL"));
+				a.setAlmd_num(rset.getString("ALMD_NUM"));
+				a.setAlmd_time(rset.getString("ALMD_TIME"));
+				a.setAlmd_temp(rset.getString("ALMD_TEMP"));
+				a.setAlmd_ps(rset.getString("ALMD_PS"));
+				a.setAlmd_writer(rset.getString("ALMD_WRITER"));
+				a.setAlmd_date(rset.getDate("ALMD_DATE"));
+				
+				
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return a;
+	}
 
 
 	/**
@@ -299,31 +353,33 @@ public class AlimDao {
 	 * @param con
 	 * @param empNo
 	 * @param ano
-	 * @param table
-	 * @param culumn
+	 * @param category 
 	 * @return
 	 */
-	public Alim readAlimCommon(Connection con, int empNo, int ano, String table, String culumn) {
+	public Alim readAlimCommon(Connection con, int empNo, int ano, int category) {
 		
 		Alim b = new Alim();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("readAlimCommon");
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCommon");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCommon");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCommon");
+		}
 		
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-			
-			
-			  pstmt.setString(1, culumn); 
-			  pstmt.setString(2, culumn); 
-			  pstmt.setString(3, culumn); 
-			  pstmt.setString(4, table); 
-			  pstmt.setString(5, culumn);
-			  pstmt.setInt(6, ano);
+			  
+			  pstmt.setInt(1, ano);
 			 
 			
 			 
@@ -340,7 +396,6 @@ public class AlimDao {
 				b.setAdate(rset.getDate("CDATE"));
 				b.setAck(rset.getString("CK"));
 				
-				System.out.println(b);
 			}
 			
 		} catch(SQLException e) {
@@ -352,6 +407,45 @@ public class AlimDao {
 		
 		return b;
 	}
+
+
+	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCheck");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCheck");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCheck");
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, read);
+			pstmt.setInt(2, ano);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
+	}
+
+
+	
 
 
 

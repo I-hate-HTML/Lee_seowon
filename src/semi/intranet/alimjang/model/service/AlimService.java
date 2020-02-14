@@ -1,12 +1,12 @@
 package semi.intranet.alimjang.model.service;
 
-import static semi.common.JDBCTemplate.close;
-import static semi.common.JDBCTemplate.getConnection;
+import static semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.home.alimjang.model.vo.AlimHome;
+import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.alimjang.model.vo.AlimNote;
 import semi.intranet.alimjang.model.dao.AlimDao;
 import semi.intranet.alimjang.model.vo.Alim;
@@ -97,17 +97,68 @@ public class AlimService {
 		return a;
 		
 	}
+	
+	/**
+	 * 알림 투약의뢰서 게시글 읽기
+	 * @param empNo
+	 * @param ano
+	 * @return
+	 */
+	public AlimMedi readAlimMedi(int empNo, int ano) {
+		
+		Connection con = getConnection();
+				
+		AlimMedi a = ad.readAlimMedi(con, empNo, ano);
+		
+		close(con);
+		
+		return a;
+	}
 
-	public Alim readAlimCommon(int empNo, int ano, String table, String culumn) {
+
+	/**
+	 * 알림장 읽기 커먼 정보
+	 * @param empNo
+	 * @param ano
+	 * @param category 
+	 * @return
+	 */
+	public Alim readAlimCommon(int empNo, int ano, int category) {
 		
 		Connection con = getConnection();
 		
-		Alim b = ad.readAlimCommon(con, empNo, ano, table, culumn);
+		Alim b = ad.readAlimCommon(con, empNo, ano, category);
 		
 		close(con);
 		
 		return b;
 	}
 
+	/**
+	 * 알림장 읽기 여부 업데이트용
+	 * @param empNo
+	 * @param read
+	 * @param category 
+	 * @param ano 
+	 * @return
+	 */
+	public int readAlimCheck(int empNo, String read, int ano, int category) {
+		
+		Connection con = getConnection();
+		
+		int result = ad.readAlimCheck(con, empNo, read, ano, category);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return 0;
+	}
+
+	
 	
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
