@@ -19,11 +19,11 @@
                <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
 		          <tr>
 		            <td>
-		              <h6 class="m-0 font-weight-bold text-primary">귀가 동의서</h6>        		
+		              <h6 class="m-0 font-weight-bold text-primary">귀가 의뢰서</h6>        		
 		            </td>
 		            <td align="right">
-		            	<button class = "btn btn-primary btn-sm" >읽음 확인</button>
-		              	<button class = "btn btn-primary btn-sm" >읽음 취소</button>                                                        
+		            	<button class = "btn btn-primary btn-sm readBtn" value='Y'>읽음 확인</button>
+		              	<button class = "btn btn-primary btn-sm readBtn" value='N'>읽음 취소</button>                                                        
 		            </td>
 		          </tr>
 		        </table>
@@ -43,7 +43,7 @@
                         <td style="text-align: center;"><%= a.getAlhm_writer() %></td>
                         <th style="text-align: center;">선생님확인</th>
                         <td style="text-align: center;">
-                        	<input type="hidden" name="ck" value="<%= b.getAck() %>">
+                        	<input type="hidden" class = "tCK" name="ck" value="<%= b.getAck() %>">
                         	<%= b.getAck() %>
                         </td>
                       </tr>
@@ -108,7 +108,8 @@
                       </tr>
                   </table>
                   <div class="float-right">
-                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="목록" onclick="history.back()"/>
+                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="반 목록" onclick="location.href='/semi/aListClass.al'"/>
+                    <input type="button" class="btn btn-link btn-primary btn-sm text-gray-400" value="전체 목록" onclick="location.href='/semi/aListAll.al'"/>
                   </div>
               </form>
           
@@ -118,6 +119,36 @@
 
       </div>
       <!-- End of Main Content -->
+      
+ <script>
+ $('.readBtn').click(function(){
+	console.log("버튼 클릭")
+	
+	var result = $(this).val();
+	var ano = '<%= a.getAlhm_no() %>';
+	var category = '<%= a.getAl_code() %>';
+	
+	console.log(result);
+	console.log(ano);
+	console.log(category);
+	
+	$.ajax({
+		url:"/semi/aReadCk.al",
+		type:"post",
+		data: {
+			'result' : result,
+			'ano' : ano,
+			'category' : category,
+		},
+		success:function(data){
+			$('.tCK').val(result);
+			$('.tCK').parent().text(result);
+		}, error:function(data){
+			alret("권한이 없습니다.");
+		}
+	});
+});
+ </script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>
 </body>

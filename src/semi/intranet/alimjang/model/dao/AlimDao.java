@@ -396,7 +396,6 @@ public class AlimDao {
 				b.setAdate(rset.getDate("CDATE"));
 				b.setAck(rset.getString("CK"));
 				
-				System.out.println(b);
 			}
 			
 		} catch(SQLException e) {
@@ -407,6 +406,42 @@ public class AlimDao {
 		}
 		
 		return b;
+	}
+
+
+	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		if(category == 1) {
+			sql = prop.getProperty("readAlimNoteCheck");
+		} else if (category == 2) {
+			sql = prop.getProperty("readAlimHomeCheck");
+		} else if (category == 3) {
+			sql = prop.getProperty("readAlimMediCheck");
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, read);
+			pstmt.setInt(2, ano);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
 	}
 
 

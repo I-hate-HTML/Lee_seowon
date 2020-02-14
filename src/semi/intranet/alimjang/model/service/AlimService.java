@@ -1,7 +1,6 @@
 package semi.intranet.alimjang.model.service;
 
-import static semi.common.JDBCTemplate.close;
-import static semi.common.JDBCTemplate.getConnection;
+import static semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -133,6 +132,31 @@ public class AlimService {
 		close(con);
 		
 		return b;
+	}
+
+	/**
+	 * 알림장 읽기 여부 업데이트용
+	 * @param empNo
+	 * @param read
+	 * @param category 
+	 * @param ano 
+	 * @return
+	 */
+	public int readAlimCheck(int empNo, String read, int ano, int category) {
+		
+		Connection con = getConnection();
+		
+		int result = ad.readAlimCheck(con, empNo, read, ano, category);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return 0;
 	}
 
 	

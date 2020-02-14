@@ -37,8 +37,6 @@ public class AlimReadServlet extends HttpServlet {
 		int ano = Integer.parseInt(request.getParameter("ano"));
 		int category = Integer.parseInt(request.getParameter("category"));
 		
-		System.out.println(ano);
-		System.out.println(category);
 		
 		int empNo = 2015001;
 		
