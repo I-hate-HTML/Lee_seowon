@@ -1,28 +1,25 @@
-package semi.intranet.alimjang.controller;
+package semi.home.foodcalendar.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import semi.intranet.alimjang.model.service.AlimService;
+import semi.home.foodcalendar.service.FoodCalendarService;
 
 /**
- * Servlet implementation class AlimReadChcekServlet
+ * Servlet implementation class FoodCalendarSelectImg
  */
-@WebServlet("/aReadCk.al")
-public class AlimReadChcekServlet extends HttpServlet {
+@WebServlet("/fcalimg.me")
+public class FoodCalendarSelectImg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlimReadChcekServlet() {
+    public FoodCalendarSelectImg() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +29,13 @@ public class AlimReadChcekServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
+		String date = request.getParameter("fooddate");
 		
-		int empNo = 2015001; // 나중에 수정할 것!!
+		String path = new FoodCalendarService().selectimg(date);
 		
-		String read = request.getParameter("result");
-		int ano = Integer.parseInt(request.getParameter("ano"));
-		int category = Integer.parseInt(request.getParameter("category"));
-		
-		
-		int result = new AlimService().readAlimCheck(empNo, read, ano, category);
-		
-		new Gson().toJson(result, response.getWriter());
-		
-	
-	
+		response.getWriter().print(path);
 	}
 
 	/**
