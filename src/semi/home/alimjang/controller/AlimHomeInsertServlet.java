@@ -1,4 +1,4 @@
-spackage semi.home.alimjang.controller;
+package semi.home.alimjang.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
