@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="semi.home.alimjang.model.vo.AlimHome" %>
+<%@ page import="semi.home.alimjang.model.vo.AlimMedi" %>
 <%@ page import="semi.intranet.alimjang.model.vo.Alim" %>
 <%@ include file = "../intranet/common/nav.jsp" %>
 
 <%
-	AlimHome a = (AlimHome)request.getAttribute("a");
+	AlimMedi a = (AlimMedi)request.getAttribute("a");
 	Alim b = (Alim)request.getAttribute("b");
 %>
 <!-- Begin Page Content -->
@@ -36,11 +36,11 @@
                     <tr>
                         <th style="text-align: center;">글번호</th>
                         <td style="text-align: center;">
-                        	<input type="hidden" name="ano" value="<%= a.getAlhm_no() %>">
-                        	<%= a.getAlhm_no() %>
+                        	<input type="hidden" name="ano" value="<%= a.getAlmd_no() %>">
+                        	<%= a.getAlmd_no() %>
                         </td>
                         <th style="text-align: center;">작성자</th>
-                        <td style="text-align: center;"><%= a.getAlhm_writer() %></td>
+                        <td style="text-align: center;"><%= a.getAlmd_writer() %></td>
                         <th style="text-align: center;">선생님확인</th>
                         <td style="text-align: center;">
                         	<input type="hidden" name="ck" value="<%= b.getAck() %>">
@@ -59,7 +59,36 @@
                         	<%= b.getAchild() %>
                         </td>
                         <th style="text-align: center;">날짜</th>
-                        <td style="text-align: center;"><%= a.getAlhm_date() %></td>
+                        <td style="text-align: center;"><%= a.getAlmd_date() %></td>
+                      </tr>
+                      <tr>
+	                      <th style="text-align: center;">증상</th>
+	                      <td style="text-align: center;"><%= a.getAlmd_con()%></td>
+	                      <th style="text-align: center;">약의 종류</th>
+	                      <td style="text-align: center;"><%= a.getAlmd_type() %></td>
+	                      <th style="text-align: center;">투약 용량</th>
+	                      <td style="text-align: center;"><%= a.getAlmd_vol() %></td>
+                      </tr>
+                      <tr>
+	                      <th style="text-align: center;">투약 횟수</th>
+	                      <td>
+	                        <select style="width:100%;" id="num" disabled>
+                          		<option><%= a.getAlmd_num() %></option>
+                      		</select>
+                      	  </td>
+	                      <th style="text-align: center;">투약 시간</th>
+	                      <td style="text-align: center;"><%= a.getAlmd_time() %></td>
+	                      <th style="text-align: center;">보관 방법</th>
+	                      <td style="text-align: center;">
+                            <input type = "radio" id="temp_1" name = "temp" value="실온" disabled>
+                            <span>실온</span>     
+                            <input type = "radio" id="temp_2" name = "temp" value="냉장" disabled>
+                            <span>냉장</span>
+                         </td>
+                      </tr>
+                      <tr>
+                      	<th style="text-align: center; height:300px">특이사항</th>
+                        <td colspan="5"><%= a.getAlmd_ps() %></td>
                       </tr>
                       
                   </table>
@@ -74,6 +103,18 @@
 
       </div>
       <!-- End of Main Content -->
+<script>
+
+	var temp = '<%= a.getAlmd_temp()%>';
+	
+	if($('#temp_1').val() == temp) {
+		$('#temp_1').attr('checked', true);
+	} else if($('#temp_2').val() == temp){
+		$('#temp_2').attr('checked', true);
+	} 
+</script>
+
+
 
 <%@ include file = "../intranet/common/footer.jsp" %>
 </body>

@@ -102,9 +102,8 @@
 	
 	<script>
 	 $(function(){
-		 
 		 var count = 2;
-         $('#bfile1').click(function(){
+         $('#bfile1').change(function(){
              $(this).clone(true).appendTo('#filearea').attr('name','bfile'+count);
              $('input[name=bfile'+count+']').val('');
              count++;
