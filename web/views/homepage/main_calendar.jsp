@@ -141,7 +141,7 @@
 						imgsend:$('#fileinput')[0]
 					}, 
 					processData: false,
-		            contentType: false,
+		            contentType: false,	
 		            cache: false,
 		            success: function (data) {
 		            	alert(data);
