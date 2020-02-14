@@ -22,6 +22,7 @@
 	table{border: 3px solid;}
 	tr{height: 50px}
 	th{font-size: 35px; height: 50px;}
+	td{height: 100px;}
 	td#sun{width: 100px; text-align: center; font-size: 20px; font-weight: bold; color: red;}
 	td.etc{width: 100px; text-align: center; font-size: 20px; font-weight: bold;}
 	td#sat{width: 100px; text-align: center; font-size: 20px; font-weight: bold; color: blue;}
