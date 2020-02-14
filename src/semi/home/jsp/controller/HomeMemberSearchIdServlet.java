@@ -36,14 +36,13 @@ public class HomeMemberSearchIdServlet extends HttpServlet {
 		
 		Member m = new Member(cname,email);
 		
-		System.out.println(m);
 	
 		HomeMemberService hms = new HomeMemberService();
 		String page ="";
 		try{
 			page = "views/homepage/login_searchId_Fin.jsp";
 			m = hms.searchId(m);
-			System.out.println(m);
+			System.out.println("아이디 찾기 완료!!");
 			request.setAttribute("member", m);
 			
 		} catch(MemberException e) {

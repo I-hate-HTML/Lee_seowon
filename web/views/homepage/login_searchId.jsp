@@ -263,17 +263,17 @@ vertical-align: middle;}
 						<form action="/semi/searchId" method="post">
 							<input type="text" class="input_area" name="cname" placeholder="자녀이름 입력">
                             <input type="text" class="input_area" name="email" placeholder="이메일 입력">
-                        </form>    
 							<p class="txt"><Strong class="black">
 								입력한 정보를 통해 본인인증 후 아이디를 찾으실 수 있습니다.</Strong></p>
 							<p class="txtmt">본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하므로<br>
 								인증 이외의 용도 또는 저장되지 않습니다.</p>
 						</div>
 						<div class="btnWrap">
-							<input type="button" value="인증하기" class="btn login_btn" onclick="location='login_searchId_Fin.jsp'">
+							<input type="submit" value="인증하기" class="btn login_btn">
 							<!-- ********************************* 나중에 type을 submit으로 변경 ********************************* -->
 						</div>
 					</div>
+                        </form>    
 				</div>
 			
 			<!-- footer -->
