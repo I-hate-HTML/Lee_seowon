@@ -31,14 +31,14 @@
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/boardlsit.do" id="dropdown01">커뮤니티</a></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">마이페이지</a>
 							<div class="dropdown-menu " aria-labelledby="dropdown01">
-								<a class="dropdown-item" href="/semi/homeupdate">개인정보수정</a>
+								<a class="dropdown-item" href="/semi/views/homepage/edit_member.jsp">개인정보수정</a>
 								<a class="dropdown-item" href="./alimNote.jsp">알림장작성</a>
 								<a class="dropdown-item" href="/semi/qList.qna">문의신청</a>
 							</div></li>
 						<li class="nav-item dropdown show">
 								
 							<%if (m == null) { %>  
-             				 <a class="nav-link" href="/semi/views/homepage/login.jsp" id="dropdown01">로그인</a>
+             				 <a class="nav-link" href="../../index.jsp" id="dropdown01">로그인</a>
          					    <%}else{ %>  
           	  				<a class="nav-link" href="/semi/homelogout" id="dropdown01">로그아웃</a>
           						<%} %>

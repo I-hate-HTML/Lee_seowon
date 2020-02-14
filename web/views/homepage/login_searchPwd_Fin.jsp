@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
+<%
+ 	Member m = (Member)request.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -261,22 +263,17 @@ vertical-align: middle;}
 						<div class="iconArea">
                            
                             <p class="txt"><Strong class="black">
-								고객님의 비밀번호는 ***** 입니다.</Strong></p>
+								고객님의 비밀번호는 <%=m.getUserPwd() %> 입니다.</Strong></p>
 								<!-- **************userPwd가져오기****************8 -->
 							<p class="txtmt">이용해주셔서 감사합니다.</p>
 							
 						</div>
 						<div class="btnWrap">
-							<input type="button" value="로그인하러가기" class="btn login_btn" onclick="location='login.jsp'">
+							<input type="button" value="로그인하러가기" class="btn login_btn" onclick="location='/semi/index.jsp'">
 						</div>
 					</div>
 				</div>
-			<div class="btna">
-				<a href="mainpage.html">HOME</a>
-				<a href="login.html">로그인</a>
-				<a href="join.html">회원가입</a>
-
-			</div>
+			
 			<!-- footer -->
 			<%@ include file="common/loginfooter.jsp"%>
 			</div>

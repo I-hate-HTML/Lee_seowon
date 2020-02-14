@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
@@ -44,15 +45,17 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 			response.sendRedirect("views/homepage/homeindex.jsp");
 			
 			session.invalidate();
-		} catch (Exception e) {
-			request.setAttribute("msg", "회원 탈퇴 중 에러발생");
+		} catch(MemberException e) {
+			request.setAttribute("error", "회원탈퇴 실패!!");
 			request.setAttribute("exception", e);
+			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+		}
 			
 			/*에러 페이지 만들건가요??*/
 		}
 		
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -98,14 +98,11 @@
                               <%
                               String chksymbol = "";
                               if(q.getChk_status().equals("N")) {
-                            	  chksymbol = "O";
-                              }else{
                             	  chksymbol = "X";
+                              }else{
+                            	  chksymbol = "O";
                               }
                               %>
-                              
-                              
-                              
                               <%= chksymbol %>
                               </td>
                           </tr>

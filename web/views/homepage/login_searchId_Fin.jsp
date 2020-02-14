@@ -267,16 +267,11 @@ vertical-align: middle;}
 							
 						</div>
 						<div class="btnWrap">
-							<input type="button" value="비밀번호찾으러가기" class="btn login_btn" onclick="location='login_searchPwd.jsp'">
+							<input type="button" value="비밀번호찾으러가기" class="btn login_btn" onclick="location='/semi/views/homepage/login_searchPwd.jsp'">
 						</div>
 					</div>
 				</div>
-			<div class="btna">
-				<a href="mainpage.jsp">HOME</a>
-				<a href="login.jsp">로그인</a>
-				<a href="join.jsp">회원가입</a>
-
-			</div>
+			
 			<!-- footer -->
 			<%@ include file="common/loginfooter.jsp"%>
 			</div>

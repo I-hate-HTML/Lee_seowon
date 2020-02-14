@@ -1,29 +1,30 @@
 package semi.home.jsp.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.service.HomeMemberService;
 import semi.home.jsp.model.vo.Member;
 
 /**
- * Servlet implementation class HomeMemberUpdateServlet
+ * Servlet implementation class HomeMemberSearchIdServlet
  */
-@WebServlet("/homeupdate")
-public class HomeMemberUpdateServlet extends HttpServlet {
+@WebServlet("/searchPwd")
+public class HomeMemberSearchPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeMemberUpdateServlet() {
+    public HomeMemberSearchPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,44 +33,38 @@ public class HomeMemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		String cbdate = request.getParameter("cbdate");
 		
-		String userPwd = request.getParameter("userPwd");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("tel1")+"-"
-					+ request.getParameter("tel2")+"-"
-					+ request.getParameter("tel3");
+		Date writerDate = null;
 		
-		String address = request.getParameter("addrNo")+", "
-						+ request.getParameter("addr1")+", "
-						+ request.getParameter("addr2");
+		String [] dateArr = cbdate.split("-"); 
+		int [] intArr = new int[dateArr.length];
 		
-		
-		HttpSession session = request.getSession(false);
-		
-		Member m = (Member)session.getAttribute("member");
-		
-		m.setUserPwd(userPwd);
-		m.setEmail(email);
-		m.setPhone(phone);
-		m.setAddress(address);
-		
-		System.out.println("변경한 회원 정보 확인 : " + m);
-		
-		HomeMemberService hms = new HomeMemberService();
-		
-		try {
-			hms.homeMemberUpdate(m);
-			System.out.println("회원정보 수정 완료!");
-			
-			response.sendRedirect("views/homepage/homeindex.jsp");
-			
-		} catch(MemberException e) {
-			request.setAttribute("error", "회원정보 수정 실패!!");
-			request.setAttribute("exception", e);
-			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+		for(int i=0; i<dateArr.length;i++) {
+			intArr[i] = Integer.parseInt(dateArr[i]);
 		}
 		
+		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
 		
+		Member m = new Member(userId,writerDate);
+		
+		
+	
+		HomeMemberService hms = new HomeMemberService();
+		String page ="";
+		try{
+			page = "views/homepage/login_searchPwd_Fin.jsp";
+			m = hms.searchPwd(m);
+			System.out.println(m);
+			request.setAttribute("member", m);
+			
+		} catch(MemberException e) {
+			page = "views/homepage/common/errorPage.jsp";
+			request.setAttribute("error", "비밀번호 찾기중 오류 발생!!");
+			request.setAttribute("exception", e);
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

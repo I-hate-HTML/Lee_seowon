@@ -120,7 +120,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form id="edit_form" action="${pageContext.request.contextPath}/homeupdate" method="post">
+        <form id="edit_form" action="${pageContext.request.contextPath}/homeupdate" method="post" onsubmit="return validate();">
             <table class="board-write mgtop7">
                     <tbody>
                            <tr>
@@ -133,7 +133,7 @@
                         </tr>
                         <tr>
                             <th>비밀번호 <span>*</span></th>
-                            <td><input type="password" id="userPwd" name="userPwd"  class="width1"><em>비밀번호는 6~16자리의 영문, 숫자, 특수문자의 혼합</em></td>
+                            <td><input type="password" id="userPwd" name="userPwd"  class="width1"><em>비밀번호는 영문 대,소문자,숫자만 입력 가능하고, 4~12자로 입력하세요.</em></td>
                         </tr>
                         <tr>
                             <th>비밀번호 확인 <span>*</span></th>
@@ -310,7 +310,19 @@
 	      	
 	      });
 		
-		
+	    function validate(){
+	    if(!chk(/^[A-Za-z0-9]{4,12}$/,userPwd, "비밀번호는 영문 대,소문자,숫자만 입력 가능하고, 4~12자로 입력하세요.")){
+            return false;
+        	}
+	    function chk(re,ele,msg){
+			if(!re.test(ele.value)){
+				alert(msg);
+				ele.select();
+				return false;
+			}
+			return true;
+		}
+	    }
 		</script>
                 
       </div>
