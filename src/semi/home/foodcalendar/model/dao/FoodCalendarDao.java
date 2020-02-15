@@ -29,6 +29,13 @@ public class FoodCalendarDao {
 		}
 	}
 
+	/**
+	 * 이미지 등록
+	 * @param fdate
+	 * @param fcalimg
+	 * @param con
+	 * @return
+	 */
 	public int imginput(String fdate, String fcalimg, Connection con) {
 		
 		PreparedStatement pstmt = null;
@@ -54,6 +61,12 @@ public class FoodCalendarDao {
 		return result;
 	}
 
+	/**
+	 * 이미지 선택
+	 * @param con
+	 * @param date
+	 * @return
+	 */
 	public String selectimg(Connection con, String date) {
 
 		String path = "";
@@ -81,6 +94,12 @@ public class FoodCalendarDao {
 		return path;
 	}
 
+	/**
+	 * 이미지 삭제
+	 * @param con
+	 * @param date
+	 * @return
+	 */
 	public int deleteImg(Connection con, String date) {
 
 		int result =0;
@@ -102,6 +121,69 @@ public class FoodCalendarDao {
 			close(pstmt);
 		}
 		
+		
+		return result;
+	}
+
+	/**
+	 * 해당 달 데이터 값이 존재하는지 확인
+	 * @param con
+	 * @param fdate
+	 * @return
+	 */
+	public int checkimg(Connection con, String fdate) {
+
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("countimg");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, fdate);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result= rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);			
+		}
+		return result;
+	}
+
+	/**
+	 * 이미지 수정용
+	 * @param fdate
+	 * @param fcalimg
+	 * @param con
+	 * @return
+	 */
+	public int imgupdate(String fdate, String fcalimg, Connection con) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("imgupdate");
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, fcalimg);
+			pstmt.setString(2, fdate);
+			
+			result = pstmt.executeUpdate();
+					
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}

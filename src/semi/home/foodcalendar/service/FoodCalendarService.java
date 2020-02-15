@@ -13,7 +13,15 @@ public class FoodCalendarService {
 		Connection con = getConnection();
 		// 이부분에서 count 조회 하나 만들고 결과에 따라서 다르게 처리
 		
-		int result = new FoodCalendarDao().imginput(fdate,fcalimg,con);
+		int check = new FoodCalendarDao().checkimg(con,fdate);
+		
+		int result = 0;
+		if(check>0) {
+			result = new FoodCalendarDao().imgupdate(fdate,fcalimg,con);
+		}else {
+			result = new FoodCalendarDao().imginput(fdate,fcalimg,con);
+		}
+		
 		
 		if(result>0) commit(con);
 		else rollback(con);
