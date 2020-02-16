@@ -48,8 +48,6 @@ public class HomeMemberSearchPwdServlet extends HttpServlet {
 		writerDate = new Date(new GregorianCalendar(intArr[0], intArr[1]-1, intArr[2]).getTimeInMillis());
 		
 		Member m = new Member(userId,writerDate);
-		
-		
 	
 		HomeMemberService hms = new HomeMemberService();
 		String page ="";
@@ -58,10 +56,8 @@ public class HomeMemberSearchPwdServlet extends HttpServlet {
 			int result = hms.searchPwd(m);
 			System.out.println("비밀번호 찾기 완료");
 			System.out.println(result);
-			
-			
 			request.setAttribute("member", m);
-			
+		
 		} catch(MemberException e) {
 			page = "views/homepage/common/errorPage.jsp";
 			request.setAttribute("error", "비밀번호 찾기중 오류 발생!!");

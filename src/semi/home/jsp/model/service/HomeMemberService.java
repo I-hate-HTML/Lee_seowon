@@ -100,6 +100,9 @@ public class HomeMemberService {
 		con = getConnection();
 		
 		int result = hmDao.serchPwd(con,m);
+		if(result == 0) {
+			throw new MemberException("비밀번호 찾기 실패!");
+		}
 		if(result > 0) commit(con);
 		else rollback(con);
 		close(con);
