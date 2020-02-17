@@ -410,6 +410,84 @@ public class FormDao {
 
 
 
+	/**
+	 * 결재자 결재내용 저장
+	 * @param con
+	 * @param fno
+	 * @param sign1
+	 * @param sign2
+	 * @param sign3
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSign(Connection con, int fno, String sign1, String sign2, String sign3, String fReturn) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateSign");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sign1);
+			pstmt.setString(2, sign2);
+			pstmt.setString(3, sign3);
+			pstmt.setString(4, fReturn);
+			pstmt.setInt(5, fno);
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/**
+	 * 품의서 삭제
+	 * @param con
+	 * @param fno
+	 * @param eno
+	 * @return
+	 */
+	public int deleteForm(Connection con, int fno, int eno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, fno);
+			pstmt.setInt(2, eno);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+
 
 
 

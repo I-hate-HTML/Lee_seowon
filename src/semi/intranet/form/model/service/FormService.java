@@ -41,7 +41,8 @@ public class FormService {
 	 * @param signIdArr
 	 * @return
 	 */
-	public SignList findSignId(String[] signIdArr) {
+	public SignList 
+	findSignId(String[] signIdArr) {
 
 		Connection con = getConnection();
 
@@ -228,6 +229,55 @@ public class FormService {
 
 
 		return f;
+	}
+
+	/**
+	 * 결재자 품의 업데이트
+	 * @param fno
+	 * @param signArr
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn) {
+		
+		Connection con = getConnection();
+
+		
+		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	/**
+	 * 품의서 삭제용
+	 * @param fno
+	 * @param eno 
+	 * @return
+	 */
+	public int deleteForm(int fno, int eno) {
+		
+		Connection con = getConnection();
+		
+		int result = fd.deleteForm(con, fno, eno);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+		return result;
 	}
 
 
