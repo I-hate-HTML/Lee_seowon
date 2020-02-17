@@ -212,48 +212,25 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-child fa-2x"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter" id="count"></span>
               </a>
               <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  아이 상태 알림
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="childAlim" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header"> 아이 상태 알림</h6>
+                
+                <!-- <a class="dropdown-item d-flex align-items-center" id="alimHref" href="">
                   <div class="mr-3">
-                    <div class="icon-circle bg-primary">
+                    <div class="icon-circle bg-primary" id="alimColor">
                       <i class="fa fa-child fa-2x text-white"></i>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">2020-01-20</div>
-                    <span class="font-weight-bold">홍달이 : 오늘 할머니가 데리러갈거에요</span>
+                    <div class="small text-gray-500" id="alimDate">2020-01-20</div>
+                    <span class="font-weight-bold" id="alimName">홍달이</span>
+                    <span id="alimCategory">투약 의뢰서</span>
                   </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fa fa-child fa-2x text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">2020-01-20</div>
-                    박응애 : 감기약 같이 보냅니다
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fa fa-child fa-2x text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">2020-01-19</div>
-                    박응애 : 박응애 알림장입니다
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="intranetNotice.jsp">더보기</a>
-              </div>
+                </a> -->
+                <a class="dropdown-item text-center small text-gray-500" href="/semi/aListClass.al">더보기</a>
             </li>
 
             <!-- Nav Item - 품의 알림 -->
@@ -324,7 +301,7 @@
                   <i name = "className">1반</i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../../login.jsp" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
                   <i class="fa fa-sign-out text-gray-400"></i>
                   로그아웃
                 </a>
@@ -337,4 +314,76 @@
 
         </nav>
         <!-- End of Topbar -->
+        
+        <script>
+
+        $(function(){
+       	
+       	var empno = '2015001'; // --> 나중에 바꾸기!!!
+
+       	$.ajax({
+       		url:"/semi/aNav.al",
+       		type:"post",
+       		data:{"empno" : empno},
+       		success:function(data){
+       			
+       			// 알림 카운트
+       			$('#count').text(data.aCount);
+       			
+       			
+       			// 알림 리스트 목록
+       			$.each(data, function(index, value){
+       				
+       				for(var i in index) {
+       					 
+       					var ano = data.aList[i].ano;
+       					var categoryNum = data.aList[i].acategory;
+       					var category = data.aList[i].category + "\t";
+       					var date = data.aList[i].adate;
+       					var aname = data.aList[i].achild;
+       					
+       					
+       					// 알림 아이콘 나오기
+       					var $a = $('<a>').attr({
+       										'class':'dropdown-item d-flex align-items-center',
+       										'href' : '/semi/aRead.al?ano='+ ano + '&category=' + categoryNum
+       										  });
+       					var $div1 = $('<div>').attr('class','mr-3');
+       					var $div2;
+       					
+       					if(categoryNum == 1) {
+       						$div2 = $('<div>').attr('class', 'icon-circle bg-primary');
+       					} else if (categoryNum == 2) {
+       						$div2 = $('<div>').attr('class', 'icon-circle bg-success');
+       					} else {
+       						$div2 = $('<div>').attr('class', 'icon-circle bg-warning');
+       					}
+       					
+       					var $i = $('<i>').attr('class', 'fa fa-child fa-2x text-white');
+       					
+       					$('#childAlim').append($a.append($div1.append($div2.append($i))));
+       					
+       					
+       					// 알림 리스트 나오기
+       					var $div3 = $('<div>');
+       					var $div4 = $('<div>').attr('class','small text-gray-500').text(date);
+       					var $span1 = $('<span>').text(aname);
+       					var $span2 = $('<span>').attr('class','font-weight-bold').text(category);
+       					
+       					$div3.append($div4);
+       					$div3.append($span2);
+       					$div3.append($span1);
+       					$('#childAlim').append($a.append($div3));
+       					
+       				}
+       			});
+       			
+       		}, error:function(data){
+       			alret("권한이 없습니다.");
+       		}
+       	});
+       });
+
+        </script>
+        
         

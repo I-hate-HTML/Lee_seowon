@@ -89,7 +89,6 @@ public class FormService {
 		s.setSname3(sInfo.get(2).getSname()); 
 		s.setScode3(sInfo.get(2).getScode());
 		
-		System.out.println(s);
 
 		return s;
 	}
@@ -133,8 +132,6 @@ public class FormService {
 		ArrayList<Form> list = fd.listForm(con, empNum, currentPage, limitContent);
 
 		close(con);
-		
-		System.out.println();
 		
 		Form f = new Form();
 		

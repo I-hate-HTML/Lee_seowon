@@ -24,7 +24,7 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3">
   	
-  	<table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
+  	<table  style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
       <tr>
         <td>
           <h6 class="m-0 font-weight-bold text-primary">품의목록</h6>
@@ -139,8 +139,8 @@
 	else if(type = '2') table = '휴가신청서';
 	else if(type = '3') table = '교구신청서';
 	else if(type = '4') table = '기타';
-  }
-
+  });
+ 
 	</script>
  
  

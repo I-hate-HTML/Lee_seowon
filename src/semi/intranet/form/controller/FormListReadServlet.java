@@ -2,8 +2,6 @@ package semi.intranet.form.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,23 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import semi.intranet.daily.model.vo.PageInfo;
 import semi.intranet.form.model.service.FormService;
 import semi.intranet.form.model.vo.Form;
+import semi.intranet.form.model.vo.SignList;
 
 /**
- * Servlet implementation class fListAjaxServlet
+ * Servlet implementation class FormListServlet
  */
-@WebServlet("/fListAjax.fo")
-public class FormListAjaxServlet extends HttpServlet {
+@WebServlet("/fListRead.fo")
+public class FormListReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListAjaxServlet() {
+    public FormListReadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +36,8 @@ public class FormListAjaxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
-		
-		
 		ArrayList<Form> flist = new ArrayList<Form>();
+		Form f = (Form)request.getAttribute("form");
 		
 		int empNo = 2015001; // 나중에 수정할 것!!
 		
@@ -75,18 +70,26 @@ public class FormListAjaxServlet extends HttpServlet {
 		
 		// 게시판 글목록 리스트
 		flist = new FormService().listForm(empNo, currentPage, limitContent);
-		JsonObject formList = new JsonObject();
 		
-		// page 리스트
-		PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+				
+		String page = "";
+	
+		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
+		if(f != null && flist != null && empNo == f.getfWriterId() ) { // 기안자 일 경우
+			page = "views/intranet/intranetFormRead.jsp";
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		} 
 		
-		Map<String,Object> hmap = new HashMap<String,Object>();
+		request.getRequestDispatcher(page).forward(request, response);
+	
 		
-		hmap.put("flist", flist);
-		hmap.put("pi",pi);
-		
-		new Gson().toJson(hmap, response.getWriter());
-
+	
+	
+	
 	}
 
 	/**
