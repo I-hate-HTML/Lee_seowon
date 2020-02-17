@@ -325,7 +325,6 @@
         <script>
 
         $(function(){
-       	console.log("nav로드")
        	
        	var empno = '2015001'; // --> 나중에 바꾸기!!!
 
@@ -334,7 +333,6 @@
        		type:"post",
        		data:{"empno" : empno},
        		success:function(data){
-       			console.log(data);
        			
        			// 알림 카운트
        			$('#count').text(data.aCount);

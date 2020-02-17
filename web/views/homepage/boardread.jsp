@@ -5,6 +5,8 @@
     
     <%
     	Board b = (Board)request.getAttribute("board");
+    	String[] nameArr = (String[])request.getAttribute("bfile");
+    	/* String 배열을 받는 배열 생성  */
     %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -82,7 +84,15 @@
                                 <tr>
                                     <th class="tatd">내용 </th>
                                     <td colspan="3">
-                                    <div style="height: 500px;">                 
+                                    <div style="height: auto;">
+                                         <% if(nameArr[0]!="1"){ %>
+                                    		<% for(int i=0; i<nameArr.length ;i++){ %>
+                                			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: auto">
+                                    		<br>
+                                    		<%} %>
+                                    	<%} %>     
+                                    	
+                                    	<!-- 배열이 비어있을때 nullException이  발생하기 때문에 구분을 위해 넣어준 1 이 아닐때 이미지를 생성시킴-->          
                                         <%= b.getBcontent() %>
                                     </div>
                                 </td>
@@ -109,7 +119,9 @@
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
-		
+		$('src').click({
+			location.href="$(this).attr('src')";
+		});
 	
 	</script>
 

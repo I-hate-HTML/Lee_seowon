@@ -1,12 +1,19 @@
 package semi.intranet.employee.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import semi.intranet.employee.model.service.EmployeeService;
 import semi.intranet.employee.model.vo.Employee;
@@ -15,35 +22,92 @@ import semi.intranet.employee.model.vo.Employee;
  * Servlet implementation class EmployeeInsertServlet
  */
 @WebServlet("/empInsert.em")
+
 public class EmployeeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeInsertServlet() {  
-        super();  
-        // TODO Auto-generated constructor stub
-    }
-  
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EmployeeInsertServlet() {  
+		super();  
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String empName = request.getParameter("empName");
-		String empJob = request.getParameter("empJob");
-		String empNo = request.getParameter("empNo1")+"-"+request.getParameter("empNo2");
-		String empPhone = request.getParameter("empPhone");
-		String empEmail = request.getParameter("empEmail");
-		String empAddr = request.getParameter("empAddr1")+" "+request.getParameter("empAddr2")+" "+request.getParameter("empAddr3");
-		String empClass= request.getParameter("empClass");
+		int maxSize = 1024 * 1024 * 10;
 		
-		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,empClass); 
+
+		// 웹 상의 루트(최상위 경로) 경로를 활용하여 저장할 폴더 위치 지정하기
+		String root = request.getServletContext().getRealPath("/");
+
+		// 게시판의 첨부파일을 저장할 폴더 이름 지정하기
+		String savePath = root + "resources/intranet/employeeImg";
 		
+		MultipartRequest mrequest = new MultipartRequest(
+				request, // 변경하기 위한 원본 객체
+				savePath, // 파일 저장 경로
+				maxSize,  // 저장할 파일의 최대 크기
+				"UTF-8", // 저장할 문자셋 설정
+				new DefaultFileRenamePolicy()
+				// 만약 동일한 이름의 
+				// 파일을 저장했을 경우
+				// 기존의 파일과 구분하기 위해
+				// 새로운 파일명 뒤에 숫자를 붙이는 규칙
+				);
+
+		String date = mrequest.getParameter("hireDate");
+
+		System.out.println("날짜 전달 확인 : " + date); 
+
+		Date hireDate = null;
+
+		if(date != "" && date != null) { // 날짜가 들어오면 
+
+			// String --> int
+			String[] dateArr = date.split("-");     
+			int[] intArr = new int[dateArr.length];
+
+			for(int i=0; i < dateArr.length;i++) {
+				intArr[i] = Integer.parseInt(dateArr[i]);
+			}
+
+			hireDate = new Date(new GregorianCalendar(
+					intArr[0],intArr[1]-1,intArr[2]
+					).getTimeInMillis());
+
+		}
+
+
+		String empName = mrequest.getParameter("empName");
+		String empJob = mrequest.getParameter("empJob");
+		String empNo = mrequest.getParameter("empNo1")+"-"+mrequest.getParameter("empNo2");
+		String empPhone = mrequest.getParameter("empPhone");
+		String empEmail = mrequest.getParameter("empEmail");
+		String empAddr = mrequest.getParameter("empAddr1")+" "+mrequest.getParameter("empAddr2")+" "+mrequest.getParameter("empAddr3");
+		String empClass= mrequest.getParameter("empClass");
+		String empimg = mrequest.getParameter("empimg");
+
+
+		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,hireDate,empClass,empimg);
+
+
+
 		EmployeeService es = new EmployeeService();
-		 
+
 		int result  = es.insertEmployee(em);
-		 
+
+		if(result > 0) {
+			response.sendRedirect("views/intranet/intranetRegisterTeacher.jsp");
+		}else {
+			request.setAttribute("msg", "게시글 작성 실패!");
+			request.getRequestDispatcher("views/intranet/intranetRegisterTeacher.jsp")
+			.forward(request, response);
+		}
 	}
 
 	/**

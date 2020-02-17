@@ -89,6 +89,7 @@ public class BoardDao {
 				b.setBwriter(rset.getString("bwriter"));
 				b.setBdate(rset.getDate("bdate"));
 				b.setBno(rset.getInt("bno"));
+				b.setBfile(rset.getString("bfile"));
 			}
 			
 			
@@ -281,7 +282,6 @@ public class BoardDao {
 				b.setBcount(rset.getInt("bcount"));
 				b.setBdate(rset.getDate("bdate"));
 				
-				System.out.println(b);
 				list.add(b);
 			}
 			

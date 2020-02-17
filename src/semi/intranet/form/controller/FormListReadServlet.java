@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import semi.intranet.daily.model.vo.PageInfo;
 import semi.intranet.form.model.service.FormService;
 import semi.intranet.form.model.vo.Form;
@@ -17,14 +19,14 @@ import semi.intranet.form.model.vo.SignList;
 /**
  * Servlet implementation class FormListServlet
  */
-@WebServlet("/fListOnly.fo")
-public class FormListServlet extends HttpServlet {
+@WebServlet("/fListRead.fo")
+public class FormListReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListServlet() {
+    public FormListReadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +37,7 @@ public class FormListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Form> flist = new ArrayList<Form>();
+		Form f = (Form)request.getAttribute("form");
 		
 		int empNo = 2015001; // 나중에 수정할 것!!
 		
@@ -68,17 +71,43 @@ public class FormListServlet extends HttpServlet {
 		// 게시판 글목록 리스트
 		flist = new FormService().listForm(empNo, currentPage, limitContent);
 		
+				
 		String page = "";
 		
-		if(flist != null) {
-			page = "views/intranet/intranetFormWrite.jsp";
+	
+		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
+		if(f != null && flist != null && f.getType() == 1) { // 기안자 일 경우 
+			page = "views/intranet/intranetFormRead.jsp";
 			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		} else if (f != null && flist != null && f.getType() == 2) {// 결재자 일 경우
+			page = "views/intranet/intranetFormReadSign.jsp";
+			
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		} else if(f != null && flist != null && f.getType() == 3) { // 기안자 글 수정일 경우
+			page = "views/intranet/intranetFormModify.jsp";
+			
+			
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+	
+		
+	
+	
+	
 	}
 
 	/**

@@ -16,6 +16,7 @@ public class FoodCalendarService {
 		int check = new FoodCalendarDao().checkimg(con,fdate);
 		
 		int result = 0;
+		
 		if(check>0) {
 			result = new FoodCalendarDao().imgupdate(fdate,fcalimg,con);
 		}else {
@@ -26,6 +27,8 @@ public class FoodCalendarService {
 		if(result>0) commit(con);
 		else rollback(con);
 		
+		close(con);
+		
 		return result;
 	}
 
@@ -33,6 +36,8 @@ public class FoodCalendarService {
 		Connection con = getConnection();
 		
 		String path = new FoodCalendarDao().selectimg(con,date);
+		
+		close(con);
 		
 		return path;
 	}
@@ -45,6 +50,8 @@ public class FoodCalendarService {
 		
 		if(result>0) commit(con);
 		else rollback(con);
+		
+		close(con);
 		
 		return result;
 	}
