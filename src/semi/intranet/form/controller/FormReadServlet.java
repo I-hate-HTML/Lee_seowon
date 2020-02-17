@@ -36,7 +36,9 @@ public class FormReadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		
+		
 		int fno = Integer.parseInt(request.getParameter("fno"));
 //		int empNo = Integer.parseInt(request.getParameter("empNo"));
 

@@ -10,7 +10,6 @@
 
 
 <!-- Begin Page Content -->
-    
 <form action="<%=request.getContextPath() %>/fSignSave.fo" method="post">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
@@ -20,7 +19,7 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button type="submit" class = "btn btn-primary btn-sm" >결재완료</button>          
+      <button type = "submit" class = "btn btn-primary btn-sm sign">결재완료</button>          
     </td>
   </tr>
 </table>
@@ -119,7 +118,7 @@
               </td>
             </tr>                
           </table>
-        </form>
+          </form>
       </div>
   </div>          
 </div>
@@ -166,8 +165,6 @@ $(function(){
 
 });
 
-console.log($('select[name=formLineP]').val());
-
 $('select[name=formLineP]').change(function(){
 	fReturn(this);
 });
@@ -180,7 +177,6 @@ function fReturn(o){
 		$('input[name=formReturn]').attr('disabled',false);
 	}
 }
-
 
 
 
