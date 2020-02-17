@@ -1,6 +1,7 @@
 package semi.intranet.form.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import semi.intranet.daily.model.vo.PageInfo;
 import semi.intranet.form.model.service.FormService;
+import semi.intranet.form.model.vo.Form;
 
 /**
- * Servlet implementation class FormListAjaxPageServlet
+ * Servlet implementation class FormSignSaveServlet
  */
-@WebServlet("/fPasing.fo")
-public class FormListAjaxPageServlet extends HttpServlet {
+@WebServlet("/fSignSave.fo")
+public class FormSignSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListAjaxPageServlet() {
+    public FormSignSaveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,46 +32,42 @@ public class FormListAjaxPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
-		
-		int currentPage;
-		int listCount;
-		int limitContent;
-		int limitPage;
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		currentPage = 1;		
-		limitContent = 5;
-		limitPage = 3;
-		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		listCount = new FormService().getListCount();
-		
-		maxPage = (int)((double)listCount / limitContent + 0.9);
-		startPage = ((int)((double) currentPage / limitPage + 0.9) -1) * limitPage + 1;
-		
-		endPage = startPage + limitPage - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
-	
-		
 
-		//new Gson().toJson(pi, response.getWriter());
+		
+		int fno = Integer.parseInt(request.getParameter("formNum"));
+		
+		String[] signArr = request.getParameterValues("formLineP");
+		
+		String sign1 = "";
+		String sign2 = "";
+		String sign3 = "";
+		
+		int size = signArr.length;
 		
 		
-	
+		switch(size) {
+		case 1 : sign1 = signArr[0]; break;
+		case 2 : sign1 = signArr[0];
+				 sign2 = signArr[1]; break;
+		case 3 : sign1 = signArr[0];
+				 sign2 = signArr[1];
+				 sign3 = signArr[2]; break;
+		}
+		
+		
+		String fReturn = request.getParameter("formReturn");
+		
+		int result = new FormService().updateSign(fno, sign1, sign2, sign3, fReturn);
+		
+		Form f = new FormService().readForm(fno);
+		
+		String page = "";
+		
+		
+		  if(result > 0) { page = "fRead.fo"; request.setAttribute("fno", fno); }
+		  
+		  request.getRequestDispatcher(page).forward(request, response);
+		 
 	}
 
 	/**

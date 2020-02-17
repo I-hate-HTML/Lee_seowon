@@ -23,23 +23,48 @@ public class Employee implements Serializable{
 	private Date entDate;
 	private String empClass;
 	private int hobong;
+	private String empimg;
 	  
 	  
 	public Employee() {}
 
-	public Employee(String empName, String empJob, String empNo, String empPhone,String empEmail, String empAddr,
-			 String empClass) {
+	
+	
+
+
+	
+
+
+
+
+
+	public Employee(String empName, String empJob, String empNo, String empPhone, String empEmail, String empAddr,
+			Date hireDate, String empClass, String empimg) {
+		super();
 		this.empName = empName;
 		this.empJob = empJob;
 		this.empNo = empNo;
 		this.empPhone = empPhone;
 		this.empEmail = empEmail;
-		this.empAddr = empAddr; 
+		this.empAddr = empAddr;
+		this.hireDate = hireDate;
 		this.empClass = empClass;
+		this.empimg = empimg;
 	}
 
-	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empEmail, 
-			String empAddr,Date hireDate, int entYN, Date entDate, String empClass) {
+
+
+
+
+
+
+
+
+
+
+	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empEmail,
+			String empAddr, Date hireDate, int entYN, Date entDate, String empClass, int hobong, String empimg) {
+		super();
 		this.empCode = empCode;
 		this.empName = empName;
 		this.empJob = empJob;
@@ -51,7 +76,61 @@ public class Employee implements Serializable{
 		this.entYN = entYN;
 		this.entDate = entDate;
 		this.empClass = empClass;
+		this.hobong = hobong;
+		this.empimg = empimg;
 	}
+
+
+
+
+
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+
+
+
+
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+
+
+
+
+
+	public int getEntYN() {
+		return entYN;
+	}
+
+
+
+
+
+	public void setEntYN(int entYN) {
+		this.entYN = entYN;
+	}
+
+
+
+
+
+	public Date getEntDate() {
+		return entDate;
+	}
+
+
+
+
+
+	public void setEntDate(Date entDate) {
+		this.entDate = entDate;
+	}
+
+
+
+
 
 	public int getEmpCode() {
 		return empCode;
@@ -68,6 +147,17 @@ public class Employee implements Serializable{
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
+	
+
+	public String getEmpimg() {
+		return empimg;
+	}
+
+
+	public void setEmpimg(String empimg) {
+		this.empimg = empimg;
+	}
+
 
 	public String getEmpJob() {
 		return empJob;
@@ -109,30 +199,7 @@ public class Employee implements Serializable{
 		this.empAddr = empAddr;
 	}
 
-	public Date getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
-
-	public int getEntYN() {
-		return entYN;
-	}
-
-	public void setEntYN(int entYN) {
-		this.entYN = entYN;
-	}
-
-	public Date getEntDate() {
-		return entDate;
-	}
-
-	public void setEntDate(Date entDate) {
-		this.entDate = entDate;
-	}
-
+	
 	public String getEmpClass() {
 		return empClass;
 	}

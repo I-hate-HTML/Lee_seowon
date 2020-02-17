@@ -63,7 +63,7 @@
     	<div class="row">
       		<div class="col-lg-8 col-md-12 mx-auto">
             <br><br>
-            <form action="<%= request.getContextPath() %>/bwrite.do" >
+            <form action="<%= request.getContextPath() %>/bwrite.do" method="post" enctype="multipart/form-data" >
               <table class="table table-bordered" style="background: white;">
                   <tbody>
                           <tr>
@@ -77,7 +77,7 @@
                           <tr>
                               <th>첨부파일: </th>
                               <td>
-                              <span id="filearea"><input type="file" name="bfile1" id="bfile1"></span>
+                              <span id="filearea"><input type="file" name="bfile" id="bfile1" multiple></span>
                               </td>
                           </tr>
  
@@ -101,6 +101,11 @@
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
+	
+
+	
+	
+	/* 
 	 $(function(){
 		 var count = 2;
          $('#bfile1').change(function(){
@@ -108,7 +113,7 @@
              $('input[name=bfile'+count+']').val('');
              count++;
          });
-	 });
+	 }); */
 	
 	</script>
 

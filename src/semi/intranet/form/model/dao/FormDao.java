@@ -382,9 +382,10 @@ public class FormDao {
 	 * 품의서 수정할 내용 불러오기
 	 * @param con
 	 * @param fno
+	 * @param eno 
 	 * @return
 	 */
-	public Form modifyViewForm(Connection con, int fno) {
+	public Form modifyViewForm(Connection con, int fno, int eno) {
 		
 		Form f = new Form();
 		
@@ -397,6 +398,30 @@ public class FormDao {
 			
 			pstmt = con.prepareStatement(sql);
 			
+			pstmt.setInt(1, fno);
+			pstmt.setInt(2, eno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				f.setFno(rset.getInt("DRAFT_NO"));
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
+				f.setFwriter(rset.getString("WNAME"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				f.setFsignId1(rset.getInt("SIGN_EMP1"));
+				f.setFsign1(rset.getString("SNAME1"));
+				f.setFsignId2(rset.getInt("SIGN_EMP2"));
+				f.setFsign2(rset.getString("SNAME2"));
+				f.setFsignId3(rset.getInt("SIGN_EMP3"));
+				f.setFsign3(rset.getString("SNAME3"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFcontent(rset.getString("DRAFT_CONTENT"));
+				f.setFfile(rset.getString("DRAFT_FILE"));
+				
+			}
+			
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -406,6 +431,84 @@ public class FormDao {
 		}
 		
 		return f;
+	}
+
+
+
+	/**
+	 * 결재자 결재내용 저장
+	 * @param con
+	 * @param fno
+	 * @param sign1
+	 * @param sign2
+	 * @param sign3
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSign(Connection con, int fno, String sign1, String sign2, String sign3, String fReturn) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateSign");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sign1);
+			pstmt.setString(2, sign2);
+			pstmt.setString(3, sign3);
+			pstmt.setString(4, fReturn);
+			pstmt.setInt(5, fno);
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	/**
+	 * 품의서 삭제
+	 * @param con
+	 * @param fno
+	 * @param eno
+	 * @return
+	 */
+	public int deleteForm(Connection con, int fno, int eno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, fno);
+			pstmt.setInt(2, eno);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 

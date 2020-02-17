@@ -14,7 +14,7 @@
 <form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
-    <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
+    <table  style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
       <tr>
         <td>
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
@@ -28,7 +28,7 @@
 </table>
 <div class="card-body">
   <div class="table-responsive">  	
-      <table class="table table-bordered" id="dataTable" width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
+      <table  class="table table-bordered" id="dataTable" width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
         <tr>
           <th>품의번호</th>
           <td>
@@ -117,7 +117,10 @@
 </div>
 <!-- End of Main Content -->
 
+
+
 <script>
+// 품의 쓰기창 품의서 분류에 맞는 내용 채워넣는 스크립트
    function contentChange(){
     var option = document.getElementById("formCategory");
     var content = document.getElementById("formContent");
@@ -154,6 +157,7 @@
  }
 
 
+// 결재자추가 버튼
 var i = 0;
  function add(){
     var line2 = document.getElementById('formLine2');
@@ -217,6 +221,7 @@ var i = 0;
     } 
  }
 
+//결재자 삭제 버튼
  function del(){
      
      $('#formLine'+i).css('display','none').val("");
@@ -225,6 +230,7 @@ var i = 0;
  }
  
 
+ // 품의 쓰기창 결재자 리스트 가져오는 ajax
 $(function(){
 	console.log("기능실행")
 	$.ajax({
@@ -258,6 +264,9 @@ $('#viewTable td').click(function(){
 		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
 	});
 });
+
+
+
  
 </script>
 

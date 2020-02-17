@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav2.jsp" %>
-<%-- <%@ include file = "intranetFormList.jsp" %> --%>
-<%@ include file = "intranetFormListAjax.jsp" %>
+<%@ include file = "intranetFormList.jsp" %>
 <%@ page import="semi.intranet.form.model.vo.Form" %>
 
 <%
@@ -12,17 +11,16 @@
 
 <!-- Begin Page Content -->
     
-<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
+
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
-    <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
+    <table style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
       <tr>
         <td>
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fModifyView.fo'">수정</button>
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fDelete.fo'">삭제</button>             
+      <button class = "btn btn-primary btn-sm delete">삭제</button>             
     </td>
   </tr>
 </table>
@@ -57,31 +55,31 @@
          			<input type ="hidden" name="signCode" value="<%= form.getFsignId1() %>">
           		</option>
            </select>
-           <select name = "formLineP" id = "formLineP1" disabled style="display:block">            
+           <select name = "formLineP" id = "formLineP1" disabled >            
              <option value="<%= form.getFsignck1() %>" ><%= form.getFsignck1() %></option>
            </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine2" disabled style="display:none">
+            <select name="formLine" id = "formLine2" disabled>
             	<option value="">결재자 선택</option>
             		<option value="<%= form.getFsign2() %>" selected><%= form.getFsign2() %>    		
             			<input type ="hidden" name="signCode" value="<%= form.getFsignId2() %>">
 	            	</option>
             </select>
-            <select  name = "formLineP" id = "formLineP2" disabled style="display:none">
+            <select  name = "formLineP" id = "formLineP2" disabled>
               <option value="<%= form.getFsignck2() %>" ><%= form.getFsignck2() %></option>
             </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine3" disabled style="display:none">
+            <select name="formLine" id = "formLine3" disabled>
             	<option value="">결재자 선택</option>
             		<option value="<%= form.getFsign3() %>" selected><%= form.getFsign3() %>      		
             			<input type ="hidden" name="signCode" value="<%= form.getFsignId3() %>">
 	            	</option>
             </select>
-            <select  name = "formLineP" id = "formLineP3" disabled style="display:none">
+            <select  name = "formLineP" id = "formLineP3" disabled>
               <option value="<%= form.getFsignck3() %>" ><%= form.getFsignck3() %></option>
             </select> 
           </td>
@@ -105,7 +103,7 @@
 	        <tr>
 	          <th>내용</th>
 	          <td colspan="7">
-	            <%= form.getFcontent() %>
+	           <pre><%= form.getFcontent() %></pre> 
 	          </td>
 	        </tr>
             <tr>
@@ -115,7 +113,6 @@
               </td>
             </tr>                
           </table>
-        </form>
       </div>
   </div>          
 </div>
@@ -125,25 +122,90 @@
 </div>
 <!-- End of Main Content -->
 <script>
-$(function(){
+
+$('#viewTable td').click(function(){
 	
-	/* if($('#formLineP').val() == null) {
-		$('#formLineP').css('display','none');
-	}
-	 */
+	var fno = $(this).parent().find("input").val();
+	var empNo = 2015001; //--> 바꾸기!!!
 	
-	 console.log($('#formLineP1').val());
-	 var dd = $('#formLineP1').val();
-	 console.log(dd);
-	 
-/* 		if($('#formLineP1').val() ) {
-			$('#formLineP1').css('display','block');
-		} */
+	$.ajax({
+		url:"/semi/fReadAjax.fo",
+		type:"get",
+		data: { 'fno' : fno,
+				'empNo' : empNo
+		},
+		success:function(data){
+			console.log(data);
+			
+			
+			
+			
+		}, error:function(data){
+			console.log("error");
+		}
 		
-	
-	
+	});
 	
 });
+
+
+// 삭제버튼
+$(".delete").click(function(){
+	
+	if($('#formLineP1').val() != "null") {
+		alert("이미 품의가 진행중입니다.");
+		
+	} else {
+		var fno = "<%= form.getFno() %>";
+		var eno = "2015001"; //--> 나중에 바꾸기!!!!
+	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno + "&eno=" + eno;
+	}
+	
+});
+
+//게시물 이동용 스크립트 
+$('#viewTable td').click(function(){
+		
+	var fno = $(this).parent().find("input").val();
+	location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
+
+});
+
+
+$(function(){
+	
+	// 결재자 1의 결재가 없으면 결재 select 안보이게
+	if($('#formLineP1').val() == "null") {
+		$('#formLineP1').css('display','none');
+	}
+	
+	// 결재자 2가 없으면 select 안보이게
+	if($('#formLine2').val() == "null") {
+		$('#formLine2').css('display','none');
+	}
+	
+	// 결재자 2의 결재가 없으면 결재 select 안보이게
+	if($('#formLineP2').val() == "null") {
+		$('#formLineP2').css('display','none');
+	}
+	
+	// 결재자 3가 없으면 select 안보이게
+	if($('#formLine3').val() == "null") {
+		$('#formLine3').css('display','none');
+	}
+	
+	// 결재자3의 결재가 없으면 결재 select 안보이게
+	if($('#formLineP3').val() == "null") {
+		$('#formLineP3').css('display','none');
+	}
+
+});
+
+
+
+
+
+
 </script>
 
 

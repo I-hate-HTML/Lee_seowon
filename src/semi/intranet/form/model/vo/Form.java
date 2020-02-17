@@ -33,6 +33,7 @@ public class Form implements Serializable{
 	private String ffile;		// 첨부파일
 	private String fstatus;		// 결재 상태
 	private String category;	// 카테고리 string
+	private int type;		// list 구분용 type --> 1 read / 2 readSign / 3 modify / 4 signModify 
 	
 	
 	
@@ -56,7 +57,7 @@ public class Form implements Serializable{
 	 * @param fcontent
 	 */
 	public Form(int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, int fsignId1, String fsign2,
-			int fsignId2, String fsign3, int fsignId3, String ftitle, String fcontent) {
+			int fsignId2, String fsign3, int fsignId3, String ftitle, String fcontent, int type) {
 		super();
 		this.fcategory = fcategory;
 		this.fwriter = fwriter;
@@ -70,86 +71,14 @@ public class Form implements Serializable{
 		this.fsignId3 = fsignId3;
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
+		this.type = type;
 	}
 
 
-
-	/**
-	 * 품의 보기용
-	 * @param fno
-	 * @param fcategory
-	 * @param fwriter
-	 * @param fWriterId
-	 * @param fdate
-	 * @param fsign1
-	 * @param fsignId1
-	 * @param fsignck1
-	 * @param fsign2
-	 * @param fsignId2
-	 * @param fsignck2
-	 * @param fsign3
-	 * @param fsignId3
-	 * @param fsignck3
-	 * @param freturnmsg
-	 * @param ftitle
-	 * @param fcontent
-	 * @param ffile
-	 * @param fstatus
-	 */
 	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, int fsignId1,
 			String fsignck1, String fsign2, int fsignId2, String fsignck2, String fsign3, int fsignId3, String fsignck3,
-			String freturnmsg, String ftitle, String fcontent, String ffile, String fstatus) {
-		super();
-		this.fno = fno;
-		this.fcategory = fcategory;
-		this.fwriter = fwriter;
-		this.fWriterId = fWriterId;
-		this.fdate = fdate;
-		this.fsign1 = fsign1;
-		this.fsignId1 = fsignId1;
-		this.fsignck1 = fsignck1;
-		this.fsign2 = fsign2;
-		this.fsignId2 = fsignId2;
-		this.fsignck2 = fsignck2;
-		this.fsign3 = fsign3;
-		this.fsignId3 = fsignId3;
-		this.fsignck3 = fsignck3;
-		this.freturnmsg = freturnmsg;
-		this.ftitle = ftitle;
-		this.fcontent = fcontent;
-		this.ffile = ffile;
-		this.fstatus = fstatus;
-	}
-	
-	
-
-
-	/**
-	 * 카테고리 String으로
-	 * @param fno
-	 * @param fcategory
-	 * @param fwriter
-	 * @param fWriterId
-	 * @param fdate
-	 * @param fsign1
-	 * @param fsignId1
-	 * @param fsignck1
-	 * @param fsign2
-	 * @param fsignId2
-	 * @param fsignck2
-	 * @param fsign3
-	 * @param fsignId3
-	 * @param fsignck3
-	 * @param freturnmsg
-	 * @param ftitle
-	 * @param fcontent
-	 * @param ffile
-	 * @param fstatus
-	 * @param category
-	 */
-	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fsign1, int fsignId1,
-			String fsignck1, String fsign2, int fsignId2, String fsignck2, String fsign3, int fsignId3, String fsignck3,
-			String freturnmsg, String ftitle, String fcontent, String ffile, String fstatus, String category) {
+			String freturnmsg, String ftitle, String fcontent, String ffile, String fstatus, String category,
+			int type) {
 		super();
 		this.fno = fno;
 		this.fcategory = fcategory;
@@ -171,6 +100,19 @@ public class Form implements Serializable{
 		this.ffile = ffile;
 		this.fstatus = fstatus;
 		this.category = category;
+		this.type = type;
+	}
+
+
+
+	public int getType() {
+		return type;
+	}
+
+
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 

@@ -1,8 +1,6 @@
 package semi.intranet.form.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.intranet.form.model.service.FormService;
-import semi.intranet.form.model.vo.Form;
 
 /**
- * Servlet implementation class FormModifyView
+ * Servlet implementation class FormDeleteServlet
  */
-@WebServlet("/fModifyView.fo")
-public class FormModifyView extends HttpServlet {
+@WebServlet("/fDelete.fo")
+public class FormDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormModifyView() {
+    public FormDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +30,16 @@ public class FormModifyView extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int fno = Integer.parseInt(request.getParameter("fno"));
+		int eno = Integer.parseInt(request.getParameter("eno"));
 		
-		Form f = new Form();
-		
-		f = new FormService().modifyViewForm(fno);
+		int result = new FormService().deleteForm(fno, eno);
 		
 		String page = "";
 		
-		if(f != null) {
-			page = "views/intranet/intranetFormModify.jsp";
-			request.setAttribute("form", f);
+		if(result > 0) {
+			response.sendRedirect("fListOnly.fo");
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
-	
 	}
 
 	/**

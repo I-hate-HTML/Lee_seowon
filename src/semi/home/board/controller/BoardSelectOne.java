@@ -33,10 +33,20 @@ public class BoardSelectOne extends HttpServlet {
 		
 		Board b  = new BoardService().selectOne(bno);
 		
+		String[] bfile= new String[] {"1"};
+		// 만약 사진첨부를 안하고 글을 썼을때 null 값이 들어오기 때문에 구분해줄 수 있는 문구를 넣고 배열을 만들어줌
+		if(b.getBfile()!= null) {
+			 bfile = b.getBfile().split(",");
+		}
+		// , 로 구분되어있는 bfile 이름들을 String 배열에 각각 집어넣는 과정
+		
+		
 		String path="";
 		if(b != null) {
 			path="views/homepage/boardread.jsp";
 			request.setAttribute("board", b);
+			request.setAttribute("bfile",bfile);
+			// String 배열을 게시글을 읽는 페이지로 보낸다
 			request.getRequestDispatcher(path).forward(request, response);
 			
 		}else {
