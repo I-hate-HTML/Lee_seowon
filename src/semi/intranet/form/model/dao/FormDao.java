@@ -382,9 +382,10 @@ public class FormDao {
 	 * 품의서 수정할 내용 불러오기
 	 * @param con
 	 * @param fno
+	 * @param eno 
 	 * @return
 	 */
-	public Form modifyViewForm(Connection con, int fno) {
+	public Form modifyViewForm(Connection con, int fno, int eno) {
 		
 		Form f = new Form();
 		
@@ -396,6 +397,30 @@ public class FormDao {
 		try {
 			
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, fno);
+			pstmt.setInt(2, eno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				f.setFno(rset.getInt("DRAFT_NO"));
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
+				f.setFwriter(rset.getString("WNAME"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				f.setFsignId1(rset.getInt("SIGN_EMP1"));
+				f.setFsign1(rset.getString("SNAME1"));
+				f.setFsignId2(rset.getInt("SIGN_EMP2"));
+				f.setFsign2(rset.getString("SNAME2"));
+				f.setFsignId3(rset.getInt("SIGN_EMP3"));
+				f.setFsign3(rset.getString("SNAME3"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFcontent(rset.getString("DRAFT_CONTENT"));
+				f.setFfile(rset.getString("DRAFT_FILE"));
+				
+			}
 			
 			
 		} catch(SQLException e) {

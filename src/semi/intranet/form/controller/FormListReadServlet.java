@@ -73,16 +73,34 @@ public class FormListReadServlet extends HttpServlet {
 		
 				
 		String page = "";
+		
 	
 		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
-		if(f != null && flist != null && empNo == f.getfWriterId() ) { // 기안자 일 경우
+		if(f != null && flist != null && f.getType() == 1) { // 기안자 일 경우 
 			page = "views/intranet/intranetFormRead.jsp";
 			request.setAttribute("list", flist);
 			request.setAttribute("form", f);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);
-		} 
+		} else if (f != null && flist != null && f.getType() == 2) {// 결재자 일 경우
+			page = "views/intranet/intranetFormReadSign.jsp";
+			
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		} else if(f != null && flist != null && f.getType() == 3) { // 기안자 글 수정일 경우
+			page = "views/intranet/intranetFormModify.jsp";
+			
+			
+			request.setAttribute("list", flist);
+			request.setAttribute("form", f);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
+			request.setAttribute("pi", pi);
+		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	

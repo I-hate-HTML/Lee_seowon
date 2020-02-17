@@ -217,13 +217,24 @@ public class FormService {
 	/**
 	 * 품의서 수정할 내용 불러오기
 	 * @param fno
+	 * @param eno 
 	 * @return
 	 */
-	public Form modifyViewForm(int fno) {
+	public Form modifyViewForm(int fno, int eno) {
 
 		Connection con = getConnection();
 
-		Form f = fd.modifyViewForm(con, fno);
+		Form f = fd.modifyViewForm(con, fno, eno);
+		
+		if(f.getFcategory() == 1) {
+			f.setCategory("지출결의서");
+		} else if(f.getFcategory() == 2) {
+			f.setCategory("휴가신청서");
+		} else if(f.getFcategory() == 3) {
+			f.setCategory("교구신청서");
+		} else {
+			f.setCategory("기타");
+		}
 
 		close(con);
 

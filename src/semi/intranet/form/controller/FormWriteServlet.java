@@ -93,9 +93,11 @@ public class FormWriteServlet extends HttpServlet {
 		String title = mrequest.getParameter("formTitle"); 
 		String content = mrequest.getParameter("formContent"); 
 		String file = mrequest.getParameter("formFile");
+		
+		int type = 1; 
 
 		Form f = new Form(category, writer, writerId, writeDate, s.getSname(),s.getScode(),
-						 s.getSname2(),s.getScode2(),s.getSname3(),s.getScode3(),title, content);
+						 s.getSname2(),s.getScode2(),s.getSname3(),s.getScode3(),title, content, type);
 
 		int result = new FormService().insertForm(f);
 
