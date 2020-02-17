@@ -13,7 +13,7 @@ public class IntranetMemberService {
 	private IntranetMemberDao imDao = new IntranetMemberDao ();
 	
 	/**
-	 * 조회용
+	 * 가입한 회원들 조회용
 	 * @return
 	 */
 	public ArrayList<Member> selectList() {
@@ -26,27 +26,21 @@ public class IntranetMemberService {
 		return list;
 	}
 	
-	public Member selectOne(int nno) {
-		Connection con = getConnection();
-		
-		Member m = imDao.selectOne(con, nno);
-		
-		// 게시글 상세보기를 통해 1회 조회할때
-		// 2가지 기능이 실행된다.
-		// 1. nno에 해당하는 게시글 내용을 가져오기(SELECT)
-		// 2. 게시글 내용이 성공적으로 불러와 졌다면 (UPDATE)
-		//    조회수가 1 증가해야한다.
-		
-		if(m != null) {
-			int result = imDao.updateReadCount(con,nno);
+	public int readAlimCheck(int empNo, String read, int ano, int category) {
 			
-			if(result > 0) commit(con);
-			else rollback(con);
+			Connection con = getConnection();
+			
+			int result = ad.readAlimCheck(con, empNo, read, ano, category);
+			
+			if(result > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			
+			close(con);
+			
+			return 0;
 		}
-		
-		close(con);
-		
-		return m;
-	}
 
 }

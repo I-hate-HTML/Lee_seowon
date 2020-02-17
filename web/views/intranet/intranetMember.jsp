@@ -145,9 +145,9 @@ input.check {
 									<div class="action_in">
 										선택 회원을&nbsp;
 										<button type="submit" class="btn btn-primary btn-sm" onclick="agreeMem();"
-											id="memberaccept">가입승인</button>
+											id="memberaccept" value="Y">가입승인</button>
 										<button class="btn btn-primary btn-sm" onclick="denyMem();"
-											id="membernonono">가입거절</button>
+											id="membernonono" value="X">가입거절</button>
 									</div>
 								</div>
 								<table border="1" cellspacing="0" class="tbl_lst_type" style="width:100%;">
@@ -204,7 +204,7 @@ input.check {
 							<th scope="col"><strong class="line_r">자녀 성별</strong></th>
 							<th scope="col"><strong class="line_r">자녀 반</strong></th>
 							<th scope="col"><strong class="line_r">승인 상태</strong></th>
-
+							
 						</tr>
 					</thead>
 
@@ -232,7 +232,7 @@ input.check {
 							<td class="tc"><span class="num"><%=m.getCgender()%></span>
 							</td>
 							<td class="tc"><span class="num"><%=m.getCclass()%></span></td>
-							<td class="tc"><span class="num"><%=m.getMstatus()%></span></td>
+							<td class="tc" id="thanksNuNa"><span class="num"><%=m.getMstatus()%></span></td>
 						</tr>
 
 
@@ -263,9 +263,22 @@ input.check {
 			}
 		}
 		
+		$('#memberaccept').click(function(){
+			console.log("버튼 클릭")
+			
+			var result = $(this).val();
+			var before = $('#thanksNuNa').val();
+			
+			console.log(before);
+			
+		})
+		
 		function agreeMem(){
 			$("#joinapplication").submit();
 			alert('승인되었습니다!');
+			
+			
+			
 		}
 		
 		function denyMem(){
