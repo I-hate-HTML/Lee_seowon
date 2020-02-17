@@ -32,7 +32,8 @@
         <tr>
           <th>품의번호</th>
           <td>
-            <input type = "text" style="padding-left: 0.2rem;"name="formNum" value = "<%= form.getFno() %>" disabled>
+            <input type = "hidden" name="formNum" value = "<%= form.getFno() %>" >
+            <%= form.getFno() %>
           </td>
           <th>분류</th>
           <td>
@@ -46,47 +47,42 @@
             <input type ="hidden" name = "writerId" value="<%= form.getfWriterId() %> disabled">
           </td>
           <th>기안날짜</th>
-          <td><input type = "date" name="formDate" value="<%= form.getFdate() %>" disabled></td>
+          <td><%= form.getFdate() %></td>
         </tr>
         <tr>  
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine" disabled>
-            	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign1() %>" selected><%= form.getFsign1() %> 		
-            			<input type ="hidden" name="signCode" value="<%= form.getFsignId1() %>">
-	            	</option>
-            </select>
-            <select name = "formLineP" disabled >            
-              <option value="" >선택</option>
-              <option value="Y">승인</option>
-              <option value="N">반려</option>
-            </select> 
+           <select name="formLine" id = "formLine1" disabled>
+         		<option value="<%= form.getFsign1() %>" selected><%= form.getFsign1() %> 		
+         			<input type ="hidden" name="signCode" value="<%= form.getFsignId1() %>">
+          		</option>
+           </select>
+           <select name = "formLineP" id = "formLineP1" disabled style="display:block">            
+             <option value="<%= form.getFsignck1() %>" ><%= form.getFsignck1() %></option>
+           </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine" disabled>
+            <select name="formLine" id = "formLine2" disabled style="display:none">
             	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign2() %>" selected><%= form.getFsignId2() %>    		
+            		<option value="<%= form.getFsign2() %>" selected><%= form.getFsign2() %>    		
             			<input type ="hidden" name="signCode" value="<%= form.getFsignId2() %>">
 	            	</option>
             </select>
-            <select  name = "formLineP" disabled>
-              <option value="Y">승인</option>
-              <option value="N">반려</option>
+            <select  name = "formLineP" id = "formLineP2" disabled style="display:none">
+              <option value="<%= form.getFsignck2() %>" ><%= form.getFsignck2() %></option>
             </select> 
           </td>
           <th>결재자</th>
           <td>
-            <select name="formLine" id = "formLine" disabled>
+            <select name="formLine" id = "formLine3" disabled style="display:none">
             	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign3() %>" selected><%= form.getFsignId3() %>      		
+            		<option value="<%= form.getFsign3() %>" selected><%= form.getFsign3() %>      		
             			<input type ="hidden" name="signCode" value="<%= form.getFsignId3() %>">
 	            	</option>
             </select>
-            <select  name = "formLineP" disabled>
-              <option value="Y">승인</option>
-              <option value="N">반려</option>
+            <select  name = "formLineP" id = "formLineP3" disabled style="display:none">
+              <option value="<%= form.getFsignck3() %>" ><%= form.getFsignck3() %></option>
             </select> 
           </td>
           <td style="text-align: center;"colspan="2">
@@ -128,6 +124,27 @@
 
 </div>
 <!-- End of Main Content -->
+<script>
+$(function(){
+	
+	/* if($('#formLineP').val() == null) {
+		$('#formLineP').css('display','none');
+	}
+	 */
+	
+	 console.log($('#formLineP1').val());
+	 var dd = $('#formLineP1').val();
+	 console.log(dd);
+	 
+/* 		if($('#formLineP1').val() ) {
+			$('#formLineP1').css('display','block');
+		} */
+		
+	
+	
+	
+});
+</script>
 
 
 <%@ include file = "../intranet/common/footer.jsp" %>

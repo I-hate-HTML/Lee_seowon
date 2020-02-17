@@ -76,7 +76,7 @@
 			</div>
 		</div>
 
-		<div class="modal fade" id="insertEvent" tabindex="-1" role="dialog">
+		<div class="modal fade" id="Event" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -86,7 +86,7 @@
 							<span aria-hidden="true">x</span>
 						</button>
 					</div>
-					<form class="form-horizontal">
+					<form class="form-horizontal" onsubmit="return check()" action="/semi/InsertEvent.ev">
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="eventTitle">내용</label> <input type="text"
@@ -110,7 +110,10 @@
 							</div>
 							<div class="form-group">
 								<label>등록자</label>
-								<input id="user" type="text" value="<%//아이디받아오셈%>" disabled="disabled" class="form-control">
+								<input id="user" type="text" value="<%//session.getUserName()%>" disabled="disabled" class="form-control">
+							</div>
+							<div hidden="">
+								<input name="json" id="chidden">
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -129,6 +132,19 @@
 
 
 	<script type="text/javascript">
+		var cData = [];
+		$(document).ready(function(){
+			$.getJSON("../../resources/intranet/ajax/data.json",function(data){
+				
+				
+				$.each(data, function(i, item){
+					var aa = JSON.stringify(item);
+					cData.push(aa);
+				});
+			});
+			console.log(cData);
+		});
+	
 		document.addEventListener('DOMContentLoaded', function() {
 			var Calendar = FullCalendar.Calendar;
 			var Draggable = FullCalendarInteraction.Draggable;
@@ -147,17 +163,17 @@
 			});
 
 			var calendar = new Calendar(calendarEl, {
-				plugins : [ 'interaction', 'dayGrid', 'timeGrid','list' ],
+				plugins : [ 'interaction', 'dayGrid', 'timeGrid'],
 				header : {
 					left : 'prev,next today',
 					center : 'title',
-					right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+					right : 'dayGridMonth,timeGridWeek,timeGridDay'
 				},
 				navLinks :true,
 				editable : true,
 				droppable : true,
 				allDaySlot : false,
-				events:"../../resources/intranet/ajax/data.json",
+				events: "../../resources/intranet/ajax/data.json",
 				drop : function(info) {
 
 					if (checkbox.checked) {
@@ -166,9 +182,7 @@
 					}
 				},
 				locale : 'ko',
-				dateClick : function() {
-	
-				}
+				dataeClick : function(){}
 				
 			});
 
@@ -177,48 +191,43 @@
 			jQuery.noConflict();
 			calendar.on('dateClick', function(info) {
 				console.log('sibal' + info.dateStr);
-				$('#insertEvent').modal('show');
+				$('#Event').modal('show');
 				$('#startDate').attr('value', info.dateStr);
+				$('#endDate').attr('value', info.dateStr);
 			});
+			calendar.on('dataClick',function(info){
+				$('#Event').modal('show');
+			})
 
 		});
 		
-		$('#insertEvent1').click(function(){
+		function check(){
 			var event = new Object();
+			event._id = cData.length+1;
 			event.title = $('#eventTitle').val();
 			event.start = $('#startDate').val();
 			event.end = $('#endDate').val();
 			event.type= $('#eventType').val();
 			event.username = $('#user').val();
-			
+			event.backgroundColor="#a9e34b";
+			event.textColor="#ffffff"
 			
 			console.log(event.title);
 			var jsonData = JSON.stringify(event);
 			
 			if(event.title == ''||event.type==''){
-				alert('빈 항목이 있습니당')
+				alert('빈 항목이 있습니당');
+				return false;
 			}else{
-				if(event.end ==''){
-					event.end=event.start;
-				};
-				$.ajax({
-					type:"POST",
-					dataType : "json",
-					url : "/semi/InsertEvent.ev",
-					data : {
-						json : jsonData
-					},
-					success : function(data){
-						alert('등록 성공');
-						location.reload();
-					},error : function(){
-						alert('등록 실패');
-						$('#eventTitle').select();
-					}
-				});
-				
+				cData.push(jsonData);
+				$('#chidden').attr("value",JSON.stringify(cData));
+				console.log($('#chidden').val);
+				return true;
 			};
-		});
+			
+			
+			
+		};
 		
 	</script>
 

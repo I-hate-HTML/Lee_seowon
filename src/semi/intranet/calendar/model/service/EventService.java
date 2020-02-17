@@ -11,11 +11,11 @@ public class EventService {
 
 	private Connection con;
 	private EventDao edao = new EventDao();
-	public int InsertEvent(Calendar cc) {
+	public int InsertEvent(String cJson) {
 		int result = 0;
 		con = getConnection();
 		
-		result = edao.InsertEvent(con,cc);
+		result = edao.InsertEvent(con,cJson);
 		
 		if(result>0) commit(con);
 		else rollback(con); 

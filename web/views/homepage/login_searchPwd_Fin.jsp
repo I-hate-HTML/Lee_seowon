@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="semi.home.jsp.model.vo.*"%>
-<%
- 	Member m = (Member)request.getAttribute("member");
-%>
+    pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -263,7 +261,7 @@ vertical-align: middle;}
 						<div class="iconArea">
                            
                             <p class="txt"><Strong class="black">
-								고객님의 비밀번호는 <%=m.getUserPwd() %> 입니다.</Strong></p>
+								고객님의 비밀번호는 핸드폰 번호로 변경되었습니다. </Strong></p>
 								<!-- **************userPwd가져오기****************8 -->
 							<p class="txtmt">이용해주셔서 감사합니다.</p>
 							

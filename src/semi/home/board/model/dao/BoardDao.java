@@ -65,6 +65,12 @@ public class BoardDao {
 		return list;
 	}*/
 
+	/**
+	 * 게시글 선택
+	 * @param con
+	 * @param bno
+	 * @return
+	 */
 	public Board selectOne(Connection con, int bno) {
 		Board b = new Board();
 		PreparedStatement pstmt = null;
@@ -96,6 +102,12 @@ public class BoardDao {
 		return b;
 	}
 
+	/**
+	 * 게시글 조회수 증가용
+	 * @param con
+	 * @param bno
+	 * @return
+	 */
 	public int updateCount(Connection con, int bno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -140,6 +152,12 @@ public class BoardDao {
 		return result;
 	}
 
+	/**
+	 * 게시글 수정용
+	 * @param con
+	 * @param pbno
+	 * @return
+	 */
 	public Board updateView(Connection con, int pbno) {
 		
 		Board b = new Board();
@@ -169,6 +187,13 @@ public class BoardDao {
 		return b;
 	}
 
+	/**
+	 * 게시글 수정용
+	 * @param con
+	 * @param pbno
+	 * @param bcontent
+	 * @return
+	 */
 	public int updateBoard(Connection con, int pbno, String bcontent) {
 
 		int result = 0;
@@ -190,6 +215,11 @@ public class BoardDao {
 		return result;
 	}
 
+	/**
+	 * 게시판 넘버링
+	 * @param con
+	 * @return
+	 */
 	public int getListCount(Connection con) {
 		
 		int listCount = 0;
@@ -216,6 +246,14 @@ public class BoardDao {
 		return listCount;
 	}
 
+	/**
+	 * 게시판 넘버링
+	 * @param con
+	 * @param currentPage
+	 * @param limit
+	 * @param listCount
+	 * @return
+	 */
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit, int listCount) {
 		ArrayList<Board> list = null;
 		PreparedStatement pstmt = null;

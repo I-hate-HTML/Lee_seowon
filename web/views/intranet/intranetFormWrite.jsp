@@ -215,7 +215,6 @@ var i = 0;
     	});
         
     } 
-    console.log(option.val());
  }
 
  function del(){
