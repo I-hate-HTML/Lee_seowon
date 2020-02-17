@@ -221,7 +221,7 @@
 			}else{
 				cData.push(jsonData);
 				$('#chidden').attr("value",JSON.stringify(cData));
-				console.log($('#chidden').val);
+				console.log($('#chidden').val());
 				return true;
 			};
 			

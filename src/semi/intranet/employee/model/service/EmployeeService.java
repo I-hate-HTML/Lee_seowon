@@ -1,15 +1,9 @@
 package semi.intranet.employee.model.service;
 
-import static com.kh.jsp.common.JDBCTemplate.close;
-import static com.kh.jsp.common.JDBCTemplate.commit;
-import static com.kh.jsp.common.JDBCTemplate.getConnection;
-import static com.kh.jsp.common.JDBCTemplate.rollback;
-import static semi.common.JDBCTemplate.close;
-import static semi.common.JDBCTemplate.commit;
-import static semi.common.JDBCTemplate.getConnection;
-import static semi.common.JDBCTemplate.rollback;
+import static semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import semi.intranet.employee.model.dao.EmployeeDao;
 import semi.intranet.employee.model.vo.Employee;
@@ -35,7 +29,8 @@ public class EmployeeService {
 	 * 인트라넷 정보수정
 	 * @param e
 	 */
-	public void updateEmployee(Employee e) {
+	public int updateEmployee(Employee e) {
+		
 		
 		con = getConnection();
 		int result = eDao.updateMember(con,e);
@@ -46,7 +41,15 @@ public class EmployeeService {
 		close(con);
 		
 		return result;
+		 
+	}
+	public ArrayList<Employee> emplistAll() {
+		con = getConnection();
 		
+		ArrayList<Employee> ae = eDao.emplistAll(con);
+		close(con);
+				
+		return ae;
 	}
 
 }

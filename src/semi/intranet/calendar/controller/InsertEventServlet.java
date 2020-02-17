@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import semi.intranet.calendar.model.service.EventService;
 
 /**
@@ -39,8 +42,11 @@ public class InsertEventServlet extends HttpServlet {
 		
 		if(result > 0) {
 			try {
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObj = (JSONObject)jsonParser.parse(cJson);
 				fw = new FileWriter("../../resources/intranet/ajax/data.json",false);
-				fw.write(cJson);
+				fw.write(jsonObj.toJSONString());
+				fw.flush();
 				fw.close();
 			}catch(Exception e) {
 				e.printStackTrace();
