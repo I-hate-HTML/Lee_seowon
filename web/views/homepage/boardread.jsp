@@ -119,7 +119,9 @@
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
-		
+		$('src').click({
+			location.href="$(this).attr('src')";
+		});
 	
 	</script>
 

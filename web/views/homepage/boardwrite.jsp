@@ -100,7 +100,12 @@
 
 	<%@ include file = "common/footer.jsp" %>
 	
-	<script>/* 
+	<script>
+	
+
+	
+	
+	/* 
 	 $(function(){
 		 var count = 2;
          $('#bfile1').change(function(){
