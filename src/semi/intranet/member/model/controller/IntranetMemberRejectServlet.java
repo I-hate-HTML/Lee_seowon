@@ -1,28 +1,23 @@
-package semi.intranet.form.controller;
+package semi.intranet.member.model.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.form.model.service.FormService;
-import semi.intranet.form.model.vo.Form;
-
 /**
- * Servlet implementation class FormModifyView
+ * Servlet implementation class IntranetMemberRejectServlet
  */
-@WebServlet("/fModifyView.fo")
-public class FormModifyView extends HttpServlet {
+@WebServlet("/reject.member")
+public class IntranetMemberRejectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormModifyView() {
+    public IntranetMemberRejectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +26,8 @@ public class FormModifyView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int fno = Integer.parseInt(request.getParameter("fno"));
-		
-		Form f = new Form();
-		
-		f = new FormService().modifyViewForm(fno);
-		
-		String page = "";
-		
-		if(f != null) {
-			page = "views/intranet/intranetFormModify.jsp";
-			request.setAttribute("form", f);
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

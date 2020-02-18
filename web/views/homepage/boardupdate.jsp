@@ -5,6 +5,7 @@
     
     <%
     	Board b = (Board)request.getAttribute("board");
+     String[] nameArr = (String[])request.getAttribute("bfile");
     %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -69,34 +70,58 @@
     	<div class="row">
       		<div class="col-lg-8 col-md-12 mx-auto">
             <br><br>
-            <form action="<%= request.getContextPath() %>/bupdate.bo" >
+            <form action="<%= request.getContextPath() %>/bupdate.bo" method="post" enctype="multipart/form-data">
               <table class="table table-bordered" style="background: white;">
                   <tbody>
                           <tr>
                               <th>제목: </th>
-                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control" value="<%= b.getBtitle() %>" readonly="readonly"/></td>
+                              <td colspan="2"><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control" value="<%= b.getBtitle() %>" readonly="readonly"/></td>
                           </tr>
                           <tr>
                               <th>내용: </th>
-                              <td><textarea cols="10" placeholder="내용을 입력하세요. " name="bcontent" class="form-control" style="height: 500px; resize: none;" > <%= b.getBcontent() %></textarea></td>
+                              <td colspan="2">
+                              <textarea cols="10" placeholder="내용을 입력하세요. " id="bcontent" name="bcontent" class="form-control" style="height: 500px; resize: none;" ><%= b.getBcontent() %></textarea>
+<%--                               <div contentEditable="true" class="form-control" style="height:auto;">
+                              <% if(nameArr[0]!="1"){ %>
+                                    		<% for(int i=0; i<nameArr.length ;i++){ %>
+                                			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: auto">
+                                    		<br>
+                                    		<%} %>
+                                    	<%} %> <%=b.getBcontent() %>
+								</div> --%>
+                              </td>
+                          </tr>
+                          <tr>
+                              <th>현재파일: </th>
+                              <td>
+                              <%if(nameArr[0]!="1"){ %>
+                                    		<% for(int i=0; i<nameArr.length ;i++){ %>
+                                    		<input type="text" value="<%= nameArr[i] %>" readonly="readonly" id="img<%=i+1%>">
+                                			<input type="button" class="btn btn-primary" value="삭제" id="test<%=i+1%>">
+                                    		<br>
+                                    <%} %>
+                                  <%} %>
+                              </td>
+                              <td>
+                              	<img src="" alt="" style="max-width: 258px" id="previewimg">
+                              </td>
                           </tr>
                           <tr>
                               <th>첨부파일: </th>
-                              <td>
-                              <span><input type="file" name="bfile" value="<%= b.getBfile() %>"></span>
+                              <td colspan="2">
+                              <span><input type="file" name="bfile" multiple></span>
                               </td>
                           </tr>
- 	
-                          
+							
                         </tbody>
                       </table>
-                      <input type="hidden" name="pbno" value="<%= b.getBno() %>">
-                      
+                      <input type="hidden" id="pbno" name="pbno" value="<%= b.getBno() %>">
+                      <input type="hidden" id="orifile" name="orifile">
                       <div class="float-right">
-                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>
-                        <input type="reset" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="취소" />
+                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="submit1()" class="pull-right"/>
+                        <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" onclick="location.href='/semi/boardlsit.do'" value="취소" />
                       </div>
-              </form>
+             <</form>
       		</div>
     	</div>
   	</div>
@@ -105,6 +130,54 @@
 <!-- 하단 안내 -->
 
 	<%@ include file = "common/footer.jsp" %>
+	
+	<script>
+	
+	$(function(){
+		 <%if(nameArr[0]!="1"){ %>
+			<% for(int i=0; i<nameArr.length ;i++){ %>
+				$('#img<%=i+1%>').attr('chk',0);
+			<%} %>
+		<%} %>
+	});
+	 
+	
+	var filearr=[];
+	var bfile;
+	
+	function submit1(){
+		$('input[chk=0]').each(function(index,item){
+			filearr.push($(this).val());
+		});
+		bfile = filearr.join(',');
+		$('#orifile').val(bfile);
+	};
+	
+	 
+	<%if(nameArr[0]!="1"){ %>
+		<% for(int i=0; i<nameArr.length ;i++){ %>
+		 $('#test<%=i+1%>').click(function(){
+			 		var check = confirm("정말 이미지를 삭제하시겠습니까?");
+			 		if(check ==true){
+						$('#img<%=i+1%>').css('color','red');
+						$('#img<%=i+1%>').attr('chk',1);
+						$(this).attr('hidden','true');
+						console.log($('#img<%=i+1%>').attr('chk'));
+			 		}
+		  });
+		 
+		 $('#img<%=i+1%>').click(function(){
+			 console.log($(this).val());
+			 $('#previewimg').attr('src','/semi/resources/homepage/images/boardUploadFIles/'+$(this).val());
+		 });
+		 
+		<%} %>
+	<%} %>
+	
+	
+	
+
+	</script>
 
 </body>
 </html>

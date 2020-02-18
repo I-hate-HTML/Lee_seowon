@@ -20,7 +20,6 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button class = "btn btn-primary btn-sm modify">수정</button>
       <button class = "btn btn-primary btn-sm delete">삭제</button>             
     </td>
   </tr>
@@ -146,18 +145,6 @@ $('#viewTable td').click(function(){
 		}
 		
 	});
-	
-});
-
-// 수정버튼
-$(".modify").click(function(){
-	
-	if($('#formLineP1').val() != "null") {
-		alert("이미 품의가 진행중입니다.");
-		
-	} else {
-	 location.href='<%= request.getContextPath()%>/fModifyView.fo';
-	}
 	
 });
 

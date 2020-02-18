@@ -1,13 +1,17 @@
 package semi.intranet.form.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import semi.intranet.form.model.service.FormService;
+import semi.intranet.form.model.vo.Form;
 
 /**
  * Servlet implementation class FormSignSaveServlet
@@ -28,6 +32,7 @@ public class FormSignSaveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 		int fno = Integer.parseInt(request.getParameter("formNum"));
 		
@@ -54,14 +59,15 @@ public class FormSignSaveServlet extends HttpServlet {
 		
 		int result = new FormService().updateSign(fno, sign1, sign2, sign3, fReturn);
 		
+		Form f = new FormService().readForm(fno);
+		
 		String page = "";
 		
-		if(result > 0) {
-			page = "fReadSign.fo";
-			request.setAttribute("fno", fno);
-		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		  if(result > 0) { page = "fRead.fo"; request.setAttribute("fno", fno); }
+		  
+		  request.getRequestDispatcher(page).forward(request, response);
+		 
 	}
 
 	/**

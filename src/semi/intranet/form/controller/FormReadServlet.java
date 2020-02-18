@@ -36,7 +36,9 @@ public class FormReadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		
+		
 		int fno = Integer.parseInt(request.getParameter("fno"));
 //		int empNo = Integer.parseInt(request.getParameter("empNo"));
 
@@ -45,19 +47,19 @@ public class FormReadServlet extends HttpServlet {
 
 		
 		Form f = new FormService().readForm(fno);
-		
-		
 
 		String page = "";
 		
 	
 		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
 		if(f != null && empNo == f.getfWriterId() ) { // 기안자 일 경우
+			f.setType(1);
 			page = "fListRead.fo";
 			request.setAttribute("form", f);
 			
 		} else if (f != null && empNo == f.getFsignId1() || empNo == f.getFsignId2() || empNo == f.getFsignId3()) {// 결재자 일 경우
-			page = "fListSign.fo";
+			f.setType(2);
+			page = "fListRead.fo";
 			request.setAttribute("form", f);
 		}
 		

@@ -1,12 +1,18 @@
 package semi.home.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+
+import semi.common.MyRenamePolicy;
+import semi.home.board.model.vo.Board;
 import semi.home.board.service.BoardService;
 
 /**
@@ -28,10 +34,45 @@ public class BoardUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pbno = Integer.parseInt(request.getParameter("pbno"));
-		String bcontent = request.getParameter("bcontent");
 		
-		int result = new BoardService().updateBoard(pbno,bcontent);
+		
+		
+		int maxSize = 1024 * 1024 * 10; // 10MB
+		
+		String root = request.getServletContext().getRealPath("/");
+		
+		String savePath = root + "resources/homepage/images/boardUploadFiles";
+
+		MultipartRequest mrequest
+		    = new MultipartRequest(request, savePath,
+								   maxSize, "UTF-8",
+								   new MyRenamePolicy());
+		
+		
+		
+		
+		
+		int pbno = Integer.parseInt(mrequest.getParameter("pbno"));
+		String bcontent = mrequest.getParameter("bcontent");
+		String bfile = mrequest.getParameter("orifile");
+		mrequest.getFilesystemName("bfile");
+		
+		ArrayList filelist = MyRenamePolicy.Filenamechange;
+		
+		String newfile="";
+		
+		for(int i=0;i<filelist.size();i++) {
+			if(i==filelist.size()-1) {
+				newfile+=filelist.get(i);
+			}else {
+				newfile+=filelist.get(i)+",";
+			}
+		}
+		
+		bfile= bfile+","+newfile;
+		
+		int result = new BoardService().updateBoard(pbno,bcontent,bfile);
+		MyRenamePolicy.Filenamechange.clear();
 		
 		if(result>0) {
 			response.sendRedirect("boardlsit.do");

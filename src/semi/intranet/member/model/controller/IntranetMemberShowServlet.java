@@ -15,7 +15,7 @@ import semi.intranet.member.model.service.IntranetMemberService;
 /**
  * Servlet implementation class IntranetMemberShowServlet
  */
-@WebServlet("/showvisitor.mem")
+@WebServlet("/showmem.list")
 public class IntranetMemberShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class IntranetMemberShowServlet extends HttpServlet {
 			request.setAttribute("Member", list);
 		}else {
 			page = "views/common/errorPage.jsp";//이거 안 돼있나
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
+			request.setAttribute("msg", "불러오기 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

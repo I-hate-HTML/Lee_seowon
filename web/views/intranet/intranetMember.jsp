@@ -144,10 +144,10 @@ input.check {
 								<div class="board_action">
 									<div class="action_in">
 										선택 회원을&nbsp;
-										<button class="btn btn-primary btn-sm" onclick="agreeMem();"
-											id="memberaccept">가입승인</button>
+										<button type="submit" class="btn btn-primary btn-sm" onclick="agreeMem();"
+											id="memberaccept" value="Y">가입승인</button>
 										<button class="btn btn-primary btn-sm" onclick="denyMem();"
-											id="membernonono">가입거절</button>
+											id="membernonono" value="X">가입거절</button>
 									</div>
 								</div>
 								<table border="1" cellspacing="0" class="tbl_lst_type" style="width:100%;">
@@ -204,7 +204,7 @@ input.check {
 							<th scope="col"><strong class="line_r">자녀 성별</strong></th>
 							<th scope="col"><strong class="line_r">자녀 반</strong></th>
 							<th scope="col"><strong class="line_r">승인 상태</strong></th>
-
+							
 						</tr>
 					</thead>
 
@@ -214,7 +214,7 @@ input.check {
 										%>
 						<tr id="member1">
 							<td class="tc"><input type="checkbox"
-								name="applyMemberCheck" value="" id="c1" title="선택"
+								name="applyMemberCheck" value="<%=m.getUserId()%>" id="c1" title="선택"
 								class="check _click"></td>
 							<td class="tc"><span class="img"><%=m.getUserId()%></span></td>
 							<td class="tc"><span class="txt"><%=m.getUserName()%></span>
@@ -232,7 +232,7 @@ input.check {
 							<td class="tc"><span class="num"><%=m.getCgender()%></span>
 							</td>
 							<td class="tc"><span class="num"><%=m.getCclass()%></span></td>
-							<td class="tc"><span class="num"><%=m.getMstatus()%></span></td>
+							<td class="tc" id="thanksNuNa"><span class="num"><%=m.getMstatus()%></span></td>
 						</tr>
 
 
@@ -263,7 +263,27 @@ input.check {
 			}
 		}
 		
-		function 
+		$('#memberaccept').click(function(){
+			console.log("버튼 클릭")
+			
+			var result = $(this).val();
+			var before = $('#thanksNuNa').val();
+			
+			console.log(before);
+			
+		})
+		
+		function agreeMem(){
+			$("#joinapplication").submit();
+			alert('승인되었습니다!');
+			
+			
+			
+		}
+		
+		function denyMem(){
+			alert('승인 거부되었습니다!');
+		}
 	</script>
 	<!-- End of Main Content -->
 	<%@ include file="../intranet/common/footer.jsp"%>

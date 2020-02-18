@@ -195,15 +195,17 @@ public class BoardDao {
 	 * @param bcontent
 	 * @return
 	 */
-	public int updateBoard(Connection con, int pbno, String bcontent) {
+	public int updateBoard(Connection con, int pbno, String bcontent, String bfile) {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateBoard");
 		try {
+			System.out.println(bfile);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bcontent);
-			pstmt.setInt(2, pbno);
+			pstmt.setString(2, bfile);
+			pstmt.setInt(3, pbno);
 			
 			result= pstmt.executeUpdate();
 			
