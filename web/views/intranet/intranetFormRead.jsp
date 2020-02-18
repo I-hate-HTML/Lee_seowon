@@ -11,17 +11,16 @@
 
 <!-- Begin Page Content -->
     
-<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
+
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
-    <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
+    <table style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
       <tr>
         <td>
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button class = "btn btn-primary btn-sm modify">수정</button>
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fDelete.fo'">삭제</button>             
+      <button class = "btn btn-primary btn-sm delete">삭제</button>             
     </td>
   </tr>
 </table>
@@ -114,7 +113,6 @@
               </td>
             </tr>                
           </table>
-        </form>
       </div>
   </div>          
 </div>
@@ -151,16 +149,20 @@ $('#viewTable td').click(function(){
 });
 
 
-$(".modify").click(function(){
+// 삭제버튼
+$(".delete").click(function(){
 	
 	if($('#formLineP1').val() != "null") {
 		alert("이미 품의가 진행중입니다.");
 		
 	} else {
-	 location.href='<%= request.getContextPath()%>/fModifyView.fo';
+		var fno = "<%= form.getFno() %>";
+		var eno = "2015001"; //--> 나중에 바꾸기!!!!
+	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno + "&eno=" + eno;
 	}
 	
 });
+
 //게시물 이동용 스크립트 
 $('#viewTable td').click(function(){
 		

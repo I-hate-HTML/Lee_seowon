@@ -85,7 +85,7 @@
             <h6 class="collapse-header">상세 메뉴</h6>
             <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetRegisterStudent.jsp">원아등록</a>
             <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetRegisterTeacher.jsp">교사등록</a>
-            <a class="collapse-item" href="/semi/showvisitor.mem">회원 관리</a>
+            <a class="collapse-item" href="/semi/showmem.list">회원 관리</a>
           </div>
         </div>
       </li>

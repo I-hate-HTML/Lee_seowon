@@ -10,8 +10,7 @@
 
 
 <!-- Begin Page Content -->
-    
-<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/fSignSave.fo" method="post">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
     <table style="min-width:0%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
@@ -20,7 +19,7 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fModifyView.fo'">결재</button>          
+      <button type = "submit" class = "btn btn-primary btn-sm sign">결재완료</button>          
     </td>
   </tr>
 </table>
@@ -56,7 +55,7 @@
           		</option>
            </select>
            <select name = "formLineP" id = "formLineP1">
-              <option value="">선택</option>
+              <option value="선택">선택</option>
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
@@ -70,7 +69,7 @@
 	            	</option>
             </select>
             <select name = "formLineP" id = "formLineP2">
-              <option value="">선택</option>
+              <option value="선택">선택</option>
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
@@ -84,7 +83,7 @@
 	            	</option>
             </select>
             <select name = "formLineP" id = "formLineP3">
-              <option value="">선택</option>
+              <option value="선택">선택</option>
               <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
@@ -119,7 +118,7 @@
               </td>
             </tr>                
           </table>
-        </form>
+          </form>
       </div>
   </div>          
 </div>
@@ -165,6 +164,20 @@ $(function(){
 	}
 
 });
+
+$('select[name=formLineP]').change(function(){
+	fReturn(this);
+});
+
+function fReturn(o){
+	var val = $(':selected',o).val();
+	console.log(val);
+	
+	if(val == 'N') {
+		$('input[name=formReturn]').attr('disabled',false);
+	}
+}
+
 
 
 </script>

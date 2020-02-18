@@ -18,13 +18,13 @@ import semi.intranet.form.model.vo.SignList;
  * Servlet implementation class FormListServlet
  */
 @WebServlet("/fListOnly.fo")
-public class FormListServlet extends HttpServlet {
+public class FormListOnlyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListServlet() {
+    public FormListOnlyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

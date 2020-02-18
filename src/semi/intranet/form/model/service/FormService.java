@@ -41,7 +41,8 @@ public class FormService {
 	 * @param signIdArr
 	 * @return
 	 */
-	public SignList findSignId(String[] signIdArr) {
+	public SignList 
+	findSignId(String[] signIdArr) {
 
 		Connection con = getConnection();
 
@@ -216,18 +217,78 @@ public class FormService {
 	/**
 	 * 품의서 수정할 내용 불러오기
 	 * @param fno
+	 * @param eno 
 	 * @return
 	 */
-	public Form modifyViewForm(int fno) {
+	public Form modifyViewForm(int fno, int eno) {
 
 		Connection con = getConnection();
 
-		Form f = fd.modifyViewForm(con, fno);
+		Form f = fd.modifyViewForm(con, fno, eno);
+		
+		if(f.getFcategory() == 1) {
+			f.setCategory("지출결의서");
+		} else if(f.getFcategory() == 2) {
+			f.setCategory("휴가신청서");
+		} else if(f.getFcategory() == 3) {
+			f.setCategory("교구신청서");
+		} else {
+			f.setCategory("기타");
+		}
 
 		close(con);
 
 
 		return f;
+	}
+
+	/**
+	 * 결재자 품의 업데이트
+	 * @param fno
+	 * @param signArr
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn) {
+		
+		Connection con = getConnection();
+
+		
+		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	/**
+	 * 품의서 삭제용
+	 * @param fno
+	 * @param eno 
+	 * @return
+	 */
+	public int deleteForm(int fno, int eno) {
+		
+		Connection con = getConnection();
+		
+		int result = fd.deleteForm(con, fno, eno);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+		return result;
 	}
 
 
