@@ -87,7 +87,7 @@
                                     <div style="height: auto;">
                                          <% if(nameArr[0]!="1"){ %>
                                     		<% for(int i=0; i<nameArr.length ;i++){ %>
-                                			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: auto">
+                                			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: 630px">
                                     		<br>
                                     		<%} %>
                                     	<%} %>     
@@ -119,10 +119,9 @@
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
-		$('src').click({
-			location.href="$(this).attr('src')";
+		$('img').click(function(){
+			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
-	
 	</script>
 
 </body>

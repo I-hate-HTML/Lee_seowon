@@ -120,6 +120,9 @@
 		<%@ include file="common/footer.jsp" %>
 
       <script>
+      	$('img').click(function(){
+			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
+		});
 
 		function imageURL(input) {
 			if (input.files && input.files[0]) {
