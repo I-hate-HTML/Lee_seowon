@@ -48,17 +48,14 @@ public class BoardWriteServlet extends HttpServlet {
 								   maxSize, "UTF-8",
 								   new MyRenamePolicy());
 		
-		
 		String btitle = mrequest.getParameter("btitle");
 		String bwriter = "admin";//request.getParameter("userId");
 		String bcontent = mrequest.getParameter("bcontent");
 		mrequest.getFilesystemName("bfile");
 		// mrequest.getFilesystemName(태그네임); 을 불러올때 파일이 저장이 되고
 		// 이때 기존의 방법대신 강사님이 사용하신 MyRenamePolicy를 이용
-		
 
 		Board b = new Board();
-
 		
 		ArrayList filelist = MyRenamePolicy.Filenamechange;
 		// MyRenamePlicy에서 저장해놓은 이름을 가져와서 꺼냄
@@ -83,6 +80,7 @@ public class BoardWriteServlet extends HttpServlet {
 
 		int result = new BoardService().BoardWrite(b);
 		
+		MyRenamePolicy.Filenamechange.clear();
 		if(result>0) {
 			response.sendRedirect("boardlsit.do");
 		}else {
