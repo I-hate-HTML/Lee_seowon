@@ -60,10 +60,10 @@ public class BoardService {
 		return b;
 	}
 
-	public int updateBoard(int pbno, String bcontent) {
+	public int updateBoard(int pbno, String bcontent, String bfile) {
 		Connection con = getConnection();
 		
-		int result = bDao.updateBoard(con,pbno,bcontent);
+		int result = bDao.updateBoard(con,pbno,bcontent,bfile);
 		
 		if(result>0) commit(con);
 		else rollback(con);

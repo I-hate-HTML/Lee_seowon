@@ -33,9 +33,15 @@ public class BoardUpdateViewServlet extends HttpServlet {
 		
 		Board b = new Board();
 		b = new BoardService().updateView(pbno);
+		String[] bfile= new String[] {"1"};
+		// 만약 사진첨부를 안하고 글을 썼을때 null 값이 들어오기 때문에 구분해줄 수 있는 문구를 넣고 배열을 만들어줌
+		if(b.getBfile()!= null) {
+			 bfile = b.getBfile().split(",");
+		}
 		
 		if( b != null) {
 			request.setAttribute("board", b);
+			request.setAttribute("bfile",bfile);
 			request.getRequestDispatcher("views/homepage/boardupdate.jsp").forward(request, response);
 		}else {
 			System.out.println("Board가 비어있다");

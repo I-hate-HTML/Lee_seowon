@@ -87,7 +87,7 @@
                       
                       <div class="float-right">
                         <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>
-                        <input type="reset" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="취소" />
+                        <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" onclick="location.href='/semi/boardlsit.do'" value="취소" />
                       </div>
               </form>
       		</div>
