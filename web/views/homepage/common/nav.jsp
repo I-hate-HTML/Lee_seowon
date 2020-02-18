@@ -27,7 +27,7 @@
 									class="dropdown-item" href="./food_calender.jsp">식단 안내</a> <a
 									class="dropdown-item" href="./event_calender.jsp">행사 안내</a>
 							</div></li>
-						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="./gallaryBoard.jsp" id="dropdown01">앨범</a></li>
+						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/gboardlist" id="dropdown01">앨범</a></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/boardlsit.do" id="dropdown01">커뮤니티</a></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">마이페이지</a>
 							<div class="dropdown-menu " aria-labelledby="dropdown01">

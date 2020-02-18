@@ -1,5 +1,10 @@
+<%@page import="semi.home.gboard.model.vo.Gboard"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,7 +18,7 @@
 	<!-- 개별페이지 CSS -->
 	<!-- 이것만 위치 맞춰주면됨 -->
   	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
-	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
+	
 
 	<!-- 부트스트랩 -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -79,103 +84,48 @@
                     
         <div class="row" style="text-align-last: center;">
             <!-- Portfolio Item 1 -->
-            <div class="col-md-6 col-lg-4" >
-                  <div id="right_issuezoom" class="content_box r_issuezoom">
-                    <div class="rcont_issue">
-                    <a  href="#">
-                    <span class="img_box">
-                      <img src="./img/1.jpg" alt="" width="100%">    
-                    </span>    
-                      <div class="txt_box" style="font-size: 17px;"> 
-                     <strong>크리스마스의 어린이들</strong> 
-                  </div> 
-                  <span class="issue_inner">
-                  </span>     
-                </a>
-               </div>
-                </div>
-            </div>
             
+            
+
+             <% for(Gboard s : list) { %>
             <div class="col-md-6 col-lg-4" >
-                  <div id="right_issuezoom" class="content_box r_issuezoom">
-                    <div class="rcont_issue">
-                    <a  href="#">
-                    <span class="img_box">
-                      <img src="./img/2.jpg" alt="" width="100%">    
-                    </span>    
-                      <div class="txt_box" style="font-size: 20px; align-items: center;"> 
-                     <strong>본좌에게 밥을 달라</strong> 
-                  </div> 
-                  <span class="issue_inner">
-                  </span>     
-                </a>
-               </div>
-                </div>
+				<div class="gboard-list" align="center">
+					<div>
+						<img src="<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/<%= s.getGfile() %>" 
+						     width="300px" height="350px">
+						<input type="hidden" value="<%= s.getGno() %>">
+						     
+					</div>
+					
+					<p>No. <%=s.getGno() + " " + s.getGtitle() %><br>
+					조회수	: <%= s.getGcount() %>
+					</p>
+				</div>
+			</div>
+			<% } %>
+			
+			
+			
+			
+              
             </div>
 
-            <div class="col-md-6 col-lg-4" >
-                  <div id="right_issuezoom" class="content_box r_issuezoom">
-                    <div class="rcont_issue">
-                    <a  href="#">
-                    <span class="img_box">
-                      <img src="./img/3.jpg" alt="" width="100%">    
-                    </span>    
-                      <div class="txt_box" style="font-size: 17px; text-align: center; " > 
-                     본좌는 잠이 필요하다
-                  </div> 
-                  <span class="issue_inner">
-                  </span>     
-                </a>
-               </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4" >
-                  <div id="right_issuezoom" class="content_box r_issuezoom">
-                    <div class="rcont_issue">
-                    <a  href="#">
-                    <span class="img_box">
-                      <img src="./img/4.jpg" alt="" width="100%">    
-                    </span>    
-                      <div class="txt_box " style="font-size: 20px;"> 
-                     본좌에게 제물을 바쳐라
-                  </div> 
-                  <span class="issue_inner">
-                  </span>     
-                </a>
-               </div>
-                </div>
-            </div>
-
+			<script>
+				$(function(){
+					$('.gboard-list').click(function(){
+							var gno = $(this).children().children().eq(1).val();
+							console.log(gno);
+							location.href = "<%=request.getContextPath()%>/gboardselectone.go?gno=" + gno;
+					});
+				});
+			</script>
     
-            <!-- Portfolio Item 2 -->
-            <div class="col-md-6 col-lg-4">
-          
-                    <img class="img-fluid" src="./img/a2.png" alt="" style="margin-bottom: 30px;">
-                    <br>
-                    <b>식단표</b>
-                    <p style="margin: 20px; font-size: 13px;">영양과 맛을 <br>고루 갖춘 영양식단</p>
-            </div>
-    
-            <!-- Portfolio Item 3 -->
-            <div class="col-md-6 col-lg-4">
-      
-                    <img class="img-fluid" src="./img/a3.png" alt="" style="margin-bottom: 30px;">
-                    <br>
-                    <b>버스시간표</b>
-                    <p style="margin: 20px; font-size: 13px;">팡팡버스를 <br>타야하는 시간</p>
-            </div>
-            
-            
-  
-    </div>
-
+           
+           
+    		</div>
 
             </div>
          </div>
-       </div>
-       
-     
            <br>
            <div align="center">   
           
@@ -188,13 +138,14 @@
 				          		<li class="page-item"><a class="page-link" href="#">4</a></li>
 				          		<li class="page-item"><a class="page-link" href="#">5</a></li>
 				          		<li class="page-item"><a class="page-link" href="#">Next</a></li>
+ 
+<li> <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/gallary_write.jsp'">글작성</button></li>
 				          	</ul>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
           <hr>
-
 
 
 	<!-- 하단 안내 -->
