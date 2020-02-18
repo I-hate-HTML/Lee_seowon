@@ -10,10 +10,10 @@
 <body>
 <!-- Begin Page Content -->
         <div class="container-fluid">
-
+		<form id="updateForm" method="post">
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">상담확인</h1>
-
+		
           <div class="card shadow mb-4">
             <div class="card-header py-3"> 
               <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
@@ -31,7 +31,7 @@
                   <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
                     
             <tr>
-              <th></th>
+              <th><input type="checkbox" id="chkalltop" onclick="checkAll()"></th>
               <th>번호</th>
               <th>반</th>
               <th>원아명</th>
@@ -41,7 +41,7 @@
               <th>날짜</th>
             </tr>
             <tr>
-              <td><input type ="checkbox"> </td>
+              <td><input type ="checkbox" name="sangdham"> </td>
               <td name = "num">1</td>
               <td name = "class">1반</td>
               <td name = "studentName">홍달이</td>
@@ -75,8 +75,22 @@
             </nav>  
           </div>                   
         </div>
+        
+   		<script>
+	   		function checkAll(){
+				if($("#chkalltop").is(':checked')){
+					$("input[name=sangdham]").prop("checked", true);
+				}else{
+					$("input[name=sangdham]").prop("checked", false);
+				}
+			}
+	   		
+	   		function deleteNotice(){				
+				$("#updateForm").attr("action","<%=request.getContextPath() %>/nDelete.no");
+			}
+   		</script>
         <!-- /.container-fluid -->
-
+		</form>
       </div>
       <!-- End of Main Content -->
 
