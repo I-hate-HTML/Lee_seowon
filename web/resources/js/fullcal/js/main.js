@@ -162,7 +162,6 @@ var calendar = $('#calendar').fullCalendar({
 			type: "get",
 			url: "/semi/readEvent.ev",
 			success: function (response) {
-				console.log(response);
 				var events = [];
 				for (var i = 0; i < response.length; i++) {
 					var evt = {
@@ -204,14 +203,14 @@ var calendar = $('#calendar').fullCalendar({
 
 		/** 리사이즈시 수정된 날짜반영
 		 * 하루를 빼야 정상적으로 반영됨. */
-		var newDates = calDateWhenResize(event);
-
+		var newDates = event;
+		
 		//리사이즈한 일정 업데이트
 		$.ajax({
 			type: "get",
 			url: "/semi/updateEvent.ev",
 			data: {
-				id: event._id,
+				event:event.title,
 				newstart : newDates.startDate,
 				newend : newDate.endDate
 			},
@@ -241,15 +240,15 @@ var calendar = $('#calendar').fullCalendar({
 
 		// 드랍시 수정된 날짜반영
 		var newDates = calDateWhenDragnDrop(event);
-
 		//드롭한 일정 업데이트
+		console.log(event);
 		$.ajax({
 			type: "get",
 			url: "/semi/updateEvent.ev",
 			data: {
-				id: event._id,
+				event: event.title,
 				newstart : newDates.startDate,
-				newend : newDate.endDate
+				newend : newDates.endDate
 			},
 			success: function (response) {
 				alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
@@ -337,7 +336,7 @@ var calendar = $('#calendar').fullCalendar({
 	},
 	eventLimitClick: 'week', //popover
 	navLinks: true,
-	defaultDate: moment('2020-02'), //실제 사용시 삭제
+	defaultDate: moment('2020-02'), 
 	timeFormat: 'HH:mm',
 	defaultTimedEventDuration: '01:00:00',
 	editable: true,

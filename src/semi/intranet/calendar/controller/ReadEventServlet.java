@@ -37,7 +37,8 @@ public class ReadEventServlet extends HttpServlet {
 		EventService es = new EventService();
 		JSONArray result = new JSONArray();
 		result = es.readEvent();
-		System.out.println(result.toJSONString());
+		
+		System.out.println(result.get(0));
 		if(result != null) {
 			response.getWriter().print(result);
 		}

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.intranet.calendar.model.service.EventService;
+
 /**
  * Servlet implementation class UpdateEventServlet
  */
@@ -25,7 +27,15 @@ public class UpdateEventServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		
+		String event = request.getParameter("event");
+		String newstart = request.getParameter("newstart");
+		String newend = request.getParameter("newend");
+		System.out.println(event);
+		
+		EventService es = new EventService();
+		int result = es.updateEvent(event,newstart,newend);
 		
 	}
 

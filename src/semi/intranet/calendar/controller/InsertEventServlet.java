@@ -42,43 +42,11 @@ public class InsertEventServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EventService ev = new EventService();
 		int result = 0;
-		JSONArray alljson = new JSONArray();
 		
 		String jsonstr = request.getParameter("event");
-		JSONParser parser = new JSONParser();
-		System.out.println("시발");
 		
-		try {
-			try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\user2\\git\\Lee_seowon\\web\\views\\intranet\\data.json"),"UTF8"))) {
-				alljson = (JSONArray)parser.parse(reader);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			Object obj = parser.parse(jsonstr);
-			JSONObject jsonobj = (JSONObject)obj;
-			alljson.add(jsonobj);
-			
-			result = ev.InsertEvent(alljson.toString());
-			System.out.println(alljson.toString());
-			
-			if(result>0) {
-				try ( BufferedWriter file = new BufferedWriter(
-	                    new OutputStreamWriter(
-	                            new FileOutputStream("C:\\Users\\user2\\git\\Lee_seowon\\web\\views\\intranet\\data.json"),"UTF8"))){
-					file.write(alljson.toJSONString());
-					file.flush();
-					file.close();
-				}catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		result = ev.InsertEvent(jsonstr);
 		
-
-
 	}
 
 	/**
