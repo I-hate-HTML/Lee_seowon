@@ -56,15 +56,31 @@ public class FormSignSaveServlet extends HttpServlet {
 		
 		
 		String fReturn = request.getParameter("formReturn");
+
 		
-		int result = new FormService().updateSign(fno, sign1, sign2, sign3, fReturn);
+		int result = new FormService().updateSign(fno, sign1, sign2, sign3, fReturn, size);
+		
+		
+		
+		// 게시글이 저장이 되면
+		if (result > 0) {
+			
+			// 게시글 품의 프로세스 변경
+			int resultChange = new FormService().updateSignProcess(fno, size, fReturn);
+
+		}
+		
 		
 		Form f = new FormService().readForm(fno);
+		f.setType(3);
 		
 		String page = "";
 		
 		
-		  if(result > 0) { page = "fRead.fo"; request.setAttribute("fno", fno); }
+		  if(result > 0) { 
+			  page = "fListRead.fo"; 
+			  request.setAttribute("form", f); 
+		 }
 		  
 		  request.getRequestDispatcher(page).forward(request, response);
 		 

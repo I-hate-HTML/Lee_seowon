@@ -7,12 +7,15 @@
     
     <%
     ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+    
     PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	String nowschval = (String)request.getAttribute("nowschcal");
+	String nowkeyword = (String)request.getAttribute("nowkeyword");
     
     %>
 	
@@ -80,6 +83,7 @@
   	<div class="container">
     	<div class="row">
       		<div class="col-lg-8 col-md-10 mx-auto">
+      			<h1>검색페이지</h1>
 				  <table id="boardtable" class="table table-hover" style="background: white;">
                       <thead>
                           <tr>
@@ -121,23 +125,23 @@
                   <div class="text-center d-flex justify-content-center">
                     <ul class="pagination">
                     <% if(currentPage <=1){ %>
-                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=1" >Previous</a></li>                	
+                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=1&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>" >Previous</a></li>                	
                     <%}else{ %>
-                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=currentPage - 1 %>" >Previous</a></li>
+                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=currentPage - 1 %>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>" >Previous</a></li>
                     <%} %>
                     
                     <% for(int p = startPage; p <= endPage; p++){
     						if(p == currentPage){	 %>
-    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=p%>" ><%=p %></a></li>
+    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=p%>&nowschval=<%=nowschval %>"+"&nowkeyword=<%=nowkeyword%>" ><%=p %></a></li>
     				<%		}else{ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%=p %>"><%=p %></a></li>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=p %>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>"><%=p %></a></li>
 					<%	    } %>
 					<%	 } %>
 					
 					<% if(currentPage >= maxPage){ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%= maxPage %>">Next</a></li>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%= maxPage %>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>">Next</a></li>
 					<% 		}else{ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%= currentPage + 1 %>">Next</a></li>
+						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%= currentPage + 1 %>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>">Next</a></li>
 					<% } %>					
 					</ul>
                   </div>

@@ -91,8 +91,8 @@ public class FormListReadServlet extends HttpServlet {
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);
-		} else if(f != null && flist != null && f.getType() == 3) { // 기안자 글 수정일 경우
-			page = "views/intranet/intranetFormModify.jsp";
+		} else if(f != null && flist != null && f.getType() == 3) { // 결재자 결재 완료 일 경우
+			page = "views/intranet/intranetFormModifySign.jsp";
 			
 			
 			request.setAttribute("list", flist);

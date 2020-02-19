@@ -247,14 +247,16 @@ public class FormService {
 	 * @param fno
 	 * @param signArr
 	 * @param fReturn
+	 * @param size 
 	 * @return
 	 */
-	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn) {
+	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn, int size) {
 		
 		Connection con = getConnection();
 
 		
 		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		
 		
 		if(result > 0) {
 			commit(con);
@@ -263,6 +265,46 @@ public class FormService {
 		}
 		
 		close(con);
+		
+		return result;
+	}
+
+
+	
+	/**
+	 * 품의서 프로세스 업데이트 (반려/승인/검토)
+	 * @param fno
+	 * @param size
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSignProcess(int fno, int size, String fReturn) {
+		
+		Connection con = getConnection();
+		
+		
+		int result = 0;
+		
+		if(fReturn != null) {
+			
+			result = fd.updateSignProcess(con, fno, -1);
+		
+		} else if (fReturn == null) {
+			
+			result = fd.updateSignProcess(con, fno, size);
+			
+		}
+		
+		
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
 		
 		return result;
 	}
@@ -290,6 +332,8 @@ public class FormService {
 		
 		return result;
 	}
+
+	
 
 
 
