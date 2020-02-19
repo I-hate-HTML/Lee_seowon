@@ -474,6 +474,53 @@ public class FormDao {
 		return result;
 	}
 
+	
+	
+	/**
+	 * 결재자 결재 내용에 따른 결재 프로세스 변경 (반려 / 승인 / 검토)
+	 * @param con
+	 * @param fno
+	 * @param size 
+	 * @return
+	 */
+	public int updateSignProcess(Connection con, int fno, int size) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		if( size < 0) {
+			sql = prop.getProperty("updateSignReturn");
+		} else {
+			sql = prop.getProperty("updateSignPer");
+		}
+		
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			if( size < 0) {
+				pstmt.setInt(1, fno);
+			} else {
+				pstmt.setInt(1, fno);
+				pstmt.setInt(2, size + 1);
+			}
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 
 	/**
@@ -510,6 +557,10 @@ public class FormDao {
 		
 		return result;
 	}
+
+
+
+	
 
 
 
