@@ -71,7 +71,7 @@ public class FormListOnlyServlet extends HttpServlet {
 		String page = "";
 		
 		if(flist != null) {
-			page = "views/intranet/intranetFormWrite.jsp";
+			page = "views/intranet/intranetFormList.jsp";
 			request.setAttribute("list", flist);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);

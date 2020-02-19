@@ -148,16 +148,20 @@ $(function(){
 	var sign2p = $('select[id=formLineP2]').val();
 	var sign3p = $('select[id=formLineP3]').val();
 	
+	console.log(sign1p);
+	console.log(sign2p);
+	console.log(sign3p);
 	
-	if(sign1 == empId && sign1p != null ) {
+	
+	if(sign1 == empId && sign1p != null) {
 		$('#formLineP1').attr('disabled', false);
-	} else {
+	} else if(sign2p != null){
 		$('#formLineP1').attr('disabled', true);
 	}
 	
 	if(sign2 == empId && sign2p != null) {
 		$('#formLineP2').attr('disabled', false);
-	} else {
+	} else if(sign3p != null){
 		$('#formLineP2').attr('disabled', true);
 	}
 	
