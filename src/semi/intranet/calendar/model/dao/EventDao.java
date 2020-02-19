@@ -14,6 +14,8 @@ import java.util.Properties;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import semi.intranet.daily.model.dao.DailyDao;
 
@@ -30,7 +32,7 @@ public class EventDao {
 			e.printStackTrace();
 		}
 	}
-	public int InsertEvent(Connection con, String cJson) {
+	public int InsertEvent(Connection con, String alljson) {
 		int result = 0;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
@@ -41,9 +43,9 @@ public class EventDao {
 			stmt = con.createStatement();
 			result = stmt.executeUpdate(clear);
 			
-			if(result>0) {
+			if(result>=0) {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, cJson);
+			pstmt.setString(1, alljson);
 			
 			result = pstmt.executeUpdate();
 			}
@@ -51,6 +53,34 @@ public class EventDao {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	public JSONArray readEvent(Connection con) {
+		JSONArray result = new JSONArray();
+		
+		Statement stmt = null;
+		String sql = prop.getProperty("readEvent");
+		ResultSet rset = null;
+		
+		JSONParser parser = new JSONParser();
+		String all = "";
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				all = rset.getString(1);
+				result = (JSONArray)parser.parse(all);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ParseException e) {
+			e.printStackTrace();
 		}
 		
 		
