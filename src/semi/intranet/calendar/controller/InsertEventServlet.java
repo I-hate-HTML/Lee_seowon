@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import semi.intranet.calendar.model.service.EventService;
+import org.json.simple.parser.ParseException;
 
 /**
  * Servlet implementation class InsertEventServlet
@@ -33,32 +32,22 @@ public class InsertEventServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EventService es = new EventService();
-		String cJson = request.getParameter("json");
-		FileWriter fw;
-		
-		int result = 0;
-		result = es.InsertEvent(cJson);
-		
-		if(result > 0) {
-			try {
-				JSONParser jsonParser = new JSONParser();
-				JSONObject jsonObj = (JSONObject)jsonParser.parse(cJson);
-				fw = new FileWriter("../../resources/intranet/ajax/data.json",false);
-				fw.write(jsonObj.toJSONString());
-				fw.flush();
-				fw.close();
-			}catch(Exception e) {
+		String jsonstr = request.getParameter("event");
+		JSONParser parser = new JSONParser();
+		try {
+			Object obj = parser.parse(jsonstr);
+			JSONObject jsonobj = (JSONObject)obj;
+			
+			try (FileWriter file = new FileWriter("/semi/data.json",true)){
+				file.write(jsonobj.toJSONString());
+				file.flush();
+				file.close();
+			}catch(IOException e) {
 				e.printStackTrace();
-				request.setAttribute("msg", "시발");
-				request.getRequestDispatcher("/views/intranet/intranetCalender.jsp").forward(request, response);
 			}
-			
-			response.sendRedirect("/views/intranet/intranetCalender.jsp");
-			
-		}else {
-			request.setAttribute("msg", "시발");
-			request.getRequestDispatcher("/views/intranet/intranetCalender.jsp").forward(request, response);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 

@@ -12,4 +12,5 @@ encoding//src/config/member-query.properties=UTF-8
 encoding//src/config/qna-query.properties=UTF-8
 encoding//src/semi/intranet/employee/model/vo/Employee.java=UTF-8
 encoding//web/resources/intranet/ajax/data.json=UTF-8
+encoding//web/views/intranet/data.json=UTF-8
 encoding/<project>=UTF-8
