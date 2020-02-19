@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,21 +65,24 @@
     	<div class="row">
       		<div class="col-lg-8 col-md-12 mx-auto">
             <br><br>
-            <form action="<%= request.getContextPath() %>/bwrite.do" >
+            <form action="<%= request.getContextPath() %>/insertgboard" method="post" enctype="multipart/form-data" >
               <table class="table table-bordered" style="background: white;">
                   <tbody>
                           <tr>
                               <th>제목: </th>
-                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control"/></td>
+                              <td><input type="text" placeholder="제목을 입력하세요." name="gtitle" class="form-control"/>
+                              	<input type="hidden" name ="userId" value="<%=m.getUserId()%>"/>
+                              </td>
+                              
                           </tr>
                           <tr>
                               <th>내용: </th>
-                              <td><textarea cols="10" placeholder="내용을 입력하세요. " name="bcontent" class="form-control" style="height: 500px; resize: none;"></textarea></td>
+                              <td><textarea cols="10" placeholder="내용을 입력하세요. " name="gcontent" class="form-control" style="height: 500px; resize: none;"></textarea></td>
                           </tr>
                           <tr>
                               <th>첨부파일: </th>
                               <td>
-                              <span id="filearea"><input type="file" name="bfile1" id="bfile1"></span>
+                              <span id="filearea"><input type="file" name="gfile" id="gfile"></span>
                               </td>
                           </tr>
  
@@ -86,7 +91,7 @@
                       </table>
                       
                       <div class="float-right">
-                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>
+                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록"  class="pull-right"/>
                         <input type="reset" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="취소" />
                       </div>
               </form>
@@ -94,14 +99,13 @@
     	</div>
   	</div>
 
-
 <!-- 하단 안내 -->
 
 
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
-	 $(function(){
+	/*  $(function(){
 		 var count = 2;
          $('#bfile1').change(function(){
              $(this).clone(true).appendTo('#filearea').attr('name','bfile'+count);
@@ -109,7 +113,7 @@
              count++;
          });
 	 });
-	
+	 */
 	</script>
 
 		

@@ -80,9 +80,6 @@
   	<div class="container">
     	<div class="row">
       		<div class="col-lg-8 col-md-10 mx-auto">
-            
-        
-            
 				  <table id="boardtable" class="table table-hover" style="background: white;">
                       <thead>
                           <tr>
@@ -106,9 +103,21 @@
                       </tbody>
                   </table>
                   <hr><br>
+					<div class="text-center d-flex justify-content-center">
+					    <select class="form-control" style="width: 100px; margin-right: 10px	">
+							<option value="">---</option>
+							<option value="writer">작성자</option>
+							<option value="title">제목</option>
+							<option value="content">내용</option>
+						</select>
+					<input type="text" class="form-control" style="margin-right: 30px; width:60%">
+					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" value="검색">
+					</div>	
+					<br>
                   <% if(true){ %>
                   <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
                   <% } %>
+                  
                   <div class="text-center d-flex justify-content-center">
                     <ul class="pagination">
                     <% if(currentPage <=1){ %>
@@ -130,11 +139,10 @@
 					<% 		}else{ %>
 						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/boardlsit.do?currentPage=<%= currentPage + 1 %>">Next</a></li>
 					<% } %>					
-					
 					</ul>
                   </div>
-
-      		</div>
+                  	
+			</div>
     	</div>
   	</div>
 <hr>

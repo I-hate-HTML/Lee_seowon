@@ -1,11 +1,10 @@
-<%@page import="semi.home.board.model.vo.Board"%>
 
+<%@page import="semi.home.gboard.model.vo.Gboard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
-    	Board b = (Board)request.getAttribute("board");
-    	String[] nameArr = (String[])request.getAttribute("bfile");
+    	Gboard g = (Gboard)request.getAttribute("Gboard");
     	/* String 배열을 받는 배열 생성  */
     %>
 <!DOCTYPE html>
@@ -59,8 +58,8 @@
 	<%@ include file = "common/nav.jsp" %>
 
 <div class="top_bg">
-  <a class="top_p"> 공지사항 </a>
-   <p>팡팡 유치원 공지사항</p>
+  <a class="top_p"> 사진게시판 </a>
+   <p>팡팡 유치원 사진게시판</p>
  </div>
 
     <!-- 메인 컨텐츠 구역 -->
@@ -73,40 +72,35 @@
                         <tbody>
                                 <tr>
                                     <th class="tatd">제목 </th>
-                                    <th colspan="3"><%= b.getBtitle() %></th>
+                                    <th colspan="3"><%= g.getGtitle() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">작성자 </th>
-                                    <th><%= b.getBwriter() %></th>
+                                    <th><%= g.getGwriter() %></th>
                                     <th class="tatd">작성일  </th>
-                                    <th><%= b.getBdate() %></th>
+                                    <th><%= g.getGdate() %></th>
                                 </tr>
                                 <tr>
                                     <th class="tatd">내용 </th>
                                     <td colspan="3">
-                                    <div style="height: auto;">
-                                         <% if(nameArr[0]!="1"){ %>
-                                    		<% for(int i=0; i<nameArr.length ;i++){ %>
-                                			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: 630px">
-                                    		<br>
-                                    		<%} %>
-                                    	<%} %>     
+                                     <div style="height: auto;">
+                                        
                                     	
                                     	<!-- 배열이 비어있을때 nullException이  발생하기 때문에 구분을 위해 넣어준 1 이 아닐때 이미지를 생성시킴-->          
-                                        <%= b.getBcontent() %>
-                                    </div>
+                                        <%= g.getGcontent() %>
+                                    </div> 
                                 </td>
                                 </tr>
                         </tbody>
                     </table>
-                    <input type="hidden" name="pbno" value="<%=b.getBno()%>" >
+                    <input type="hidden" name="pbno" value="<%=g.getGno()%>" >
                 <div class="float-right">
                 
                 <%// if(){ %>
-                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location.href='/semi/bupdateview.bo?pbno=<%=b.getBno() %>'" class="pull-right"/>
+                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location.href='/semi/bupdateview.bo?pbno=<%=g.getGno() %>'" class="pull-right"/>
                 <%//} %>  
                   
-                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location.href='/semi/boardlsit.do'" class="pull-right"/>
+                  <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location.href='/semi/gboardlist'" class="pull-right"/>
               
               </div>
       		</div>
@@ -118,11 +112,12 @@
 
 	<%@ include file = "common/footer.jsp" %>
 	
-	<script>
-		$('img').click(function(){
-			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
+<!-- 	<script>
+		$('src').click({
+			location.href="$(this).attr('src')";
 		});
-	</script>
+	
+	</script> -->
 
 </body>
 </html>

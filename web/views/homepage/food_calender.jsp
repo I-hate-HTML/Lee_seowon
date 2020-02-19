@@ -91,8 +91,49 @@
             </div>
             <div id="cal_tab" class="cal">
             </div>
+            <hr>
             <div>
                 <img src="" style="width: 100%;" alt="음식 사진 들어갑니다" id="foodimg">
+            <hr>
+            <p>
+            	⊙ 식단은 원내 사정(검수 물품 불량, 물가 인상 등)상 변경될 수 있습니다. <br>
+				⊙ 원산지 표시(쌀, 채소, 과일은 국내산 친환경으로 사용) <br>
+				<small>
+				- 농산물 : 친환경 농산물 식재료 사용 &nbsp;&nbsp;&nbsp;&nbsp;
+				- 공산품(된장, 고추장, 간장, 참기름, 깨, 소금 등) : 국산 <br>
+				- 공산품(설탕, 튀김가루, 빵가루, 밀가루) : 유기농 설탕, 우리밀 국산 &nbsp;&nbsp;&nbsp;&nbsp;
+				- non-GMO 현미유 사용 <br>
+				</small>
+				◈ 알레르기 유발식품 표시제 (식단표의 번호에 해당되는 식품) <br>
+				<small>
+				1.난류 2.우유 3.메밀 4.땅콩 5.대두 6.밀 7.고등어 8.게 9.새우 10.돼지고기 11.복숭아 12.토마토 13.아황산류 <br>14.호두
+				15.닭고기 16. 쇠고기 17.오징어 18.조개류(굴, 전복, 홍합 포함)
+				</small>				
+            </p>
+            <table border="1px solid grey" style="text-align: center; font-size: small;">
+            	<tr>
+            		<th>쌀<br>(친환경 쌀)</th>
+            		<th>김치<br>(배추, 고춧가루)</th>
+            		<th>쇠고기</th>
+            		<th>돼지고기/가공품</th>
+            		<th>닭고기, 달걀</th>
+            		<th>오리고기</th>
+            		<th>명태(동태)</th>
+            		<th>오징어</th>
+            		<th>두부</th>
+            	</tr>
+            	<tr>
+            		<td>국내산<br>무농약 쌀</td>
+            		<td>국내산</td>
+            		<td>국내산 한우 1등급</td>
+            		<td>국내산 1등급</td>
+            		<td>국내산</td>
+            		<td>국내산</td>
+            		<td>러시아산</td>
+            		<td>국내산</td>
+            		<td>국내산 콩</td>
+            	</tr>
+            </table>
             </div>
             </div>
             </div>
@@ -120,6 +161,9 @@
 		<%@ include file="common/footer.jsp" %>
 
       <script>
+      	$('img').click(function(){
+			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
+		});
 
 		function imageURL(input) {
 			if (input.files && input.files[0]) {

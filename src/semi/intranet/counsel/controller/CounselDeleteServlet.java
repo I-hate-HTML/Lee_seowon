@@ -1,26 +1,26 @@
-package semi.home.board.controller;
+package semi.intranet.counsel.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.home.board.model.vo.Board;
-import semi.home.board.service.BoardService;
+import semi.intranet.counsel.model.service.CounselService;
 
 /**
- * Servlet implementation class BoardUpdateServlet
+ * Servlet implementation class CounselDeleteServlet
  */
-@WebServlet("/bupdateview.bo")
-public class BoardUpdateViewServlet extends HttpServlet {
+@WebServlet("/delete.counsel")
+public class CounselDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardUpdateViewServlet() {
+    public CounselDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +29,20 @@ public class BoardUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pbno = Integer.parseInt(request.getParameter("pbno"));
+		int nno = Integer.parseInt(request.getParameter("cno"));
 		
-		Board b = new Board();
-		b = new BoardService().updateView(pbno);
-		String[] bfile= new String[] {"1"};
-		// 만약 사진첨부를 안하고 글을 썼을때 null 값이 들어오기 때문에 구분해줄 수 있는 문구를 넣고 배열을 만들어줌
-		if(b.getBfile()!= null) {
-			 bfile = b.getBfile().split(",");
-		}
+		System.out.println(cno);
 		
-		if( b != null) {
-			request.setAttribute("board", b);
-			request.setAttribute("bfile",bfile);
-			request.getRequestDispatcher("views/homepage/boardupdate.jsp").forward(request, response);
+		CounselService cs = new CounselService();
+		
+		int result = cs.deleteCounsel(nno);
+		
+		if(result > 0) {
+			response.sendRedirect("selectList.counsel");
 		}else {
-			System.out.println("Board가 비어있다");
+			request.setAttribute("msg", "수정 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
 	}
 
 	/**
