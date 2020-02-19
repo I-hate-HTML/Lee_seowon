@@ -73,6 +73,43 @@ public class AlimDao {
 	}
 
 
+	
+	/**
+	 * 알림장 반 총 게시물 수 확인용
+	 * @param con
+	 * @param empNo
+	 * @return
+	 */
+	public int getClassListCount(Connection con, int empNo) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("classListCount");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empNo);
+			pstmt.setInt(2, empNo);
+			pstmt.setInt(3, empNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listCount = rset.getInt("SUM(TOTAL)");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return listCount;
+	}
 
 
 	/**
@@ -532,6 +569,9 @@ public class AlimDao {
 		
 		return list;
 	}
+
+
+	
 
 
 	

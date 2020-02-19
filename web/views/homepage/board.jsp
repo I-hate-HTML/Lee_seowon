@@ -104,14 +104,14 @@
                   </table>
                   <hr><br>
 					<div class="text-center d-flex justify-content-center">
-					    <select class="form-control" style="width: 100px; margin-right: 10px	">
+					    <select class="form-control" style="width: 100px; margin-right: 10px" id="searchval">
 							<option value="">---</option>
 							<option value="writer">작성자</option>
 							<option value="title">제목</option>
 							<option value="content">내용</option>
 						</select>
-					<input type="text" class="form-control" style="margin-right: 30px; width:60%">
-					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" value="검색">
+					<input type="text" class="form-control" style="margin-right: 30px; width:60%" id="keyword">
+					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="searchboard()" value="검색">
 					</div>	
 					<br>
                   <% if(true){ %>
@@ -158,6 +158,10 @@
     			location.href="<%=request.getContextPath()%>/selectOne.bo?bno=" + bno;	
           });
     });
+    
+    function searchboard(){
+    	location.href="<%=request.getContextPath()%>/searchboard.bo?searchval="+$('#searchval').val()+"&keyword="+$('#keyword').val();
+    }
     
     </script>
 		

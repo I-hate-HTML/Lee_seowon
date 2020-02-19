@@ -94,5 +94,25 @@ public class BoardService {
 			return list;
 		
 	}
+
+	public int getSearchCount(String searchval, String keyword) {
+		Connection con = getConnection();
+		
+		int listCount = bDao.getSearchCount(con,searchval,keyword);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> searchBoard(String searchval, String keyword,int currentPage,int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<Board> list = bDao.searchBoard(con,searchval,keyword,currentPage,limit);
+		
+		close(con);
+		
+		return list;
+	}
 }
 	

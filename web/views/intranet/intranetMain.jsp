@@ -2,13 +2,46 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file = "../intranet/common/nav.jsp" %>
-
+<%=request.getContextPath()%>
     
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
 <html lang="ko">
 <head>
   <title>꿈나라어린이집 # 인트라넷_메인</title>
+  <link href='../../resources/js/fullcal/core/main.css' rel='stylesheet' />
+<link href='../../resources/js/fullcal/daygrid/main.css'
+	rel='stylesheet' />
+
+<script src='../../resources/js/fullcal/core/main.js'></script>
+<script src='../../resources/js/fullcal/daygrid/main.js'></script>
+<script src="../../resources/js/fullcal/interaction/main.min.js"></script>
+<script src='../../resources/js/fullcal/core/locales/ko.js'></script>
+<script src="../../resources/js/fullcal/timegrid/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<style type="text/css">
+#external-events {
+	width: 50%;
+	border: 1px solid #ccc;
+	background: #eee;
+}
+.demo-topbar+#external-events { /* will get stripped out */
+	top: 60px;
+}
+#external-events .fc-event {
+	margin: 1em 0;
+	cursor: move;
+}
+#calendar-container {
+	position: relative;
+	z-index: 1;
+	margin-left: 200px;
+}
+#calendar {
+	max-width: 1200px;
+	margin: 20px auto;
+}
+</style>
 </head>
 <body>
          <!-- Begin Page Content -->
@@ -19,7 +52,7 @@
            </div>
  
            <!-- Content Row -->
-           <div class="row">
+
  
              <!-- 메뉴1 간략히 보기 -->
              
@@ -29,16 +62,16 @@
            <div class="row">
              <div class="card shodow mb-4" style="width: 100%;">
                <div class="card-header py-3">
-                 <h6 class="m-0 font-weight-bold text-primary">일정관리</h6>
+                 <h6 class="m-0 font-weight-bold text-primary">일정관리</h6> 
                </div>
-               <div class="card-body" id="call_calendar">
-
+               <div class="card-body">
+					<div id="calendar"></div>
                </div>
              </div>
              
              
            <!-- Content Row -->
-           <div class="row">
+          
  
              <!-- Content Column -->
              <div class="col-lg-6 mb-4">
@@ -58,42 +91,6 @@
                <th>제목</th>
                <th>작성자</th>
                <th>날짜</th>
-             </tr>
-             <tr>
-               <td><input type = "checkbox" name = "check"></td>
-               <td name = "num">4</td>
-               <td name = "category">귀가동의서</td>
-               <td name = "name">홍달이</td>
-               <td name = "title">오늘 할머니가 데리러갈거에요</td>
-               <td name = "writer">dalmom</td>
-               <td name = "date">2020-01-20</td>
-             </tr>
-             <tr>
-               <td><input type = "checkbox" name = "check"></td>
-               <td name = "num">3</td>
-               <td name = "category">투약의뢰서</td>
-               <td name = "name">박응애</td>
-               <td name = "title">박응애 감기약 같이 보냅니다</td>
-               <td name = "writer">park</td>
-               <td name = "date">2020-01-20</td>
-             </tr>
-             <tr>
-               <td><input type = "checkbox" name = "check"></td>
-               <td name = "num">2</td>
-               <td name = "category">알림장</td>
-               <td name = "name">김아가</td>
-               <td name = "title">김아가 알림장입니다.</td>
-               <td name = "writer">aga</td>
-               <td name = "date">2020-01-19</td>
-             </tr>
-             <tr>
-               <td><input type = "checkbox" name = "check"></td>
-               <td name = "num">1</td>
-               <td name = "category">알림장</td>
-               <td name = "name">박응애</td>
-               <td name = "title">박응애 알림장입니다.</td>
-               <td name = "writer">park</td>
-               <td name = "date">2020-01-19</td>
              </tr>
            </table>
                  </div><br>
@@ -122,34 +119,7 @@
                <th >제목</th>
                <th>기안자</th>               
                <th>작성일</th>
-             </tr>
-             <tr>
-               <td><input type = "checkbox"></td>
-               <td>2020-001</td>
-               <td>휴가신청</td>
-               <td>검토</td>
-               <td>휴가 신청의 건</td>
-               <td>김선생</td>
-               <td>2020-01-10</td>
-             </tr>
-             <tr>
-               <td><input type = "checkbox"></td>
-               <td>2020-004</td>
-               <td>예산신청</td>
-               <td>검토</td>
-               <td>롤 스킨구매관련 예산신청</td>
-               <td>롤선생</td>
-               <td>2020-01-20</td>
-             </tr>
-             <tr>
-               <td><input type = "checkbox"></td>
-               <td>2020-007</td>
-               <td>예산신청</td>
-               <td>완료</td>
-               <td>원생 담배지원금</td>
-               <td>임도훈</td>
-               <td>2020-01-20</td>
-             </tr>              
+             </tr>           
            </table>  
            
            <nav aria-label="Page navigation example">
@@ -180,10 +150,77 @@
         </div>
        <!-- /.container-fluid -->
 
-     </div>
      <!-- End of Main Content -->
-     
      <%@ include file = "../intranet/common/footer.jsp" %>
+     <script type="text/javascript">
+	
+		document.addEventListener('DOMContentLoaded', function() {
+			var Calendar = FullCalendar.Calendar;
+			var Draggable = FullCalendarInteraction.Draggable;
+			var calendarEl = document.getElementById('calendar');
+			var calendar = new Calendar(calendarEl, {
+				plugins : [ 'interaction', 'dayGrid', 'timeGrid'],
+				header : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'dayGridMonth,timeGridWeek,timeGridDay'
+				},
+				navLinks :true,
+				editable : true,
+				droppable : true,
+				allDaySlot : false,
+				events: "../../resources/intranet/ajax/data.json",
+				drop : function(info) {
+					if (checkbox.checked) {
+						info.draggedEl.parentNode.removeChild(info.draggedEl);
+					}
+				},
+				locale : 'ko',
+				dataeClick : function(){}
+				
+			});
+			calendar.render();
+			jQuery.noConflict();
+			calendar.on('dateClick', function(info) {
+				console.log('sibal' + info.dateStr);
+				$('#Event').modal('show');
+				$('#startDate').attr('value', info.dateStr);
+				$('#endDate').attr('value', info.dateStr);
+			});
+			calendar.on('dataClick',function(info){
+				$('#Event').modal('show');
+			})
+		});
+		
+		function check(){
+			var event = new Object();
+			event._id = cData.length+1;
+			event.title = $('#eventTitle').val();
+			event.start = $('#startDate').val();
+			event.end = $('#endDate').val();
+			event.type= $('#eventType').val();
+			event.username = $('#user').val();
+			event.backgroundColor="#a9e34b";
+			event.textColor="#ffffff"
+			
+			console.log(event.title);
+			var jsonData = JSON.stringify(event);
+			
+			if(event.title == ''||event.type==''){
+				alert('빈 항목이 있습니당');
+				return false;
+			}else{
+				cData.push(jsonData);
+				$('#chidden').attr("value",JSON.stringify(cData));
+				console.log($('#chidden').val());
+				return true;
+			};
+			
+			
+			
+		};
+		
+	</script>
      
  
 </body>

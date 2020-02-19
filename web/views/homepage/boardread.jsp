@@ -84,7 +84,7 @@
                                 <tr>
                                     <th class="tatd">내용 </th>
                                     <td colspan="3">
-                                    <div style="height: auto;">
+                                    <div style="height: auto; min-height: 500px">
                                          <% if(nameArr[0]!="1"){ %>
                                     		<% for(int i=0; i<nameArr.length ;i++){ %>
                                 			<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/boardUploadFIles/<%= nameArr[i] %>" style="max-height: 500px; max-width: 630px">

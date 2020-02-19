@@ -1,13 +1,16 @@
 package semi.intranet.calendar.controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+
+import semi.intranet.calendar.model.service.EventService;
 
 /**
  * Servlet implementation class ReadEventServlet
@@ -28,7 +31,17 @@ public class ReadEventServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8"); 
+		
+		EventService es = new EventService();
+		JSONArray result = new JSONArray();
+		result = es.readEvent();
+		System.out.println(result.toJSONString());
+		if(result != null) {
+			response.getWriter().print(result);
+		}
+		
 	}
 
 	/**
