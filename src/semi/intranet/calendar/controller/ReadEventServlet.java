@@ -1,25 +1,28 @@
 package semi.intranet.calendar.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+
 import semi.intranet.calendar.model.service.EventService;
 
 /**
- * Servlet implementation class UpdateEventServlet
+ * Servlet implementation class ReadEventServlet
  */
-@WebServlet("/updateEvent.ev")
-public class UpdateEventServlet extends HttpServlet {
+@WebServlet("/readEvent.ev")
+public class ReadEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateEventServlet() {
+    public ReadEventServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +30,18 @@ public class UpdateEventServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
-		String event = request.getParameter("event");
-		String newstart = request.getParameter("newstart");
-		String newend = request.getParameter("newend");
-		System.out.println(event);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8"); 
 		
 		EventService es = new EventService();
-		int result = es.updateEvent(event,newstart,newend);
+		JSONArray result = new JSONArray();
+		result = es.readEvent();
+		
+		System.out.println(result.get(0));
+		if(result != null) {
+			response.getWriter().print(result);
+		}
 		
 	}
 

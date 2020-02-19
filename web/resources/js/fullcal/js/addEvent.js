@@ -80,15 +80,16 @@ var newEvent = function (start, end, eventType) {
         //새로운 일정 저장
         $.ajax({
             type: "get",
-            url: "InsertEvent.ev",
+            url: "/semi/InsertEvent.ev",
             data: {
                 event : JSON.stringify(eventData)
             },
             dataType : 'json',
             success: function (response) {
-                //DB연동시 중복이벤트 방지를 위한
-                //$('#calendar').fullCalendar('removeEvents');
-                //$('#calendar').fullCalendar('refetchEvents');
+            	history.replaceState({}, null, location.pathname);
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('refetchEvents');
+                
             }
         });
     });
