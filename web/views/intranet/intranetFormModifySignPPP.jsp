@@ -55,8 +55,8 @@
           		</option>
            </select>
            <select name = "formLineP" id = "formLineP1">
-           	  <option value="<%= form.getFsignck1() %>" ><%= form.getFsignck1() %>
-           	  <option value="Y">승인</option>
+              <option value="선택">선택</option>
+              <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
           </td>
@@ -69,8 +69,8 @@
 	            	</option>
             </select>
             <select name = "formLineP" id = "formLineP2">
-           	  <option value="<%= form.getFsignck2() %>" ><%= form.getFsignck2() %>
-           	  <option value="Y">승인</option>
+              <option value="선택">선택</option>
+              <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
           </td>
@@ -83,8 +83,8 @@
 	            	</option>
             </select>
             <select name = "formLineP" id = "formLineP3">
-           	  <option value="<%= form.getFsignck3() %>" ><%= form.getFsignck3() %>
-           	  <option value="Y">승인</option>
+              <option value="선택">선택</option>
+              <option value="Y">승인</option>
               <option value="N">반려</option>
             </select>
           </td>
@@ -96,7 +96,7 @@
 	        <tr>
 	          <th>반려이유</th>
 	          <td colspan="7">
-	            <input type="text" name = "formReturn" style = "width: 99%;" value="<%= form.getFreturnmsg() %>" disabled>
+	            <input type="text" name = "formReturn" style = "width: 99%;" disabled>
 	          </td>
 	        </tr>
 	        <tr>
@@ -144,24 +144,20 @@ $(function(){
 	var sign2 = $('input[id=signCode2]').val();
 	var sign3 = $('input[id=signCode3]').val();
 	
-	var sign1p = $('select[id=formLineP1]').val();
-	var sign2p = $('select[id=formLineP2]').val();
-	var sign3p = $('select[id=formLineP3]').val();
 	
-	
-	if(sign1 == empId && sign1p != null ) {
+	if(sign1 == empId) {
 		$('#formLineP1').attr('disabled', false);
 	} else {
 		$('#formLineP1').attr('disabled', true);
 	}
 	
-	if(sign2 == empId && sign2p != null) {
+	if(sign2 == empId) {
 		$('#formLineP2').attr('disabled', false);
 	} else {
 		$('#formLineP2').attr('disabled', true);
 	}
 	
-	if(sign3 == empId && sign3p != null) {
+	if(sign3 == empId) {
 		$('#formLineP3').attr('disabled', false);
 	} else {
 		$('#formLineP3').attr('disabled', true);
@@ -181,10 +177,6 @@ function fReturn(o){
 		$('input[name=formReturn]').attr('disabled',false);
 	}
 }
-
-$(function(){
-	
-});
 
 
 

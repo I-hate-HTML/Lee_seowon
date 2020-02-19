@@ -1,18 +1,21 @@
 package semi.intranet.calendar.model.dao;
 
+import static semi.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import semi.intranet.calendar.model.vo.Calendar;
-import semi.intranet.daily.model.dao.DailyDao;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import static semi.common.JDBCTemplate.*;
+import semi.intranet.daily.model.dao.DailyDao;
 
 public class EventDao {
 	private Properties prop = new Properties();
@@ -53,5 +56,27 @@ public class EventDao {
 		
 		return result;
 	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

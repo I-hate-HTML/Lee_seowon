@@ -27,6 +27,23 @@ public class AlimService {
 		
 		return listCount;
 	}
+	
+	/**
+	 * 알림장 반 게시글 총 글 수 확인
+	 * @param empNo
+	 * @return
+	 */
+	public int getClassListCount(int empNo) {
+
+		Connection con = getConnection();
+		
+		int listCount = ad.getClassListCount(con, empNo);
+		
+		return listCount;
+	}
+
+	
+	
 
 	/**
 	 * 알림장 전체 리스트 가져오기
@@ -192,6 +209,7 @@ public class AlimService {
 		return list;
 	}
 
+	
 	
 
 	
