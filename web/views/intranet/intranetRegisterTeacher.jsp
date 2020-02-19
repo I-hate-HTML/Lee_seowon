@@ -220,7 +220,7 @@
 		//직원정보 테이블로 불러오는 ajax
 		$(function() {
 			$.ajax({
-				url : "/semi/empCall.do",
+				url : "empCall.do",
 				type : "get",
 				success : function(data) {
 					$.each(data, function(index, value) {
