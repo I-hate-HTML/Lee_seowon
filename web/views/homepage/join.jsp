@@ -474,7 +474,7 @@
 		</script>
 		
 		
-		<%@ include file="common/footer.jsp"%>
+		<%@ include file="common/footer2.jsp"%>
 		
 </body>
 </html>

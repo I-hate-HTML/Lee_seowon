@@ -60,8 +60,8 @@
                   </ul>
               	</div>
               <div class="d-flex justify-content-center">
-                  <button class="btn" style="background: #002c5f; color: white; width: 150px; height: 50px; margin: 50px;" onclick="location='homeindex.jsp'">
-                      메인으로 가기
+                  <button class="btn" style="background: #002c5f; color: white; width: 150px; height: 50px; margin: 50px;" onclick="location='../../index.jsp'">
+                      로그인하러 가기
                   </button>
                 </div>   
             </div> 
@@ -69,7 +69,7 @@
           </div>
         </div>
          <!-- Footer -->
-	<%@ include file="common/footer.jsp"%>
+	<%@ include file="common/footer2.jsp"%>
     
     </body>
 </html>
