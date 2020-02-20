@@ -114,5 +114,16 @@ public class BoardService {
 		
 		return list;
 	}
+
+	public int deleteBoard(int pbno) {
+		Connection con = getConnection();
+		
+		int result = bDao.deleteBoard(con,pbno);
+		if(result>0)commit(con);
+		else rollback(con);
+		
+		close(con);
+		return result;
+	}
 }
 	

@@ -132,7 +132,7 @@
                     
                     <% for(int p = startPage; p <= endPage; p++){
     						if(p == currentPage){	 %>
-    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=p%>&nowschval=<%=nowschval %>"+"&nowkeyword=<%=nowkeyword%>" ><%=p %></a></li>
+    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=p%>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>" ><%=p %></a></li>
     				<%		}else{ %>
 						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/searchboard.bo?currentPage=<%=p %>&nowschval=<%=nowschval %>&nowkeyword=<%=nowkeyword%>"><%=p %></a></li>
 					<%	    } %>

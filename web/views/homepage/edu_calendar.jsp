@@ -9,8 +9,6 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>교육을 합시다</title>
-        <script src = "../signup/js/jquery-3.4.1.min.js"></script>
-        <script src = "../signup/js/jquery.selectbox.js"></script>
     
       	<!-- 개별페이지 CSS -->
       	<!-- 이것만 위치 맞춰주면됨 -->
@@ -96,17 +94,7 @@
             </div>
             </div>
             </div>
-           <% if(true){ %>
-            <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
-            	<input type="file"id="fileinput" class="btn btn-primary"
-               	style="background: #002c5f; color: white; width: 100px;"
-                accept=".jpg,.jpeg,.png,.gif,.jfif"onchange="imageURL(this)">
-                	사진 업로드
-            </label>
-             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
-             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="" >등록</button>               
-           <% } %>
-           
+            <form id="imguploadform">
             <% if(true){ %>
             <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
             	<input type="file" id="fileinput" class="btn btn-primary"
@@ -117,6 +105,8 @@
              <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
              <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" id="sendimg" >등록</button>               
            <% } %>
+           <input type="hidden" id="edudate" name="edudate">
+           </form>
         </div>
         <br>
         <br>
@@ -127,24 +117,22 @@
 
 
       <script type="text/javascript">
-      
-
-      
-
 		$('#sendimg').click(function(){
+			
+			var form = $('#imguploadform')[0];
+			var data = new FormData(form);
 			
 		        $.ajax({
 		            type: "post",
-		            enctype: 'multipart/form-data',
-		            url: "/semi/fcalendar.me",
+		            enctype:'multipart/form-data',
+		            url: "/semi/ecalinputimg.me",
 		            data: {
-						imgsend:$('#fileinput')[0]
-					}, 
-					processData: false,
-		            contentType: false,	
-		            cache: false,
+						data:data
+					},
+					contentType : false,
+			        processData : false,
 		            success: function (data) {
-		            	alert(data);
+		            	alert("성공!");
 		            },
 		            error: function () {
 		                alert("fail");
@@ -208,23 +196,25 @@
         
         //calendar 날짜표시
         function drawDays(){
-            $("#cal_top_year").text(year);
-            $("#cal_top_month").text(month);
-            for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
-                if(i%7==1){
-                    $tdDay.eq(i).text(++dayCount+lol[i%8]);
-                }else if(i%7==4){
-                    $tdDay.eq(i).text(++dayCount+lol[i%8]);
-                }else{
-                    $tdDay.eq(i).text(++dayCount);
-                }
-            }
-            for(var i=0;i<42;i+=7){
-                $tdDay.eq(i).css("color","red");
-            }
-            for(var i=6;i<42;i+=7){
-                $tdDay.eq(i).css("color","blue");
-            }
+            $("#foodyear").text(year);
+            $("#foodmonth").text(month);
+            $("#fooddate").val(String(year) + month);
+            
+            $.ajax({
+            	url : "/semi/fcalimg.me",
+            	type : "post",
+            	data:{
+            		fooddate : $("#fooddate").val()
+            	},success:function(data){
+            		$('#foodimg').attr('src','<%=request.getContextPath()%>/resources/homepage/images/foodimg/'+data);
+            	},error:function(){
+            		alert("에러났다 에베베벱베베벱ㅂ베벱");
+            	}
+            	
+            });
+            
+      		
+
         }
      
         //calendar 월 이동
@@ -235,7 +225,7 @@
                 year--;
             }
             if(month<10){
-                month=String("0"+month);
+                month=String(month);
             }
             getNewInfo();
             }
@@ -247,7 +237,7 @@
                 year++;
             }
             if(month<10){
-                month=String("0"+month);
+                month=String(month);
             }
             getNewInfo();
         }
@@ -262,6 +252,7 @@
             lastDay = new Date(year,month,0);
             drawDays();
         }
+        
     </script>
     </body>
 </html>
