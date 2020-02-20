@@ -30,29 +30,31 @@ public class GboardDao {
 		ArrayList<Gboard> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+//		String sql = prop.getProperty("selectList");
+		String sql ="SELECT * FROM(SELECT ROWNUM RNUM,G.* FROM(SELECT * FROM GBOARD WHERE STATUS='Y' ORDER BY GNO DESC) G) WHERE RNUM BETWEEN ? AND ?";
 		try {
+			
 			pstmt = con.prepareStatement(sql);
+			
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit -1;
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(sql);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
 			list = new ArrayList<Gboard>();
+			
 			
 			while(rset.next()) {
 				Gboard g = new Gboard();
-				
+//				g.setGno(listCount - rset.getInt("RNUM")+1);
 				g.setGno(rset.getInt("GNO"));
 				g.setGtitle(rset.getString("gtitle"));
-				g.setGcontent(rset.getString("gcontent"));
-				g.setGwriter(rset.getString("gwriter"));
 				g.setGcount(rset.getInt("gcount"));
-				g.setGdate(rset.getDate("gdate"));
 //				g.setGfile(rset.getString("gfile"));
 				String[] sarr = (rset.getString("gfile").split(","));
 				g.setGfile(sarr[0]);
-				g.setStatus(rset.getString("status"));
-
 				list.add(g);
 				
 			}
@@ -60,7 +62,7 @@ public class GboardDao {
 			e.printStackTrace();;
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}

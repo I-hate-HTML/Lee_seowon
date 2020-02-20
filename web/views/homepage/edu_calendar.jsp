@@ -13,7 +13,6 @@
       	<!-- 개별페이지 CSS -->
       	<!-- 이것만 위치 맞춰주면됨 -->
       	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
-		<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">      	
           
       	<!-- 부트스트랩 -->
       	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -32,6 +31,7 @@
       	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
       	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
         
+		<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">      	
 
         <style type="text/css">
             .cal_top{

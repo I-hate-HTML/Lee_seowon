@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav2.jsp" %>
-<%@ include file = "intranetFormList.jsp" %>
 <%@ page import="semi.intranet.form.model.vo.Form" %>
 
 <%
@@ -51,36 +50,36 @@
           <th>결재자</th>
           <td>
            <select name="formLine" id = "formLine1" disabled>
-         		<option value="<%= form.getFsign1() %>" selected><%= form.getFsign1() %> 		
-         			<input type ="hidden" name="signCode" value="<%= form.getFsignId1() %>">
+         		<option value="" selected>		
+         			<input type ="hidden" name="signCode" value="">
           		</option>
            </select>
            <select name = "formLineP" id = "formLineP1" disabled >            
-             <option value="<%= form.getFsignck1() %>" ><%= form.getFsignck1() %></option>
+             <option value="" ></option>
            </select> 
           </td>
           <th>결재자</th>
           <td>
             <select name="formLine" id = "formLine2" disabled>
             	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign2() %>" selected><%= form.getFsign2() %>    		
-            			<input type ="hidden" name="signCode" value="<%= form.getFsignId2() %>">
+            		<option value="" selected>   		
+            			<input type ="hidden" name="signCode" value="">
 	            	</option>
             </select>
             <select  name = "formLineP" id = "formLineP2" disabled>
-              <option value="<%= form.getFsignck2() %>" ><%= form.getFsignck2() %></option>
+              <option value="" ></option>
             </select> 
           </td>
           <th>결재자</th>
           <td>
             <select name="formLine" id = "formLine3" disabled>
             	<option value="">결재자 선택</option>
-            		<option value="<%= form.getFsign3() %>" selected><%= form.getFsign3() %>      		
-            			<input type ="hidden" name="signCode" value="<%= form.getFsignId3() %>">
+            		<option value="" selected>      		
+            			<input type ="hidden" name="signCode" value="">
 	            	</option>
             </select>
             <select  name = "formLineP" id = "formLineP3" disabled>
-              <option value="<%= form.getFsignck3() %>" ><%= form.getFsignck3() %></option>
+              <option value="" ></option>
             </select> 
           </td>
           <td style="text-align: center;"colspan="2">

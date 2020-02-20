@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import semi.intranet.calendar.model.service.EventService;
 
 /**
@@ -32,10 +34,15 @@ public class UpdateEventServlet extends HttpServlet {
 		String event = request.getParameter("event");
 		String newstart = request.getParameter("newstart");
 		String newend = request.getParameter("newend");
-		System.out.println(event);
+		
 		
 		EventService es = new EventService();
-		int result = es.updateEvent(event,newstart,newend);
+		JSONObject obj = es.selectOne(event);
+		 
+		obj.put("start", newstart);
+		obj.put("end", newend);
+		
+		int result = es.updateEvent(event,obj.toString());
 		
 	}
 
