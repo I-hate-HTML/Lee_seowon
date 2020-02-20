@@ -356,6 +356,50 @@ public class FormService {
 		return list;
 	}
 
+	/**
+	 * READ용 결재자 리스트 가져오기 --> 사용
+	 * @param list
+	 * @param msg 
+	 * @param yn 
+	 * @return
+	 */
+	public ArrayList<SignList> getSignSelect(String list, String yn, String msg) {
+		
+		
+		Connection con = getConnection();
+		
+
+		ArrayList<SignList> SignList = fd.getSignSelect(con, list);
+		
+		// 결재 유무 넣기
+		if(yn != null) {
+			
+			SignList a = new SignList();
+			
+			String[] ynList = yn.split(",");
+			
+			for(int i = 0; i < ynList.length; i++) {
+				SignList.get(i).setSyn(ynList[i]);
+			}
+		} 
+		
+		// 결재 메시지 넣기
+		if(msg != null) {
+			
+			SignList a = new SignList();
+			
+			String[] msgList = msg.split(",");
+			
+			for(int i = 0; i < msgList.length; i++) {				
+				SignList.get(i).setSmsg(msgList[i]);
+			}
+		}
+		
+		close(con);
+		
+		return SignList;
+	}
+
 	
 
 

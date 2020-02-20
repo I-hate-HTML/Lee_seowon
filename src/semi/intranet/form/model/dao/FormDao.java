@@ -178,7 +178,7 @@ public class FormDao {
 	
 
 	/**
-	 * 품의서 게시판 목록 읽기 + 페이징 처리
+	 * 품의서 게시판 목록 읽기 + 페이징 처리 --> 맞음
 	 * @param con
 	 * @param empNum 
 	 * @param limitContent 
@@ -188,6 +188,8 @@ public class FormDao {
 	public ArrayList<Form> listForm(Connection con, int empNum, int currentPage, int limitContent) {
 		
 		ArrayList<Form> list = new ArrayList<Form>();
+		
+		String emp = Integer.toString(empNum);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -202,7 +204,7 @@ public class FormDao {
 			int endContent = startContent + limitContent -1;
 			
 			pstmt.setInt(1, empNum);
-			pstmt.setInt(2, '%'+empNum+'%');
+			pstmt.setString(2, '%'+emp+'%');
 			pstmt.setInt(3, endContent);
 			pstmt.setInt(4, startContent);
 			
@@ -345,7 +347,7 @@ public class FormDao {
 				f.setFwriter(rset.getString("WNAME"));
 				f.setfWriterId(rset.getInt("DRAFT_EMP"));
 				f.setFdate(rset.getDate("DRAFT_DATE"));
-				f.setfSignList(rset.getString("SING_EMP"));
+				f.setfSignList(rset.getString("SIGN_EMP"));
 				f.setfSignckList(rset.getString("SIGN_YN"));
 				f.setFreturnmsg(rset.getString("RETURN_REASON"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
@@ -543,6 +545,52 @@ public class FormDao {
 		
 		
 		return result;
+	}
+
+
+
+	/**
+	 * READ용 결재자 리스트 가져오기 --> 사용
+	 * @param con
+	 * @param list
+	 * @return
+	 */
+	public ArrayList<SignList> getSignSelect(Connection con, String list) {
+		
+		ArrayList<SignList> SignList = new ArrayList<SignList>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getSignSelect");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, list);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				SignList s = new SignList();
+				
+				s.setPosition(rset.getString("JOB"));
+				s.setScode(rset.getInt("EMP_CODE"));
+				s.setSname(rset.getString("EMP_NAME"));
+				
+				SignList.add(s);
+			
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return SignList;
 	}
 
 

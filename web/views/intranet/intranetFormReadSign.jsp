@@ -21,7 +21,7 @@
         		<h6 class="m-0 font-weight-bold text-primary">품의결재창</h6>
             </td>
             <td align="right">
-              <button class = "btn btn-primary btn-sm delete">삭제</button>
+              <button class = "btn btn-primary btn-sm sign">결재완료</button>
             </td>
           </tr>
         </table>
@@ -85,7 +85,9 @@
 <script>
 
 
+// 데이터 가져오는 용
 $(function(){
+	var emp = '2015001'; //--> 나중에 수정!!
 	
 	var signNo = '<%= form.getfSignList() %>'
 	var signYn = '<%= form.getfSignckList() %>'
@@ -111,6 +113,8 @@ $(function(){
 					var empNo = data.signList[i].scode;
 					var yn = data.signList[i].syn;
 					var msg = data.signList[i].smsg;
+					
+					var ynList="";
 					
 					if(yn == null || yn == 'null') {
 						yn = "결재전";
@@ -153,7 +157,14 @@ $(function(){
 														      'id':'formLineP'+i,
 														      'disabled' : true
 													         });
-					var $option2 = $('<option>').val(yn).text(yn); 
+					var $option2 = $('<option>').val(yn).text(yn);
+					
+					
+					// 활성화창
+					var $optionA = $('<option>').text("선택");
+					var $optionB = $('<option>').val("Y").text("승인");
+					var $optionC = $('<option>').val("N").text("반려");
+					
 					
 					
 					var $td3 = $('<td>').attr('colspan','3'); 
@@ -163,12 +174,28 @@ $(function(){
 													'disabled' : true
 													}).css('width','100%').val(msg);
 					
-					$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
-					$tr1.append($th2).append($td2.append($select2.append($option2)));
-					$tr2.append($td3.append($input3));
 					
-					$('#signTable').append($tr1);
-					$('#signTable').append($tr2);
+					// 결재자이면 자기 결재창 활성화 아니면 비활성화
+					if(emp == empNo) {
+						
+						$select2.attr('disabled' , false);
+						$input3.attr({'disabled':false,'placeholder':'품의 관련 의견을 적어주세요'}).val(null);
+						
+						$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
+						$tr1.append($th2).append($td2.append($select2.append($optionA).append($optionB).append($optionC)));
+						$tr2.append($td3.append($input3));
+						
+						$('#signTable').append($tr1);
+						$('#signTable').append($tr2);
+						
+					} else {
+						$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
+						$tr1.append($th2).append($td2.append($select2.append($option2)));
+						$tr2.append($td3.append($input3));
+						
+						$('#signTable').append($tr1);
+						$('#signTable').append($tr2);
+					}
 					
 					
 				}
