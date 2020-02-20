@@ -3,6 +3,7 @@
 
 <%
  Member m = (Member)session.getAttribute("member"); 
+ request.setAttribute("member", m);
 %>    
 
 

@@ -25,7 +25,7 @@ public class Member implements Serializable{
 	private String cgender;
 	private int cclass;
 	private String mstatus;
-	
+	private int job_code;
 	// 기본생성자
 	public Member() {
 	}
@@ -65,7 +65,7 @@ public class Member implements Serializable{
 	// 전체 데이터 조회
 	public Member(int mno, String userId, String userPwd, String userName, String gender, String email, String phone,
 			String address, Date enrolldate, int cno, String cname, Date cbdate, String cgender, int cclass,
-			String mstatus) {
+			String mstatus,int job_code) {
 		super();
 		this.mno = mno;
 		this.userId = userId;
@@ -82,6 +82,7 @@ public class Member implements Serializable{
 		this.cgender = cgender;
 		this.cclass = cclass;
 		this.mstatus = mstatus;
+		this.job_code = job_code;
 	}
 
 	public int getMno() {
@@ -204,13 +205,24 @@ public class Member implements Serializable{
 		this.mstatus = mstatus;
 	}
 
+	public int getJob_code() {
+		return job_code;
+	}
+
+	public void setJob_code(int job_code) {
+		this.job_code = job_code;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", gender=" + gender + ", email=" + email + ", phone=" + phone + ", address=" + address
 				+ ", enrolldate=" + enrolldate + ", cno=" + cno + ", cname=" + cname + ", cbdate=" + cbdate
-				+ ", cgender=" + cgender + ", cclass=" + cclass + ", mstatus=" + mstatus + "]";
+				+ ", cgender=" + cgender + ", cclass=" + cclass + ", mstatus=" + mstatus + ", job_code=" + job_code
+				+ "]";
 	}
+
+	
 
 	
 	

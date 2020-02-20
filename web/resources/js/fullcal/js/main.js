@@ -210,7 +210,7 @@ var calendar = $('#calendar').fullCalendar({
 			type: "get",
 			url: "/semi/updateEvent.ev",
 			data: {
-				event:event.title,
+				event : event.title,
 				newstart : newDates.startDate,
 				newend : newDate.endDate
 			},
@@ -246,7 +246,7 @@ var calendar = $('#calendar').fullCalendar({
 			type: "get",
 			url: "/semi/updateEvent.ev",
 			data: {
-				event: event.title,
+				event : event.title,
 				newstart : newDates.startDate,
 				newend : newDates.endDate
 			},
@@ -315,7 +315,7 @@ var calendar = $('#calendar').fullCalendar({
 
 	//이벤트 클릭시 수정이벤트
 	eventClick: function (event, jsEvent, view) {
-		editEvent(event);
+		editEvent1(event);
 	},
 
 	locale: 'ko',

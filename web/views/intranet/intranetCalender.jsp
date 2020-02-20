@@ -132,7 +132,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">닫기</button>
 								<button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-								<button type="button" class="btn btn-primary" id="updateEvent">저장</button>
+								<button type="button" class="btn btn-primary" id="editEvent111">저장</button>
 							</div>
 						</div>
 
@@ -287,7 +287,7 @@
 		
 		function check(){
 			var event = new Object();
-			event._id = cData.length+1;
+			event._id = cData.length+1;jquery click 반복
 			event.title = $('#eventTitle').val();
 			event.start = $('#startDate').val();
 			event.end = $('#endDate').val();

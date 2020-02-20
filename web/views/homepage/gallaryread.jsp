@@ -118,12 +118,11 @@
 
 	<%@ include file = "common/footer.jsp" %>
 	
-<!-- 	<script>
-		$('src').click({
-			location.href="$(this).attr('src')";
+	<script>
+		$('img').click(function(){
+			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
-	
-	</script> -->
+	</script>
 
 </body>
 </html>

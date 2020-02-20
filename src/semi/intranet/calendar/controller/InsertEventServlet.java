@@ -44,8 +44,8 @@ public class InsertEventServlet extends HttpServlet {
 		int result = 0;
 		
 		String jsonstr = request.getParameter("event");
-		
-		result = ev.InsertEvent(jsonstr);
+		String eventcode = request.getParameter("eventcode");
+		result = ev.InsertEvent(jsonstr,eventcode);
 		
 	}
 
