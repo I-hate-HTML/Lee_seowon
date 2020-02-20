@@ -28,7 +28,7 @@
 									class="dropdown-item" href="./event_calender.jsp">행사 안내</a>
 							</div></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/gboardlist" id="dropdown01">앨범</a></li>
-						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/boardlsit.do" id="dropdown01">커뮤니티</a></li>
+						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="/semi/boardlsit.do" id="dropdown01">공지사항</a></li>
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">마이페이지</a>
 							<div class="dropdown-menu " aria-labelledby="dropdown01">
 								<a class="dropdown-item" href="/semi/views/homepage/edit_member.jsp">개인정보수정</a>
