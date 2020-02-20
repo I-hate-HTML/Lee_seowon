@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.home.gboard.model.service.GboardService;
 import semi.home.gboard.model.vo.Gboard;
+import semi.home.gboard.model.vo.PageInfo;
 
 /**
  * Servlet implementation class SelectGboardListServlet
@@ -59,11 +60,13 @@ public class SelectGboardListServlet extends HttpServlet {
 	list = gs.selectList(currentPage,limit);
 	
 	String page ="";
-	
 	if(list != null) {
 		
 		page = "views/homepage/gallaryBoard.jsp";
 		request.setAttribute("list", list);
+		
+		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		request.setAttribute("pi", pi);
 		
 	} else {
 		

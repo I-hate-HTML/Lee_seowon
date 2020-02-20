@@ -26,34 +26,35 @@ public class GboardDao {
 		}
 	}
 	
-	public ArrayList<Gboard> selectList(Connection con,int currentPage,int limit,int listCount)  {
+	public ArrayList<Gboard> selectList(Connection con,int currentPage,int limit)  {
 		ArrayList<Gboard> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+//		String sql = prop.getProperty("selectList");
+		String sql ="SELECT * FROM(SELECT ROWNUM RNUM,G.* FROM(SELECT * FROM GBOARD WHERE STATUS='Y' ORDER BY GNO DESC) G) WHERE RNUM BETWEEN ? AND ?";
 		try {
+			
 			pstmt = con.prepareStatement(sql);
+			
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit -1;
-			pstmt.setInt(1, endRow);
-			pstmt.setInt(2, startRow);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Gboard>();
 			
+			
 			while(rset.next()) {
 				Gboard g = new Gboard();
-				g.setGno(listCount - rset.getInt("RNUM")+1);
-//				g.setGno(rset.getInt("GNO"));
+//				g.setGno(listCount - rset.getInt("RNUM")+1);
+				g.setGno(rset.getInt("GNO"));
 				g.setGtitle(rset.getString("gtitle"));
-				g.setGcontent(rset.getString("gcontent"));
-				g.setGwriter(rset.getString("gwriter"));
 				g.setGcount(rset.getInt("gcount"));
-				g.setGdate(rset.getDate("gdate"));
 //				g.setGfile(rset.getString("gfile"));
 				String[] sarr = (rset.getString("gfile").split(","));
 				g.setGfile(sarr[0]);
-				g.setStatus(rset.getString("status"));
-
 				list.add(g);
 				
 			}
