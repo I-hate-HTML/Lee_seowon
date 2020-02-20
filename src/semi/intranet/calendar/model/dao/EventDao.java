@@ -32,7 +32,7 @@ public class EventDao {
 			e.printStackTrace();
 		}
 	}
-	public int InsertEvent(Connection con, String addjson) {
+	public int InsertEvent(Connection con, String addjson, String eventcode) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -40,7 +40,8 @@ public class EventDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, addjson);
+			pstmt.setString(1, eventcode);
+			pstmt.setString(2, addjson);
 			result = pstmt.executeUpdate();
 			
 			
@@ -68,8 +69,7 @@ public class EventDao {
 
 			while(rset.next()) {
 				JSONObject aa = new JSONObject();
-				aa = (JSONObject) parser.parse(rset.getString("E_DATA"));
-				aa.put("_id", rset.getInt(1));
+				aa = (JSONObject) parser.parse(rset.getString("E_CONTENT"));
 				result.add(aa);
 			}
 
@@ -85,53 +85,88 @@ public class EventDao {
 
 		return result;
 	}
-	public int updateEvent(Connection con, String event, String newstart, String newend) {
+	public int updateEvent(Connection con, String event, String jsonstr) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		Statement stmt = null;
-		String sql = prop.getProperty("readEvent");
-		String clear = prop.getProperty("clearEvent");
-		String insert = prop.getProperty("insertEvent");
-		ResultSet rset = null;
-
-		JSONParser parser = new JSONParser();
-		JSONArray jall = new JSONArray();
-		JSONObject cll = new JSONObject();
-		String all = "";
-
+		
+		String sql = prop.getProperty("updateEvent");
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(sql);
-
-			if(rset.next()) {
-				all = rset.getString(1);
-				jall = (JSONArray) parser.parse(all);
-				for(int i=0;i<jall.size();i++) {
-					cll = (JSONObject) jall.get(i);
-					if(cll.get("title").equals(event)) {
-						cll.put("start", newstart);
-						cll.put("end", newend);
-						break;
-					}
-				}
-				System.out.println(jall.toString());
-				result = stmt.executeUpdate(clear);
-				if(result>=0) {
-					pstmt = con.prepareStatement(insert);
-					pstmt.setString(1, jall.toString());
-				}
-			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, jsonstr);
+			pstmt.setString(2, event);
 			
-			
-			
-
+			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}catch(ParseException e) {
-			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 
 
+		return result;
+	}
+	public JSONObject selectOne(Connection con,String eventid) {
+		ResultSet rset = null;
+		JSONObject obj = new JSONObject();
+		JSONParser parser = new JSONParser();
+		
+		PreparedStatement pstmt = null;
+		String call = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(call);
+			pstmt.setString(1, eventid);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				obj = (JSONObject)parser.parse(rset.getString(1));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch(ParseException e){
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return obj;
+	}
+	public int deleteEvent(Connection con, String before) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteOne");
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, before);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int editEvent(Connection con, String before, String event, String after) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("editEvent");
+		int result = 0;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, after);
+			pstmt.setString(2, event);
+			pstmt.setString(3, before);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 
