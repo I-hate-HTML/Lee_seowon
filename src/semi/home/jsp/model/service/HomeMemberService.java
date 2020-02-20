@@ -100,6 +100,9 @@ public class HomeMemberService {
 	public int searchPwd(Member m) throws MemberException {
 		con = getConnection();
 		
+		String phonenum = hmDao.searchPhoneNum(con,m);
+		
+		
 		int result = hmDao.serchPwd(con,m);
 		if(result == 0) {
 			throw new MemberException("비밀번호 찾기 실패!");
