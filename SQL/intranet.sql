@@ -59,22 +59,7 @@ CREATE TABLE CLASS(
 --INSERT INTO CLASS VALUES(4,'밤잎',7,20);
 
 
-
-CREATE TABLE EMPLOYEE(
-    EMP_CODE NUMBER PRIMARY KEY,
-    EMP_NAME VARCHAR2(20) NOT NULL,
-    EMP_JOB  NUMBER,
-    EMP_NO VARCHAR2(50) NOT NULL UNIQUE,
-    EMP_PHONE VARCHAR2(50) NOT NULL,
-    EMP_ADDR VARCHAR2(150) NOT NULL,
-    HIRE_DATE DATE NOT NULL,
-    ENT_DATE DATE,
-    ENT_YN VARCHAR2(10) CHECK (ENT_YN IN('Y','N')),
-    EMP_CLASS NUMBER,
-    HOBONG NUMBER,
-    CONSTRAINT FK_EMP_JOB FOREIGN KEY(EMP_JOB) REFERENCES JOB(JOB_CODE),
-    CONSTRAINT FK_EMP_CLASS FOREIGN KEY(EMP_CLASS) REFERENCES CLASS(CLASS_CODE)
-);    
+  
 
 
 CREATE TABLE DRAFT(
@@ -165,28 +150,38 @@ CREATE TABLE FAMILY(
     FAMILY_MEMO VARCHAR2(50)
 );
 
-CREATE TABLE CALENDAR(
-    C_ID NUMBER PRIMARY KEY,
-    C_TITLE VARCHAR2(50) NOT NULL,
-    C_DESCRIPTION VARCHAR2(100) DEFAULT 'Lorem ipsum dolor sit incid idunt ut Lorem ipsum sit.',
-    C_START DATE NOT NULL,
-    C_END DATE,
-    C_USER VARCHAR2(10),
-    C_ALLDAY VARCHAR2(10)
-);
-
 CREATE TABLE EVENT(
-	E_TITLE VARCHAR2(50) NOT NULL,
-	E_CONTENT VARCHAR2(300),
-	E_START DATE NOT NULL,
-	E_END DATE NOT NULL,
-	E_TYPE VARCHAR2(20),
-	E_USER VARCHAR2(20)
-);
+    E_CODE VARCHAR2(50),
+	E_CONTENT CLOB NOT NULL
+); 
+
+INSERT INTO EVENT VALUES('급식남품업체 입찰','{"allDay":false,"backgroundColor":"#D25565","start":"2020-02-07 09:30","description":"동원식품, 한일식품, 롯데제과, 해테","end":"2020-02-07T15:00","_id":1,"title":"급식남품업체 입찰","type":"기타","textColor":"#ffffff","username":"영양사"}');
+INSERT INTO EVENT VALUES('화재안전점검','{"allDay":false,"backgroundColor":"#9775fa","start":"2020-02-01 12:30","description":"2020년 정기 화재점검","end":"2020-02-01T15:30","_id":2,"title":"화재안전점검","type":"기타","textColor":"#ffffff","username":"임도훈"}');
+INSERT INTO EVENT VALUES('2월 원생 생일 파티','{"allDay":true,"backgroundColor":"#ffa94d","start":"2020-02-03","description":"대상 : 임도훈,이서원,이승효","end":"2020-02-03","_id":3,"title":"2월 원생 생일 파티","type":"원내행사","textColor":"#ffffff","username":"교사"}');
+INSERT INTO EVENT VALUES('적금 만기','{"allDay":true,"backgroundColor":"#74c0fc","start":"2020-02-06","description":"적금 갱신 요함","end":"2020-02-06","_id":4,"title":"적금 만기","type":"기타","textColor":"#ffffff","username":"원장"}');
+INSERT INTO EVENT VALUES('원생 화스트페이스','{"allDay":true,"backgroundColor":"#63e6be","start":"2020-02-14","description":"비밀임","end":"2020-02-14","_id":6,"title":"원생 화스트페이스","type":"원내행사","textColor":"#ffffff","username":"원장"}');
+INSERT INTO EVENT VALUES('피시방 체험학습','{"allDay":true,"backgroundColor":"#a9e34b","start":"2020-02-18","description":"프로게이머 양성을 위한 조기교육","end":"2020-02-18","_id":7,"title":"피시방 체험학습","type":"체험학습","textColor":"#ffffff","username":"교사"}');
+INSERT INTO EVENT VALUES('2월 정기회의','{"allDay":false,"backgroundColor":"#4d638c","start":"2020-02-24 09:00","description":"졸면 사망","end":"2020-02-24T10:00","_id":8,"title":"2월 정기회의","type":"교사일정","textColor":"#ffffff","username":"교사"}');
+INSERT INTO EVENT VALUES('출장','{"allDay":true,"backgroundColor":"#495057","start":"2020-02-28","description":"사실 놀러감","end":"2020-02-28","_id":9,"title":"출장","type":"교사일정","textColor":"#ffffff","username":"원장"}');
+INSERT INTO EVENT VALUES('입학 원서접수','{"allDay":true,"backgroundColor":"#9775fa","start":"2020-02-19","description":"귀찮으니 하지마세요","end":"2020-02-21","_id":10,"title":"입학 원서접수","type":"원내행사","textColor":"#ffffff","username":"원장"}');
+INSERT INTO EVENT VALUES('원생 배틀로얄','{"allDay":true,"backgroundColor":"#D25565","start":"2020-02-05","description":"강한자만이 살아남는다","end":"2020-02-06","_id":11,"title":"원생 배틀로얄","type":"원내행사","textColor":"#ffffff","username":"교사"}');
+INSERT INTO EVENT VALUES('나나나','{"allDay":true,"backgroundColor":"#D25565","start":"2020-01-31","description":"","end":"2020-02-01","_id":12,"title":"나나나","type":"기타","textColor":"#ffffff","username":"교사"}');
 
 
-
-
+CREATE TABLE EMPLOYEE(
+    EMP_CODE NUMBER PRIMARY KEY,
+    EMP_NAME VARCHAR2(20) NOT NULL,
+    EMP_JOB  VARCHAR2(20) NOT NULL,
+    EMP_NO VARCHAR2(50) NOT NULL UNIQUE,
+    EMP_PHONE VARCHAR2(50) NOT NULL,
+    EMP_ADDR VARCHAR2(450) NOT NULL,
+    HIRE_DATE VARCHAR2(50) NOT NULL,
+    ENT_DATE VARCHAR2(50) DEFAULT 2000-01-01,
+    ENT_YN VARCHAR2(10),
+    EMP_CLASS VARCHAR2(20),
+    HOBONG NUMBER DEFAULT 1,
+    EMP_IMG VARCHAR2(50)
+);  
 
 
 

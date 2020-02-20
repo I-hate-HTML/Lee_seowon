@@ -68,8 +68,13 @@ public class BoardUpdateServlet extends HttpServlet {
 				newfile+=filelist.get(i)+",";
 			}
 		}
+		System.out.println(bfile.isEmpty());
 		
-		bfile= bfile+","+newfile;
+		if(bfile.isEmpty()) {
+			bfile=newfile;
+		}else {
+			bfile= bfile+","+newfile;
+		}
 		
 		int result = new BoardService().updateBoard(pbno,bcontent,bfile);
 		MyRenamePolicy.Filenamechange.clear();

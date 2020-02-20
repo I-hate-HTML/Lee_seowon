@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../intranet/common/nav2.jsp"%>
-<%= request.getContextPath() %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,7 +219,7 @@
 		//직원정보 테이블로 불러오는 ajax
 		$(function() {
 			$.ajax({
-				url : "empCall.do",
+				url : "/semi/empCall.do",
 				type : "get",
 				success : function(data) {
 					$.each(data, function(index, value) {
@@ -234,8 +233,6 @@
 						var $entDate = $('<td>').text(value.entDate);
 						var $empClass = $('<td>').text(value.empClass);
 						var $hobong = $('<td>').text(value.hobong);
-
-						// 숫자로 받아오기 때문에 서블릿에서 변환과정이 필요함
 						var $entYN = $('<td>').text(value.entYN);
 
 						$tr.append($empIndex);

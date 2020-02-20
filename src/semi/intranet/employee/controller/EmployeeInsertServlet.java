@@ -37,17 +37,16 @@ public class EmployeeInsertServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int maxSize = 1024 * 1024 * 10;
-		
 
-		// 웹 상의 루트(최상위 경로) 경로를 활용하여 저장할 폴더 위치 지정하기
+
 		String root = request.getServletContext().getRealPath("/");
 
 		// 게시판의 첨부파일을 저장할 폴더 이름 지정하기
-		String savePath = root + "resources/intranet/employeeImg";
-		
+		String savePath = root + "resources/intranet/image";
+
 		MultipartRequest mrequest = new MultipartRequest(
 				request, // 변경하기 위한 원본 객체
 				savePath, // 파일 저장 경로
@@ -90,7 +89,7 @@ public class EmployeeInsertServlet extends HttpServlet {
 		String empEmail = mrequest.getParameter("empEmail");
 		String empAddr = mrequest.getParameter("empAddr1")+" "+mrequest.getParameter("empAddr2")+" "+mrequest.getParameter("empAddr3");
 		String empClass= mrequest.getParameter("empClass");
-		String empimg = mrequest.getParameter("empimg");
+		String empimg = mrequest.getFilesystemName("empimg");
 
 
 		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,hireDate,empClass,empimg);

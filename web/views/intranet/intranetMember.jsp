@@ -201,6 +201,7 @@ input.check {
 							<th scope="col"><strong class="line_r">자녀 생일</strong></th>
 							<th scope="col"><strong class="line_r">자녀 성별</strong></th>
 							<th scope="col"><strong class="line_r">자녀 반</strong></th>
+							<th scope="col"><strong class="line_r">Job_Code</strong></th>
 							<th scope="col"><strong class="line_r">승인 상태</strong></th>
 							
 						</tr>
@@ -230,6 +231,7 @@ input.check {
 							<td class="tc"><span class="num"><%=m.getCgender()%></span>
 							</td>
 							<td class="tc"><span class="num"><%=m.getCclass()%></span></td>
+							<td class="tc"><span class="num"><%=m.getJob_code()%></span></td>
 							<td class="tc" id="thanksNuNa"><span class="num"><%=m.getMstatus()%></span></td>
 						</tr>
 
@@ -329,7 +331,7 @@ input.check {
 	                }
 	            });
 			}
-		 });
+		 }); 
 		
 	</script>
 	<!-- End of Main Content -->
