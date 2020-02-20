@@ -7,10 +7,9 @@ import static semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import semi.intranet.form.model.dao.FormDao;
 import semi.intranet.form.model.vo.Form;
@@ -21,7 +20,7 @@ public class FormService {
 	private FormDao fd = new FormDao();
 
 	/**
-	 * 결재자 리스트 불러오기 용
+	 * 결재자 리스트 불러오기 용 --> 사용
 	 * @param empNo
 	 * @return
 	 */
@@ -38,18 +37,17 @@ public class FormService {
 
 	/**
 	 * 결재자 정보 가져오기
-	 * @param signIdArr
+	 * @param signList
 	 * @return
 	 */
-	public SignList 
-	findSignId(String[] signIdArr) {
+	public SignList findSignId(String signList) {
 
 		Connection con = getConnection();
 
 		// 1. String[] 배열 형변환하기
-		int signId1 = Integer.parseInt(signIdArr[0]);
-		int signId2 = Integer.parseInt(signIdArr[1]);
-		int signId3 = Integer.parseInt(signIdArr[2]);
+		int signId1 = Integer.parseInt(signList[0]);
+		int signId2 = Integer.parseInt(signList[1]);
+		int signId3 = Integer.parseInt(signList[2]);
 
 		// 2. Dao로 보내서 해당 결재자 정보 가져오기
 		ArrayList<SignList> sInfo = fd.findSignId(con, signId1, signId2, signId3);
@@ -97,7 +95,7 @@ public class FormService {
 
 
 	/**
-	 * 품의서 작성용
+	 * 품의서 작성용 --> 사용
 	 * @param f
 	 * @param signIdArr 
 	 * @return
@@ -120,7 +118,7 @@ public class FormService {
 	}
 
 	/**
-	 * 품의서 게시판 목록 불러오기 + 페이징 처리
+	 * 품의서 게시판 목록 불러오기 + 페이징 처리 --> 사용
 	 * @param empNum 
 	 * @param limitContent 
 	 * @param currentPage 
@@ -174,7 +172,7 @@ public class FormService {
 	}
 
 	/**
-	 * 총 게시글 확인
+	 * 총 게시글 확인 --> 사용
 	 * @return
 	 */
 	public int getListCount() {
@@ -247,14 +245,16 @@ public class FormService {
 	 * @param fno
 	 * @param signArr
 	 * @param fReturn
+	 * @param size 
 	 * @return
 	 */
-	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn) {
+	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn, int size) {
 		
 		Connection con = getConnection();
 
 		
 		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		
 		
 		if(result > 0) {
 			commit(con);
@@ -263,6 +263,46 @@ public class FormService {
 		}
 		
 		close(con);
+		
+		return result;
+	}
+
+
+	
+	/**
+	 * 품의서 프로세스 업데이트 (반려/승인/검토)
+	 * @param fno
+	 * @param size
+	 * @param fReturn
+	 * @return
+	 */
+	public int updateSignProcess(int fno, int size, String fReturn) {
+		
+		Connection con = getConnection();
+		
+		
+		int result = 0;
+		
+		if(fReturn != null) {
+			
+			result = fd.updateSignProcess(con, fno, 9);
+		
+		} else if (fReturn == null) {
+			
+			result = fd.updateSignProcess(con, fno, size);
+			
+		}
+		
+		
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
 		
 		return result;
 	}
@@ -290,6 +330,33 @@ public class FormService {
 		
 		return result;
 	}
+
+	/**
+	 * 결재자 ID 정렬 --> 사용
+	 * @param signList
+	 * @return
+	 */
+	public String signListSort(String signList) {
+				
+		String[] sort = signList.split(",");
+		
+		String list="";
+		
+		
+		// 3. 결재자 정렬 --> 낮은 연차순
+		
+		Arrays.sort(sort, Collections.reverseOrder());
+			
+		for(String a : sort) {
+			
+			list += a + ",";
+			
+		}
+		
+		return list;
+	}
+
+	
 
 
 

@@ -119,6 +119,7 @@
                       <input type="hidden" id="orifile" name="orifile">
                       <div class="float-right">
                         <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="submit1()" class="pull-right"/>
+                        <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="삭제" onclick="location.href='/semi/deleteboard.bo?pbno=<%=b.getBno()%>'" class="pull-right"/>
                         <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" onclick="location.href='/semi/boardlsit.do'" value="취소" />
                       </div>
              <</form>

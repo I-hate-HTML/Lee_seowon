@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="semi.intranet.form.model.vo.SignList, java.util.ArrayList, semi.intranet.form.model.vo.Form" %>
+<%@ include file = "../intranet/common/nav2.jsp" %>
+<%@ page import="java.util.ArrayList, semi.intranet.form.model.vo.Form" %>
 <%@ page import="semi.intranet.daily.model.vo.PageInfo" %>
 
 <%
@@ -30,14 +31,14 @@
           <h6 class="m-0 font-weight-bold text-primary">품의목록</h6>
     </td>
     <td align="right">
-      <input type="button" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fListOnly.fo'" value="글쓰기">
+      <input type="button" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath() %>/views/intranet/intranetFormWrite.jsp'" value="글쓰기">
     </td>
   </tr>
 </table>
   </div>
   <div class="card-body">
     <div class="table-responsive"> 
-      <table id = "viewTable" class="table table-striped">
+      <table id = "viewTable" class="table table-striped" style="min-width:0px">
         <tr>
           <th width = "10%">품의번호</th>
           <th width = "10%">분류</th>
@@ -123,10 +124,15 @@
   
   
  <script>
-                             
 
+//게시물 이동용 스크립트 
+ $('#viewTable td').click(function(){
+ 		
+ 		var fno = $(this).parent().find("input").val();
+ 		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
  
- 
+ });
+
 
  
   $(function(){
@@ -143,5 +149,5 @@
  
 	</script>
  
- 
+ <%@ include file = "../intranet/common/footer.jsp" %>
     

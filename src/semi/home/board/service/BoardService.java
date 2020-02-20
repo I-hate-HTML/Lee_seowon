@@ -94,5 +94,36 @@ public class BoardService {
 			return list;
 		
 	}
+
+	public int getSearchCount(String searchval, String keyword) {
+		Connection con = getConnection();
+		
+		int listCount = bDao.getSearchCount(con,searchval,keyword);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> searchBoard(String searchval, String keyword,int currentPage,int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<Board> list = bDao.searchBoard(con,searchval,keyword,currentPage,limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int deleteBoard(int pbno) {
+		Connection con = getConnection();
+		
+		int result = bDao.deleteBoard(con,pbno);
+		if(result>0)commit(con);
+		else rollback(con);
+		
+		close(con);
+		return result;
+	}
 }
 	

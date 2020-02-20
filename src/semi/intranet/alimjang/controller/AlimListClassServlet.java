@@ -63,7 +63,7 @@ public class AlimListClassServlet extends HttpServlet {
 		// 페이징 처리
 		
 		// 총 글 수
-		listCount = new AlimService().getListCount();
+		listCount = new AlimService().getClassListCount(empNo);
 		
 		
 		// 가장 마지막 페이지

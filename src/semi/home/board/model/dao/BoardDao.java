@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import static semi.common.JDBCTemplate.*;
 
 import semi.home.board.model.vo.Board;
@@ -201,7 +203,6 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateBoard");
 		try {
-			System.out.println(bfile);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bcontent);
 			pstmt.setString(2, bfile);
@@ -296,6 +297,111 @@ public class BoardDao {
 		
 		
 		return list;
+	}
+
+	public int getSearchCount(Connection con, String searchval, String keyword) {
+
+		int listCount = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		String sql = "";
+		
+		
+		switch(searchval) {
+		
+		case("title"): sql=prop.getProperty("searchcounttitle"); break;
+		
+		case("content"): sql=prop.getProperty("searchcountcontent"); break;
+		
+		case("writer"): sql=prop.getProperty("searchcountname"); break;
+		}
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Board> searchBoard(Connection con, String searchval, String keyword,int currentPage,int limit) {
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "";
+		switch(searchval) {
+		case("title") : sql=prop.getProperty("searchtitle"); break;
+		case("content") : sql= prop.getProperty("searchcontent"); break;
+		case("writer") : sql= prop.getProperty("searchname"); break;
+		}
+		
+		try {
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit -1;
+			
+			pstmt= con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, startRow);
+
+			rset= pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board();
+
+				b.setBno(rset.getInt("bno"));
+				b.setBtitle(rset.getString("btitle"));
+				b.setBcontent(rset.getString("bcontent"));
+				b.setBwriter(rset.getString("bwriter"));
+				b.setBcount(rset.getInt("bcount"));
+				b.setBdate(rset.getDate("bdate"));
+				
+				list.add(b);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int deleteBoard(Connection con, int pbno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pbno);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 

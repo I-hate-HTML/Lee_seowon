@@ -144,10 +144,8 @@ input.check {
 								<div class="board_action">
 									<div class="action_in">
 										선택 회원을&nbsp;
-										<button type="submit" class="btn btn-primary btn-sm" onclick="agreeMem();"
-											id="memberaccept" value="Y">가입승인</button>
-										<button class="btn btn-primary btn-sm" onclick="denyMem();"
-											id="membernonono" value="X">가입거절</button>
+										<div id="sibal" value="Y">가입승인123123123123123</div>
+										<button class="btn btn-primary btn-sm" id="membernonono" value="X">가입거절</button>
 									</div>
 								</div>
 								<table border="1" cellspacing="0" class="tbl_lst_type" style="width:100%;">
@@ -212,8 +210,8 @@ input.check {
 						<%
 											for (Member m : list) {
 										%>
-						<tr id="member1">
-							<td class="tc"><input type="checkbox"
+						<tr class="member">
+							<td class="tc"><input class='memCheck' type="checkbox" data-userId="<%=m.getUserId()%>"
 								name="applyMemberCheck" value="<%=m.getUserId()%>" id="c1" title="선택"
 								class="check _click"></td>
 							<td class="tc"><span class="img"><%=m.getUserId()%></span></td>
@@ -263,15 +261,7 @@ input.check {
 			}
 		}
 		
-		$('#memberaccept').click(function(){
-			console.log("버튼 클릭")
-			
-			var result = $(this).val();
-			var before = $('#thanksNuNa').val();
-			
-			console.log(before);
-			
-		})
+		
 		
 		function agreeMem(){
 			$("#joinapplication").submit();
@@ -284,6 +274,43 @@ input.check {
 		function denyMem(){
 			alert('승인 거부되었습니다!');
 		}
+		
+		$('#sibal').on('click',function(){
+			var reqeustData = [];
+			//체크박스 선택된 놈만 배열로 추출
+			$('.memCheck').each(function(){
+			    if($(this).prop('checked')){//선택된놈이면
+			    	console.log($(this).attr('data-userId'));
+			    	reqeustData.push($(this).attr('data-userId'));
+			    }
+			});
+			
+			//체크박스가 아무것도 선택되지 않았다면..
+			if(reqeustData.length < 1){
+				alert('선택해줘');
+				return;
+			}else{
+				console.log('시작');
+				$.ajax({
+	                url:'/semi/approve.member',
+	                type:'post',
+	                contentType:'application/json; charset=UTF-8',
+	                dataType:'json',
+	                data:JSON.stringify(reqeustData),
+	                success:function(data){
+	                   if(data.status=='success'){
+	                	   alert("성공");
+	                   }else{
+	                	   alert("실패");
+	                   }
+	                },
+	                error:function(){
+	                }
+	            });
+			}
+		 });
+			
+		
 	</script>
 	<!-- End of Main Content -->
 	<%@ include file="../intranet/common/footer.jsp"%>

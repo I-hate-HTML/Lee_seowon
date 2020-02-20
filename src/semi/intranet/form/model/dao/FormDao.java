@@ -110,12 +110,11 @@ public class FormDao {
 			pstmt.setInt(1, f.getFcategory());
 			pstmt.setInt(2, f.getfWriterId());
 			pstmt.setDate(3, f.getFdate());
-			pstmt.setInt(4, f.getFsignId1());
+			pstmt.setString(4, f.getfSignList());
 			pstmt.setString(5, f.getFtitle());
 			pstmt.setString(6, f.getFcontent());
 			pstmt.setString(7, f.getFfile());
-			pstmt.setInt(8, f.getFsignId2());
-			pstmt.setInt(9, f.getFsignId3());
+			
 			
 			result = pstmt.executeUpdate();
 			
@@ -203,11 +202,9 @@ public class FormDao {
 			int endContent = startContent + limitContent -1;
 			
 			pstmt.setInt(1, empNum);
-			pstmt.setInt(2, empNum);
-			pstmt.setInt(3, empNum);
-			pstmt.setInt(4, empNum);
-			pstmt.setInt(5, endContent);
-			pstmt.setInt(6, startContent);
+			pstmt.setInt(2, '%'+empNum+'%');
+			pstmt.setInt(3, endContent);
+			pstmt.setInt(4, startContent);
 			
 			rset = pstmt.executeQuery();
 			
@@ -474,6 +471,50 @@ public class FormDao {
 		return result;
 	}
 
+	
+	
+	/**
+	 * 결재자 결재 내용에 따른 결재 프로세스 변경 (반려 / 승인 / 검토)
+	 * @param con
+	 * @param fno
+	 * @param size 
+	 * @return
+	 */
+	public int updateSignProcess(Connection con, int fno, int size) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "";
+		
+		System.out.println(size);
+		
+		switch(size) {
+		case 1 : sql = prop.getProperty("updateSign1"); break;
+		case 2 : sql = prop.getProperty("updateSign2"); break;
+		case 3 : sql = prop.getProperty("updateSign3"); break;
+		case 9 : sql = prop.getProperty("updateSignReturn"); break;
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+				pstmt.setInt(1, fno);
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 
 	/**
@@ -510,6 +551,10 @@ public class FormDao {
 		
 		return result;
 	}
+
+
+
+	
 
 
 

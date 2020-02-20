@@ -61,12 +61,13 @@ public class BoardListServlet extends HttpServlet {
 		
 		String page = "";
 		
+		
 		if(list!= null) {
-			System.out.println("여긴 서블릿" + list);
 			page = "views/homepage/board.jsp";
 			request.setAttribute("list", list);
 			
 			PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+			
 			request.setAttribute("pi",pi);
 		}else {
 			request.setAttribute("msg", "에러발생");

@@ -26,21 +26,12 @@ public class IntranetMemberService {
 		return list;
 	}
 	
-	public int readAlimCheck(int empNo, String read, int ano, int category) {
-			
-			Connection con = getConnection();
-			
-			int result = ad.readAlimCheck(con, empNo, read, ano, category);
-			
-			if(result > 0) {
-				commit(con);
-			} else {
-				rollback(con);
-			}
-			
-			close(con);
-			
-			return 0;
-		}
+	public int acceptMember(String userId) {
+		Connection con = getConnection();
+		
+		return imDao.acceptMember(con,userId);
+	}
+	
+
 
 }

@@ -125,14 +125,14 @@
 
       <!-- Nav Item - 품의관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/fListOnly.fo">
+        <a class="nav-link" href="/semi/fList.fo">
           <i class="fa fa-file-alt fa-2x"></i>
           <span>품의관리</span></a>
       </li>
 
       <!-- Nav Item - 일정관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="intranetCalender.jsp">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetCalender.jsp">
           <i class="fa fa-calendar-alt fa-2x"></i>
           <span>일정관리</span></a>
       </li>

@@ -53,55 +53,56 @@ public class FormWriteServlet extends HttpServlet {
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",new DefaultFileRenamePolicy());
 
 
+		String date = mrequest.getParameter("formDate");
+		
+		Date writeDate = null;
+		
+		if(date != "" && date != null) {
+			// 날짜가 들어오면
+			
+			// String --> int
+			String[] dateArr = date.split("-"); 
+			int[] intArr = new int[dateArr.length];
+			
+			// split한 String 문자들을 생성한 int 배열의 각 인덱스에 각각 대입하기
+			
+			for(int i = 0; i < dateArr.length; i++) {
+				intArr[i] = Integer.parseInt(dateArr[i]);
+			}
+			
+			writeDate = new Date(new GregorianCalendar(
+					intArr[0],intArr[1]-1,intArr[2]
+					).getTimeInMillis());
+			
+		} else {
+			// 날짜가 들어오지 않으면
+			writeDate = new Date(new GregorianCalendar().getTimeInMillis());
+			
+		}
 
 		int category = Integer.parseInt(mrequest.getParameter("formCategory"));
 		String writer = mrequest.getParameter("formName");
 		int writerId = Integer.parseInt(mrequest.getParameter("writerId"));
-		String date = mrequest.getParameter("formDate");
-
-		Date writeDate = null;
-
-		if(date != "" && date != null) {
-			// 날짜가 들어오면
-
-			// String --> int
-			String[] dateArr = date.split("-"); 
-			int[] intArr = new int[dateArr.length];
-
-			// split한 String 문자들을 생성한 int 배열의 각 인덱스에 각각 대입하기
-
-			for(int i = 0; i < dateArr.length; i++) {
-				intArr[i] = Integer.parseInt(dateArr[i]);
-			}
-
-			writeDate = new Date(new GregorianCalendar(
-					intArr[0],intArr[1]-1,intArr[2]
-					).getTimeInMillis());
-
-		} else {
-			// 날짜가 들어오지 않으면
-			writeDate = new Date(new GregorianCalendar().getTimeInMillis());
-
-		}
-
-
-		
-		String[] signIdArr = mrequest.getParameterValues("formLine"); // 결재자 ID 배열
-		
-		SignList s = new FormService().findSignId(signIdArr);	
-
 		String title = mrequest.getParameter("formTitle"); 
+		String signList = mrequest.getParameter("signList_fin");
+		
+		// 낮은 연차순으로 정렬
+		signList = new FormService().signListSort(signList);
+		
 		String content = mrequest.getParameter("formContent"); 
 		String file = mrequest.getParameter("formFile");
 		
-		int type = 1; 
-
-		Form f = new Form(category, writer, writerId, writeDate, s.getSname(),s.getScode(),
-						 s.getSname2(),s.getScode2(),s.getSname3(),s.getScode3(),title, content, type);
-
+		
+		Form f = new Form(category, writer, writerId, writeDate, signList, title, content, file);
+		
+		
 		int result = new FormService().insertForm(f);
+		
+		if(result > 0) {
+			response.sendRedirect("fList.fo");
+		}
 
-		if(result > 0) { response.sendRedirect("fListOnly.fo"); }
+		
 
 
 	}
