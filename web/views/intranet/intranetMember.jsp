@@ -144,7 +144,7 @@ input.check {
 								<div class="board_action">
 									<div class="action_in">
 										선택 회원을&nbsp;
-										<div id="sibal" value="Y">가입승인123123123123123</div>
+										<button class="btn btn-primary btn-sm" id="membercomeon" value="Y">가입승인</button>
 										<button class="btn btn-primary btn-sm" id="membernonono" value="X">가입거절</button>
 									</div>
 								</div>
@@ -261,25 +261,11 @@ input.check {
 			}
 		}
 		
-		
-		
-		function agreeMem(){
-			$("#joinapplication").submit();
-			alert('승인되었습니다!');
-			
-			
-			
-		}
-		
-		function denyMem(){
-			alert('승인 거부되었습니다!');
-		}
-		
-		$('#sibal').on('click',function(){
+		$('#membercomeon').on('click',function(){
 			var reqeustData = [];
-			//체크박스 선택된 놈만 배열로 추출
+			//체크박스 선택된 것만 배열로 추출
 			$('.memCheck').each(function(){
-			    if($(this).prop('checked')){//선택된놈이면
+			    if($(this).prop('checked')){//선택된 거면
 			    	console.log($(this).attr('data-userId'));
 			    	reqeustData.push($(this).attr('data-userId'));
 			    }
@@ -287,7 +273,7 @@ input.check {
 			
 			//체크박스가 아무것도 선택되지 않았다면..
 			if(reqeustData.length < 1){
-				alert('선택해줘');
+				alert('선택해 주세요.');
 				return;
 			}else{
 				console.log('시작');
@@ -299,7 +285,7 @@ input.check {
 	                data:JSON.stringify(reqeustData),
 	                success:function(data){
 	                   if(data.status=='success'){
-	                	   alert("성공");
+	                	   alert('승인되었습니다!');
 	                   }else{
 	                	   alert("실패");
 	                   }
@@ -309,7 +295,41 @@ input.check {
 	            });
 			}
 		 });
+		
+		$('#membernonono').on('click',function(){
+			var reqeustData = [];
+			//체크박스 선택된 것만 배열로 추출
+			$('.memCheck').each(function(){
+			    if($(this).prop('checked')){//선택된 거면
+			    	console.log($(this).attr('data-userId'));
+			    	reqeustData.push($(this).attr('data-userId'));
+			    }
+			});
 			
+			//체크박스가 아무것도 선택되지 않았다면..
+			if(reqeustData.length < 1){
+				alert('선택해 주세요.');
+				return;
+			}else{
+				console.log('시작');
+				$.ajax({
+	                url:'/semi/reject.member',
+	                type:'post',
+	                contentType:'application/json; charset=UTF-8',
+	                dataType:'json',
+	                data:JSON.stringify(reqeustData),
+	                success:function(data){
+	                   if(data.status=='success'){
+	                	   alert('승인 거부되었습니다!');
+	                   }else{
+	                	   alert("실패");
+	                   }
+	                },
+	                error:function(){
+	                }
+	            });
+			}
+		 });
 		
 	</script>
 	<!-- End of Main Content -->
