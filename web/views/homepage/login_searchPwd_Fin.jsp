@@ -261,7 +261,7 @@ vertical-align: middle;}
 						<div class="iconArea">
                            
                             <p class="txt">
-								고객님의 비밀번호를 <Strong class="black">12345678</Strong>로 변경되었습니다. <br>
+								고객님의 비밀번호를 <Strong class="black">핸드폰번호(-제외)</Strong>로 변경되었습니다. <br>
 								로그인 후 반드시 마이페이지에서 다시 비밀번호를 변경해주시길 바랍니다.
 							</p>
 							<p class="txtmt">이용해주셔서 감사합니다.</p>

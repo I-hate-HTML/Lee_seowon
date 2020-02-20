@@ -35,11 +35,18 @@ public class SelectGboardSelectOneServlet extends HttpServlet {
 		
 		GboardService gs = new GboardService();
 		Gboard g = gs.selectOne(gno);
+		
+		String[] gfile = new String[] {"1"}; 
+		if(g.getGfile()!=null) {
+			gfile = g.getGfile().split(",");
+		}
+		
 		String page = "";
 		
 		if(g!=null) {
 			page = "views/homepage/gallaryread.jsp";
 			request.setAttribute("Gboard", g);
+			request.setAttribute("Gfile", gfile);
 		}else {
 			page = "views/homepage/common/errorPage.jsp";
 			request.setAttribute("msg", "공지사항 상세보기 실패!");

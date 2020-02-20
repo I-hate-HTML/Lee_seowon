@@ -13,10 +13,10 @@ public class GboardService {
 	private GboardDao gDao = new GboardDao();
 	
 	
-	public ArrayList<Gboard> selectList()  {
+	public ArrayList<Gboard> selectList(int currentPage,int limit)  {
 		Connection con = getConnection();
-		
-		ArrayList<Gboard> list = gDao.selectList(con);
+		int listCount = gDao.getListCount(con);
+		ArrayList<Gboard> list = gDao.selectList(con,currentPage,limit,listCount);
 		
 		close(con);
 		
@@ -49,6 +49,50 @@ public class GboardService {
 		close(con);
 		
 		return result;
+	}
+
+
+	public Gboard upDateView(int gno) {
+		Connection con = getConnection();
+		Gboard g = gDao.upDateView(con,gno);
+		
+		close(con);
+		
+		return g;
+	}
+
+
+	public int updateGboard(int gno, String gcontent, String gfile) {
+		Connection con = getConnection();
+		int result = gDao.updateGboard(con,gno,gcontent,gfile);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+
+	public int gboardDelete(int gno) {
+		Connection con = getConnection();
+		int result = gDao.gboardDelete(con,gno);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = gDao.getListCount(con);
+		close(con);
+		return listCount;
 	}
 
 }

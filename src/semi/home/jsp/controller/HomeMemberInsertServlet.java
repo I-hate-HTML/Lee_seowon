@@ -63,7 +63,6 @@ public class HomeMemberInsertServlet extends HttpServlet {
 		
 		Member m = new Member(userId,userPwd,userName,gender,email,phone,address,cname,writerDate,cgender,cclass);
 		
-		System.out.println("가입 회원 정보 확인 : " + m);
 		
 		HomeMemberService hms = new HomeMemberService();
 		

@@ -36,7 +36,8 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
 	<link href="https://fonts.googleapis.com/css?family=Cute+Font&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-  
+  <link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css"
+	rel="stylesheet">
   
 
   <style>
@@ -72,7 +73,7 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
 
   <div class="top_bg">
     <a class="top_p"> 사진게시판 </a>
-     <p>아이들의 행복한 시간</p>
+     <p>팡팡 유치원 사진게시판</p>
    </div>
    <br>
 	<!-- 메인 컨텐츠 구역 -->      
@@ -87,7 +88,24 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
             
             
 
-             <% for(Gboard s : list) { %>
+             <%-- <% for(Gboard s : list) { %>
+            <div class="col-md-6 col-lg-4" >
+				<div class="gboard-list" align="center">
+					<div>
+						<img src="<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/<%= s.getGfile() %>" 
+						     width="300px" height="350px">
+						<input type="hidden" value="<%= s.getGno() %>">
+						     
+					</div>
+					
+					<p>No. <%=s.getGno() + " " + s.getGtitle() %><br>
+					조회수	: <%= s.getGcount() %>
+					</p>
+				</div>
+			</div>
+			<% } %> --%>
+			
+			<% for(Gboard s : list) { %>
             <div class="col-md-6 col-lg-4" >
 				<div class="gboard-list" align="center">
 					<div>
@@ -103,8 +121,6 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
 				</div>
 			</div>
 			<% } %>
-			
-			
 			
 			
               

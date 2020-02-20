@@ -209,7 +209,6 @@ public class HomeMemberDao {
 				
 				result.setUserId(rset.getString("userId"));
 			}
-			System.out.println(result);
 		}catch(Exception e) {
 			throw new MemberException(e.getMessage());
 		}finally {
@@ -221,7 +220,7 @@ public class HomeMemberDao {
 	}
 
 
-	public int serchPwd(Connection con, Member m) throws MemberException {
+	public int serchPwd(Connection con, Member m, String changepwd) throws MemberException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -229,8 +228,9 @@ public class HomeMemberDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m.getUserId());
-			pstmt.setDate(2, m.getCbdate());
+			pstmt.setString(1, changepwd);
+			pstmt.setString(2, m.getUserId());
+			pstmt.setDate(3, m.getCbdate());
 			
 			result = pstmt.executeUpdate();
 			
@@ -241,6 +241,34 @@ public class HomeMemberDao {
 		}
 		
 		return result;
+	}
+
+
+	public String searchPhoneNum(Connection con, Member m) {
+		String phonenum="";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPhoneNum");
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setDate(2, m.getCbdate());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				phonenum = rset.getString(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return phonenum;
 	}
 
 }
