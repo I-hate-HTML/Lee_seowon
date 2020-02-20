@@ -26,12 +26,26 @@ public class IntranetMemberService {
 		return list;
 	}
 	
+	/**
+	 * 가입승인 버튼 눌렀을 때
+	 * @param userId
+	 * @return
+	 */
 	public int acceptMember(String userId) {
 		Connection con = getConnection();
 		
 		return imDao.acceptMember(con,userId);
 	}
 	
-
+	/**
+	 * 가입거절 눌렀을 때
+	 * @param userId
+	 * @return
+	 */
+	public int rejectMember(String userId) {
+		Connection con = getConnection();
+		
+		return imDao.rejectMember(con,userId);
+	}
 
 }

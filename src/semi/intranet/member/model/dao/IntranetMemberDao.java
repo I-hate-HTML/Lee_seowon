@@ -67,6 +67,7 @@ public class IntranetMemberDao {
 				m.setCbdate(rset.getDate("cbdate"));
 				m.setCgender(rset.getString("cgender"));//String?
 				m.setCclass(rset.getInt("cclass"));
+				m.setJob_code(rset.getInt("JOB_CODE"));
 				m.setMstatus(rset.getString("MSTATUS"));
 				
 				list.add(m);
@@ -81,40 +82,6 @@ public class IntranetMemberDao {
 		return list;
 	}
 	
-	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = "";
-		
-		if(category == 1) {
-			sql = prop.getProperty("readAlimNoteCheck");
-		} else if (category == 2) {
-			sql = prop.getProperty("readAlimHomeCheck");
-		} else if (category == 3) {
-			sql = prop.getProperty("readAlimMediCheck");
-		}
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, read);
-			pstmt.setInt(2, ano);
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-				
-		return result;
-	}
 
 	/**
 	 * ????
@@ -196,6 +163,12 @@ public class IntranetMemberDao {
 		return result;
 	}
 
+	/**
+	 * 회원승인 시에
+	 * @param con
+	 * @param userId
+	 * @return
+	 */
 	public int acceptMember(Connection con, String userId) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -204,8 +177,37 @@ public class IntranetMemberDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "Y");
-			pstmt.setString(2, userId);
+			pstmt.setInt(1, 6);
+			pstmt.setString(2, "Y");
+			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
+			commit(con);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(con);
+		}
+		return result;
+	}
+
+	/**
+	 * 회원 거부 시에
+	 * @param con
+	 * @param userId
+	 * @return
+	 */
+	public int rejectMember(Connection con, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("changingStatus");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, "X");
+			pstmt.setString(3, userId);
 			result = pstmt.executeUpdate();
 			commit(con);
 		}catch(SQLException e) {

@@ -38,7 +38,7 @@
   	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
   	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
 
-  
+ 
   <style>
  
  
@@ -89,8 +89,9 @@
 
             <!-- Portfolio Item 1 -->
             <div class="col-md-6 col-lg-4" >
-  
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" alt="" style="margin-bottom: 30px;">
+  					<a href="/semi/boardlsit.do">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" href="/semi/boardlsit.do" alt="" style="margin-bottom: 30px;">
+  					</a>
                     <br>
                     <b>공지사항</b>
                     <p style="margin: 20px; font-size: 13px;">팡팡 가족이<br> 알아야할 공지사항</p>
@@ -98,8 +99,9 @@
     
             <!-- Portfolio Item 2 -->
             <div class="col-md-6 col-lg-4">
-          
+          			<a href="./food_calender.jsp">
                     <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a2.png" alt="" style="margin-bottom: 30px;">
+          			</a>
                     <br>
                     <b>식단표</b>
                     <p style="margin: 20px; font-size: 13px;">영양과 맛을 <br>고루 갖춘 영양식단</p>
@@ -107,8 +109,9 @@
     
             <!-- Portfolio Item 3 -->
             <div class="col-md-6 col-lg-4">
-      
+      				<a href="/semi/selectOne.bo?bno=1">
                     <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a3.png" alt="" style="margin-bottom: 30px;">
+      				</a>
                     <br>
                     <b>버스시간표</b>
                     <p style="margin: 20px; font-size: 13px;">팡팡버스를 <br>타야하는 시간</p>

@@ -82,7 +82,8 @@ var newEvent = function (start, end, eventType) {
             type: "get",
             url: "/semi/InsertEvent.ev",
             data: {
-                event : JSON.stringify(eventData)
+                event : JSON.stringify(eventData),
+                eventcode : eventData.title
             },
             dataType : 'json',
             success: function (response) {

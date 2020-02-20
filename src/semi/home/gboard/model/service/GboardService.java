@@ -15,8 +15,8 @@ public class GboardService {
 	
 	public ArrayList<Gboard> selectList(int currentPage,int limit)  {
 		Connection con = getConnection();
-		int listCount = gDao.getListCount(con);
-		ArrayList<Gboard> list = gDao.selectList(con,currentPage,limit,listCount);
+		
+		ArrayList<Gboard> list = gDao.selectList(con,currentPage,limit);
 		
 		close(con);
 		

@@ -61,7 +61,8 @@ public class UpdateGboardServlet extends HttpServlet {
 			}
 		}
 		
-		gfile = gfile+","+newfile;
+		if(gfile == null) gfile = newfile+","+gfile;
+		else gfile = gfile+","+newfile;
 	
 		int result = new GboardService().updateGboard(gno,gcontent,gfile);
 		MyRenamePolicy.Filenamechange.clear();
