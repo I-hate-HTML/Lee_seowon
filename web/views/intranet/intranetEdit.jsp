@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>꿈나라어린이집 # 인트라넷</title>
 </head>
 <body>
@@ -131,8 +132,8 @@
                       <tr>
                         <th>주소 <span>*</span></th>
                         <td>
-                          <input type="text" name="homezipcode" id="homezipcode" class="width4" style="width:80px;">
-                          <div class="btn btn-primary btn-sm" id="btnSend" onclick="addrSearch()" style="margin-bottom:3px; cursor:pointer"><span style='font-weight:700; font-size:13px;'>주소찾기</span></div>
+                          <input type="text" name="homezipcode" id="homezipcode" class="width4" style="width:80px;" readonly="">
+                          <div class="btn btn-primary btn-sm" id="btnSend" onclick="addrSearch();" style="margin-bottom:3px; cursor:pointer"><span style='font-weight:700; font-size:13px;'>주소찾기</span></div>
                           <p class="mg4">
                               <input type="text" name="homeaddress" id="homeaddress" class="width1" style="width:50%;"><br>
                               <input type="text" name="homeaddress2" id="homeaddress2" class="width1" style="width:50%; margin-top:5px;">

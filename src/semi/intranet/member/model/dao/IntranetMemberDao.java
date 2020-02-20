@@ -206,7 +206,7 @@ public class IntranetMemberDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, 0);
-			pstmt.setString(2, "X");
+			pstmt.setString(2, "N");
 			pstmt.setString(3, userId);
 			result = pstmt.executeUpdate();
 			commit(con);
