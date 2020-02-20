@@ -38,7 +38,7 @@
   	<link href="<%=request.getContextPath()%>/resources/homepage/css/cleanblogmin.css" rel="stylesheet">
   	<link href="<%=request.getContextPath()%>/resources/homepage/css/nav.css" rel="stylesheet">
 
-  
+ 
   <style>
  
  
