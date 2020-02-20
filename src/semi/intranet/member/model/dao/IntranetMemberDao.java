@@ -81,40 +81,6 @@ public class IntranetMemberDao {
 		return list;
 	}
 	
-	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = "";
-		
-		if(category == 1) {
-			sql = prop.getProperty("readAlimNoteCheck");
-		} else if (category == 2) {
-			sql = prop.getProperty("readAlimHomeCheck");
-		} else if (category == 3) {
-			sql = prop.getProperty("readAlimMediCheck");
-		}
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, read);
-			pstmt.setInt(2, ano);
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-				
-		return result;
-	}
 
 	/**
 	 * ????
@@ -205,6 +171,27 @@ public class IntranetMemberDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "Y");
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+			commit(con);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(con);
+		}
+		return result;
+	}
+
+	public int rejectMember(Connection con, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("changingStatus");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "X");
 			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
 			commit(con);

@@ -117,7 +117,7 @@ int endPage = pi.getEndPage();
 				<div class="gboard-list" align="center">
 					<div>
 						<img src="<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/<%= s.getGfile() %>" 
-						     width="300px" height="350px">
+						     width="300px" height="350px" style="cursor: pointer;">
 						<input type="hidden" value="<%= s.getGno() %>">
 						     
 					</div>
