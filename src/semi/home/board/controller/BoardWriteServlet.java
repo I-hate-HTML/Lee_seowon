@@ -49,7 +49,7 @@ public class BoardWriteServlet extends HttpServlet {
 								   new MyRenamePolicy());
 		
 		String btitle = mrequest.getParameter("btitle");
-		String bwriter = "admin";//request.getParameter("userId");
+		String bwriter = mrequest.getParameter("userId");
 		String bcontent = mrequest.getParameter("bcontent");
 		mrequest.getFilesystemName("bfile");
 		// mrequest.getFilesystemName(태그네임); 을 불러올때 파일이 저장이 되고
