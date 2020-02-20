@@ -1,227 +1,302 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ include file = "../intranet/common/nav.jsp" %>
-<%=request.getContextPath()%>
-    
+	pageEncoding="UTF-8"%>
+
+<%@ include file="../intranet/common/nav.jsp"%>
+
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
 <html lang="ko">
 <head>
-  <title>꿈나라어린이집 # 인트라넷_메인</title>
-  <link href='../../resources/js/fullcal/core/main.css' rel='stylesheet' />
-<link href='../../resources/js/fullcal/daygrid/main.css'
-	rel='stylesheet' />
+<title>꿈나라어린이집 # 인트라넷_메인</title>
+<link rel="stylesheet"
+	href="../../resources/js/fullcal/vendor/css/fullcalendar.min.css" />
+<link rel="stylesheet"
+	href="../../resources/js/fullcal/vendor/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href='../../resources/js/fullcal/vendor/css/select2.min.css' />
+<link rel="stylesheet"
+	href='../../resources/js/fullcal/vendor/css/bootstrap-datetimepicker.min.css' />
 
-<script src='../../resources/js/fullcal/core/main.js'></script>
-<script src='../../resources/js/fullcal/daygrid/main.js'></script>
-<script src="../../resources/js/fullcal/interaction/main.min.js"></script>
-<script src='../../resources/js/fullcal/core/locales/ko.js'></script>
-<script src="../../resources/js/fullcal/timegrid/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<style type="text/css">
-#external-events {
-	width: 50%;
-	border: 1px solid #ccc;
-	background: #eee;
-}
-.demo-topbar+#external-events { /* will get stripped out */
-	top: 60px;
-}
-#external-events .fc-event {
-	margin: 1em 0;
-	cursor: move;
-}
-#calendar-container {
-	position: relative;
-	z-index: 1;
-	margin-left: 200px;
-}
-#calendar {
-	max-width: 1200px;
-	margin: 20px auto;
-}
-</style>
+<link rel="stylesheet" href="../../resources/js/fullcal/css/main.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
-         <!-- Begin Page Content -->
-         <div class="container-fluid">
-          <!-- 컨텐츠 머리글 -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-             <h1 class="h3 mb-0 text-gray-800">꿈나라어린이집</h1>
-           </div>
- 
-           <!-- Content Row -->
 
- 
-             <!-- 메뉴1 간략히 보기 -->
-             
- 
-           <!-- Content Row -->
- 
-           <div class="row">
-             <div class="card shodow mb-4" style="width: 100%;">
-               <div class="card-header py-3">
-                 <h6 class="m-0 font-weight-bold text-primary">일정관리</h6> 
-               </div>
-               <div class="card-body">
-					<div id="calendar"></div>
-               </div>
-             </div>
-             
-             
-           <!-- Content Row -->
-          
- 
-             <!-- Content Column -->
-             <div class="col-lg-6 mb-4">
- 
-               <!--업무 이동! -->
-               <div class="card shadow mb-4">
-                 <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">알림장 관리</h6>
-                 </div>
-                 <div class="card-body">
-                    <table class = "table" style="font-size:12px;">
-             <tr>
-               <th></th>
-               <th>글번호</th>
-               <th>구분</th>
-               <th>아이명</th>
-               <th>제목</th>
-               <th>작성자</th>
-               <th>날짜</th>
-             </tr>
-           </table>
-                 </div><br>
-               </div>
-               
- 
-               <!-- Color System -->
- 
-             </div>
- 
-             <div class="col-lg-6 mb-4">
- 
-               <!-- Approach -->
-               <div class="card shadow mb-4">
-                 <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">품의확인</h6>
-                 </div>
-                 <div class="card-body">
-                   
-           <table class = "table table-hover" style="font-size:12px;">
-             <tr>
-               <th></th>
-               <th>품의번호</th>
-               <th>분류</th>
-               <th>상태</th>
-               <th >제목</th>
-               <th>기안자</th>               
-               <th>작성일</th>
-             </tr>           
-           </table>  
-           
-           <nav aria-label="Page navigation example">
-             <ul class="pagination pagination-sm justify-content-center">
-               <li class="page-item disabled">
-                 <a class="page-link" href="#" aria-label="Previous">
-                   <span aria-hidden="true">&laquo;</span>
-                   <span class="sr-only">Previous</span>
-                 </a>
-               </li>
-               <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-               <li class="page-item"><a class="page-link" href="#">2</a></li>
-               <li class="page-item"><a class="page-link" href="#">3</a></li>
-               <li class="page-item">
-                 <a class="page-link" href="#" aria-label="Next">
-                   <span aria-hidden="true">&raquo;</span>
-                   <span class="sr-only">Next</span>
-                 </a>
-               </li>
-             </ul>
-           </nav>        
-         
-                 </div>
-               </div>
- 
-             </div>
-           </div>
-        </div>
-       <!-- /.container-fluid -->
+	<div class="container">
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+			<!-- 컨텐츠 머리글 -->
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">꿈나라어린이집</h1>
+			</div>
+			<div class="row">
+			<div class="col-lg-6 mb-4">
+		
+					<!--업무 이동! -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">알림장 관리</h6>
+						</div>
+						<div class="card-body">
+							<table class="table" style="font-size: 12px;" id="alim">
+								<tr>
+									<th>글번호</th>
+									<th>구분</th>
+									<th>아이명</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>날짜</th>
+								</tr>
+							</table>
+						</div>
+						<br>
+					</div>
 
-     <!-- End of Main Content -->
-     <%@ include file = "../intranet/common/footer.jsp" %>
-     <script type="text/javascript">
-	
-		document.addEventListener('DOMContentLoaded', function() {
-			var Calendar = FullCalendar.Calendar;
-			var Draggable = FullCalendarInteraction.Draggable;
-			var calendarEl = document.getElementById('calendar');
-			var calendar = new Calendar(calendarEl, {
-				plugins : [ 'interaction', 'dayGrid', 'timeGrid'],
-				header : {
-					left : 'prev,next today',
-					center : 'title',
-					right : 'dayGridMonth,timeGridWeek,timeGridDay'
-				},
-				navLinks :true,
-				editable : true,
-				droppable : true,
-				allDaySlot : false,
-				events: "../../resources/intranet/ajax/data.json",
-				drop : function(info) {
-					if (checkbox.checked) {
-						info.draggedEl.parentNode.removeChild(info.draggedEl);
-					}
-				},
-				locale : 'ko',
-				dataeClick : function(){}
+
+					<!-- Color System -->
+
+				</div>
+
+				<div class="col-lg-6 mb-4">
+
+					<!-- Approach -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">품의확인</h6>
+						</div>
+						<div class="card-body">
+
+							<table class="table table-hover" style="font-size: 12px;" id="pum">
+								<tr>
+									<th>품의번호</th>
+									<th>분류</th>
+									<th>상태</th>
+									<th>제목</th>
+									<th>기안자</th>
+									<th>작성일</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>				
+			<div class="row">
+				<div class="card shodow mb-4" style="width: 100%;">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">원내일정</h6>
+					</div>
+					<div class="card-body">
+						<div id="calendar"></div>
+					</div>
+					
+				</div>
+
+
+				<!-- Content Row -->
+
+				<!-- Content Column -->
 				
-			});
-			calendar.render();
-			jQuery.noConflict();
-			calendar.on('dateClick', function(info) {
-				console.log('sibal' + info.dateStr);
-				$('#Event').modal('show');
-				$('#startDate').attr('value', info.dateStr);
-				$('#endDate').attr('value', info.dateStr);
-			});
-			calendar.on('dataClick',function(info){
-				$('#Event').modal('show');
-			})
-		});
+			</div>
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- End of Main Content -->
+	<%@ include file="../intranet/common/footer.jsp"%>
+	<script src="../../resources/js/fullcal/vendor/js/bootstrap.min.js"></script>
+	<script src="../../resources/js/fullcal/vendor/js/moment.min.js"></script>
+	<script src="../../resources/js/fullcal/vendor/js/fullcalendar.min.js"></script>
+	<script src="../../resources/js/fullcal/vendor/js/ko.js"></script>
+	<script src="../../resources/js/fullcal/vendor/js/select2.min.js"></script>
+	<script
+		src="../../resources/js/fullcal/vendor/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+	var calendar = $('#calendar').fullCalendar({
+
 		
-		function check(){
-			var event = new Object();
-			event._id = cData.length+1;
-			event.title = $('#eventTitle').val();
-			event.start = $('#startDate').val();
-			event.end = $('#endDate').val();
-			event.type= $('#eventType').val();
-			event.username = $('#user').val();
-			event.backgroundColor="#a9e34b";
-			event.textColor="#ffffff"
-			
-			console.log(event.title);
-			var jsonData = JSON.stringify(event);
-			
-			if(event.title == ''||event.type==''){
-				alert('빈 항목이 있습니당');
-				return false;
-			}else{
-				cData.push(jsonData);
-				$('#chidden').attr("value",JSON.stringify(cData));
-				console.log($('#chidden').val());
-				return true;
-			};
-			
-			
-			
-		};
+
+		//주말 숨기기 & 보이기 버튼
+		customButtons: {
+			viewWeekends: {
+				text: '주말',
+				click: function () {
+					activeInactiveWeekends ? activeInactiveWeekends = false : activeInactiveWeekends = true;
+					$('#calendar').fullCalendar('option', {
+						weekends: activeInactiveWeekends
+					});
+				}
+			}
+		},
+
+		header: {
+			left: 'today, prevYear, nextYear, viewWeekends',
+			center: 'prev, title, next',
+			right: 'month,agendaWeek,agendaDay,listWeek'
+		},
+		views: {
+			month: {
+				columnFormat: 'dddd'
+			},
+			agendaWeek: {
+				columnFormat: 'M/D ddd',
+				titleFormat: 'YYYY년 M월 D일',
+				eventLimit: false
+			},
+			agendaDay: {
+				columnFormat: 'dddd',
+				eventLimit: false
+			},
+			listWeek: {
+				columnFormat: ''
+			}
+		},
+
+		/* ****************
+		 *  일정 받아옴 
+		 * ************** */
+		events: function (start, end, timezone, callback) {
+			$.ajax({
+				type: "get",
+				url: "/semi/readEvent.ev",
+				success: function (response) {
+					var events = [];
+					for (var i = 0; i < response.length; i++) {
+						var evt = {
+								_id: response[i].id,
+								title: response[i].title,
+								description : response[i].description,
+								start : response[i].start,
+								end : response[i].end,
+								type : response[i].type,
+								username : response[i].username,
+								backgroundColor : response[i].backgroundColor,
+								textColor : response[i].textColor,
+								allDay : response[i].allDay
+						};
+						events.push(evt);
+					}
+					callback(events);
+					var fixedDate = response.map(function (array) {
+						if (array.allDay && array.start !== array.end) {
+							// 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+							array.end = moment(array.end).add(1, 'days');
+						}
+						return array;
+					});
+					callback(fixedDate);
+				}
+			});
+		},
+
+		eventAfterAllRender: function (view) {
+			if (view.name == "month") {
+				$(".fc-content").css('height', 'auto');
+			}
+		},
 		
+
+		locale: 'ko',
+		timezone: "local",
+		nextDayThreshold: "09:00:00",
+		allDaySlot: true,
+		displayEventTime: true,
+		displayEventEnd: true,
+		firstDay: 0, //월요일이 먼저 오게 하려면 1
+		weekNumbers: false,
+		selectable: true,
+		weekNumberCalculation: "ISO",
+		eventLimit: true,
+		views: {
+			month: {
+				eventLimit: 12
+			}
+		},
+		eventLimitClick: 'week', //popover
+		navLinks: true,
+		defaultDate: moment('2020-02'), 
+		timeFormat: 'HH:mm',
+		defaultTimedEventDuration: '01:00:00',
+		editable: false,
+		minTime: '00:00:00',
+		maxTime: '24:00:00',
+		slotLabelFormat: 'HH:mm',
+		weekends: true,
+		nowIndicator: true,
+		dayPopoverFormat: 'MM/DD dddd',
+		longPressDelay: 0,
+		eventLongPressDelay: 0,
+		selectLongPressDelay: 0
+	});
+	});
 	</script>
-     
- 
+	<script>
+   		$('#userTableBtn').click(function(){
+   			$.ajax({
+   				url : "/semi/",
+   				type : "get",
+   				success:function(data){
+   					$.each(data,function(index,value){
+   						var $tr = $('<tr>');
+   						var $pumno = $('<td>').text(index);
+   						var $pumtype = $('<td>').text(value.userNo);
+   						var $pumnow = $('<td>').text(value.phone);
+   						var $pumtitle = $('<td>').text(value.userName);
+   						var $pumuser = $('<td>').text(value.gender);
+   						var $pumdate = $('<td>').text(value.phone);
+   						
+   						
+   						
+   						$tr.append($pumno);
+   						$tr.append($pumtype);
+   						$tr.append($pumnow);
+   						$tr.append($pumtitle);
+   						$tr.append($pumuser);
+   						$tr.append($pumdate);
+   						
+   						$('#pum').append($tr);
+   					});
+   				},error:function(){
+   					console.log("에러입니다.");
+   				}
+   			})
+   		})
+   </script>
+	
+   <script>
+   		$('#userTableBtn').click(function(){
+   			$.ajax({
+   				url : "/semi/",
+   				type : "get",
+   				success:function(data){
+   					$.each(data,function(index,value){
+   						var $tr = $('<tr>');
+   						var $alimno = $('<td>').text(index);
+   						var $alimtype = $('<td>').text(value.userNo);
+   						var $childname = $('<td>').text(value.phone);
+   						var $title = $('<td>').text(value.userName);
+   						var $writer = $('<td>').text(value.gender);
+   						var $date = $('<td>').text(value.phone);
+   						
+   						
+   						
+   						$tr.append($alimno);
+   						$tr.append($alimtype);
+   						$tr.append($childname);
+   						$tr.append($title);
+   						$tr.append($writer);
+   						$tr.append($date);
+   						
+   						$('#alim').append($tr);
+   					});
+   				},error:function(){
+   					console.log("에러입니다.");
+   				}
+   			})
+   		})
+   </script>
+
 </body>
 </html>
