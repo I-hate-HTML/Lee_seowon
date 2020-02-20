@@ -26,12 +26,15 @@ public class GboardDao {
 		}
 	}
 	
-	public ArrayList<Gboard> selectList(Connection con)  {
+	public ArrayList<Gboard> selectList(Connection con,int currentPage,int limit)  {
 		ArrayList<Gboard> list = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectList");
 		try {
+			pstmt = con.prepareStatement(sql);
+			int startRow = (currentPage-1)*limit +1;
+			int endRow = startRow + limit -1;
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(sql);
 			list = new ArrayList<Gboard>();
@@ -45,7 +48,9 @@ public class GboardDao {
 				g.setGwriter(rset.getString("gwriter"));
 				g.setGcount(rset.getInt("gcount"));
 				g.setGdate(rset.getDate("gdate"));
-				g.setGfile(rset.getString("gfile"));
+//				g.setGfile(rset.getString("gfile"));
+				String[] sarr = (rset.getString("gfile").split(","));
+				g.setGfile(sarr[0]);
 				g.setStatus(rset.getString("status"));
 
 				list.add(g);
@@ -137,6 +142,104 @@ public class GboardDao {
 		}
 		
 		return result;
+	}
+
+	public Gboard upDateView(Connection con, int gno) {
+		Gboard g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("upDateView");
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, gno);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				g = new Gboard();
+				
+				g.setGno(gno);
+				g.setGtitle(rset.getString("gtitle"));
+				g.setGcontent(rset.getString("gcontent"));
+				g.setGwriter(rset.getString("gwriter"));
+				g.setGdate(rset.getDate("gdate"));
+				g.setGfile(rset.getString("gfile"));
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return g;
+	}
+
+	public int updateGboard(Connection con, int gno, String gcontent, String gfile) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateGboard");
+		
+		try {
+			
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, gcontent);
+		pstmt.setString(2, gfile);
+		pstmt.setInt(3, gno);
+			
+		result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int gboardDelete(Connection con,int gno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("gboardDelete");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, gno);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getListCount(Connection con) {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("ListCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
 	}
 
 }

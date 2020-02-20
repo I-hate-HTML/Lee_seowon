@@ -1,6 +1,7 @@
 package semi.home.gboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,24 +50,36 @@ public class InsertGboardServlet extends HttpServlet {
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyRenamePolicy());
 		
-		String fileName = mrequest.getFilesystemName("gfile");
+		
 		
 		String gtitle = mrequest.getParameter("gtitle");
 		String gname = mrequest.getParameter("userId");
 		String gcontent = mrequest.getParameter("gcontent");
-	
-		System.out.println(gtitle);
-		System.out.println(gname);
-		System.out.println(gcontent);
+		mrequest.getFilesystemName("gfile");
 		
 		Gboard g = new Gboard();
+		
+		ArrayList filelist = MyRenamePolicy.Filenamechange;
+		// MyRenamePlicy에서 저장해놓은 이름을 가져와서 꺼냄
+		String gfile="";
+		
+		for(int i=0;i<filelist.size();i++) {
+			if(i==filelist.size()-1) {
+				gfile+=filelist.get(i);
+			}else {
+				gfile+=filelist.get(i)+",";
+			}
+		}
+		
+		
 		g.setGtitle(gtitle);
 		g.setGcontent(gcontent);
 		g.setGwriter(gname);
-		g.setGfile(fileName);
+		g.setGfile(gfile);
 		
 		
 		int result = new GboardService().insertgboard(g);
+		
 		
 		if(result > 0) {
 			System.out.println("사진 게시글 작성 완료!!");

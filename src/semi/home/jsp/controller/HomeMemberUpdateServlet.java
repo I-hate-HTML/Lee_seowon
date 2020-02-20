@@ -53,7 +53,6 @@ public class HomeMemberUpdateServlet extends HttpServlet {
 		m.setPhone(phone);
 		m.setAddress(address);
 		
-		System.out.println("변경한 회원 정보 확인 : " + m);
 		
 		HomeMemberService hms = new HomeMemberService();
 		

@@ -21,6 +21,16 @@ public class Gboard  implements Serializable{
 	public Gboard() {
 		super();
 	}
+	
+
+	public Gboard(int gno, String gtitle, String gcontent, String gfile) {
+		super();
+		this.gno = gno;
+		this.gtitle = gtitle;
+		this.gcontent = gcontent;
+		this.gfile = gfile;
+	}
+
 
 	public Gboard(int gno, String gtitle, String gcontent, String gwriter, int gcount, Date gdate, String gfile,
 			String status) {

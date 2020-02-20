@@ -56,7 +56,7 @@
 
 <div class="top_bg">
   <a class="top_p"> 사진게시판 </a>
-   <p>아이들의 행복한 시간</p>
+   <p>팡팡 유치원 사진게시판</p>
  </div>
 
 
@@ -82,7 +82,7 @@
                           <tr>
                               <th>첨부파일: </th>
                               <td>
-                              <span id="filearea"><input type="file" name="gfile" id="gfile"></span>
+                              <span id="filearea"><input type="file" name="gfile" id="gfile" multiple></span>
                               </td>
                           </tr>
  

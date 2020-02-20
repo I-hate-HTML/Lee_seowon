@@ -33,8 +33,30 @@ public class SelectGboardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	ArrayList<Gboard> list = null;
+	GboardService gs = new GboardService();
 	
-	list = new GboardService().selectList();
+	int startPage;
+	int endPage;
+	int maxPage;
+	int currentPage;
+	int limit;
+	currentPage = 1;
+	limit = 9;
+	
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	int listCount = gs.getListCount();
+	
+	maxPage = (int)((double)listCount/limit + 0.9);
+	startPage = ((int)((double)currentPage / limit + 0.9)-1)*limit+1;
+	endPage = startPage + limit -1;
+	if(endPage > maxPage) {
+		endPage = maxPage;
+	}
+	
+	list = gs.selectList(currentPage,limit);
 	
 	String page ="";
 	

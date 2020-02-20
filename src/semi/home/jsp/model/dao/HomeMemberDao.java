@@ -209,7 +209,6 @@ public class HomeMemberDao {
 				
 				result.setUserId(rset.getString("userId"));
 			}
-			System.out.println(result);
 		}catch(Exception e) {
 			throw new MemberException(e.getMessage());
 		}finally {

@@ -55,7 +55,6 @@ public class HomeMemberSearchPwdServlet extends HttpServlet {
 			page = "views/homepage/login_searchPwd_Fin.jsp";
 			int result = hms.searchPwd(m);
 			System.out.println("비밀번호 찾기 완료");
-			System.out.println(result);
 			request.setAttribute("member", m);
 		
 		} catch(MemberException e) {
