@@ -130,7 +130,7 @@
  		
  		var fno = $(this).parent().find("input").val();
  		location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
- 	});
+ 
  });
 
 

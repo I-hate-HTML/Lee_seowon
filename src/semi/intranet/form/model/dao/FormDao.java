@@ -110,12 +110,11 @@ public class FormDao {
 			pstmt.setInt(1, f.getFcategory());
 			pstmt.setInt(2, f.getfWriterId());
 			pstmt.setDate(3, f.getFdate());
-			pstmt.setInt(4, f.getFsignId1());
+			pstmt.setString(4, f.getfSignList());
 			pstmt.setString(5, f.getFtitle());
 			pstmt.setString(6, f.getFcontent());
 			pstmt.setString(7, f.getFfile());
-			pstmt.setInt(8, f.getFsignId2());
-			pstmt.setInt(9, f.getFsignId3());
+			
 			
 			result = pstmt.executeUpdate();
 			
@@ -203,11 +202,9 @@ public class FormDao {
 			int endContent = startContent + limitContent -1;
 			
 			pstmt.setInt(1, empNum);
-			pstmt.setInt(2, empNum);
-			pstmt.setInt(3, empNum);
-			pstmt.setInt(4, empNum);
-			pstmt.setInt(5, endContent);
-			pstmt.setInt(6, startContent);
+			pstmt.setInt(2, '%'+empNum+'%');
+			pstmt.setInt(3, endContent);
+			pstmt.setInt(4, startContent);
 			
 			rset = pstmt.executeQuery();
 			

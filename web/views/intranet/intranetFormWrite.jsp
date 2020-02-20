@@ -12,7 +12,7 @@
 
 <!-- Begin Page Content -->
 
-<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/fWrite.fo" method="post" name = "formWrite" enctype="multipart/form-data">
 <div class="card shadow mb-4">
   <div class="card-header py-3"> 
     <table style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
@@ -21,7 +21,7 @@
           <h6 class="m-0 font-weight-bold text-primary" style="width: 100px">품의결재창</h6>
     </td>
     <td align="right">
-      <button type="submit" class = "btn btn-primary btn-sm">등록</button>
+      <button class = "btn btn-primary btn-sm" id="submitBtn">등록</button>
       <button type="reset" class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath()%>/fList.fo'">취소</button>    
               
     </td>
@@ -80,13 +80,14 @@
 		<td>
 			<div class="rank_list">
 				<select id="signListSelect" name="signListSelect1" size="10" style="width:100%" multiple>
+				<input type="hidden" id="selectSign" name = "signList_fin" value="">
 				</select>
 			</div>
 		</td>
           </tr>
           <tr>
           <td style="text-align: center; border-top:hidden;"colspan="3">
-            <input type ="button" class="btn btn-primary btn-sm saveSign" value="결재자 저장">
+            <input type ="button" class="btn btn-primary btn-sm" id="saveSign" value="결재자 저장">
             <input type ="button" class="btn btn-primary btn-sm cancleSign" value="결재자 취소">
           </td>
         </tr>
@@ -133,7 +134,7 @@
     }else if(option.value == '2') {
         content.value = '';
         content.value += '휴가신청서\n\n\n';
-        content.value += '휴가 기간 :  년  월  일  ~   년  월  일 \n\n';
+        content.value += '휴가 기간 :  년  월  일  ~   년  월  일  총  일 \n\n';
         content.value += '휴가 사유 :  \n\n\n';
         content.value += '위와 같이 휴가를 신청하오니 결재 바랍니다.\n\n';
         content.value += '** 휴가신청서 파일을 첨부해주세요 ';
@@ -157,12 +158,11 @@
 
 // 품의 쓰기창 결재자 리스트 가져오는 ajax
 $(function(){
-	console.log("기능실행");
+	
 	 $.ajax({
  		url:"/semi/fSignList.fo",
  		type:"post",
  		success:function(data){
- 			console.log(data);
  			
  			var $select = $('#signList');
  			
@@ -172,7 +172,7 @@ $(function(){
  				var $option = $('<option>');
  				
  				$option.val(data[i].scode);
- 				$option.text(data[i].position + "\t" + data[i].sname);
+ 				$option.text(data[i].scode + "\t" + data[i].position + "\t" + data[i].sname);
  				
  				$select.append($option);
  				
@@ -206,13 +206,13 @@ var JSopt  =  {
 			if(_mode == 'add') {
 				$("#signList").find("option").each(function() {
 					if(this.selected){
-						$("#signListSelect").append("<option value='" + this.value +"'>" + this.text +"</option>");
+						$("#signListSelect").append("<option value='" + this.value +"' selected>" + this.text +"</option>");
 						$(this).remove();
 					}
 				});
 			}  else if (_mode == "addall") {
 				$("#signList").find("option").each(function() {
-					$("#signListSelect").append("<option value='" + this.value +"'>" + this.text +"</option>");
+					$("#signListSelect").append("<option value='" + this.value +"' selected>" + this.text +"</option>");
 					$("#signList").empty();
 				});
 			} else if (_mode == "backall") {
@@ -232,10 +232,51 @@ var JSopt  =  {
 		}
 	}
 
-$(".saveSign").click(function(){
-	console.log("버튼 실행")
-	console.log($("#signListSelect option").val());
+
+// 결재자 저장 버튼
+$("#saveSign").off().on("click",(function(){
+
+	var select=$('#signListSelect>option').map(function(){return $(this).val();});
+	
+	var fin="";
+
+	
+	for(var i = 0; i < select.length; i++) {
+		fin += select[i]+",";
+	}
+	
+	 $('#selectSign').val(fin);
+	 
+	 alert(select.length + "명의 결재자가 선택되었습니다.");
+}));
+
+
+// 결재자 취소 버튼
+$(".cancleSign").click(function(){
+	
+	if(!$('#selectSign').val()) {
+		alert("저장된 결재자가 없습니다.");
+	} else {
+		$('#selectSign').val("");
+		
+		alert("결재자 선택이 취소 되었습니다.");
+		
+		JSopt.doOpt("backall");
+	}
+	
 });
+
+
+ // 글 등록 버튼
+$('#submitBtn').off().on('click',(function(){
+	
+	if(!$('#selectSign').val()) {
+		alert("결재자를 선택해주세요")
+	} else {
+		document.formWrite.submit();
+	}
+	
+}));
 
 	 
 </script>
