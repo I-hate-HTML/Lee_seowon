@@ -49,8 +49,6 @@ public class FoodCalendarDao {
 			
 			result= pstmt.executeUpdate();
 			
-			
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
