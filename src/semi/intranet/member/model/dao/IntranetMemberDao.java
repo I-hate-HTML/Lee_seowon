@@ -67,6 +67,7 @@ public class IntranetMemberDao {
 				m.setCbdate(rset.getDate("cbdate"));
 				m.setCgender(rset.getString("cgender"));//String?
 				m.setCclass(rset.getInt("cclass"));
+				m.setMstatus(rset.getString("MSTATUS"));
 				
 				list.add(m);
 			}
@@ -192,6 +193,27 @@ public class IntranetMemberDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	public int acceptMember(Connection con, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("changingStatus");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "Y");
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+			commit(con);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(con);
+		}
 		return result;
 	}
 

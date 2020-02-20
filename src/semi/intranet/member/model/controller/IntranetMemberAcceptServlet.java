@@ -1,6 +1,12 @@
 package semi.intranet.member.model.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import semi.intranet.alimjang.model.service.AlimService;
+import semi.intranet.member.model.service.IntranetMemberService;
 
 /**
  * Servlet implementation class IntranetMemberAcceptServlet
@@ -17,41 +24,59 @@ import semi.intranet.alimjang.model.service.AlimService;
 @WebServlet("/approve.member")
 public class IntranetMemberAcceptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public IntranetMemberAcceptServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
-		
-		int empNo = 2015001; // 나중에 수정할 것!!
-		
-		String read = request.getParameter("result");
-		int ano = Integer.parseInt(request.getParameter("ano"));
-		int category = Integer.parseInt(request.getParameter("category"));
-		
-		
-		int result = new AlimService().readAlimCheck(empNo, read, ano, category);
-		
-		new Gson().toJson(result, response.getWriter());
-		
+	public IntranetMemberAcceptServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Map<String,String> returnData = new HashMap<>();
+		
+		IntranetMemberService ims = new IntranetMemberService();
+		
+		try(InputStream is = request.getInputStream();
+			ByteArrayOutputStream os = new ByteArrayOutputStream()){
+			int x;
+	        byte[] buf = new byte[1024*8];
+	        while ((x = is.read(buf)) != -1) {
+	            os.write(buf, 0, x);
+	        }
+			byte[] ba = os.toByteArray();
+			String json = new String(ba);
+			
+			List<String> userIdList = new Gson().fromJson(json, new TypeToken<List<String>>(){}.getType());
+
+			for (String userId : userIdList) {
+				ims.acceptMember(userId);
+			}
+			
+			returnData.put("status", "success");
+		}
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+		
+		new Gson().toJson(returnData, response.getWriter());
+		
+		
+
 	}
 
 }

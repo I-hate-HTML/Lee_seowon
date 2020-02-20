@@ -287,7 +287,7 @@ public class FormService {
 		
 		if(fReturn != null) {
 			
-			result = fd.updateSignProcess(con, fno, -1);
+			result = fd.updateSignProcess(con, fno, 9);
 		
 		} else if (fReturn == null) {
 			

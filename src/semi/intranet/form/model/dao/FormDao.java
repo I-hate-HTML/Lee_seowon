@@ -491,23 +491,20 @@ public class FormDao {
 		
 		String sql = "";
 		
-		if( size < 0) {
-			sql = prop.getProperty("updateSignReturn");
-		} else {
-			sql = prop.getProperty("updateSignPer");
-		}
+		System.out.println(size);
 		
+		switch(size) {
+		case 1 : sql = prop.getProperty("updateSign1"); break;
+		case 2 : sql = prop.getProperty("updateSign2"); break;
+		case 3 : sql = prop.getProperty("updateSign3"); break;
+		case 9 : sql = prop.getProperty("updateSignReturn"); break;
+		}
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			if( size < 0) {
 				pstmt.setInt(1, fno);
-			} else {
-				pstmt.setInt(1, fno);
-				pstmt.setInt(2, size + 1);
-			}
 			
 			result = pstmt.executeUpdate();			
 			
