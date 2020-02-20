@@ -7,21 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import semi.intranet.calendar.model.service.EventService;
 
 /**
- * Servlet implementation class UpdateEventServlet
+ * Servlet implementation class DeleteEventServlet
  */
-@WebServlet("/updateEvent.ev")
-public class UpdateEventServlet extends HttpServlet {
+@WebServlet("/deleteEvent.ev")
+public class DeleteEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateEventServlet() {
+    public DeleteEventServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +27,11 @@ public class UpdateEventServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String event = request.getParameter("event");
-		String newstart = request.getParameter("newstart");
-		String newend = request.getParameter("newend");
-		
-		
 		EventService es = new EventService();
-		JSONObject obj = es.selectOne(event);
-		 
-		obj.put("start", newstart);
-		obj.put("end", newend);
-		
-		int result = es.updateEvent(event,obj.toString());
+		System.out.println(event);
+		es.deleteEvent(event);
 		
 	}
 
