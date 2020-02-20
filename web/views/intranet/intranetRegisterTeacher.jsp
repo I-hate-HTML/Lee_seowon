@@ -233,8 +233,6 @@
 						var $entDate = $('<td>').text(value.entDate);
 						var $empClass = $('<td>').text(value.empClass);
 						var $hobong = $('<td>').text(value.hobong);
-
-						// 숫자로 받아오기 때문에 서블릿에서 변환과정이 필요함
 						var $entYN = $('<td>').text(value.entYN);
 
 						$tr.append($empIndex);

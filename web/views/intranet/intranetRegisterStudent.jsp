@@ -21,7 +21,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                  <form action="" method="" name = "registerStudent">
+                  <form action=""  name = "registerStudent">
                     <table class="table table-bordered" id="dataTable" width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
                       <tr>
                         <th style="padding:0.2rem">학번</th>

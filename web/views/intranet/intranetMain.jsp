@@ -52,6 +52,7 @@
 							</table>
 						</div>
 						<br>
+						<hr>
 					</div>
 
 
@@ -67,8 +68,7 @@
 							<h6 class="m-0 font-weight-bold text-primary">품의확인</h6>
 						</div>
 						<div class="card-body">
-
-							<table class="table table-hover" style="font-size: 12px;" id="pum">
+							<table class="table" style="font-size: 12px;" id="pum">
 								<tr>
 									<th>품의번호</th>
 									<th>분류</th>
@@ -79,8 +79,9 @@
 								</tr>
 							</table>
 						</div>
+						<br>
+						<hr>
 					</div>
-
 				</div>
 			</div>				
 			<div class="row">
