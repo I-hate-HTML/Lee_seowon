@@ -5,6 +5,7 @@ import static semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 
 import oracle.net.aso.r;
+import semi.common.EncryptPassword;
 import semi.home.jsp.model.dao.HomeMemberDao;
 import semi.home.jsp.model.exception.MemberException;
 import semi.home.jsp.model.vo.Member;
@@ -102,8 +103,11 @@ public class HomeMemberService {
 		
 		String phonenum = hmDao.searchPhoneNum(con,m);
 		
+		String changepwd = new EncryptPassword().Encryptpass(phonenum);
 		
-		int result = hmDao.serchPwd(con,m);
+		
+		int result = hmDao.serchPwd(con,m,changepwd);
+		
 		if(result == 0) {
 			throw new MemberException("비밀번호 찾기 실패!");
 		}

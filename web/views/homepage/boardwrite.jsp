@@ -80,12 +80,13 @@
                               <span id="filearea"><input type="file" name="bfile" id="bfile1" multiple></span>
                               </td>
                           </tr>
- 
+ 							
                           
                         </tbody>
                       </table>
                       
                       <div class="float-right">
+                      	<input type="hidden" value="<%=m.getUserId()%>" name="userId">
                         <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="" class="pull-right"/>
                         <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" onclick="location.href='/semi/boardlsit.do'" value="취소" />
                       </div>

@@ -220,7 +220,7 @@ public class HomeMemberDao {
 	}
 
 
-	public int serchPwd(Connection con, Member m) throws MemberException {
+	public int serchPwd(Connection con, Member m, String changepwd) throws MemberException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -228,8 +228,9 @@ public class HomeMemberDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m.getUserId());
-			pstmt.setDate(2, m.getCbdate());
+			pstmt.setString(1, changepwd);
+			pstmt.setString(2, m.getUserId());
+			pstmt.setDate(3, m.getCbdate());
 			
 			result = pstmt.executeUpdate();
 			
