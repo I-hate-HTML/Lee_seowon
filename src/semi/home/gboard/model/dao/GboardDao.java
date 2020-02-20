@@ -35,14 +35,15 @@ public class GboardDao {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (currentPage-1)*limit +1;
 			int endRow = startRow + limit -1;
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(sql);
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			rset = pstmt.executeQuery();
 			list = new ArrayList<Gboard>();
 			
 			while(rset.next()) {
 				Gboard g = new Gboard();
-				
-				g.setGno(rset.getInt("GNO"));
+				g.setGno(listCount - rset.getInt("RNUM")+1);
+//				g.setGno(rset.getInt("GNO"));
 				g.setGtitle(rset.getString("gtitle"));
 				g.setGcontent(rset.getString("gcontent"));
 				g.setGwriter(rset.getString("gwriter"));
@@ -60,7 +61,7 @@ public class GboardDao {
 			e.printStackTrace();;
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
