@@ -23,7 +23,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown show"><a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">보육프로그램</a>
 							<div class="dropdown-menu " aria-labelledby="dropdown01">
-								<a class="dropdown-item" href="./main_calendar.jsp">보육계획안</a> <a
+								<a class="dropdown-item" href="./edu_calendar.jsp">보육계획안</a> <a
 									class="dropdown-item" href="./food_calender.jsp">식단 안내</a> <a
 									class="dropdown-item" href="./event_calender.jsp">행사 안내</a>
 							</div></li>

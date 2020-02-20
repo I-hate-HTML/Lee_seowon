@@ -54,11 +54,11 @@ public class FormReadServlet extends HttpServlet {
 	
 		// 기안자인지 결재자인지 구분 --> 구분에 따라 읽는 페이지 달라짐
 		if(f != null && empNo == f.getfWriterId() ) { // 기안자 일 경우
-			page = "fListRead.fo";
+			page = "views/intranet/intranetFormRead.jsp";
 			request.setAttribute("form", f);
 			
-		} else if (f != null && empNo == f.getFsignId1() || empNo == f.getFsignId2() || empNo == f.getFsignId3()) {// 결재자 일 경우
-			page = "fListRead.fo";
+		} else if (f != null) {// 결재자 일 경우
+			page = "views/intranet/intranetFormModifySign.jsp";
 			request.setAttribute("form", f);
 		}
 		
