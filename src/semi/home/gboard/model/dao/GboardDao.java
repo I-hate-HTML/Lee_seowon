@@ -26,7 +26,7 @@ public class GboardDao {
 		}
 	}
 	
-	public ArrayList<Gboard> selectList(Connection con,int currentPage,int limit)  {
+	public ArrayList<Gboard> selectList(Connection con,int currentPage,int limit,int listCount)  {
 		ArrayList<Gboard> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
