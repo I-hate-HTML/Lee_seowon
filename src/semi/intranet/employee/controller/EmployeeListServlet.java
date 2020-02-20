@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
 
 import semi.intranet.employee.model.service.EmployeeService;
 import semi.intranet.employee.model.vo.Employee;
@@ -22,54 +21,46 @@ import semi.intranet.employee.model.vo.Employee;
 @WebServlet("/empCall.do")
 public class EmployeeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EmployeeListServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json; charset=UTF-8"); 
+		
 		EmployeeService es = new EmployeeService();
 		List<Employee> ae = new ArrayList<>();
 		
+		
 		ae = es.emplistAll();
+		System.out.println(ae);
+		String json = new Gson().toJson(ae);
+		System.out.println(json);
 		
-		JSONObject empInfo = null;
-		JSONArray result = new JSONArray();
-		
-		for(Employee emp : ae) {
-			empInfo = new JSONObject();
-			
-			empInfo.put("empCode", emp.getEmpCode());
-			empInfo.put("empJob", emp.getEmpJob());
-			empInfo.put("empName", emp.getEmpName());
-			empInfo.put("empPhone", emp.getEmpPhone());
-			empInfo.put("hireDate", emp.getHireDate());
-			empInfo.put("entDate", emp.getEntDate());
-			empInfo.put("empClass", emp.getEmpClass());
-			empInfo.put("hobong", emp.getHobong());
-			empInfo.put("entYN", emp.getEntYN()==1?"Y":"N");
-			
-			result.add(empInfo);
-		}
-		
-		response.getWriter().print(result.toJSONString());
-		
-		
+		response.getWriter().print(json);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
+
+
+
+
+
+
+/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// TODO Auto-generated method stub
+	doGet(request, response);
+}
 
 }
