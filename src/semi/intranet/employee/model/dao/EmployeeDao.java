@@ -48,7 +48,7 @@ public class EmployeeDao {
 			pstmt.setString(3, em.getEmpNo());
 			pstmt.setString(4, em.getEmpPhone());
 			pstmt.setString(5, em.getEmpAddr());
-			pstmt.setDate(6, em.getHireDate());
+			pstmt.setString(6, em.getHireDate());
 			pstmt.setString(7, em.getEmpClass());
 			pstmt.setString(8, em.getEmpimg());
 			result = pstmt.executeUpdate();
@@ -93,7 +93,7 @@ public class EmployeeDao {
 	}
 
 	public ArrayList<Employee> emplistAll(Connection con) {
-		ArrayList<Employee> ae = null;
+		ArrayList<Employee> ae = new ArrayList<>();
 		Statement stmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("emplistAll");
@@ -104,16 +104,15 @@ public class EmployeeDao {
 			
 			while(rset.next()) {
 				Employee e = new Employee();
-				
-				e.setEmpCode(rset.getInt("EMP_CODE"));
-				e.setEmpJob(rset.getString("EMP_JOB"));
-				e.setEmpName(rset.getString("EMP_NAME"));
-				e.setEmpPhone(rset.getString("EMP_PHONE"));
-				e.setHireDate(rset.getDate("HIRE_DATE"));
-				e.setEntDate(rset.getDate("ENT_DATE"));
-				e.setEmpClass(rset.getString("EMP_CLASS"));
-				e.setHobong(rset.getInt("HOBONG"));
-				e.setEntYN(rset.getString("ENT_YN").equals("Y")?1:2);
+
+				e.setEmpCode(rset.getInt(1));
+				e.setEmpJob(rset.getString(3));
+				e.setEmpName(rset.getString(2));
+				e.setEmpPhone(rset.getString(5));
+				e.setHireDate(rset.getString(7));
+				e.setEmpClass(rset.getString(10));
+				e.setHobong(rset.getInt(11));
+				e.setEntYN(rset.getString(9).equals("Y")?1:2);
 				
 				ae.add(e);
 			}

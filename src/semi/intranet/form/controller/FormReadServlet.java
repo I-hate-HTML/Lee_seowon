@@ -57,8 +57,8 @@ public class FormReadServlet extends HttpServlet {
 			page = "views/intranet/intranetFormRead.jsp";
 			request.setAttribute("form", f);
 			
-		} else if (f != null) {// 결재자 일 경우
-			page = "views/intranet/intranetFormModifySign.jsp";
+		} else if (f != null && empNo != f.getfWriterId()) {// 결재자 일 경우
+			page = "views/intranet/intranetFormReadSign.jsp";
 			request.setAttribute("form", f);
 		}
 		

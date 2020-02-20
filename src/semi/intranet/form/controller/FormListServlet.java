@@ -47,7 +47,7 @@ public class FormListServlet extends HttpServlet {
 		int endPage;
 		
 		currentPage = 1;		
-		limitContent = 5;
+		limitContent = 10;
 		limitPage = 3;
 		
 		if(request.getParameter("currentPage") != null) {
