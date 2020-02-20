@@ -83,8 +83,8 @@
             
             <div class="cal_top">
                 <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
-                <span id="cal_top_year"></span>
-                <span id="cal_top_month"></span>
+                <span id="eduyear" name="eduyear"></span>
+                <span id="edumonth" name="edumonth"></span>
                 <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
             </div>
             <div id="cal_tab" class="cal">
@@ -94,17 +94,17 @@
             </div>
             </div>
             </div>
-            <form id="imguploadform">
+            <form  action="<%= request.getContextPath() %>/ecalinputimg.me" id="imguploadform" method="post" enctype="multipart/form-data">
             <% if(true){ %>
             <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
             	<input type="file" id="fileinput" class="btn btn-primary"
-               	style="background: #002c5f; color: white; width: 100px;" name="imgsend"
+               	style="background: #002c5f; color: white; width: 100px;" name="eduimg"
                 accept=".jpg,.jpeg,.png,.gif,.jfif"onchange="imageURL(this)">
                 	사진 업로드
             </label>
              <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" onclick="deleteImg()" >삭제</button>
-             <button class="btn justify-content-center " style="background: #002c5f; color: white; width: 100px;" id="sendimg" >등록</button>               
-           <% } %>
+             <input type="submit" class="btn justify-content-center" style="background: #002c5f; color: white; width: 100px;" id="sendimg" value="등록">       
+          <% } %>
            <input type="hidden" id="edudate" name="edudate">
            </form>
         </div>
@@ -117,27 +117,9 @@
 
 
       <script type="text/javascript">
-		$('#sendimg').click(function(){
-			
-			var form = $('#imguploadform')[0];
-			var data = new FormData(form);
-			
-		        $.ajax({
-		            type: "post",
-		            enctype:'multipart/form-data',
-		            url: "/semi/ecalinputimg.me",
-		            data: {
-						data:data
-					},
-					contentType : false,
-			        processData : false,
-		            success: function (data) {
-		            	alert("성공!");
-		            },
-		            error: function () {
-		                alert("fail");
-		            }
-		        });
+
+        $('img').click(function(){
+			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
 
 		
@@ -148,7 +130,6 @@
 				reader.onload = function(e) {
 					$('#eduimg').attr('src', e.target.result);
 				}
-
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
@@ -156,11 +137,21 @@
 		function deleteImg(){
 			$('#eduimg').attr('src','');
 			$('#fileinput').val('');
+			$.ajax({				
+				url:"/semi/edeleteimg.me",
+				type:"post",
+				data:{
+					edudate : $("#edudate").val()	
+				},
+				success:function(){
+					alert("삭제성공!");
+				},
+				error:function(){
+					alert("에러발생!");
+				}
+			});
 		}
 		
-		function clickimg(input){
-			
-		}
 
         var lol = ["곱창","마라탕","소시지페스티벌","수소수","H2O가","산소라는건","문과인","나도안다"]
     
@@ -196,17 +187,17 @@
         
         //calendar 날짜표시
         function drawDays(){
-            $("#foodyear").text(year);
-            $("#foodmonth").text(month);
-            $("#fooddate").val(String(year) + month);
+            $("#eduyear").text(year);
+            $("#edumonth").text(month);
+            $("#edudate").val(String(year) + month);
             
             $.ajax({
-            	url : "/semi/fcalimg.me",
+            	url : "/semi/eselectimg.me",
             	type : "post",
             	data:{
-            		fooddate : $("#fooddate").val()
+            		edudate : $("#edudate").val()
             	},success:function(data){
-            		$('#foodimg').attr('src','<%=request.getContextPath()%>/resources/homepage/images/foodimg/'+data);
+            		$('#eduimg').attr('src','<%=request.getContextPath()%>/resources/homepage/images/eduimg/'+data);
             	},error:function(){
             		alert("에러났다 에베베벱베베벱ㅂ베벱");
             	}

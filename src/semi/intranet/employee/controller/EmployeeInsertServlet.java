@@ -46,7 +46,7 @@ public class EmployeeInsertServlet extends HttpServlet {
 		String root = request.getServletContext().getRealPath("/");
 
 		// 게시판의 첨부파일을 저장할 폴더 이름 지정하기
-		String savePath = root + "resources/intranet/employeeImg";
+		String savePath = "/SemiProject/web/resources/intranet/image";
 		
 		MultipartRequest mrequest = new MultipartRequest(
 				request, // 변경하기 위한 원본 객체

@@ -12,7 +12,8 @@
  
  a{color:#212529;transition:all .2s}
  
- a:focus,a:hover{color:#0085a1}
+ a:focus,a:hover{color:#0085a1; cursor: pointer;}
+ 
  
  blockquote{font-style:italic;color:#868e96}
  
