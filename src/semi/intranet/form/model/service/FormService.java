@@ -187,7 +187,7 @@ public class FormService {
 	}
 
 	/**
-	 * 품의서 읽기
+	 * 품의서 읽기 --> 확인
 	 * @param fno
 	 * @return
 	 */

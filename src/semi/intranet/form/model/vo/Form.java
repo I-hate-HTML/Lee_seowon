@@ -19,7 +19,8 @@ public class Form implements Serializable{
 	private String fwriter;	// 작성자
 	private int fWriterId;	// 작성자 코드
 	private Date fdate;		// 기안날짜
-	private String fSignList; // 결재자 저장용
+	private String fSignList; // 결재자코드 저장용
+	private String fSignckList; // 결재자 확인 저장용
 	private String[] fsign;	// 결재자
 	private int[] fsignId;	// 결재자 코드
 	private String[] fsignck; // 결재자 확인
@@ -61,6 +62,64 @@ public class Form implements Serializable{
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
 		this.ffile = ffile;
+	}
+
+
+
+
+	/**
+	 * 품의 읽기용
+	 * @param fno
+	 * @param fcategory
+	 * @param fwriter
+	 * @param fWriterId
+	 * @param fdate
+	 * @param fSignList
+	 * @param fSignckList
+	 * @param fsign
+	 * @param fsignId
+	 * @param fsignck
+	 * @param freturnmsg
+	 * @param ftitle
+	 * @param fcontent
+	 * @param ffile
+	 * @param fstatus
+	 * @param category
+	 */
+	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fSignList, String fSignckList,
+			String[] fsign, int[] fsignId, String[] fsignck, String freturnmsg, String ftitle, String fcontent,
+			String ffile, String fstatus, String category) {
+		super();
+		this.fno = fno;
+		this.fcategory = fcategory;
+		this.fwriter = fwriter;
+		this.fWriterId = fWriterId;
+		this.fdate = fdate;
+		this.fSignList = fSignList;
+		this.fSignckList = fSignckList;
+		this.fsign = fsign;
+		this.fsignId = fsignId;
+		this.fsignck = fsignck;
+		this.freturnmsg = freturnmsg;
+		this.ftitle = ftitle;
+		this.fcontent = fcontent;
+		this.ffile = ffile;
+		this.fstatus = fstatus;
+		this.category = category;
+	}
+
+
+
+
+	public String getfSignckList() {
+		return fSignckList;
+	}
+
+
+
+
+	public void setfSignckList(String fSignckList) {
+		this.fSignckList = fSignckList;
 	}
 
 
