@@ -50,7 +50,11 @@ public class HomeMemberSearchPwdServlet extends HttpServlet {
 		Member m = new Member(userId,writerDate);
 	
 		HomeMemberService hms = new HomeMemberService();
+		
+		
 		String page ="";
+		
+		
 		try{
 			page = "views/homepage/login_searchPwd_Fin.jsp";
 			int result = hms.searchPwd(m);

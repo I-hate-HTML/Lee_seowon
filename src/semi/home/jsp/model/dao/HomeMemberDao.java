@@ -242,4 +242,32 @@ public class HomeMemberDao {
 		return result;
 	}
 
+
+	public String searchPhoneNum(Connection con, Member m) {
+		String phonenum="";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPhoneNum");
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setDate(2, m.getCbdate());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				phonenum = rset.getString(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return phonenum;
+	}
+
 }
