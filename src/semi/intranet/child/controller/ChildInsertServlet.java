@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import semi.intranet.child.model.service.ChildService;
 import semi.intranet.child.model.vo.Child;
+import semi.intranet.employee.model.service.EmployeeService;
+import semi.intranet.employee.model.vo.Employee;
 
 /**
  * Servlet implementation class ChildInsertServlet
@@ -30,31 +35,56 @@ public class ChildInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cName = request.getParameter("cName");
-		String cGender = request.getParameter("cGender");
-		String cNo = request.getParameter("cNo1")+"-"+request.getParameter("cNo2");
-		String cBirth = request.getParameter("cYear")+"."
-					+request.getParameter("cMonth")+"."
-					+request.getParameter("cDate");
-		String cAddr = request.getParameter("cAddr1")
-					+request.getParameter("cAddr2")
-					+request.getParameter("cAddr3");
-		String cImage = request.getParameter("cUrl");
-		String cClass = request.getParameter("cClass");
+		int maxSize = 1024 * 1024 * 10;
+
+
+		String root = request.getServletContext().getRealPath("/");
+
+		// 게시판의 첨부파일을 저장할 폴더 이름 지정하기
+		String savePath = root + "resources/intranet/image";
+
+		MultipartRequest mrequest = new MultipartRequest(
+				request, // 변경하기 위한 원본 객체
+				savePath, // 파일 저장 경로
+				maxSize,  // 저장할 파일의 최대 크기
+				"UTF-8", // 저장할 문자셋 설정
+				new DefaultFileRenamePolicy()
+				// 만약 동일한 이름의 
+				// 파일을 저장했을 경우
+				// 기존의 파일과 구분하기 위해
+				// 새로운 파일명 뒤에 숫자를 붙이는 규칙
+				);
+
 		
-		Child c = new Child(cName,cGender,cNo,cBirth,cAddr,cImage,cClass);
+
 		
+		String name = mrequest.getParameter("stuname");
+		String gender = mrequest.getParameter("stugen");
+		String stuno = mrequest.getParameter("stuno1")+"-"+mrequest.getParameter("stuno2");
+		String birth = mrequest.getParameter("stubirth");
+		String entdate = mrequest.getParameter("stuent");
+		String stuaddr = mrequest.getParameter("stuaddr1")+" "+mrequest.getParameter("stuaddr2")+" "+mrequest.getParameter("stuaddr3");
+		int age = Integer.parseInt(mrequest.getParameter("stuage"));
+		String state = mrequest.getParameter("stustate");
+		String stuclass= mrequest.getParameter("stuClass");
+		String stuimg = mrequest.getFilesystemName("stuimg");
+
+
+		Child ch = new Child(name,gender,stuno,birth,entdate,stuaddr,age,state,stuclass,stuimg);
+
+
+
 		ChildService cs = new ChildService();
-		int result = cs.insertChild(c);
-		
-		if(result>0) {
-			request.setAttribute("msg", "���� ��� �Ϸ�");
-			request.getRequestDispatcher("views/intranet/intranetRegisterStudent.jsp");
+
+		int result = cs.insertChild(ch);
+
+		if(result > 0) {
+			response.sendRedirect("views/intranet/intranetRegisterStudent.jsp");
 		}else {
-			request.setAttribute("msg", "���� ��� ����!");
-			request.getRequestDispatcher("views/intranet/intranetRegisterStudent.jsp");
+			request.setAttribute("msg", "게시글 작성 실패!");
+			request.getRequestDispatcher("views/intranet/intranetRegisterStudent.jsp")
+			.forward(request, response);
 		}
-		
 	}
 
 	/**
