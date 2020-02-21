@@ -1,27 +1,31 @@
-package semi.intranet.form.controller;
+package semi.home.gboard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import semi.home.jsp.model.vo.Member;
-import semi.intranet.form.model.service.FormService;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import semi.home.gboard.model.service.GboardService;
+import semi.home.gboard.model.vo.Gboard;
 
 /**
- * Servlet implementation class FormDeleteServlet
+ * Servlet implementation class MainPageImageServlet
  */
-@WebServlet("/fDelete.fo")
-public class FormDeleteServlet extends HttpServlet {
+@WebServlet("/MainpageImg.me")
+public class MainPageImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormDeleteServlet() {
+    public MainPageImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +35,27 @@ public class FormDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
+		response.setContentType("application/json; charset=UTF-8");
 		
-		int eno = Integer.parseInt(m.getUserId());
 		
-		int fno = Integer.parseInt(request.getParameter("fno"));
+		ArrayList<Gboard> list = new GboardService().getmainimg();
 		
-		int result = new FormService().deleteForm(fno, eno);
+		JSONObject ginfo = null;
+		JSONArray result = new JSONArray();
 		
-		String page = "";
-		
-		if(result > 0) {
-			response.sendRedirect("fList.fo");
+		for(Gboard gb : list) {
+			ginfo = new JSONObject();
+			
+			ginfo.put("gno", gb.getGno());
+			ginfo.put("gtitle", gb.getGtitle());
+			ginfo.put("gfile", gb.getGfile());
+			
+			result.add(ginfo);
 		}
 		
+		response.getWriter().print(result.toJSONString());
+		
+	
 	}
 
 	/**

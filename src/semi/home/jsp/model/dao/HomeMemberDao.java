@@ -60,6 +60,7 @@ public class HomeMemberDao {
 				result.setCbdate(rset.getDate("cbdate"));
 				result.setCgender(rset.getString("cgender"));
 				result.setCclass(rset.getInt("cclass"));
+				result.setJob_code(rset.getInt("job_code"));
 				
 				
 			}

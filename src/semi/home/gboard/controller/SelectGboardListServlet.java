@@ -59,19 +59,20 @@ public class SelectGboardListServlet extends HttpServlet {
 	
 	list = gs.selectList(currentPage,limit);
 	
+	
 	String page ="";
 	if(list != null) {
 		
 		page = "views/homepage/gallaryBoard.jsp";
 		request.setAttribute("list", list);
-		
 		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		request.setAttribute("pi", pi);
+		System.out.println("사진게시판 리스트 불러오기 완료!!");
 		
 	} else {
 		
-		page = "views/common/errorPage.jsp";
-		request.setAttribute("msg", "사진 게시판 목록 조회 실패!!");
+		page ="views/homepage/common/errorPage.jsp";
+		request.setAttribute("msg", "사진게시판 검색 실패!!");
 		
 	}
 	

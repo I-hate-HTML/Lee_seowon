@@ -244,4 +244,124 @@ public class GboardDao {
 		return listCount;
 	}
 
+	public ArrayList<Gboard> searchGboard(Connection con, String category, String keyword) {
+		ArrayList<Gboard> searchlist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = null;
+		switch(category) {
+		
+		case "writer":
+			sql = "SELECT * FROM GBOARD WHERE GWRITER LIKE '%' || ? || '%'";
+			break;
+		case "title":
+			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+			break;
+		case "content":
+			sql = "SELECT * FROM GBOARD WHERE GCONTENT LIKE '%' || ? || '%'";
+			break;
+		}
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			searchlist = new ArrayList<Gboard>();
+			while(rset.next()) {
+				Gboard g = new Gboard();
+				
+				g.setGno(rset.getInt("gno"));
+				g.setGtitle(rset.getString("gtitle"));
+				g.setGcontent(rset.getString("gcontent"));
+				g.setGwriter(rset.getString("gwriter"));
+				g.setGcount(rset.getInt("gcount"));
+				g.setGdate(rset.getDate("gdate"));
+//				g.setGfile(rset.getString("gfile"));
+				String [] searchArr = rset.getString("gfile").split(",");
+				g.setGfile(searchArr[0]);
+				g.setStatus(rset.getString("status"));
+				searchlist.add(g);
+			}
+		}catch(SQLException e) {
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return searchlist;
+	}
+
+	public ArrayList<Gboard> selecGboard(Connection con) {
+		ArrayList<Gboard> searchlist = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = "SELECT * FROM GBOARD";
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			searchlist = new ArrayList<Gboard>();
+			while(rset.next()) {
+				Gboard g = new Gboard();
+				
+				g.setGno(rset.getInt("gno"));
+				g.setGtitle(rset.getString("gtitle"));
+				g.setGcontent(rset.getString("gcontent"));
+				g.setGwriter(rset.getString("gwriter"));
+				g.setGcount(rset.getInt("gcount"));
+				g.setGdate(rset.getDate("gdate"));
+				g.setGfile(rset.getString("gfile"));
+				g.setStatus(rset.getString("status"));
+				
+				searchlist.add(g);
+			}
+			
+			
+		}catch(SQLException e) {
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return searchlist;
+	}
+
+	public ArrayList<Gboard> getmainimg(Connection con) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Gboard> list = new ArrayList<Gboard>();
+		String sql = prop.getProperty("getmainimg");
+		
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				Gboard gb = new Gboard();
+				gb.setGno(rset.getInt("gno"));
+				gb.setGtitle(rset.getString("gtitle"));
+				String[] sarr = rset.getString("gfile").split(",");
+				gb.setGfile(sarr[0]);
+				
+				list.add(gb);
+			}
+	
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
+	}
+
 }

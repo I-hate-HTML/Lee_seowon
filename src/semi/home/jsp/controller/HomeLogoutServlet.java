@@ -37,7 +37,7 @@ public class HomeLogoutServlet extends HttpServlet {
 			session.invalidate();
 		}
 	
-		response.sendRedirect("views/homepage/homeindex.jsp");
+		response.sendRedirect("index.jsp");
 	
 	}
 

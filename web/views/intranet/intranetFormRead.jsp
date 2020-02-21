@@ -188,13 +188,13 @@ $(function(){
 // 삭제버튼
 $(".delete").click(function(){
 	
-	if($('#formLineP1').val() != "null") {
+	if($('#formLineP1').val() != "결재전") {
 		alert("이미 품의가 진행중입니다.");
 		
 	} else {
 		var fno = "<%= form.getFno() %>";
 		var eno = "<%= m.getUserId() %>";
-	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno + "&eno=" + eno;
+	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno;
 	}
 	
 });
