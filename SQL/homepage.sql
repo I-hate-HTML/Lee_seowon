@@ -19,8 +19,11 @@ CREATE TABLE MEMBER(
     JOB_CODE NUMBER                                             -- 아이디 정보 확인
 );
 
-INSERT INTO MEMBER VALUES(1,'admin','admin','관리자','M','admin@naver.com','01012345678','주소',DEFAULT,1,'나자녀',SYSDATE,'M',1,'Y',1);
-
+INSERT INTO MEMBER VALUES(1,'admin','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','관리자','M','admin@naver.com','01012345678','주소',DEFAULT,1,'나자녀',SYSDATE,'M',1,'Y',1);
+INSERT INTO MEMBER VALUES(2,'kimhana','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','하나님','M','kim15@nate.com','01011111111','31172, 충남 천안시 서북구 월봉로 48 (쌍용동, 나사렛대학교), 진리관',DEFAULT,2020002,'예수림',20/12/25,'M',2,'Y',6);
+INSERT INTO MEMBER VALUES(3,'hamtory','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','햄토리','M','ham@to.ry','01010203040','15643, 경기 안산시 단원구 대부동동, 햄찌볼',DEFAULT,2020003,'아이쿵',25/02/04,'F',3,'Y',6);
+INSERT INTO MEMBER VALUES(4,'kimok','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','김옥지','F','kimok@daum.net','01001010202','29004, 충북 옥천군 군북면 옥지로 204 (지오리), 1층',DEFAULT,2020004,'양금옥',20/05/04,'F',4,'N',6);
+INSERT INTO MEMBER VALUES(5,'admin','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','김파인애플','F','pine@apple.com','01082825353','30053, 세종특별자치시 장군면 파인빌리지길 9 (도계리), 101동 101호',DEFAULT,2020005,'이채리',25/06/12,'F',3,'N',6);
 
 CREATE TABLE BOARDTYPE(
     BTYPE NUMBER PRIMARY KEY,
@@ -147,6 +150,9 @@ COMMENT ON COLUMN ALIMHOME.ALHM_PHONE2 IS '보호자연락처';
 COMMENT ON COLUMN ALIMHOME.ALHM_WRITER IS '작성자';
 COMMENT ON COLUMN ALIMHOME.ALHM_DATE IS '작성일';
 COMMENT ON COLUMN ALIMHOME.ALIM_CK IS '체크여부';
+
+INSERT INTO ALIMHOME VALUES (SEQ_ALHM.NEXTVAL,2,2020004,'도보','오후','아빠','01044044404','할아버지','01055055505','kimok',DEFAULT,'N');
+
 
 CREATE TABLE ALIMMEDI(              -- 투약 통지서
     ALMD_NO NUMBER PRIMARY KEY,     -- 투약 통지서 번호

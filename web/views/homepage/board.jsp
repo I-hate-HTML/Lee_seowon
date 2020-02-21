@@ -153,7 +153,12 @@
 	<%@ include file = "common/footer.jsp" %>
 
     <script>
-    console.log('<%=m%>');
+    
+    $("#keyword").keydown(function(e) {
+        if(e.keyCode==13){
+        	searchboard();
+        }
+    });
     
     $(function(){
     	  $('#boardtable td').click(function(){

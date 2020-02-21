@@ -68,7 +68,7 @@
                   <tbody>
                           <tr>
                               <th>제목: </th>
-                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control" required="required"/></td>
+                              <td><input type="text" placeholder="제목을 입력하세요. " name="btitle" class="form-control"/></td>
                           </tr>
                           <tr>
                               <th>내용: </th>
@@ -77,7 +77,7 @@
                           <tr>
                               <th>첨부파일: </th>
                               <td>
-                              <span id="filearea"><input type="file" name="bfile" id="bfile1" accept=".jpg,.jpeg,.png,.gif,.jfif" multiple></span>
+                              <span id="filearea"><input type="file" name="bfile" id="bfile1" accept=".jpg,.jpeg,.png,.gif,.jfif" onchange='chk_file_type(this)' multiple></span>
                               </td>
                           </tr>
  							
@@ -105,20 +105,20 @@
 	
 	<script>
 	
-	$('#bfile1').change(function(){
-		 var bfile = $('#bfile1');
-		 var file_kind = bfile.val().lastIndexOf('.');
-		 var file_name = bfile.val().substring(file_kind+1,bfile.length);
+	function chk_file_type(obj) {
+		 var file_kind = obj.value.lastIndexOf('.');
+		 var file_name = obj.value.substring(file_kind+1,obj.length);
 		 var file_type = file_name.toLowerCase();
-		 var check_file_type= new Array();
-		 check_file_type=['jpg','gif','png','jpeg','bmp','jfif'];
+		 var check_file_type= new Array();check_file_type=['jpg','gif','png','jpeg','bmp','jfif'];
 
 		 if(check_file_type.indexOf(file_type)==-1){
 		  alert('이미지 파일만 선택할 수 있습니다.');
+		  var parent_Obj=obj.parentNode
+		  var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
 		  $('#bfile1').val('');
 		  return false;
 		 }
-	});
+		}
 	
 
 	</script>

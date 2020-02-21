@@ -85,6 +85,7 @@ public class BoardService {
 
 	public ArrayList<Board> selectList(int currentPage, int limit) {
 			Connection con = getConnection();
+			
 			int listCount = bDao.getListCount(con);
 			
 			ArrayList<Board> list = bDao.selectList(con,currentPage,limit,listCount);
@@ -108,7 +109,18 @@ public class BoardService {
 	public ArrayList<Board> searchBoard(String searchval, String keyword,int currentPage,int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<Board> list = bDao.searchBoard(con,searchval,keyword,currentPage,limit);
+		ArrayList<Board> list = null;
+		
+		if(searchval.length() > 0) {
+			 list =	 bDao.searchBoard(con,searchval,keyword,currentPage,limit);
+			 // 키워드가 존재할때
+			}else {
+				int listCount = bDao.getListCount(con);
+				
+				list = bDao.selectList(con,currentPage,limit,listCount);
+				
+			}
+		
 		
 		close(con);
 		
