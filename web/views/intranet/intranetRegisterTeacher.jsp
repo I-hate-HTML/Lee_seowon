@@ -222,6 +222,7 @@
 				url : "/semi/empCall.do",
 				type : "get",
 				success : function(data) {
+					console.log(data);
 					$.each(data, function(index, value) {
 						var $tr = $('<tr>');
 						var $empIndex = $('<td>').text(index + 1);

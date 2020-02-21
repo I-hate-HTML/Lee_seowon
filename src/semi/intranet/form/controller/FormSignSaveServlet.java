@@ -33,56 +33,22 @@ public class FormSignSaveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		response.setContentType("application/json; charset=UTF-8");
 		
-		int fno = Integer.parseInt(request.getParameter("formNum"));
+		int fno = Integer.parseInt(request.getParameter("fno"));
+		String yn = request.getParameter("yn") + ",";
+		String reason = request.getParameter("reason") + ",";
+		String process = request.getParameter("result");
 		
-		String[] signArr = request.getParameterValues("formLineP");
+		System.out.println(process);
 		
-		String sign1 = "";
-		String sign2 = "";
-		String sign3 = "";
+		int result = new FormService().updateSign(fno, yn, reason, process);
 		
-		int size = signArr.length;
-		
-		
-		switch(size) {
-		case 1 : sign1 = signArr[0]; break;
-		case 2 : sign1 = signArr[0];
-				 sign2 = signArr[1]; break;
-		case 3 : sign1 = signArr[0];
-				 sign2 = signArr[1];
-				 sign3 = signArr[2]; break;
+		if(result > 0) {
+			new Gson().toJson(result, response.getWriter());
 		}
 		
 		
-		String fReturn = request.getParameter("formReturn");
-
-		
-		int result = new FormService().updateSign(fno, sign1, sign2, sign3, fReturn, size);
-		
-		
-		
-		// 게시글이 저장이 되면
-		if (result > 0) {
-			
-			// 게시글 품의 프로세스 변경
-			int resultChange = new FormService().updateSignProcess(fno, size, fReturn);
-
-		}
-		
-		
-		Form f = new FormService().readForm(fno);
-		f.setType(3);
-		
-		String page = "";
-		
-		
-		  if(result > 0) { 
-			  page = "fListRead.fo"; 
-			  request.setAttribute("form", f); 
-		 }
-		  
-		  request.getRequestDispatcher(page).forward(request, response);
 		 
 	}
 

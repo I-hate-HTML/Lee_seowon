@@ -48,7 +48,7 @@ public class EmployeeDao {
 			pstmt.setString(3, em.getEmpNo());
 			pstmt.setString(4, em.getEmpPhone());
 			pstmt.setString(5, em.getEmpAddr());
-			pstmt.setDate(6, em.getHireDate());
+			pstmt.setString(6, em.getHireDate());
 			pstmt.setString(7, em.getEmpClass());
 			pstmt.setString(8, em.getEmpimg());
 			result = pstmt.executeUpdate();
@@ -109,7 +109,7 @@ public class EmployeeDao {
 				e.setEmpJob(rset.getString(3));
 				e.setEmpName(rset.getString(2));
 				e.setEmpPhone(rset.getString(5));
-				e.setHireDate(rset.getDate(7));
+				e.setHireDate(rset.getString(7));
 				e.setEmpClass(rset.getString(10));
 				e.setHobong(rset.getInt(11));
 				e.setEntYN(rset.getString(9).equals("Y")?1:2);

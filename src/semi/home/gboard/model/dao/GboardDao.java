@@ -12,8 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import semi.home.gboard.model.vo.Gboard;
 public class GboardDao {
 
@@ -331,6 +329,41 @@ public class GboardDao {
 		}
 		
 		return searchlist;
+	}
+
+	public ArrayList<Gboard> getmainimg(Connection con) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Gboard> list = new ArrayList<Gboard>();
+		String sql = prop.getProperty("getmainimg");
+		
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				Gboard gb = new Gboard();
+				gb.setGno(rset.getInt("gno"));
+				gb.setGtitle(rset.getString("gtitle"));
+				String[] sarr = rset.getString("gfile").split(",");
+				gb.setGfile(sarr[0]);
+				
+				list.add(gb);
+			}
+	
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
 	}
 
 }

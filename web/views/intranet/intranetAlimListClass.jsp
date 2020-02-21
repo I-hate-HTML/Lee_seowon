@@ -147,6 +147,7 @@
     $('#viewTable td').click(function(){
     	var ano = $(this).parent().children().find("input[type=hidden]").val(); 
     	var category = $(this).parent().children().eq(1).find("input[type=hidden]").val();
+    	var empno = '<%= m.getUserId()%>'
       
     	console.log('ano : ' + ano);
     	console.log('category : ' + category);

@@ -109,4 +109,14 @@ public class GboardService {
 		return searchlist;
 	}
 
+
+	public ArrayList<Gboard> getmainimg() {
+		Connection con = getConnection();
+		ArrayList<Gboard> list = gDao.getmainimg(con);
+		
+		close(con);
+		
+		return list;
+	}
+
 }

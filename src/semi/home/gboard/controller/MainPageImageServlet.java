@@ -1,4 +1,4 @@
-package semi.intranet.form.controller;
+package semi.home.gboard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,25 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import semi.home.jsp.model.vo.Member;
-import semi.intranet.form.model.service.FormService;
-import semi.intranet.form.model.vo.SignList;
+import semi.home.gboard.model.service.GboardService;
+import semi.home.gboard.model.vo.Gboard;
 
 /**
- * Servlet implementation class FormSignListServlet
+ * Servlet implementation class MainPageImageServlet
  */
-@WebServlet("/fSignList.fo") // 결재자 리스트 가져오기  --> gson
-public class FormSignListServlet extends HttpServlet {
+@WebServlet("/MainpageImg.me")
+public class MainPageImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSignListServlet() {
+    public MainPageImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,18 +35,26 @@ public class FormSignListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
 		
-		int empNo = Integer.parseInt(m.getUserId());
+		ArrayList<Gboard> list = new GboardService().getmainimg();
 		
-		ArrayList<SignList> list = new FormService().getSignList(empNo);
+		JSONObject ginfo = null;
+		JSONArray result = new JSONArray();
 		
+		for(Gboard gb : list) {
+			ginfo = new JSONObject();
+			
+			ginfo.put("gno", gb.getGno());
+			ginfo.put("gtitle", gb.getGtitle());
+			ginfo.put("gfile", gb.getGfile());
+			
+			result.add(ginfo);
+		}
 		
-		new Gson().toJson(list, response.getWriter());
+		response.getWriter().print(result.toJSONString());
+		
 	
 	}
 

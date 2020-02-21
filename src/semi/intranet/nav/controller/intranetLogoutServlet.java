@@ -1,8 +1,6 @@
-package semi.intranet.form.controller;
+package semi.intranet.nav.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,23 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import semi.home.jsp.model.vo.Member;
-import semi.intranet.form.model.service.FormService;
-import semi.intranet.form.model.vo.SignList;
-
 /**
- * Servlet implementation class FormSignListServlet
+ * Servlet implementation class intranetLogoutServlet
  */
-@WebServlet("/fSignList.fo") // 결재자 리스트 가져오기  --> gson
-public class FormSignListServlet extends HttpServlet {
+@WebServlet("/iLogout.in")
+public class intranetLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSignListServlet() {
+    public intranetLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +27,15 @@ public class FormSignListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		response.setContentType("application/json; charset=UTF-8");
-		
+		// 로그인된 세션 종료
 		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
 		
-		int empNo = Integer.parseInt(m.getUserId());
-		
-		ArrayList<SignList> list = new FormService().getSignList(empNo);
-		
-		
-		new Gson().toJson(list, response.getWriter());
+		if(session != null) {
+			System.out.println("로그아웃이 실행됩니다.");
+			session.invalidate();
+		}
 	
+		response.sendRedirect("/semi/index.jsp");
 	}
 
 	/**
