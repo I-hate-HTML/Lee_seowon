@@ -95,4 +95,14 @@ public class GboardService {
 		return listCount;
 	}
 
+
+	public ArrayList<Gboard> getmainimg() {
+		Connection con = getConnection();
+		ArrayList<Gboard> list = gDao.getmainimg(con);
+		
+		close(con);
+		
+		return list;
+	}
+
 }

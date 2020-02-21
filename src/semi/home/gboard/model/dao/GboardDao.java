@@ -244,4 +244,39 @@ public class GboardDao {
 		return listCount;
 	}
 
+	public ArrayList<Gboard> getmainimg(Connection con) {
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Gboard> list = new ArrayList<Gboard>();
+		String sql = prop.getProperty("getmainimg");
+		
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				Gboard gb = new Gboard();
+				gb.setGno(rset.getInt("gno"));
+				gb.setGtitle(rset.getString("gtitle"));
+				String[] sarr = rset.getString("gfile").split(",");
+				gb.setGfile(sarr[0]);
+				
+				list.add(gb);
+			}
+	
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return list;
+	}
+
 }
