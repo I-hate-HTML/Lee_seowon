@@ -596,7 +596,7 @@ public class FormDao {
 
 
 	/**
-	 * 기존에 있던 결재 내용 가져오기용 -->
+	 * 기존에 있던 결재 내용 가져오기용 -->사용
 	 * @param con
 	 * @param fno
 	 * @return
