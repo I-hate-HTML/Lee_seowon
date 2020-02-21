@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.daily.model.vo.PageInfo;
 import semi.intranet.form.model.service.FormService;
 import semi.intranet.form.model.vo.Form;
@@ -43,7 +45,10 @@ public class FormReadServlet extends HttpServlet {
 //		int empNo = Integer.parseInt(request.getParameter("empNo"));
 
 		
-		int empNo = 2015001; // 나중에 바꿀 것
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int empNo = Integer.parseInt(m.getUserId());
 
 		
 		Form f = new FormService().readForm(fno);

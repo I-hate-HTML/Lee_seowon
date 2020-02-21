@@ -57,7 +57,7 @@
           	<input type="hidden" id="listCategory" name = "category" value="<%= f.getFcategory() %>">        
           	<span id = "typeChage"><%= f.getCategory() %></span>
           </td>
-          <td style="text-align: center"><%= f.getFstatus() %></td>
+          <td style="text-align: center"><%= f.getFstate() %></td>
           <td style="text-align: center"><%= f.getFtitle() %></td>
           <td style="text-align: center">
           	<%= f.getFwriter() %>

@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
 <html lang="ko">
+<%@ page import="semi.intranet.alimjang.model.vo.Alim" %>
+<%@ page import="semi.home.jsp.model.vo.*"%>
+
+<%
+ Member m = (Member)session.getAttribute("member"); 
+ request.setAttribute("member", m);
+%>
 
 <head>
 	
@@ -154,7 +161,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="../../login.jsp" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -286,24 +293,24 @@
             <!-- Nav Item - 선생님 사진 -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">차은우 선생님</span>
-                <img class="img-profile rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= m.getUserName() %> 선생님</span>
+                <img class="img-profile rounded-circle" id="tImage" >
               </a>
 
               <!-- Dropdown - 선생님 인포메이션 -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item">
                   <i>이름 : </i>
-                  <i name = "tName">차은우</i>
+                  <i name = "tName"><%= m.getUserName() %></i>
                 </a>
                 <a class="dropdown-item">
                   <i>담당반 : </i>
-                  <i name = "className">1반</i>
+                  <i name = "className" id="classNum"></i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
                   <i class="fa fa-sign-out text-gray-400"></i>
-                  로그아웃
+                 		 로그아웃
                 </a>
               </div>
             </li>
@@ -319,7 +326,7 @@
 
         $(function(){
        	
-       	var empno = '2015001'; // --> 나중에 바꾸기!!!
+       	var empno = '<%= m.getUserId()%>';
 
        	$.ajax({
        		url:"/semi/aNav.al",
@@ -382,6 +389,33 @@
        			alret("권한이 없습니다.");
        		}
        	});
+       });
+        
+      //선생님 정보 가져오기
+        $(function(){
+
+          	$.ajax({
+          		url:"/semi/iNavEmployee.in",
+          		type:"post",
+          		success:function(data){
+          			
+          			var classNum = data.info.classNum;
+          			var position = data.info.position;
+          			var image = data.info.image;
+
+          			if(classNum == 0) {
+          				$('#classNum').text(position);
+          			} else {
+          				$('#classNum').text(classNum + "반");
+          			}
+          			
+          			$('#tImage').attr("src",'resources/intranet/image/'+ image);
+          			
+          		}, error:function(data){
+          			
+          		}
+          	});
+       	
        });
 
         </script>

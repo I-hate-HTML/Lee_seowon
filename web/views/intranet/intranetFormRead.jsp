@@ -91,6 +91,7 @@ $(function(){
 	var signYn = '<%= form.getfSignckList() %>'
 	var signMsg = '<%= form.getFreturnmsg() %>'
 	
+	console.log(signNo);
 	
 	$.ajax({
 		url:"/semi/fSignSelect.fo",
@@ -192,7 +193,7 @@ $(".delete").click(function(){
 		
 	} else {
 		var fno = "<%= form.getFno() %>";
-		var eno = "2015001"; //--> 나중에 바꾸기!!!!
+		var eno = "<%= m.getUserId() %>";
 	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno + "&eno=" + eno;
 	}
 	

@@ -178,7 +178,7 @@ public class FormDao {
 	
 
 	/**
-	 * 품의서 게시판 목록 읽기 + 페이징 처리 --> 맞음
+	 * 품의서 게시판 목록 읽기 + 페이징 처리 --> 사용
 	 * @param con
 	 * @param empNum 
 	 * @param limitContent 
@@ -215,7 +215,7 @@ public class FormDao {
 				
 				f.setFno(rset.getInt("DRAFT_NO"));
 				f.setFcategory(rset.getInt("DRAFT_TYPE"));
-				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				f.setFstate(rset.getString("DRAFT_PROCESS"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFwriter(rset.getString("TNAME"));
 				f.setfWriterId(rset.getInt("DRAFT_EMP"));
@@ -262,7 +262,7 @@ public class FormDao {
 				
 				f.setFno(rset.getInt("DRAFT_NO"));
 				f.setFcategory(rset.getInt("DRAFT_TYPE"));
-				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				f.setFstate(rset.getString("DRAFT_PROCESS"));
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFwriter(rset.getString("TNAME"));
 				f.setfWriterId(rset.getInt("DRAFT_EMP"));
@@ -353,7 +353,7 @@ public class FormDao {
 				f.setFtitle(rset.getString("DRAFT_TITLE"));
 				f.setFcontent(rset.getString("DRAFT_CONTENT"));
 				f.setFfile(rset.getString("DRAFT_FILE"));
-				f.setFstatus(rset.getString("DRAFT_PROCESS"));
+				f.setFstate(rset.getString("DRAFT_PROCESS"));
 				
 			}
 			
@@ -428,16 +428,15 @@ public class FormDao {
 
 
 	/**
-	 * 결재자 결재내용 저장
+	 * 결재자 결재내용 저장 --> 사용
 	 * @param con
 	 * @param fno
-	 * @param sign1
-	 * @param sign2
-	 * @param sign3
-	 * @param fReturn
+	 * @param process 
+	 * @param yn
+	 * @param reason 
 	 * @return
 	 */
-	public int updateSign(Connection con, int fno, String sign1, String sign2, String sign3, String fReturn) {
+	public int updateSign(Connection con, int fno, String newYn, String newMsg, String process) {
 		
 		int result = 0;
 		
@@ -448,11 +447,10 @@ public class FormDao {
 		try {
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sign1);
-			pstmt.setString(2, sign2);
-			pstmt.setString(3, sign3);
-			pstmt.setString(4, fReturn);
-			pstmt.setInt(5, fno);
+			pstmt.setString(1, newYn);
+			pstmt.setString(2, newMsg);
+			pstmt.setString(3, process);
+			pstmt.setInt(4, fno);
 			
 			result = pstmt.executeUpdate();			
 			
@@ -579,7 +577,9 @@ public class FormDao {
 				s.setScode(rset.getInt("EMP_CODE"));
 				s.setSname(rset.getString("EMP_NAME"));
 				
+				
 				SignList.add(s);
+				
 			
 			}
 			
@@ -591,6 +591,45 @@ public class FormDao {
 		}
 		
 		return SignList;
+	}
+
+
+
+	/**
+	 * 기존에 있던 결재 내용 가져오기용 -->
+	 * @param con
+	 * @param fno
+	 * @return
+	 */
+	public SignList getSignContent(Connection con, int fno) {
+		SignList list = new SignList();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getSignContent");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, fno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.setSyn(rset.getString("SIGN_YN"));
+				list.setSmsg(rset.getString("RETURN_REASON"));
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 
 
