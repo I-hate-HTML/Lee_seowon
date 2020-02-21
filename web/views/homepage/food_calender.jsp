@@ -139,7 +139,7 @@
             </div>
 			<form action="<%= request.getContextPath() %>/fcalendar.me" method="post" enctype="multipart/form-data">     
 			 
-            <% if(true){ %>
+            <% if(m.getJob_code()!=6){ %>
             <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
             	<input type="file" id="fileinput" class="btn btn-primary"
                	style="background: #002c5f; color: white; width: 100px;"
@@ -161,6 +161,22 @@
 		<%@ include file="common/footer.jsp" %>
 
       <script>
+      
+      $('#fileinput').change(function(){
+ 		 var bfile = $('#bfile1');
+ 		 var file_kind = bfile.val().lastIndexOf('.');
+ 		 var file_name = bfile.val().substring(file_kind+1,bfile.length);
+ 		 var file_type = file_name.toLowerCase();
+ 		 var check_file_type= new Array();
+ 		 check_file_type=['jpg','gif','png','jpeg','bmp','jfif'];
+
+ 		 if(check_file_type.indexOf(file_type)==-1){
+ 		  alert('이미지 파일만 선택할 수 있습니다.');
+ 		  $('#bfile1').val('');
+ 		  return false;
+ 		 }
+ 	});
+      
       	$('img').click(function(){
 			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});

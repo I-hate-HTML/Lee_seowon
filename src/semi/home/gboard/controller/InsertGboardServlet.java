@@ -82,6 +82,7 @@ public class InsertGboardServlet extends HttpServlet {
 		
 		
 		if(result > 0) {
+			MyRenamePolicy.Filenamechange.clear();
 			System.out.println("사진 게시글 작성 완료!!");
 			response.sendRedirect("gboardlist");
 		}else {

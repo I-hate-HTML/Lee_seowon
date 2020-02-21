@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.vo.Member;
 import semi.home.qna.model.service.QnaService;
 import semi.home.qna.model.vo.QnA;
 
@@ -31,9 +33,12 @@ public class QnaListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
 		ArrayList<QnA> list = new ArrayList<>();
 		
-		list = new QnaService().listQna();
+		list = new QnaService().listQna(m);
 		
 		String page = "";
 		System.out.println(list);
