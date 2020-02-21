@@ -190,10 +190,10 @@
 					var $div = $('<div class="col-md-6 col-lg-4">');
 					var $a = $('<a target="_blank" href="" style="margin-bottom: 30px;">');
 					$a.attr('href','<%=request.getContextPath()%>/gboardselectone.go?gno='+value.gno);
-					var $img = $('<img src="" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;>');
+					var $img = $('<img src="" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">');
 					$img.attr('src','<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/'+value.gfile);
 					var $p = $('<p style="margin: 20px; font-size: 13px;">').text(value.gtitle);
-					
+					console.log($img);
 					$a.append($img);
 					
 					$div.append($a);
