@@ -41,14 +41,14 @@
               <th>날짜</th>
             </tr>
             <tr>
-              <td><input type ="checkbox" name="sangdham"> </td>
-              <td name = "num">1</td>
-              <td name = "class">1반</td>
-              <td name = "studentName">홍달이</td>
-              <td name = "title">상담신청합니다</td>
-              <td name = "meetDate">2020-01-30</td>
-              <td name = "writer">dalmom</td>
-              <td name = "date">2020-01-20</td>
+              <!-- <td><input type ="checkbox" name="sangdham"> </td> -->
+              <td name = "num"></td>
+              <td name = "class"></td>
+              <td name = "studentName"></td>
+              <td name = "title"></td>
+              <td name = "meetDate"></td>
+              <td name = "writer"></td>
+              <td name = "date"></td>
             </tr>
             
           </table>
