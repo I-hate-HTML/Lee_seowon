@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.form.model.service.FormService;
 
 /**
@@ -29,15 +31,19 @@ public class FormDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int eno = Integer.parseInt(m.getUserId());
+		
 		int fno = Integer.parseInt(request.getParameter("fno"));
-		int eno = Integer.parseInt(request.getParameter("eno"));
 		
 		int result = new FormService().deleteForm(fno, eno);
 		
 		String page = "";
 		
 		if(result > 0) {
-			response.sendRedirect("fListOnly.fo");
+			response.sendRedirect("fList.fo");
 		}
 		
 	}

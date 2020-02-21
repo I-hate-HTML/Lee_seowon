@@ -42,15 +42,15 @@ public class AlimjangDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-//			pstmt.setInt(1, m.getCno());
-			pstmt.setString(1, an.getAl_content());
-			pstmt.setString(2, an.getAl_feel());
-			pstmt.setString(3, an.getAl_health());
-			pstmt.setString(4, an.getAl_temp());
-			pstmt.setString(5, an.getAl_meal());
-			pstmt.setString(6, an.getAl_sleep());
-			pstmt.setString(7, an.getAl_poop());
-			pstmt.setString(8, m.getUserId());
+			pstmt.setInt(1, m.getCno());
+			pstmt.setString(2, an.getAl_content());
+			pstmt.setString(3, an.getAl_feel());
+			pstmt.setString(4, an.getAl_health());
+			pstmt.setString(5, an.getAl_temp());
+			pstmt.setString(6, an.getAl_meal());
+			pstmt.setString(7, an.getAl_sleep());
+			pstmt.setString(8, an.getAl_poop());
+			pstmt.setString(9, m.getUserId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -76,13 +76,14 @@ public class AlimjangDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, ah.getAlhm_wayhome());
-			pstmt.setString(2, ah.getAlhm_time());
-			pstmt.setString(3, ah.getAlhm_status());
-			pstmt.setString(4, ah.getAlhm_phone());
-			pstmt.setString(5, ah.getAlhm_status2());
-			pstmt.setString(6, ah.getAlhm_phone2());
-			pstmt.setString(7, m.getUserId());
+			pstmt.setInt(1, m.getCno());
+			pstmt.setString(2, ah.getAlhm_wayhome());
+			pstmt.setString(3, ah.getAlhm_time());
+			pstmt.setString(4, ah.getAlhm_status());
+			pstmt.setString(5, ah.getAlhm_phone());
+			pstmt.setString(6, ah.getAlhm_status2());
+			pstmt.setString(7, ah.getAlhm_phone2());
+			pstmt.setString(8, m.getUserId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -103,14 +104,15 @@ public class AlimjangDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, am.getAlmd_con());
-			pstmt.setString(2, am.getAlmd_type());
-			pstmt.setString(3, am.getAlmd_vol());
-			pstmt.setString(4, am.getAlmd_num());
-			pstmt.setString(5, am.getAlmd_time());
-			pstmt.setString(6, am.getAlmd_temp());
-			pstmt.setString(7, am.getAlmd_ps());
-			pstmt.setString(8, m.getUserId());
+			pstmt.setInt(1, m.getCno());
+			pstmt.setString(2, am.getAlmd_con());
+			pstmt.setString(3, am.getAlmd_type());
+			pstmt.setString(4, am.getAlmd_vol());
+			pstmt.setString(5, am.getAlmd_num());
+			pstmt.setString(6, am.getAlmd_time());
+			pstmt.setString(7, am.getAlmd_temp());
+			pstmt.setString(8, am.getAlmd_ps());
+			pstmt.setString(9, m.getUserId());
 			
 			result = pstmt.executeUpdate();
 			

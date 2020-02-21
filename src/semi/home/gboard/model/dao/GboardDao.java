@@ -251,17 +251,16 @@ public class GboardDao {
 		String sql = null;
 		switch(category) {
 		
-		case "wrtier":
-			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+		case "writer":
+			sql = "SELECT * FROM GBOARD WHERE GWRITER LIKE '%' || ? || '%'";
 			break;
 		case "title":
 			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
 			break;
 		case "content":
-			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+			sql = "SELECT * FROM GBOARD WHERE GCONTENT LIKE '%' || ? || '%'";
 			break;
 		}
-		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, keyword);
@@ -289,7 +288,6 @@ public class GboardDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		
 		return searchlist;
 	}

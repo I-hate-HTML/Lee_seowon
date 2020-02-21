@@ -34,15 +34,14 @@ public class SearchGboardServlet extends HttpServlet {
 		
 		String category = request.getParameter("con");
 		String keyword = request.getParameter("keyword");
-		
-		
+		String page = "";
+		if(!(category.isEmpty()||keyword.isEmpty())) {
 		ArrayList<Gboard> searchlist = new ArrayList<Gboard>();
 		
 		GboardService gs = new GboardService();
 		
 		searchlist = gs.searchGboard(category,keyword);
 		
-		String page = "";
 		
 		System.out.println(searchlist);
 		if(searchlist != null) {
@@ -54,7 +53,11 @@ public class SearchGboardServlet extends HttpServlet {
 			request.setAttribute("msg", "사진게시판 검색 실패!!");
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+			request.getRequestDispatcher(page).forward(request, response);
+		}else {
+			page = "gboardlist";
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 		
 	}
 
