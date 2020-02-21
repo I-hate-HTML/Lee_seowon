@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.home.alimjang.model.vo.AlimNote;
+import semi.home.jsp.model.vo.Member;
 import semi.home.qna.model.vo.QnA;
 import static semi.common.JDBCTemplate.*;
 
@@ -29,7 +30,10 @@ private Properties prop;
 		}		
 	}
 
-	/** 문의사항 작성
+
+
+	/**
+	 * 문의 작성
 	 * @param con
 	 * @param qna
 	 * @return
@@ -57,15 +61,19 @@ private Properties prop;
 		return result;
 	}
 
-	public ArrayList<QnA> listQna(Connection con) {
+
+
+	public ArrayList<QnA> listQna(Connection con, Member m) {
 		ArrayList<QnA> list = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset =null;
 		String sql = prop.getProperty("listQna");
 		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			rset = pstmt.executeQuery();
+			
 			list = new ArrayList<QnA>();
 			
 			while (rset.next()) {
@@ -86,11 +94,13 @@ private Properties prop;
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return list;
 	}
+
+
 	
 	
 	

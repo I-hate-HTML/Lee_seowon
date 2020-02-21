@@ -155,9 +155,9 @@
                     </div>
                     <h3 class="join_title"><label for="child_name">반</label></h3><br>
                         <div id="class_radio" style="text-align: center;">
-                            <label for="c_c1">씨앗반(2세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c1" value="1"> &nbsp;
-                            <label for="c_c2">새싹반(3세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c2" value="2"> &nbsp; 
-                            <label for="c_c3">나무반(4~5세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c3" value="3"> &nbsp;
+                            <label for="c_c1">씨앗반(3세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c1" value="1"> &nbsp;
+                            <label for="c_c2">새싹반(4세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c2" value="2"> &nbsp; 
+                            <label for="c_c3">나무반(5세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c3" value="3"> &nbsp;
                             <label for="c_c4">열매반(6~7세반)</label>&nbsp;<input type="radio" name="cclass" id="c_c4" value="4"> &nbsp;
                         </div><br>
 
