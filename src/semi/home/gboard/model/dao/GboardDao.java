@@ -53,6 +53,7 @@ public class GboardDao {
 				g.setGtitle(rset.getString("gtitle"));
 				g.setGcount(rset.getInt("gcount"));
 //				g.setGfile(rset.getString("gfile"));
+				
 				String[] sarr = (rset.getString("gfile").split(","));
 				g.setGfile(sarr[0]);
 				list.add(g);

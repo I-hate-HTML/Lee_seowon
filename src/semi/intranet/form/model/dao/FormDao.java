@@ -41,7 +41,7 @@ public class FormDao {
 	
 
 	/**
-	 * 결재자 리스트 가져오기
+	 * 결재자 리스트 가져오기 --> 사용
 	 * @param con
 	 * @param empNo
 	 * @return
@@ -90,7 +90,7 @@ public class FormDao {
 
 
 	/**
-	 * 품의서 작성용
+	 * 품의서 작성용 --> 사용
 	 * @param con
 	 * @param f
 	 * @return
@@ -129,53 +129,6 @@ public class FormDao {
 	}
 
 
-	/**
-	 * id에 맞는 결재자 정보 불러오기
-	 * @param signId1
-	 * @param signId2
-	 * @param signId3
-	 * @return
-	 */
-	public ArrayList<SignList> findSignId(Connection con, int signId1, int signId2, int signId3) {
-
-		ArrayList<SignList> s = new ArrayList<SignList>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("findSignId");
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, signId1);
-			pstmt.setInt(2, signId2);
-			pstmt.setInt(3, signId3);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				SignList sign = new SignList();
-				
-				sign.setScode(rset.getInt("EMP_CODE"));
-				sign.setSposition(rset.getInt("EMP_JOB"));
-				sign.setSname(rset.getString("EMP_NAME"));
-				
-				s.add(sign);
-			}
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return s;
-	}
-
-	
 
 	/**
 	 * 품의서 게시판 목록 읽기 + 페이징 처리 --> 사용
@@ -237,54 +190,9 @@ public class FormDao {
 	}
 
 	
-	public ArrayList<Form> listAjax (Connection con, int empNo) {
-		
-		ArrayList<Form> list = new ArrayList<Form>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("listAjax");
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, empNo);
-			pstmt.setInt(2, empNo);
-			pstmt.setInt(3, empNo);
-			pstmt.setInt(4, empNo);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Form f = new Form();
-				
-				f.setFno(rset.getInt("DRAFT_NO"));
-				f.setFcategory(rset.getInt("DRAFT_TYPE"));
-				f.setFstate(rset.getString("DRAFT_PROCESS"));
-				f.setFtitle(rset.getString("DRAFT_TITLE"));
-				f.setFwriter(rset.getString("TNAME"));
-				f.setfWriterId(rset.getInt("DRAFT_EMP"));
-				f.setFdate(rset.getDate("DRAFT_DATE"));
-				
-				list.add(f);
-			}
-			
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-	}
-
+	
 	/**
-	 * 총 페이지 가져오기
+	 * 총 페이지 가져오기 --> 사용
 	 * @param con
 	 * @return
 	 */
@@ -371,72 +279,16 @@ public class FormDao {
 
 
 	/**
-	 * 품의서 수정할 내용 불러오기
-	 * @param con
-	 * @param fno
-	 * @param eno 
-	 * @return
-	 */
-	public Form modifyViewForm(Connection con, int fno, int eno) {
-		
-		Form f = new Form();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("modifyViewForm");
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, fno);
-			pstmt.setInt(2, eno);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				f.setFno(rset.getInt("DRAFT_NO"));
-				f.setFcategory(rset.getInt("DRAFT_TYPE"));
-				f.setfWriterId(rset.getInt("DRAFT_EMP"));
-				f.setFwriter(rset.getString("WNAME"));
-				f.setFdate(rset.getDate("DRAFT_DATE"));
-				f.setFsignId1(rset.getInt("SIGN_EMP1"));
-				f.setFsign1(rset.getString("SNAME1"));
-				f.setFsignId2(rset.getInt("SIGN_EMP2"));
-				f.setFsign2(rset.getString("SNAME2"));
-				f.setFsignId3(rset.getInt("SIGN_EMP3"));
-				f.setFsign3(rset.getString("SNAME3"));
-				f.setFtitle(rset.getString("DRAFT_TITLE"));
-				f.setFcontent(rset.getString("DRAFT_CONTENT"));
-				f.setFfile(rset.getString("DRAFT_FILE"));
-				
-			}
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return f;
-	}
-
-
-
-	/**
 	 * 결재자 결재내용 저장 --> 사용
 	 * @param con
 	 * @param fno
 	 * @param process 
+	 * @param alim 
 	 * @param yn
 	 * @param reason 
 	 * @return
 	 */
-	public int updateSign(Connection con, int fno, String newYn, String newMsg, String process) {
+	public int updateSign(Connection con, int fno, String newYn, String newMsg, String process, String alim) {
 		
 		int result = 0;
 		
@@ -450,7 +302,8 @@ public class FormDao {
 			pstmt.setString(1, newYn);
 			pstmt.setString(2, newMsg);
 			pstmt.setString(3, process);
-			pstmt.setInt(4, fno);
+			pstmt.setString(4, alim);
+			pstmt.setInt(5, fno);
 			
 			result = pstmt.executeUpdate();			
 			
@@ -464,54 +317,10 @@ public class FormDao {
 		return result;
 	}
 
-	
-	
-	/**
-	 * 결재자 결재 내용에 따른 결재 프로세스 변경 (반려 / 승인 / 검토)
-	 * @param con
-	 * @param fno
-	 * @param size 
-	 * @return
-	 */
-	public int updateSignProcess(Connection con, int fno, int size) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = "";
-		
-		System.out.println(size);
-		
-		switch(size) {
-		case 1 : sql = prop.getProperty("updateSign1"); break;
-		case 2 : sql = prop.getProperty("updateSign2"); break;
-		case 3 : sql = prop.getProperty("updateSign3"); break;
-		case 9 : sql = prop.getProperty("updateSignReturn"); break;
-		}
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			
-				pstmt.setInt(1, fno);
-			
-			result = pstmt.executeUpdate();			
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		return result;
-	}
 
 
 	/**
-	 * 품의서 삭제
+	 * 품의서 삭제 --> 사용
 	 * @param con
 	 * @param fno
 	 * @param eno

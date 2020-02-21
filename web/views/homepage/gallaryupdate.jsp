@@ -100,7 +100,7 @@
                           <tr>
                               <th>첨부파일: </th>
                               <td colspan="2">
-                              <span><input type="file" name="gfile" multiple></span>
+                              <span><input type="file" name="gfile" id="gfile" multiple></span>
                               </td>
                           </tr>
 							
@@ -109,7 +109,7 @@
                       <input type="hidden" id="gno" name="gno" value="<%= g.getGno() %>">
                       <input type="hidden" id="orifile" name="orifile">
                       <div class="float-right">
-                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="submit1()" class="pull-right"/>
+                        <input type="submit" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" value="등록" onclick="return submit1()" class="pull-right"/>
                         <input type="button" class="btn btn-link" style="background: #002c5f; color: white; width: 100px;" onclick="location.href='/semi/gboardlist'" value="취소" />
                       </div>
              </form>
@@ -137,12 +137,19 @@
 	var bfile;
 	
 	function submit1(){
-		$('input[chk=0]').each(function(index,item){
-			filearr.push($(this).val());
-		});
-		gfile = filearr.join(',');
-		$('#orifile').val(gfile);
-	};
+	      $('input[chk=0]').each(function(index,item){
+	         filearr.push($(this).val());
+	      });
+	      bfile = filearr.join(',');
+	      console.log(bfile);
+	      if(bfile=="" &&$('#gfile').val()==""){
+	         alert("사진은 한개이상 등록해주세요!");
+	         return false;
+	      }
+	      $('#orifile').val(bfile);
+	      return true;
+	      
+	   };
 	
 	 
 	<%if(nameArr[0]!="1"){ %>
