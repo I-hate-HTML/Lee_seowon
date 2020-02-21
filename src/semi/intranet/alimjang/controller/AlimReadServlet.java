@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import semi.home.alimjang.model.vo.AlimHome;
 import semi.home.alimjang.model.vo.AlimMedi;
 import semi.home.alimjang.model.vo.AlimNote;
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
 import semi.intranet.alimjang.model.vo.Alim;
 
@@ -34,11 +36,13 @@ public class AlimReadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int empNo = Integer.parseInt(m.getUserId());
+		
 		int ano = Integer.parseInt(request.getParameter("ano"));
 		int category = Integer.parseInt(request.getParameter("category"));
-		
-		
-		int empNo = 2015001;
 		
 		String page = "";
 		

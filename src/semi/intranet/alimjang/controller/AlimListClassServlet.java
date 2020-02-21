@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
 import semi.intranet.alimjang.model.vo.Alim;
 import semi.intranet.alimjang.model.vo.PageInfo;
@@ -35,7 +37,10 @@ public class AlimListClassServlet extends HttpServlet {
 		
 		ArrayList<Alim> list = new ArrayList<Alim>();
 		
-		int empNo = 2015001; // --> 나중에 바꿀것!!!
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int empNo = Integer.parseInt(m.getUserId());
 		
 		int currentPage; 	// 현재 페이지                 
 		int listCount;		// 총 게시글 수                 

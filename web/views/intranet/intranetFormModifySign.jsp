@@ -138,7 +138,7 @@ $('#viewTable td').click(function(){
 
 $(function(){
 
-	var empId = 2015001; //--> 바꾸기!!!!
+	var empId = '<%= m.getUserId() %>';
 	
 	var sign1 = $('input[id=signCode1]').val();
 	var sign2 = $('input[id=signCode2]').val();

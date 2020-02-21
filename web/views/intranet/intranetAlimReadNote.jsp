@@ -221,10 +221,14 @@ $(function(){
 	$('.readBtn').click(function(){
 		console.log("버튼 클릭")
 		
+		if(<%= b.getCclass()%> == $('#classNum').val() ){
+	
+		
 		var result = $(this).val();
 		var ano = '<%= a.getAl_no()%>';
 		var category = '<%= a.getAl_code() %>';
 		var text = $('.tCK').val(result);
+		var empno = '<%= m.getUserId()%>'
 		
 		console.log(result);
 		console.log(ano);
@@ -237,16 +241,19 @@ $(function(){
 				'result' : result,
 				'ano' : ano,
 				'category' : category,
+				'empno' : empno
 			},
 			success:function(data){
 				$('.tCK').val(result);
 				$('.tCK').parent().text(result);
 			}
 		});
-	});
 	
-
-
+	
+		} else {
+			alert("권한이 없습니다.");
+		}
+	});
 </script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>

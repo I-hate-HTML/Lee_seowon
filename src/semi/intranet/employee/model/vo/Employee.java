@@ -18,9 +18,9 @@ public class Employee implements Serializable{
 	private String empPhone;
 	private String empEmail;
 	private String empAddr;
-	private Date hireDate; 
+	private String hireDate; 
 	private int entYN;
-	private Date entDate;
+	private String entDate;
 	private String empClass;
 	private int hobong;
 	private String empimg;
@@ -39,7 +39,7 @@ public class Employee implements Serializable{
 
 
 	public Employee(String empName, String empJob, String empNo, String empPhone, String empEmail, String empAddr,
-			Date hireDate, String empClass, String empimg) {
+			String hireDate, String empClass, String empimg) {
 		super();
 		this.empName = empName;
 		this.empJob = empJob;
@@ -63,7 +63,7 @@ public class Employee implements Serializable{
 
 
 	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empEmail,
-			String empAddr, Date hireDate, int entYN, Date entDate, String empClass, int hobong, String empimg) {
+			String empAddr, String hireDate, int entYN, String entDate, String empClass, int hobong, String empimg) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -84,7 +84,7 @@ public class Employee implements Serializable{
 
 
 
-	public Date getHireDate() {
+	public String getHireDate() {
 		return hireDate;
 	}
 
@@ -92,7 +92,7 @@ public class Employee implements Serializable{
 
 
 
-	public void setHireDate(Date hireDate) {
+	public void setHireDate(String hireDate) {
 		this.hireDate = hireDate;
 	}
 
@@ -116,7 +116,7 @@ public class Employee implements Serializable{
 
 
 
-	public Date getEntDate() {
+	public String getEntDate() {
 		return entDate;
 	}
 
@@ -124,7 +124,7 @@ public class Employee implements Serializable{
 
 
 
-	public void setEntDate(Date entDate) {
+	public void setEntDate(String entDate) {
 		this.entDate = entDate;
 	}
 

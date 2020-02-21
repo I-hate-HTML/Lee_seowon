@@ -57,7 +57,7 @@
           	<input type="hidden" id="listCategory" name = "category" value="<%= f.getFcategory() %>">        
           	<span id = "typeChage"><%= f.getCategory() %></span>
           </td>
-          <td style="text-align: center"><%= f.getFstatus() %></td>
+          <td style="text-align: center"><%= f.getFstate() %></td>
           <td style="text-align: center"><%= f.getFtitle() %></td>
           <td style="text-align: center">
           	<%= f.getFwriter() %>
@@ -75,14 +75,14 @@
                 <!-- 현재 페이지가 1페이지면 이전 페이지 버튼 disabled -->
                 <% if(currentPage <= 1){ %>
                 <li class="page-item disabled">
-                  <a class="page-link" href="<%= request.getContextPath() %>/fListOnly.fo?currentPage=1" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/fList.fo?currentPage=1" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                  </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/fListOnly.fo?currentPage=<%=currentPage -1 %>" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/fList.fo?currentPage=<%=currentPage -1 %>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
@@ -96,7 +96,7 @@
                 %>               
                 	<li class="page-item disabled"><a class="page-link"><%= p %></a></li>
                 <%		} else {%>	
-                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/fListOnly.fo?currentPage=<%= p %>"><%= p %></a></li>	
+                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/fList.fo?currentPage=<%= p %>"><%= p %></a></li>	
                 <%		} %>
                 <%	} %>
                 		
@@ -109,7 +109,7 @@
                 </li>
                 <% } else { %>
                 <li class="page-item">
-                  <a class="page-link" href="<%= request.getContextPath() %>/fListOnly.fo?currentPage=<%=currentPage +1 %>" aria-label="Next">
+                  <a class="page-link" href="<%= request.getContextPath() %>/fList.fo?currentPage=<%=currentPage +1 %>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>

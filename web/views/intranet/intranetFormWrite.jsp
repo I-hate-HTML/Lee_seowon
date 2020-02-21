@@ -51,8 +51,8 @@
           </td> 
           <th>기안자</th>
           <td>
-            <input type = "text" name="formName" value = "차은우" disabled>
-            <input type ="hidden" name = "writerId" value="2015001">
+            <input type = "text" name="formName" value = "<%= m.getUserName() %>" disabled>
+            <input type ="hidden" name = "writerId" value="<%= m.getUserId() %>">
           </td>
         </tr>
         <tr>

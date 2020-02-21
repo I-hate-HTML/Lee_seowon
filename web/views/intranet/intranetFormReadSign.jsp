@@ -21,7 +21,8 @@
         		<h6 class="m-0 font-weight-bold text-primary">품의결재창</h6>
             </td>
             <td align="right">
-              <button class = "btn btn-primary btn-sm delete">삭제</button>
+              <button class = "btn btn-primary btn-sm signCall" >결재하기</button>
+              <button class = "btn btn-primary btn-sm signSave" style="display:none">결재완료</button>
             </td>
           </tr>
         </table>
@@ -85,13 +86,14 @@
 <script>
 
 
+// 데이터 가져오는 용
 $(function(){
+	var emp = '<%= m.getUserId() %>';
 	
 	var signNo = '<%= form.getfSignList() %>'
 	var signYn = '<%= form.getfSignckList() %>'
 	var signMsg = '<%= form.getFreturnmsg() %>'
 	
-	console.log(signNo);
 	
 	$.ajax({
 		url:"/semi/fSignSelect.fo",
@@ -113,8 +115,10 @@ $(function(){
 					var yn = data.signList[i].syn;
 					var msg = data.signList[i].smsg;
 					
+					var ynList="";
+					
 					if(yn == null || yn == 'null') {
-						yn = "결재전";
+						yn = "선택";
 					} else if (yn != null && yn == 'Y') {
 						yn = "승인"
 					} else if(yn != null && yn == 'N') {
@@ -154,14 +158,22 @@ $(function(){
 														      'id':'formLineP'+i,
 														      'disabled' : true
 													         });
-					var $option2 = $('<option>').val(yn).text(yn); 
+					var $option2 = $('<option>').val(yn).text(yn);
+					
+					
+					// 활성화창
+					var $optionA = $('<option>').text("선택");
+					var $optionB = $('<option>').val("Y").text("승인");
+					var $optionC = $('<option>').val("N").text("반려");
+					
 					
 					
 					var $td3 = $('<td>').attr('colspan','3'); 
 					var $input3 = $('<input>').attr({
 													'type':'text',
-													'placeholder':'품의 괸련 의견을 적어주세요',
-													'disabled' : true
+													'disabled' : true,
+													'name':'return',
+													'id':'fReturn' + i
 													}).css('width','100%').val(msg);
 					
 					$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
@@ -169,14 +181,32 @@ $(function(){
 					$tr2.append($td3.append($input3));
 					
 					$('#signTable').append($tr1);
-					$('#signTable').append($tr2);
+					$('#signTable').append($tr2); 
 					
 					
+					// 결재자이고 결재전이면 자기 결재창 활성화 
+					 /* if(emp == empNo && yn == "결재전" && msg == "결재 전 입니다.") {
+					
+						$select2.attr('disabled' , false);
+						$input3.attr({'disabled':false,'placeholder':'품의 관련 의견을 적어주세요'}).val(null);
+						
+						$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
+						$tr1.append($th2).append($td2.append($select2.append($optionA).append($optionB).append($optionC)));
+						$tr2.append($td3.append($input3));
+						
+						$('#signTable').append($tr1);
+						$('#signTable').append($tr2);
+						 
+					} else if(emp != empNo || emp == empNo && yn != "결재 전 입니다"  && msg != "결재전" ){
+						$tr1.append($th1).append($td1.append($select1.append($option1.append($input1))));
+						$tr1.append($th2).append($td2.append($select2.append($option2)));
+						$tr2.append($td3.append($input3));
+						
+						$('#signTable').append($tr1);
+						$('#signTable').append($tr2);
+					 }  */
 				}
-				
 			});
-			
-			
 		}, error:function(data){
 			console.log("에러");
 		}
@@ -185,17 +215,127 @@ $(function(){
 });
 
 
-// 삭제버튼
-$(".delete").click(function(){
+// 결제하기 버튼
+$(".signCall").click(function(){
 	
-	if($('#formLineP1').val() != "null") {
-		alert("이미 품의가 진행중입니다.");
-		
-	} else {
-		var fno = "<%= form.getFno() %>";
-		var eno = "<%= m.getUserId() %>";
-	 location.href="<%= request.getContextPath()%>/fDelete.fo?fno=" + fno + "&eno=" + eno;
+	
+	
+	var emp = '<%= m.getUserId() %>';
+	
+	var signNo = '<%= form.getfSignList() %>'
+	var signYn = '<%= form.getfSignckList() %>'
+	var signMsg = '<%= form.getFreturnmsg() %>'
+	
+	var $optionB = $('<option>').val("Y").text("승인");
+	var $optionC = $('<option>').val("N").text("반려");
+	
+	
+	var noArr = signNo.split(',');
+	var ynArr = signYn.split(',');
+	var msgArr = signMsg.split(',');
+	
+	var location = 0;
+	var length = noArr.length-1;
+	var a = "";
+	
+	for(var i = 0; i < noArr.length-1; i++) {
+		if(emp == noArr[i]){
+			location = i;
+		}
 	}
+	
+	if(location == 0) {
+		a = 0;
+	}else if(location >0){
+		a = location;
+	}
+	
+	
+	// 내 결재이고 앞 결재가 없거나 앞 결재가 되어있으면 활성화
+	if(emp == noArr[location] && location == 0 && ynArr == "null") { // 내가 맨 앞아고 아직 결재 안했으면 활성화
+		console.log("활성화");
+		$('#formLineP'+ a).append($optionB).append($optionC).attr('disabled' , false);
+		$('#fReturn' + a).attr({'disabled':false,'placeholder':'품의 관련 의견을 적어주세요'}).val(null);
+	} else if (emp == noArr[location] && location != 0) { // 맨 앞 아닐때 
+		if(ynArr[location-1] == "Y") { // 앞에 결재자가 승인했으면 활성화
+			console.log("활성화");
+			$('#formLineP'+ a).append($optionB).append($optionC).attr('disabled' , false);
+			$('#fReturn' + a).attr({'disabled':false,'placeholder':'품의 관련 의견을 적어주세요'}).val(null);
+		} else {
+			alert("결재 순서가 아닙니다.");
+		}
+	} else {
+		alert("이미 결재 처리가 되었습니다.");
+	}
+	
+	$(this).css("display","none");
+	$('.signSave').css("display","block");
+	
+});
+
+
+
+// 결재완료버튼
+$(".signSave").click(function(){
+	
+	
+	var aa="";
+	var bb="";
+	var fno = '<%= form.getFno() %>';
+	var result = "";
+	
+	if($('input[name="signCode"]').val() == <%= m.getUserId()%>){
+		
+		aa =$('input[name="signCode"]').parent().parent().parent().parent().children().eq(3).children().val();
+
+	    bb = $('input[name="return"]').val();
+	}
+	
+	
+	var signNo = '<%= form.getfSignList() %>'
+	var signYn = '<%= form.getfSignckList() %>'
+	
+	var noArr = signNo.split(',');
+	var ynArr = signYn.split(',');
+	
+	var length = noArr.length-1;
+	
+	if(ynArr.length == length && aa == "승인") {
+		result = "승인";
+	} else if (aa == "반려") {
+		result = "반려";
+	} else {
+		result = "검토";
+	}
+	
+	 $.ajax({
+		url:"/semi/fSignSave.fo",
+		type:"post",
+		data:{"yn":aa,
+			  "reason":bb,
+			  "fno":fno,
+			  "result":result
+		},
+		success:function(data){
+			
+			if(data == 1) {
+				alert("결재 내용이 저장되었습니다.");
+			}
+			
+			if(aa != null && bb != null) {
+				$('input[name="signCode"]').parent().parent().parent().parent().children().eq(3).attr("disable",true);
+				$('input[name="return"]').attr("disable",true);
+			}
+			
+			location.reload();
+			
+		}, error:function(data){
+			console.log("에러");
+		}
+	}); 
+	 
+	 $(this).css("display","none");
+	 $('.signCall').css("display","block");
 	
 });
 
@@ -206,40 +346,6 @@ $('#viewTable td').click(function(){
 	location.href="<%= request.getContextPath() %>/fRead.fo?fno=" + fno;
 
 });
-
-
-/* $(function(){
-	
-	// 결재자 1의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP1').val() == "null") {
-		$('#formLineP1').css('display','none');
-	}
-	
-	// 결재자 2가 없으면 select 안보이게
-	if($('#formLine2').val() == "null") {
-		$('#formLine2').css('display','none');
-	}
-	
-	// 결재자 2의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP2').val() == "null") {
-		$('#formLineP2').css('display','none');
-	}
-	
-	// 결재자 3가 없으면 select 안보이게
-	if($('#formLine3').val() == "null") {
-		$('#formLine3').css('display','none');
-	}
-	
-	// 결재자3의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP3').val() == "null") {
-		$('#formLineP3').css('display','none');
-	}
-
-}); */
-
-
-
-
 
 
 </script>

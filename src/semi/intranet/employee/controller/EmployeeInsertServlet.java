@@ -59,29 +59,9 @@ public class EmployeeInsertServlet extends HttpServlet {
 				// 새로운 파일명 뒤에 숫자를 붙이는 규칙
 				);
 
-		String date = mrequest.getParameter("hireDate");
+		String hiredate = mrequest.getParameter("hireDate");
 
-		System.out.println("날짜 전달 확인 : " + date); 
-
-		Date hireDate = null;
-
-		if(date != "" && date != null) { // 날짜가 들어오면 
-
-			// String --> int
-			String[] dateArr = date.split("-");     
-			int[] intArr = new int[dateArr.length];
-
-			for(int i=0; i < dateArr.length;i++) {
-				intArr[i] = Integer.parseInt(dateArr[i]);
-			}
-
-			hireDate = new Date(new GregorianCalendar(
-					intArr[0],intArr[1]-1,intArr[2]
-					).getTimeInMillis());
-
-		}
-
-
+		
 		String empName = mrequest.getParameter("empName");
 		String empJob = mrequest.getParameter("empJob");
 		String empNo = mrequest.getParameter("empNo1")+"-"+mrequest.getParameter("empNo2");
@@ -92,7 +72,7 @@ public class EmployeeInsertServlet extends HttpServlet {
 		String empimg = mrequest.getFilesystemName("empimg");
 
 
-		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,hireDate,empClass,empimg);
+		Employee em = new Employee(empName,empJob,empNo,empPhone,empEmail,empAddr,hiredate,empClass,empimg);
 
 
 

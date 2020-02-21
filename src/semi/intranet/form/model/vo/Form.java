@@ -28,7 +28,7 @@ public class Form implements Serializable{
 	private String ftitle;		// 제목
 	private String fcontent;	// 내용
 	private String ffile;		// 첨부파일
-	private String fstatus;		// 결재 상태
+	private String fstate;		// 결재 상태
 	private String category;	// 카테고리 string
 	
 	
@@ -83,12 +83,12 @@ public class Form implements Serializable{
 	 * @param ftitle
 	 * @param fcontent
 	 * @param ffile
-	 * @param fstatus
+	 * @param fstate
 	 * @param category
 	 */
 	public Form(int fno, int fcategory, String fwriter, int fWriterId, Date fdate, String fSignList, String fSignckList,
 			String[] fsign, int[] fsignId, String[] fsignck, String freturnmsg, String ftitle, String fcontent,
-			String ffile, String fstatus, String category) {
+			String ffile, String fstate, String category) {
 		super();
 		this.fno = fno;
 		this.fcategory = fcategory;
@@ -104,7 +104,7 @@ public class Form implements Serializable{
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
 		this.ffile = ffile;
-		this.fstatus = fstatus;
+		this.fstate = fstate;
 		this.category = category;
 	}
 
@@ -307,15 +307,15 @@ public class Form implements Serializable{
 
 
 
-	public String getFstatus() {
-		return fstatus;
+	public String getFstate() {
+		return fstate;
 	}
 
 
 
 
-	public void setFstatus(String fstatus) {
-		this.fstatus = fstatus;
+	public void setFstate(String fstate) {
+		this.fstate = fstate;
 	}
 
 
@@ -340,7 +340,7 @@ public class Form implements Serializable{
 		return "Form [fno=" + fno + ", fcategory=" + fcategory + ", fwriter=" + fwriter + ", fWriterId=" + fWriterId
 				+ ", fdate=" + fdate + ", fSignList=" + fSignList + ", fsign=" + Arrays.toString(fsign) + ", fsignId="
 				+ Arrays.toString(fsignId) + ", fsignck=" + Arrays.toString(fsignck) + ", freturnmsg=" + freturnmsg
-				+ ", ftitle=" + ftitle + ", fcontent=" + fcontent + ", ffile=" + ffile + ", fstatus=" + fstatus
+				+ ", ftitle=" + ftitle + ", fcontent=" + fcontent + ", ffile=" + ffile + ", fstate=" + fstate
 				+ ", category=" + category + "]";
 	}
 

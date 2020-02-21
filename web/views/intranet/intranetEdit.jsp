@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <title>꿈나라어린이집 # 인트라넷</title>
 </head>
 <body>
@@ -72,10 +73,12 @@
                         <td>
                           <input type="text" id="email1" name="email1" class="width4"> @ 
                           <input type="text" id="email2" name="email2" class="width4">
-                          <select class="select1 ko" style="width:150px;" onchange="selectEmail(this.value);">
-                            <option value="">직접입력</option>
+                          <select id="selectEmail" class="select1 ko" style="width:150px;" onchange="selectEmail(this.value);">
+                            <option value="1">직접입력</option>
                             <option value="naver.com">naver.com</option>
+                            <option value="soongsil.ac.kr">soongsil.ac.kr</option>
                             <option value="hanmail.net">hanmail.net</option>
+                            <option value="kakao.com">kakao.com</option>
                             <option value="gmail.com">gmail.com</option>
                             <option value="hotmail.com">hotmail.com</option>
                             <option value="korea.com">korea.com</option>
@@ -131,8 +134,8 @@
                       <tr>
                         <th>주소 <span>*</span></th>
                         <td>
-                          <input type="text" name="homezipcode" id="homezipcode" class="width4" style="width:80px;">
-                          <div class="btn btn-primary btn-sm" id="btnSend" onclick="addrSearch()" style="margin-bottom:3px; cursor:pointer"><span style='font-weight:700; font-size:13px;'>주소찾기</span></div>
+                          <input type="text" name="homezipcode" id="homezipcode" class="width4" style="width:80px;" readonly="">
+                          <div class="btn btn-primary btn-sm" id="btnSend" onclick="addrSearch();" style="margin-bottom:3px; cursor:pointer"><span style='font-weight:700; font-size:13px;'>주소찾기</span></div>
                           <p class="mg4">
                               <input type="text" name="homeaddress" id="homeaddress" class="width1" style="width:50%;"><br>
                               <input type="text" name="homeaddress2" id="homeaddress2" class="width1" style="width:50%; margin-top:5px;">
@@ -157,7 +160,21 @@
       </div>
       <!-- End of Main Content -->
 
-	<script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	<script type="text/javascript">
+	$('#selectEmail').change(function(){ 
+		$("#selectEmail option:selected").each(function () {
+			
+			if($(this).val()== '1'){ //직접입력일 경우 
+				$("#email2").val(''); //값 초기화 
+				$("#email2").attr("disabled",false); //활성화 
+			}else{ //직접입력이 아닐경우 
+				$("#email2").val($(this).text()); //선택값 입력 
+				$("#email2").attr("disabled",true); //비활성화 
+				} 
+			}); 
+		});
+	
 	/*참조 API : http://postcode.map.daum.net/guide */
 	function addrSearch() {
         new daum.Postcode({

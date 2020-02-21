@@ -241,19 +241,39 @@ public class FormService {
 	}
 
 	/**
-	 * 결재자 품의 업데이트
+	 * 결재자 품의 업데이트 --> 사용
 	 * @param fno
+	 * @param reason 
+	 * @param process 
 	 * @param signArr
-	 * @param fReturn
-	 * @param size 
 	 * @return
 	 */
-	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn, int size) {
+	public int updateSign(int fno, String yn, String reason, String process) {
 		
 		Connection con = getConnection();
 
+		// 1. 저장되어있는 결재 내용 가져오기
+		SignList pre = fd.getSignContent(con, fno);
 		
-		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		// 2. 기존 결재 내용에 새로운 결재 내용 붙이기
+		String newMsg = null;
+		String newYn = null;
+		
+		if(pre.getSmsg() != null) {
+			newMsg = pre.getSmsg()+reason;
+		} else {
+			newMsg = reason;
+		}
+		
+		if(pre.getSyn() != null) {
+			newYn = pre.getSyn()+yn;
+		} else {
+			newYn = yn;
+		}
+		
+				
+		// 3. 새로운 결재내용 저장
+		int result = fd.updateSign(con, fno, newYn, newMsg, process);
 		
 		
 		if(result > 0) {
@@ -354,6 +374,51 @@ public class FormService {
 		}
 		
 		return list;
+	}
+
+	/**
+	 * READ용 결재자 리스트 가져오기 --> 사용
+	 * @param list
+	 * @param msg 
+	 * @param yn 
+	 * @return
+	 */
+	public ArrayList<SignList> getSignSelect(String list, String yn, String msg) {
+		
+		
+		Connection con = getConnection();
+
+		ArrayList<SignList> SignList = fd.getSignSelect(con, list);
+		
+		
+		// 결재 유무 넣기
+		if(yn != null) {
+			
+			SignList a = new SignList();
+			
+			String[] ynList = yn.split(",");
+			
+			
+			for(int i = 0; i < ynList.length; i++) {
+				SignList.get(i).setSyn(ynList[i]);
+			}
+		} 
+		
+		// 결재 메시지 넣기
+		if(msg != null) {
+			
+			SignList a = new SignList();
+			
+			String[] msgList = msg.split(",");
+			
+			for(int i = 0; i < msgList.length; i++) {				
+				SignList.get(i).setSmsg(msgList[i]);
+			}
+		}
+		
+		close(con);
+		
+		return SignList;
 	}
 
 	

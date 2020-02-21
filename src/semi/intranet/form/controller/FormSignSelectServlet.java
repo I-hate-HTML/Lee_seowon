@@ -2,31 +2,31 @@ package semi.intranet.form.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import semi.home.jsp.model.vo.Member;
 import semi.intranet.form.model.service.FormService;
 import semi.intranet.form.model.vo.SignList;
 
 /**
- * Servlet implementation class FormSignListServlet
+ * Servlet implementation class FormSignSelectServlet
  */
-@WebServlet("/fSignList.fo") // 결재자 리스트 가져오기  --> gson
-public class FormSignListServlet extends HttpServlet {
+@WebServlet("/fSignSelect.fo")
+public class FormSignSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSignListServlet() {
+    public FormSignSelectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +35,24 @@ public class FormSignListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	
 		response.setContentType("application/json; charset=UTF-8");
 		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
 		
-		int empNo = Integer.parseInt(m.getUserId());
+		String name = request.getParameter("sign");
+		String yn = request.getParameter("yn");
+		String msg = request.getParameter("msg");
+	
 		
-		ArrayList<SignList> list = new FormService().getSignList(empNo);
+		ArrayList<SignList> listArr = new FormService().getSignSelect(name, yn, msg);
 		
+		Map<String, Object> hmap = new HashMap<String, Object>();
 		
-		new Gson().toJson(list, response.getWriter());
+		hmap.put("signList", listArr);
+		
+		new Gson().toJson(hmap, response.getWriter());
+		
+	
 	
 	}
 
