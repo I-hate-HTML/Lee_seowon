@@ -300,13 +300,14 @@ $(".signSave").click(function(){
 	
 	var length = noArr.length-1;
 	
-	if(ynArr.length == length && aa == "승인") {
+	if(length == 1 && ynArr.length == length && aa == "Y") {
 		result = "승인";
-	} else if (aa == "반려") {
+	} else if (aa == "N") {
 		result = "반려";
 	} else {
 		result = "검토";
 	}
+	
 	
 	 $.ajax({
 		url:"/semi/fSignSave.fo",
