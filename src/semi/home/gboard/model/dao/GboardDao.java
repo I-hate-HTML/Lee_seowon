@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import semi.home.gboard.model.vo.Gboard;
 public class GboardDao {
 
@@ -242,6 +244,93 @@ public class GboardDao {
 		}
 		
 		return listCount;
+	}
+
+	public ArrayList<Gboard> searchGboard(Connection con, String category, String keyword) {
+		ArrayList<Gboard> searchlist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = null;
+		switch(category) {
+		
+		case "wrtier":
+			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+			break;
+		case "title":
+			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+			break;
+		case "content":
+			sql = "SELECT * FROM GBOARD WHERE GTITLE LIKE '%' || ? || '%'";
+			break;
+		}
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			searchlist = new ArrayList<Gboard>();
+			while(rset.next()) {
+				Gboard g = new Gboard();
+				
+				g.setGno(rset.getInt("gno"));
+				g.setGtitle(rset.getString("gtitle"));
+				g.setGcontent(rset.getString("gcontent"));
+				g.setGwriter(rset.getString("gwriter"));
+				g.setGcount(rset.getInt("gcount"));
+				g.setGdate(rset.getDate("gdate"));
+//				g.setGfile(rset.getString("gfile"));
+				String [] searchArr = rset.getString("gfile").split(",");
+				g.setGfile(searchArr[0]);
+				g.setStatus(rset.getString("status"));
+				searchlist.add(g);
+			}
+		}catch(SQLException e) {
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return searchlist;
+	}
+
+	public ArrayList<Gboard> selecGboard(Connection con) {
+		ArrayList<Gboard> searchlist = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = "SELECT * FROM GBOARD";
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			searchlist = new ArrayList<Gboard>();
+			while(rset.next()) {
+				Gboard g = new Gboard();
+				
+				g.setGno(rset.getInt("gno"));
+				g.setGtitle(rset.getString("gtitle"));
+				g.setGcontent(rset.getString("gcontent"));
+				g.setGwriter(rset.getString("gwriter"));
+				g.setGcount(rset.getInt("gcount"));
+				g.setGdate(rset.getDate("gdate"));
+				g.setGfile(rset.getString("gfile"));
+				g.setStatus(rset.getString("status"));
+				
+				searchlist.add(g);
+			}
+			
+			
+		}catch(SQLException e) {
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return searchlist;
 	}
 
 }

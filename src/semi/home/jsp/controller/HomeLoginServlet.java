@@ -38,7 +38,6 @@ public class HomeLoginServlet extends HttpServlet {
 		Member m = new Member(userId,userPwd);
 		HomeMemberService hms = new HomeMemberService();
 		
-		
 		try {
 			m = hms.selectMember(m);
 		

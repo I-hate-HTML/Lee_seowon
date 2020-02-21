@@ -1,16 +1,10 @@
-<%@page import="semi.home.gboard.model.vo.PageInfo"%>
 <%@page import="semi.home.gboard.model.vo.Gboard"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
-PageInfo pi = (PageInfo)request.getAttribute("pi");
-int listCount = pi.getListCount();
-int currentPage = pi.getCurrentPage();
-int maxPage = pi.getMaxPage();
-int startPage = pi.getStartPage();
-int endPage = pi.getEndPage();
+
 %>
 
 <!DOCTYPE html>
@@ -164,34 +158,6 @@ int endPage = pi.getEndPage();
 
             </div>
          </div>
-           <br>
-         <% if(true){ %>
-                  <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/gallary_write.jsp'">글작성</button>
-                  <% } %>
-                  
-                  <div class="text-center d-flex justify-content-center">
-                    <ul class="pagination">
-                    <% if(currentPage <=1){ %>
-                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/gboardlist?currentPage=1" >Previous</a></li>                	
-                    <%}else{ %>
-                    	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/gboardlist?currentPage=<%=currentPage - 1 %>" >Previous</a></li>
-                    <%} %>
-                    
-                    <% for(int p = startPage; p <= endPage; p++){
-    						if(p == currentPage){	 %>
-    					<li class="page-item"><a class="page-link" style="background: white; color: black;" href="<%= request.getContextPath() %>/gboardlist?currentPage=<%=p%>" ><%=p %></a></li>
-    				<%		}else{ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/gboardlist?currentPage=<%=p %>"><%=p %></a></li>
-					<%	    } %>
-					<%	 } %>
-					
-					<% if(currentPage >= maxPage){ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/gboardlist?currentPage=<%= maxPage %>">Next</a></li>
-					<% 		}else{ %>
-						<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/gboardlist?currentPage=<%= currentPage + 1 %>">Next</a></li>
-					<% } %>					
-					</ul>
-                  </div>
               </div>
             </div>
           <hr>

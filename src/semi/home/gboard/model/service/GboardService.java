@@ -95,4 +95,18 @@ public class GboardService {
 		return listCount;
 	}
 
+
+	public ArrayList<Gboard> searchGboard(String category, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Gboard> searchlist = null;
+				
+		if(category.length() > 0) {
+			searchlist = gDao.searchGboard(con,category,keyword);
+		}else {
+			searchlist = gDao.selecGboard(con);
+		}
+		close(con);
+		return searchlist;
+	}
+
 }
