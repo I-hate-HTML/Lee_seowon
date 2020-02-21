@@ -11,7 +11,7 @@ import static semi.common.JDBCTemplate.*;
 
 public class ChildService {
 	private Connection con;
-	private ChildDao cDao;
+	private ChildDao cDao = new ChildDao();
 	
 	public int insertChild(Child c) {
 		con = getConnection();

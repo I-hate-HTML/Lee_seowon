@@ -59,14 +59,14 @@ public class ChildInsertServlet extends HttpServlet {
 
 		
 		String name = mrequest.getParameter("stuname");
-		String gender = mrequest.getParameter("stugen");
+		String gender = mrequest.getParameter("stugender");
 		String stuno = mrequest.getParameter("stuno1")+"-"+mrequest.getParameter("stuno2");
 		String birth = mrequest.getParameter("stubirth");
 		String entdate = mrequest.getParameter("stuent");
 		String stuaddr = mrequest.getParameter("stuaddr1")+" "+mrequest.getParameter("stuaddr2")+" "+mrequest.getParameter("stuaddr3");
 		int age = Integer.parseInt(mrequest.getParameter("stuage"));
 		String state = mrequest.getParameter("stustate");
-		String stuclass= mrequest.getParameter("stuClass");
+		String stuclass= mrequest.getParameter("stuclass");
 		String stuimg = mrequest.getFilesystemName("stuimg");
 
 

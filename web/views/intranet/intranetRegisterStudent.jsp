@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../intranet/common/nav2.jsp"%>
+
 
 <!DOCTYPE html>
 <html>
 <head>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  
+  
+  <!-- Custom fonts for this template-->
+  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/css.css" rel="stylesheet" type="text/css">
+  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/1_content.css" rel="stylesheet" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
@@ -72,8 +88,8 @@
 								</td>
 								<th style="padding: 0.2rem">주민번호</th style="padding:0.2rem">
 								<td style="padding: 0.2rem">&nbsp; <input type='text'
-									id="stuno1" style="width: 45%;"> - <input type='text'
-									id="stuno2" style="width: 45%;">
+									name="stuno1" style="width: 45%;"> - <input type='text'
+									name="stuno2" style="width: 45%;">
 								</td>
 								<td colspan="2" rowspan="4" style="width: 10%; height:70%">
 									<div style="width: 100%; height: 100%">
@@ -85,15 +101,15 @@
 							<tr>
 								<th style="padding: 0.2rem">생일</th>
 								<td style="padding: 0.2rem" colspan="2">&nbsp;<input
-									type="date" id="stubirth">
+									type="date" name="stubirth">
 
 								</td>
 								<th style="padding: 0.2rem">입학일</th>
 								<td style="padding: 0.2rem">&nbsp;<input type="date"
-									id="stuent"></td>
+									name="stuent"></td>
 								<th style="padding: 0.2rem">졸업일</th>
 								<td style="padding: 0.2rem">&nbsp;<input type="date"
-									id="stugradu" disabled="disabled"></td>
+									name="stugradu" disabled="disabled"></td>
 							</tr>
 							<tr>
 								<th style="padding: 0.2rem" rowspan="2">주소</th>
@@ -270,7 +286,6 @@
 			</div>
 		</div>
 
-	</div>
 	<!-- End of Main Content -->
 	
 	<script>
@@ -280,8 +295,8 @@
 				url : "/semi/stuCall.do",
 				type : "get",
 				success : function(data) {
-					$.each(data, function(index, value) {
-									
+					console.log(data);
+					$.each(data, function(index, value) {					
 						var $tr = $('<tr>');
 						var $chk = $('<input>').attr({'type':'radio','class':'chkstu','value':value.cCode+','+value.name});
 						var $checkbox = $('<td>');
@@ -350,8 +365,8 @@
 			
 			
 		});
-		$('#empdel').click(function(){
-			var eid = $('.chkemp:checked').val();
+		$('#studel').click(function(){
+			var eid = $('.chkstu:checked').val();
 			var ecn = eid.split(',');
 			$.ajax({
 				url : '/semi/delStu.do',
