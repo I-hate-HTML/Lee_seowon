@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
 import semi.intranet.alimjang.model.vo.Alim;
 
@@ -39,7 +41,10 @@ public class AlimNavServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		
-		int emp = Integer.parseInt(request.getParameter("empno"));
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int emp = Integer.parseInt(m.getUserId());
 
 		ArrayList<Alim> navList = new ArrayList<Alim>();
 		

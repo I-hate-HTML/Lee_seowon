@@ -35,64 +35,6 @@ public class FormService {
 		return list;
 	}
 
-	/**
-	 * 결재자 정보 가져오기
-	 * @param signList
-	 * @return
-	 */
-	public SignList findSignId(String signList) {
-
-		Connection con = getConnection();
-
-		// 1. String[] 배열 형변환하기
-		int signId1 = Integer.parseInt(signList[0]);
-		int signId2 = Integer.parseInt(signList[1]);
-		int signId3 = Integer.parseInt(signList[2]);
-
-		// 2. Dao로 보내서 해당 결재자 정보 가져오기
-		ArrayList<SignList> sInfo = fd.findSignId(con, signId1, signId2, signId3);
-
-
-		close(con);
-		
-		
-		// 3. 결재자 정렬 --> 직급순 & ID 순
-		Collections.sort(sInfo, new Comparator<SignList>() {
-
-			@Override
-			public int compare(SignList sInfo1, SignList sInfo2) {
-				if(sInfo1.getSposition() > sInfo2.getSposition()) {
-					return 1;
-				} else if (sInfo1.getSposition() < sInfo2.getSposition()){
-					return -1;
-				} else if(sInfo1.getSposition() == sInfo2.getSposition()) {
-					if(sInfo1.getScode() > sInfo2.getScode()) {
-						return -1;
-					} else if(sInfo1.getScode() < sInfo2.getScode()) {
-						return 1;
-					}
-				}
-				return 0;
-			}
-		});
-
-		
-		// 4. SignList 로 변환
-		SignList s = new SignList();
-
-
-		s.setSname(sInfo.get(0).getSname());
-		s.setScode(sInfo.get(0).getScode()); 
-		s.setSname2(sInfo.get(1).getSname()); 
-		s.setScode2(sInfo.get(1).getScode()); 
-		s.setSname3(sInfo.get(2).getSname()); 
-		s.setScode3(sInfo.get(2).getScode());
-		
-
-		return s;
-	}
-
-
 
 	/**
 	 * 품의서 작성용 --> 사용
@@ -159,18 +101,7 @@ public class FormService {
 		return list;
 	}
 	
-	public ArrayList<Form> listAjax(int empNo) {
-		
-		Connection con = getConnection();
-
-		ArrayList<Form> list = fd.listAjax(con, empNo);
-
-		close(con);
-		
-
-		return list;
-	}
-
+	
 	/**
 	 * 총 게시글 확인 --> 사용
 	 * @return
@@ -212,49 +143,46 @@ public class FormService {
 		return f;
 	}
 
+	
 	/**
-	 * 품의서 수정할 내용 불러오기
+	 * 결재자 품의 업데이트 --> 사용
 	 * @param fno
-	 * @param eno 
-	 * @return
-	 */
-	public Form modifyViewForm(int fno, int eno) {
-
-		Connection con = getConnection();
-
-		Form f = fd.modifyViewForm(con, fno, eno);
-		
-		if(f.getFcategory() == 1) {
-			f.setCategory("지출결의서");
-		} else if(f.getFcategory() == 2) {
-			f.setCategory("휴가신청서");
-		} else if(f.getFcategory() == 3) {
-			f.setCategory("교구신청서");
-		} else {
-			f.setCategory("기타");
-		}
-
-		close(con);
-
-
-		return f;
-	}
-
-	/**
-	 * 결재자 품의 업데이트
-	 * @param fno
+	 * @param reason 
+	 * @param process 
 	 * @param signArr
-	 * @param fReturn
-	 * @param size 
 	 * @return
 	 */
-	public int updateSign(int fno, String sign1, String sign2, String sign3, String fReturn, int size) {
+	public int updateSign(int fno, String yn, String reason, String process) {
 		
 		Connection con = getConnection();
 
+		// 1. 저장되어있는 결재 내용 가져오기
+		SignList pre = fd.getSignContent(con, fno);
 		
-		int result = fd.updateSign(con, fno, sign1, sign2, sign3, fReturn);
+		// 2. 기존 결재 내용에 새로운 결재 내용 붙이기
+		String newMsg = null;
+		String newYn = null;
 		
+		if(pre.getSmsg() != null) {
+			newMsg = pre.getSmsg()+reason;
+		} else {
+			newMsg = reason;
+		}
+		
+		if(pre.getSyn() != null) {
+			newYn = pre.getSyn()+yn;
+		} else {
+			newYn = yn;
+		}
+		
+				
+		// 3. 새로운 결재내용 저장
+		int result = 0;
+		if(process == "반려" || process == "승인") {
+			result = fd.updateSign(con, fno, newYn, newMsg, process, "Y");
+		} else {
+			result = fd.updateSign(con, fno, newYn, newMsg, process, "N");
+		}
 		
 		if(result > 0) {
 			commit(con);
@@ -269,46 +197,10 @@ public class FormService {
 
 
 	
-	/**
-	 * 품의서 프로세스 업데이트 (반려/승인/검토)
-	 * @param fno
-	 * @param size
-	 * @param fReturn
-	 * @return
-	 */
-	public int updateSignProcess(int fno, int size, String fReturn) {
-		
-		Connection con = getConnection();
-		
-		
-		int result = 0;
-		
-		if(fReturn != null) {
-			
-			result = fd.updateSignProcess(con, fno, 9);
-		
-		} else if (fReturn == null) {
-			
-			result = fd.updateSignProcess(con, fno, size);
-			
-		}
-		
-		
-		
-		if(result > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
-		close(con);
-		
-		
-		return result;
-	}
+	
 
 	/**
-	 * 품의서 삭제용
+	 * 품의서 삭제용 --> 사용
 	 * @param fno
 	 * @param eno 
 	 * @return
@@ -356,18 +248,52 @@ public class FormService {
 		return list;
 	}
 
+	/**
+	 * READ용 결재자 리스트 가져오기 --> 사용
+	 * @param list
+	 * @param msg 
+	 * @param yn 
+	 * @return
+	 */
+	public ArrayList<SignList> getSignSelect(String list, String yn, String msg) {
+		
+		
+		Connection con = getConnection();
+
+		ArrayList<SignList> SignList = fd.getSignSelect(con, list);
+		
+		
+		// 결재 유무 넣기
+		if(yn != null) {
+			
+			SignList a = new SignList();
+			
+			String[] ynList = yn.split(",");
+			
+			
+			for(int i = 0; i < ynList.length; i++) {
+				SignList.get(i).setSyn(ynList[i]);
+			}
+		} 
+		
+		// 결재 메시지 넣기
+		if(msg != null) {
+			
+			SignList a = new SignList();
+			
+			String[] msgList = msg.split(",");
+			
+			for(int i = 0; i < msgList.length; i++) {				
+				SignList.get(i).setSmsg(msgList[i]);
+			}
+		}
+		
+		close(con);
+		
+		return SignList;
+	}
+
 	
-
-
-
-
-
-
-
-
-
-
-
 
 
 

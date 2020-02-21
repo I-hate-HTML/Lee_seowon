@@ -129,9 +129,19 @@ int endPage = pi.getEndPage();
 			</div>
 			<% } %>
 			
-			
               
             </div>
+			 <hr><br>
+					<div class="text-center d-flex justify-content-center">
+					    <select class="form-control" style="width: 100px; margin-right: 10px" id="searchval">
+							<option value="">---</option>
+							<option value="writer">작성자</option>
+							<option value="title">제목</option>
+							<option value="content">내용</option>
+						</select>
+					<input type="text" class="form-control" style="margin-right: 30px; width:60%" id="keyword">
+					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="return searchgboard()" value="검색">
+					</div>
 
 			<script>
 				$(function(){
@@ -141,7 +151,21 @@ int endPage = pi.getEndPage();
 							location.href = "<%=request.getContextPath()%>/gboardselectone.go?gno=" + gno;
 					});
 				});
-			</script>
+			
+				function searchgboard(){
+					if( $('#keyword').val() == ""){
+						alert("검색할 단어를 입력해 주세요!");
+						return false;
+					}
+					if($('#searchval').val()==""){
+						alert("검색할 옵션을 선택해 주세요!");
+						return false;
+					}
+					location.href="<%=request.getContextPath()%>/searchgboard?con="+$('#searchval').val()+"&keyword="+$('#keyword').val();
+					
+				}
+				
+				</script>
     
            
            

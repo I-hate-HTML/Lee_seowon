@@ -44,7 +44,7 @@
  
     </style>
 
-
+	 <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -90,7 +90,7 @@
             <!-- Portfolio Item 1 -->
             <div class="col-md-6 col-lg-4" >
   					<a href="/semi/boardlsit.do">
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" href="/semi/boardlsit.do" alt="" style="margin-bottom: 30px;">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" alt="" style="margin-bottom: 30px; cursor: pointer;">
   					</a>
                     <br>
                     <b>공지사항</b>
@@ -99,8 +99,8 @@
     
             <!-- Portfolio Item 2 -->
             <div class="col-md-6 col-lg-4">
-          			<a href="./food_calender.jsp">
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a2.png" alt="" style="margin-bottom: 30px;">
+          			<a href="<%=request.getContextPath()%>/views/homepage/food_calender.jsp">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a2.png" alt="" style="margin-bottom: 30px;cursor: pointer;">
           			</a>
                     <br>
                     <b>식단표</b>
@@ -110,7 +110,7 @@
             <!-- Portfolio Item 3 -->
             <div class="col-md-6 col-lg-4">
       				<a href="/semi/selectOne.bo?bno=1">
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a3.png" alt="" style="margin-bottom: 30px;">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a3.png" alt="" style="margin-bottom: 30px;cursor: pointer;">
       				</a>
                     <br>
                     <b>버스시간표</b>
@@ -127,12 +127,10 @@
       </h1>
       <p style="text-align: center; margin-bottom: 45px;">우리들의 행복한 시간</p>
       </div>
-      <div class="row" style="text-align-last: center;">
-        
-         
-
-        <!-- Portfolio Item 1 -->
-        <div class="col-md-6 col-lg-4"  >
+      <div class="row" style="text-align-last: center;" id="imgdiv">
+      
+        <%-- <!-- Portfolio Item 1 -->
+         <div class="col-md-6 col-lg-4"  >
           <a target="_blank" href="fjords.jpg" style="margin-bottom: 30px;">
             <img src="<%=request.getContextPath()%>/resources/homepage/images/1.jpg" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">
             </a>
@@ -158,7 +156,7 @@
             </a>
               <b>새싹반</b>
                 <p style="margin: 20px; font-size: 13px;">잠에 골아 떨어진 모습</p>
-        </div>
+        </div> --%>
 
   </div>  
 
@@ -172,5 +170,49 @@
   <%@ include file = "common/footer.jsp" %>
 
 </body>
+
+<script>
+
+	$(function(){
+		$.ajax({
+			url:"/semi/MainpageImg.me",
+			type:"post",
+			success:function(data){
+				$.each(data,function(index,value){
+					<%--  <div class="col-md-6 col-lg-4"  >
+			          			<a target="_blank" href="fjords.jpg" style="margin-bottom: 30px;">
+			            			<img src="<%=request.getContextPath()%>/resources/homepage/images/1.jpg" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;">
+			            		</a>
+			              	<b style="">씨앗반</b>
+			                <p style="margin: 20px; font-size: 13px;">크리스마스에 있었던 파티</p>
+			        	</div> --%>
+				
+					var $div = $('<div class="col-md-6 col-lg-4">');
+					var $a = $('<a target="_blank" href="" style="margin-bottom: 30px;">');
+					$a.attr('href','<%=request.getContextPath()%>/gboardselectone.go?gno='+value.gno);
+					var $img = $('<img src="" width="100%" height="300" style="margin-bottom: 30px;">');
+					$img.attr('src','<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/'+value.gfile);
+					var $p = $('<p style="margin: 20px; font-size: 13px;">').text(value.gtitle);
+					console.log($img);
+					$a.append($img);
+					
+					$div.append($a);
+					$div.append($p);
+					
+					$('#imgdiv').append($div);
+					
+					
+				});
+				
+			},error:function(){
+				
+			}
+		});
+	
+		
+		
+	});
+
+</script>
 
 </html>

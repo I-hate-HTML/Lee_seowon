@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="semi.intranet.alimjang.model.vo.Alim" %>
+<%@ page import="semi.home.jsp.model.vo.*"%>
 
-<%-- <%
- 	ArrayList<Alim> navList = (ArrayList<Alim>)request.getAttribute("navList");
-	int newAlimCount = (int)request.getAttribute("newAlimCount");
-%> --%>
+<%
+ Member m = (Member)session.getAttribute("member"); 
+ request.setAttribute("member", m);
+%>
+
 
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
@@ -36,7 +38,7 @@
   <link href="<%=request.getContextPath()%>/resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"/>
   
-  <title>꿈나라어린이집 # 인트라넷</title>
+  <title>팡팡어린이집 # 인트라넷</title>
   
 </head>
 
@@ -124,8 +126,8 @@
         <div id="collapseClass" class="collapse" aria-labelledby="headingClass" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
-            <a class="collapse-item" href="/semi/aListClass.al">알림장 확인</a>            
-            <a class="collapse-item" href="intranetAdviceBoard.jsp">상담확인</a>            
+            <a class="collapse-item"  href="/semi/aListClass.al">알림장 확인</a>            
+            <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetAdviceBoard.jsp">상담확인</a>            
           </div>
         </div>
       </li>
@@ -161,7 +163,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="/semi/homelogout">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -245,14 +247,13 @@
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-paperclip fa-2x"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">3</span>
+                <span class="badge badge-danger badge-counter formCount"></span>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">
-                  결재 상태
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">결재 상태</h6>
+                
+                <%-- <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/a.png" alt="">
                     <div class="status-indicator bg-success"></div>
@@ -281,9 +282,9 @@
                     <div class="text-truncate">2019년 12월 지출결의서입니다.</div>
                     <div class="small text-gray-500">차은우, 2019-12-30, 결재완료</div>
                   </div>
-                </a>
+                </a> --%>
                 
-                </a>
+                
                 <a class="dropdown-item text-center small text-gray-500" href="intranetForm.jsp">더보기</a>
               </div>
             </li>
@@ -293,24 +294,24 @@
             <!-- Nav Item - 선생님 사진 -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">차은우 선생님</span>
-                <img class="img-profile rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= m.getUserName() %> 선생님</span>
+                <img class="img-profile rounded-circle" id="tImage" >
               </a>
 
               <!-- Dropdown - 선생님 인포메이션 -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item">
                   <i>이름 : </i>
-                  <i name = "tName">차은우</i>
+                  <i name = "tName"><%= m.getUserName() %></i>
                 </a>
                 <a class="dropdown-item">
                   <i>담당반 : </i>
-                  <i name = "className">1반</i>
+                  <i name = "className" id="classNum"></i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/semi/homelogout" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/semi/homelogout">
                   <i class="fa fa-sign-out text-gray-400"></i>
-                  로그아웃
+                  		로그아웃
                 </a>
               </div>
             </li>
@@ -324,9 +325,10 @@
         
         <script>
 
+        // nav 알림 가져오기
         $(function(){
        	
-       	var empno = '2015001'; // --> 나중에 바꾸기!!!
+       	var empno = '<%= m.getUserId()%>';
 
        	$.ajax({
        		url:"/semi/aNav.al",
@@ -338,7 +340,7 @@
        			$('#count').text(data.aCount);
        			
        			
-       			// 알림 리스트 목록
+       		// 알림 리스트 목록
        			$.each(data, function(index, value){
        				
        				for(var i in index) {
@@ -385,21 +387,107 @@
        				}
        			});
        			
-       			
-       			
-       			
-       			
-       			
-       			
-       			
-       			
-       			
-       			
        		}, error:function(data){
        			alret("권한이 없습니다.");
        		}
        	});
        });
+
+
+        //선생님 정보 가져오기
+        $(function(){
+
+          	$.ajax({
+          		url:"/semi/iNavEmployee.in",
+          		type:"post",
+          		success:function(data){
+          			
+          			var classNum = data.info.classNum;
+          			var position = data.info.position;
+          			var image = data.info.image;
+          			
+
+          			if(classNum == 0) {
+          				$('#classNum').text(position).val(position);
+          			} else {
+          				$('#classNum').text(classNum + "반").val(classNum);
+          			}
+          			
+          			$('#tImage').attr("src",'resources/intranet/image/'+ image);
+          			
+          		}, error:function(data){
+          			
+          		}
+          	});
+       	
+       });
+        
+     // 품의 알림
+        $(function(){
+     	   var empno = '<%= m.getUserId()%>';
+     	   
+     	   $.ajax({
+     		  url:"/semi/iNavForm.in",
+     		  type:"post",
+     		  data:{"empno":empno},
+     		  success:function(data){
+     			  console.log(data);
+     			  
+     			  // 결재 알림 카운트
+     			  $(".formCount").text(data.fCount);
+     			  
+     			  // 결재 알림 리스트 목록
+     			  
+     			  $.each(data, function(index, value){
+       				
+       				for(var i in index) {
+       					 
+       					var fno = data.fList[i].fno;
+       					var name = data.fList[i].name;
+       					var date = data.fList[i].data;
+       					var process = data.fList[i].process;
+       					var title = data.fList[i].title;
+       					var image = data.fList[i].img;
+       					
+       					
+       					// 알림 사진 나오기
+       					
+       					$a1 = $('<a>').attr({"class":"dropdown-item d-flex align-items-center",
+       										 'href' :'/semi/fList.fo'
+       										});
+       					
+       					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
+       					$img1 = $('<img>').attr({
+       											 "class":"rounded-circle",
+       											 "src" : "/resources/intranet/image/" + image,
+       											 "alt" : ""
+       											});
+       					$div2 = $('<div>').attr("class","status-indicator bg-success");
+       					
+       					
+       					// 알림 리스트 가져오기
+       					$div3 = $('<div>').attr("class","font-weight-bold");
+       					$div4 = $('<div>').attr("class","text-truncate").text(title);
+       					$div5 = $('<div>').attr("class","small text-gray-500").text(name + "\t" + data + "\t" + process);
+       					
+       					
+       					$('#formAilm').append($a1.append($div1.append($img1).append($div2)));
+       					$('#formAilm').append($div3.append($div4).append($div5));
+       				}
+     			  });
+     			  
+     		  }, error:function(data){
+     			  console.log("에러");
+     		  }
+     		   
+     		   
+     		   
+     	   });
+     	   
+     	   
+     	   
+        });
+
 
         </script>
         

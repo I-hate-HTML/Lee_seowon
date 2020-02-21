@@ -83,7 +83,6 @@
   	<div class="container">
     	<div class="row">
       		<div class="col-lg-8 col-md-10 mx-auto">
-      			<h1>검색페이지</h1>
 				  <table id="boardtable" class="table table-hover" style="background: white;">
                       <thead>
                           <tr>
@@ -118,7 +117,7 @@
 					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="searchboard()" value="검색">
 					</div>	
 					<br>
-                  <% if(true){ %>
+                  <% if(m.getJob_code()!=6){ %>
                   <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
                   <% } %>
                   
@@ -156,6 +155,13 @@
 	<%@ include file = "common/footer.jsp" %>
 
     <script>
+    
+    $("#keyword").keydown(function(e) {
+        if(e.keyCode==13){
+        	searchboard();
+        }
+    });
+    
     $(function(){
     	  $('#boardtable td').click(function(){
         	  var bno = $(this).parent().children().eq(0).text();

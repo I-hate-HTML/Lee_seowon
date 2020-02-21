@@ -38,20 +38,23 @@ public class HomeLoginServlet extends HttpServlet {
 		Member m = new Member(userId,userPwd);
 		HomeMemberService hms = new HomeMemberService();
 		
-		
 		try {
 			m = hms.selectMember(m);
-		
+			/*회원가입 권환부여 로직 
+			if(m.getMstatus().equals("N")) {
+				MemberException e = new MemberException("아이디에 권한이 없습니다.");
+				request.setAttribute("exception", e);
+				request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
+				return;
+			}*/
 			System.out.println("홈페이지 로그인 성공!!");
 			
 			HttpSession session = request.getSession();
-			
 			session.setAttribute("member", m);
-		
 			response.sendRedirect("views/homepage/homeindex.jsp");
-		
+			
 		} catch(MemberException e) {
-			request.setAttribute("error", "아이디랑 비번을 확인해 주세요!");
+			request.setAttribute("error", "아이디랑 비밀번호를 확인해 주세요!");
 			request.setAttribute("exception", e);
 			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
 		}

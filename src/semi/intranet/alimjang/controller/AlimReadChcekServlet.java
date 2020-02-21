@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
 
 /**
@@ -35,7 +37,10 @@ public class AlimReadChcekServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		
-		int empNo = 2015001; // 나중에 수정할 것!!
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int empNo = Integer.parseInt(m.getUserId());
 		
 		String read = request.getParameter("result");
 		int ano = Integer.parseInt(request.getParameter("ano"));

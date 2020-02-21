@@ -61,7 +61,7 @@ public class UpdateGboardServlet extends HttpServlet {
 			}
 		}
 		
-		if(gfile == null) gfile = newfile+","+gfile;
+		if(gfile.isEmpty()) gfile = newfile;
 		else gfile = gfile+","+newfile;
 	
 		int result = new GboardService().updateGboard(gno,gcontent,gfile);

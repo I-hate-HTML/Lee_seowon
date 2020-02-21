@@ -55,11 +55,13 @@ public class HomeMemberDao {
 				result.setPhone(rset.getString("phone"));
 				result.setAddress(rset.getString("address"));
 				result.setEnrolldate(rset.getDate("enrolldate"));
-			
+				result.setCno(rset.getInt("cno"));
 				result.setCname(rset.getString("cname"));
 				result.setCbdate(rset.getDate("cbdate"));
 				result.setCgender(rset.getString("cgender"));
 				result.setCclass(rset.getInt("cclass"));
+				result.setMstatus(rset.getString("mstatus"));
+				result.setJob_code(rset.getInt("job_code"));
 				
 				
 			}

@@ -1,4 +1,4 @@
-package semi.intranet.form.controller;
+package semi.home.gboard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import semi.intranet.form.model.service.FormService;
+import semi.home.gboard.model.service.GboardService;
+import semi.home.gboard.model.vo.Gboard;
 
 /**
- * Servlet implementation class FormSignListSortServlet
+ * Servlet implementation class MainPageImageServlet
  */
-@WebServlet("/fSignListSort.fo")
-public class FormSignListSortServlet extends HttpServlet {
+@WebServlet("/MainpageImg.me")
+public class MainPageImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormSignListSortServlet() {
+    public MainPageImageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +37,25 @@ public class FormSignListSortServlet extends HttpServlet {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
-		String[] listArr = request.getParameterValues("list");
 		
-		System.out.println(listArr);
+		ArrayList<Gboard> list = new GboardService().getmainimg();
 		
-		listArr = new FormService().signListSort(listArr);
+		JSONObject ginfo = null;
+		JSONArray result = new JSONArray();
 		
-		new Gson().toJson(listArr, response.getWriter());
+		for(Gboard gb : list) {
+			ginfo = new JSONObject();
+			
+			ginfo.put("gno", gb.getGno());
+			ginfo.put("gtitle", gb.getGtitle());
+			ginfo.put("gfile", gb.getGfile());
+			
+			result.add(ginfo);
+		}
 		
+		response.getWriter().print(result.toJSONString());
 		
+	
 	}
 
 	/**

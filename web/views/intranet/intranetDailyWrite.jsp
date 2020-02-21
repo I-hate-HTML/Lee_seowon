@@ -29,8 +29,8 @@
                       	  </td>
                           <th style="text-align:center">작성자</th>
                           <td style="text-align:center">
-                         	<input type = "text" style="width:100%" name = "writer" value="차은우" disabled>
-                      		<input type = "hidden" name = "writerId" value="2015001">
+                         	<input type = "text" style="width:100%" name = "writer" value="<%=m.getUserName() %>" disabled>
+                      		<input type = "hidden" name = "writerId" value="<%= m.getUserId()%>">
                           </td>
                       </tr>
                       <tr>

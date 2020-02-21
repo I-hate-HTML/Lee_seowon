@@ -353,15 +353,15 @@ public class BoardDao {
 			
 			pstmt= con.prepareStatement(sql);
 			pstmt.setString(1, keyword);
-			pstmt.setInt(2, endRow);
-			pstmt.setInt(3, startRow);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset= pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Board b = new Board();
 
-				b.setBno(rset.getInt("bno"));
+				b.setBno(rset.getInt("rnum"));
 				b.setBtitle(rset.getString("btitle"));
 				b.setBcontent(rset.getString("bcontent"));
 				b.setBwriter(rset.getString("bwriter"));

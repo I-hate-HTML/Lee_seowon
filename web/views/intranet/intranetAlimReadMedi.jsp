@@ -119,9 +119,12 @@
 	$('.readBtn').click(function(){
 		console.log("버튼 클릭")
 		
+	if(<%= b.getCclass()%> == $('#classNum').val() ){
+		
 		var result = $(this).val();
 		var ano = '<%= a.getAlmd_no() %>';
 		var category = '<%= a.getAl_code() %>';
+		var empno = '<%= m.getUserId()%>'
 		
 		console.log(result);
 		console.log(ano);
@@ -134,14 +137,18 @@
 				'result' : result,
 				'ano' : ano,
 				'category' : category,
+				'empno' : empno
 			},
 			success:function(data){
 				$('.tCK').val(result);
 				$('.tCK').parent().text(result);
 			}, error:function(data){
-				alret("권한이 없습니다.");
+				alert("권한이 없습니다.");
 			}
 		});
+	} else {
+		alert("권한이 없습니다.");
+	}
 	});
 </script>
 
