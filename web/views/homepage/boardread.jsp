@@ -102,9 +102,9 @@
                     <input type="hidden" name="pbno" value="<%=b.getBno()%>" >
                 <div class="float-right">
                 
-                <%// if(){ %>
+                <% if(m.getJob_code()!=6){ %>
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location.href='/semi/bupdateview.bo?pbno=<%=b.getBno() %>'" class="pull-right"/>
-                <%//} %>  
+                <%} %>  
                   
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="글목록" onclick="location.href='/semi/boardlsit.do'" class="pull-right"/>
               
