@@ -161,7 +161,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="/semi/homelogout">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -250,7 +250,7 @@
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
-                  결재 상태
+                  	결재 상태
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
@@ -308,7 +308,7 @@
                   <i name = "className" id="classNum"></i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/semi/homelogout">
                   <i class="fa fa-sign-out text-gray-400"></i>
                  		 로그아웃
                 </a>
@@ -323,7 +323,9 @@
         <!-- End of Topbar -->
         
         <script>
-
+		
+        
+     	// nav 알림 가져오기
         $(function(){
        	
        	var empno = '<%= m.getUserId()%>';
@@ -417,6 +419,8 @@
           	});
        	
        });
+      
+     
 
         </script>
         
