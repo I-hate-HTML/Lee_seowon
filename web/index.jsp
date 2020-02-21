@@ -105,6 +105,10 @@
 			
 			<script>
 			
+	 		keydown(function(e) {
+		    }); 
+
+			
 			function checkValue(){
 				
 				inputForm = eval("document.LoginCheck");
@@ -183,7 +187,5 @@
 			</script>
 			</div>
 			</div>
-			
-		
 </body>
 </html>

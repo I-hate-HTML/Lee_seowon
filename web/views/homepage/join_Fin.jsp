@@ -53,7 +53,7 @@
               <div class="finish"  >
                   <div class="finish" style="background: rgba(245, 240, 240, 0.952); padding:20px; margin-top:30px;  padding-left:20px; padding-right:20px; font-size:18px; line-height:27px;" > 
                   <p class="tit" style="font-size: 25px;"><b>회원 가입이 완료되었습니다.</b></p>
-                  <p class="txt1"><span style="color: #002c5f;"><b>***회원님!</b></span> KH 요정의 집 어린이집 홈페이지 가입을 축하드립니다.<br>저희 KH 요정의 집 어린이집 홈페이지에 지속적인 관심을 부탁드립니다.</p>
+                  <p class="txt1"><span style="color: #002c5f;"><b>회원님!</b></span> KH 요정의 집 어린이집 홈페이지 가입을 축하드립니다.<br>저희 KH 요정의 집 어린이집 홈페이지에 지속적인 관심을 부탁드립니다.</p>
                   <ul class="bul_list">
                       <li>회원님의 아이디와 비밀번호의 관리소홀, 부정사용에 의한 결과의 책임은 회원님에게 있으므로 신중히 관리하시기 바랍니다.</li>
                       <li>개인정보를 변경하시려면 로그인 후 마이페이지 메뉴를 이용하세요.</li>

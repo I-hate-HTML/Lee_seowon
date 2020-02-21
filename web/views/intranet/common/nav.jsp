@@ -163,7 +163,7 @@
 
       <!-- Nav Item - 로그아웃 -->
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="/semi/homelogout">
           <i class="fa fa-sign-out fa-2x"></i>
           <span>로그아웃</span></a>
       </li>
@@ -247,14 +247,13 @@
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-paperclip fa-2x"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">3</span>
+                <span class="badge badge-danger badge-counter formCount"></span>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">
-                  결재 상태
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">결재 상태</h6>
+                
+                <%-- <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/a.png" alt="">
                     <div class="status-indicator bg-success"></div>
@@ -283,9 +282,9 @@
                     <div class="text-truncate">2019년 12월 지출결의서입니다.</div>
                     <div class="small text-gray-500">차은우, 2019-12-30, 결재완료</div>
                   </div>
-                </a>
+                </a> --%>
                 
-                </a>
+                
                 <a class="dropdown-item text-center small text-gray-500" href="intranetForm.jsp">더보기</a>
               </div>
             </li>
@@ -310,7 +309,7 @@
                   <i name = "className" id="classNum"></i>
                 </a>                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<%=request.getContextPath()%>/iLogout.in" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/semi/homelogout">
                   <i class="fa fa-sign-out text-gray-400"></i>
                   		로그아웃
                 </a>
@@ -341,7 +340,7 @@
        			$('#count').text(data.aCount);
        			
        			
-       			// 알림 리스트 목록
+       		// 알림 리스트 목록
        			$.each(data, function(index, value){
        				
        				for(var i in index) {
@@ -351,6 +350,7 @@
        					var category = data.aList[i].category + "\t";
        					var date = data.aList[i].adate;
        					var aname = data.aList[i].achild;
+       					
        					
        					// 알림 아이콘 나오기
        					var $a = $('<a>').attr({
@@ -421,6 +421,72 @@
           	});
        	
        });
+        
+     // 품의 알림
+        $(function(){
+     	   var empno = '<%= m.getUserId()%>';
+     	   
+     	   $.ajax({
+     		  url:"/semi/iNavForm.in",
+     		  type:"post",
+     		  data:{"empno":empno},
+     		  success:function(data){
+     			  console.log(data);
+     			  
+     			  // 결재 알림 카운트
+     			  $(".formCount").text(data.fCount);
+     			  
+     			  // 결재 알림 리스트 목록
+     			  
+     			  $.each(data, function(index, value){
+       				
+       				for(var i in index) {
+       					 
+       					var fno = data.fList[i].fno;
+       					var name = data.fList[i].name;
+       					var date = data.fList[i].data;
+       					var process = data.fList[i].process;
+       					var title = data.fList[i].title;
+       					var image = data.fList[i].img;
+       					
+       					
+       					// 알림 사진 나오기
+       					
+       					$a1 = $('<a>').attr("class","dropdown-item d-flex align-items-center");
+       					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
+       					$img1 = $('<img>').attr({
+       											 "class":"rounded-circle",
+       											 "src" : "/resources/intranet/image/" + image,
+       											 "alt" : ""
+       											});
+       					$div2 = $('<div>').attr("class","status-indicator bg-success");
+       					
+       					
+       					// 알림 리스트 가져오기
+       					$div3 = $('<div>').attr("class","font-weight-bold");
+       					$div4 = $('<div>').attr("class","text-truncate").text(title);
+       					$div5 = $('<div>').attr("class","small text-gray-500").text(name + "\t" + data + "\t" + process);
+       					
+       					
+       					
+       					
+       					$('#formAilm').append($a1.append($div1.append($img1).append($div2)));
+       					$('#formAilm').append($div3.append($div4).append($div5));
+       				}
+     			  })
+     			  
+     		  }, error:function(data){
+     			  console.log("에러");
+     		  }
+     		   
+     		   
+     		   
+     	   });
+     	   
+     	   
+     	   
+        });
+
 
         </script>
         

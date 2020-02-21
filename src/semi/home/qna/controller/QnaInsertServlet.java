@@ -60,7 +60,7 @@ public class QnaInsertServlet extends HttpServlet {
 		
 		if(result > 0) {
 			// 문의 등록 완료
-			response.sendRedirect("views/homepage/homeindex.jsp"); // qna.jsp를 넣으면 오류가 남ㅠㅠ 왜그럴까? 새로고침으로 해야하나???
+			response.sendRedirect("/semi/qList.qna"); // qna.jsp를 넣으면 오류가 남ㅠㅠ 왜그럴까? 새로고침으로 해야하나???
 		}else {
 			request.setAttribute("msg", "문의 사항 등록 실패");
 			request.getRequestDispatcher("views/homepage/common/errorPage.jsp").forward(request, response);
