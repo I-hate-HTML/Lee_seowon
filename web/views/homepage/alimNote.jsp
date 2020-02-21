@@ -143,12 +143,7 @@ vertical-align: middle;}
             <table class="table table-bordered">
                     <tr>
                         <td colspan="4"><textarea name="al_content" id="alim_text" cols="30" rows="10" placeholder="가정에서 이렇게 지냄" style="width: 100%; resize: none;"></textarea></td>                    
-                    </tr>
-                    <!-- <tr align="center">
-                        <td style="width: 25%;"><a href=""><i class="fas fa-images" style="font-size: 30px;"></i></a></td>
-                        <td style="width: 25%;"><a href="" ><i class="fas fa-video" style="font-size: 30px;"></i></a></td>
-                        <td colspan="2"></td>
-                    </tr> -->
+                    </tr>                    
                     <tr>
                         <td colspan="4" style="background-color: #002c5f; color: white;">기본입력</td>
                     </tr>
@@ -206,13 +201,16 @@ vertical-align: middle;}
                     </tr>
                     
                     <tr>
-                        <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><input type="submit" value="확인" style="background: none; border: none; color: white;"></div>
+                        <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray; text-align: center;">
+                            
+                            
+                            <input onclick="return chkradio" class="btn" type="submit" value="확인" style="background: none; border: none; color: white; text-align: center;">
+                            
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><img src="" alt="">취소</div>
+                            <div style="text-align: center;" onclick=""><input type="reset" value="취소" style="background: none; border: none; color: white;"></div>
                         </td>
                     </tr>
             </table>
@@ -229,11 +227,23 @@ vertical-align: middle;}
   <%@ include file="common/footer.jsp"%>
 
 
-  <script>
+  <script>  
       var date = new Date();
       $(function(){
           $('#alim_date').text(date);
       })
+      
+      function chkradio() {
+		var al_feel = $('#al_feel');
+   		if($(':radio[name="al_feel"]:checked').length < 1){
+   			alert("하라라");
+   			return true;
+   		}
+   		return false;
+	}
+      
+      
+      
   </script>
 </body>
 
