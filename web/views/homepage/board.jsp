@@ -114,8 +114,9 @@
 					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="searchboard()" value="검색">
 					</div>	
 					<br>
-                  <% if(true){ %>
-                  <button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
+                  <% if(m.getJob_code()!=6){ %>
+                  		
+                  		<button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
                   <% } %>
                   
                   <div class="text-center d-flex justify-content-center">
@@ -152,6 +153,8 @@
 	<%@ include file = "common/footer.jsp" %>
 
     <script>
+    console.log('<%=m%>');
+    
     $(function(){
     	  $('#boardtable td').click(function(){
         	  var bno = $(this).parent().children().eq(0).text();
