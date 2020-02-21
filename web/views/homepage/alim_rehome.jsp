@@ -166,7 +166,7 @@ vertical-align: middle;}
                             <select name="alhm_time" id="bob" style="width: 70%;">
                                 <option value="도보">시간 선택</option>
                                 <option value="오전">오전(12:00)</option>
-                                <option value="오전">오후(15:00)</option>
+                                <option value="오후">오후(15:00)</option>
                             </select>
                         </td>
                     </tr>

@@ -36,7 +36,7 @@
   <link href="<%=request.getContextPath()%>/resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   
-  <title>꿈나라어린이집 # 인트라넷</title>
+  <title>팡팡어린이집 # 인트라넷</title>
   
 </head>
 
