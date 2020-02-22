@@ -46,6 +46,10 @@ public class FormSignSaveServlet extends HttpServlet {
 		
 		if(result > 0) {
 			new Gson().toJson(result, response.getWriter());
+		} else {
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "품의서를 삭제할 수 없습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
 		
