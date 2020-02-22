@@ -82,13 +82,18 @@ public class AlimListAllServlet extends HttpServlet {
 		
 		String page = "";
 		
-		if(list != null) {
-			page = "views/intranet/intranetAlimListAll.jsp";
-			request.setAttribute("list", list);
-			
-			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
-			request.setAttribute("pi", pi);
-		}
+		/*
+		 * if(list != null) { page = "views/intranet/intranetAlimListAll.jsp";
+		 * request.setAttribute("list", list);
+		 * 
+		 * PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage,
+		 * maxPage, startPage, endPage); request.setAttribute("pi", pi); } else {
+		 */
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("e", "ERROR");
+			request.setAttribute("msg", "알림 리스트를 가져올 수 없습니다.");
+					
+		
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
