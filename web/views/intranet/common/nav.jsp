@@ -459,7 +459,7 @@
        					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
        					$img1 = $('<img>').attr({
        											 "class":"rounded-circle",
-       											 "src" : "resources/intranet/image/" + image,
+       											 "src" : "/resources/intranet/image/" + image,
        											 "alt" : ""
        											});
        					$div2 = $('<div>').attr("class","status-indicator bg-success");
