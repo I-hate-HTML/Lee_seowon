@@ -1,4 +1,4 @@
-package semi.intranet.nav.controller;
+package semi.intranet.child.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,19 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import semi.intranet.child.model.service.ChildService;
+import semi.intranet.employee.model.service.EmployeeService;
 
 /**
- * Servlet implementation class intranetLogoutServlet
+ * Servlet implementation class ChildEditServlet
  */
-@WebServlet("/iLogout.in")
-public class intranetLogoutServlet extends HttpServlet {
+@WebServlet("/editstu.do")
+public class ChildEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public intranetLogoutServlet() {
+    public ChildEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +29,23 @@ public class intranetLogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인된 세션 종료
-		HttpSession session = request.getSession(false);
-		
-		if(session != null) {
-			System.out.println("로그아웃이 실행됩니다.");
-			session.invalidate();
+		int code = Integer.parseInt(request.getParameter("editcode"));
+		String state = request.getParameter("editstate");
+		String addr = request.getParameter("editaddr");
+		String graduate = request.getParameter("editgradu");
+		System.out.println(graduate);
+		if(graduate != null) {
+			System.out.println("재직 중 확인");
+			graduate ="1900";
+		}else {
+			System.out.println("퇴사 여부 확인됨");
+			
 		}
-	
-		response.sendRedirect("/semi/index.jsp");
+		
+		ChildService cs = new ChildService();
+		int result = cs.editChild(code,state,addr,graduate);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

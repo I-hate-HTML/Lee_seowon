@@ -1,4 +1,4 @@
-package semi.intranet.daily.controller;
+package semi.intranet.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.daily.model.service.DailyService;
-import semi.intranet.daily.model.vo.Daily;
+import semi.intranet.qna.service.IntranetQnaService;
 
 /**
- * Servlet implementation class ReadServletNotice
+ * Servlet implementation class IntranetQnaDeleteServlet
  */
-@WebServlet("/nRead.da")
-public class NoticeReadServlet extends HttpServlet {
+@WebServlet("/qdelete.qna")
+public class IntranetQnaDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeReadServlet() {
+    public IntranetQnaDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,27 +28,20 @@ public class NoticeReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 구별을 위한 카테고리 --> 공지사항 1
-		int category = 1;
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
+		System.out.println(qno);
 		
-		int dno = Integer.parseInt(request.getParameter("dno"));
+		IntranetQnaService iqs = new IntranetQnaService();
 		
-		DailyService ds = new DailyService();
+		int result = iqs.deleteQnaList(qno);
 		
-		Daily d = ds.selectOne(dno, category);
-		
-		String page = "";
-		
-		if(d != null) {
-			page = "views/intranet/intranetNoticeRead.jsp";
-			request.setAttribute("daily", d);
-		} else {
-			page = "views/intranet/common/intranetError.jsp";
-			request.setAttribute("msg", "공지사항 글을 읽어올 수 없습니다.");
+		if(result > 0) {
+			response.sendRedirect("list.qna");
+		}else {
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

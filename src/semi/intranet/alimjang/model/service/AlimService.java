@@ -175,44 +175,6 @@ public class AlimService {
 		
 		return 0;
 	}
-	
 
-	/**
-	 * 새로운 알림 갯수 확인용
-	 * @param emp
-	 * @return
-	 */
-	public int newAlimCount(int emp) {
-
-		Connection con = getConnection();
-		
-		int newCount = ad.newAlimCount(con, emp);
-		
-		close(con);
-		
-		return newCount;
-	}
-	
-	/**
-	 * 알림장 nav 알림 리스트 가져오기
-	 * @param emp
-	 * @return
-	 */
-	public ArrayList<Alim> navListAlim(int emp) {
-		
-		Connection con = getConnection();
-		
-		ArrayList<Alim> list = ad.navListAlim(con, emp);
-		
-		close(con);
-		
-		return list;
-	}
-
-	
-	
-
-	
-	
 	
 }

@@ -1,26 +1,25 @@
-package semi.intranet.counsel.controller;
+package semi.intranet.employee.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.counsel.model.service.CounselService;
+import semi.intranet.employee.model.service.EmployeeService;
 
 /**
- * Servlet implementation class CounselDeleteServlet
+ * Servlet implementation class EmployeeDeleteServlet
  */
-@WebServlet("/delete.counsel")
-public class CounselDeleteServlet extends HttpServlet {
+@WebServlet("/delEmp.em")
+public class EmployeeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CounselDeleteServlet() {
+    public EmployeeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +28,12 @@ public class CounselDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("cno"));
+		int delid = Integer.parseInt(request.getParameter("delid"));
 		
-		System.out.println(cno);
+		EmployeeService es= new EmployeeService();
+		int result = es.deleteEmployee(delid);
 		
-		CounselService cs = new CounselService();
-		
-		int result = cs.deleteCounsel(nno);
-		
-		if(result > 0) {
-			response.sendRedirect("selectList.counsel");
-		}else {
-			request.setAttribute("msg", "수정 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		response.getWriter().print(result);
 	}
 
 	/**

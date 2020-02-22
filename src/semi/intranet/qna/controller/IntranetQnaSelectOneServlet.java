@@ -1,4 +1,4 @@
-package semi.intranet.daily.controller;
+package semi.intranet.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.daily.model.service.DailyService;
-import semi.intranet.daily.model.vo.Daily;
+import semi.home.qna.model.vo.QnA;
+import semi.intranet.qna.service.IntranetQnaService;
 
 /**
- * Servlet implementation class ReadServletNotice
+ * Servlet implementation class IntranetQnaSelectOneServlet
  */
-@WebServlet("/nRead.da")
-public class NoticeReadServlet extends HttpServlet {
+@WebServlet("/selectOne.qna")
+public class IntranetQnaSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeReadServlet() {
+    public IntranetQnaSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +29,19 @@ public class NoticeReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 구별을 위한 카테고리 --> 공지사항 1
-		int category = 1;
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
+		IntranetQnaService iqs = new IntranetQnaService();
 		
-		int dno = Integer.parseInt(request.getParameter("dno"));
-		
-		DailyService ds = new DailyService();
-		
-		Daily d = ds.selectOne(dno, category);
+		QnA q = iqs.selectOne(qno);
 		
 		String page = "";
-		
-		if(d != null) {
-			page = "views/intranet/intranetNoticeRead.jsp";
-			request.setAttribute("daily", d);
-		} else {
-			page = "views/intranet/common/intranetError.jsp";
-			request.setAttribute("msg", "공지사항 글을 읽어올 수 없습니다.");
+		if(q != null) {
+			page = "views/notice/intranetAdviceDetail.jsp";
+			request.setAttribute("qna", q);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "상세보기 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

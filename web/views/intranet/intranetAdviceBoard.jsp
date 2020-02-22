@@ -1,18 +1,23 @@
+<%@page import="java.util.*,semi.home.qna.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav.jsp" %>
+<% 
+	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>꿈나라어린이집 # 인트라넷</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script> 
 </head>
 <body>
 <!-- Begin Page Content -->
         <div class="container-fluid">
 		<form id="updateForm" method="post">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">상담확인</h1>
+          <h1 class="h3 mb-4 text-gray-800">문의 확인</h1>
 		
           <div class="card shadow mb-4">
             <div class="card-header py-3"> 
@@ -32,25 +37,32 @@
                     
             <tr>
               <th><input type="checkbox" id="chkalltop" onclick="checkAll()"></th>
-              <th>번호</th>
+              <th>글번호</th>
               <th>반</th>
               <th>원아명</th>
               <th>제목</th>
-              <th>상담날짜</th>
-              <th>작성자</th>
-              <th>날짜</th>
+              <th>ID</th>
+              <th>학부모명</th>
+              <th>작성 날짜</th>
+              <th>문의확인</th>
             </tr>
+            <%
+            for(QnA q : list) {
+            %>
             <tr>
-              <!-- <td><input type ="checkbox" name="sangdham"> </td> -->
-              <td name = "num"></td>
-              <td name = "class"></td>
-              <td name = "studentName"></td>
-              <td name = "title"></td>
-              <td name = "meetDate"></td>
-              <td name = "writer"></td>
-              <td name = "date"></td>
+              <td><input type ="checkbox" name="sangdham"> </td>
+              <td name = "num"><%=q.getQno()%></td>
+              <td name = "class"><%=q.getQcclass()%>반</td>
+              <td name = "studentName"><%=q.getQcname()%></td>
+              <td name = "title"><%=q.getQtitle()%></td>
+              <td name = "parentId"><%=q.getQwriter()%></td>
+              <td name = "parentName"><%=q.getQusername()%></td>
+              <td name = "date"><%=q.getQdate()%></td>
+              <td name = "chk_status"><%=q.getChk_status()%></td>
             </tr>
-            
+            <% 
+            } 
+            %>
           </table>
 
           <div>
@@ -77,6 +89,20 @@
         </div>
         
    		<script>
+		$(function(){
+			
+			$("#viewTable td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var qno = $(this).parent().children().eq(0).text();
+				alert(qno);
+				location.href="<%=request.getContextPath()%>/selectOne.qna?qno=" + qno;
+			});
+		});
+		
 	   		function checkAll(){
 				if($("#chkalltop").is(':checked')){
 					$("input[name=sangdham]").prop("checked", true);
@@ -85,8 +111,8 @@
 				}
 			}
 	   		
-	   		function deleteNotice(){				
-				$("#updateForm").attr("action","<%=request.getContextPath() %>/nDelete.no");
+	   		function studentDelete(){				
+				$("#updateForm").attr("action","<%=request.getContextPath() %>/qdelete.qna");
 			}
    		</script>
         <!-- /.container-fluid -->

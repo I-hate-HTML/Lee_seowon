@@ -94,8 +94,9 @@ public class ModifySaveServlet extends HttpServlet {
 			
 			
 		} else {
-			request.setAttribute("msg", "게시글 작성 실패!");
-			request.getRequestDispatcher("").forward(request, response);;
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "글을 수정할 수 없습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
 			
 		}
 

@@ -47,10 +47,11 @@ public class EmployeeDao {
 			pstmt.setString(2, em.getEmpJob());
 			pstmt.setString(3, em.getEmpNo());
 			pstmt.setString(4, em.getEmpPhone());
-			pstmt.setString(5, em.getEmpAddr());
-			pstmt.setString(6, em.getHireDate());
-			pstmt.setString(7, em.getEmpClass());
-			pstmt.setString(8, em.getEmpimg());
+			pstmt.setString(5, em.getEmpEmail());
+			pstmt.setString(6, em.getEmpAddr());
+			pstmt.setString(7, em.getHireDate());
+			pstmt.setString(8, em.getEmpClass());
+			pstmt.setString(9, em.getEmpimg());
 			result = pstmt.executeUpdate();
 			
 			
@@ -104,17 +105,17 @@ public class EmployeeDao {
 			
 			while(rset.next()) {
 				Employee e = new Employee();
-
+				
 				e.setEmpCode(rset.getInt(1));
 				e.setEmpJob(rset.getString(3));
 				e.setEmpName(rset.getString(2));
 				e.setEmpPhone(rset.getString(5));
-				e.setHireDate(rset.getString(7));
-				e.setEmpClass(rset.getString(10));
-				e.setHobong(rset.getInt(11));
-				e.setEntYN(rset.getString(9).equals("Y")?1:2);
-				
+				e.setHireDate(rset.getString(8));
+				e.setEmpClass(rset.getString(11));
+				e.setHobong(rset.getInt(12));
+				e.setEntYN(rset.getString(10));
 				ae.add(e);
+				
 			}
 			
 		}catch(SQLException e) {
@@ -128,6 +129,69 @@ public class EmployeeDao {
 				
 	}
 
+	public int updateMember(Connection con, int code, String phone, String email, String addr, String enddate) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("editEmp");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, phone);
+			pstmt.setString(2, email);
+			pstmt.setString(3, addr);
+			pstmt.setString(4, enddate);
+			pstmt.setInt(5, code);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteEmployee(Connection con, int delid) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("delEmp");
+		
+		int result = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, delid);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  

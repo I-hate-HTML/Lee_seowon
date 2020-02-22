@@ -3,6 +3,7 @@ encoding//src/config/alimjang-query.properties=UTF-8
 encoding//src/config/board-query.properties=UTF-8
 encoding//src/config/calendar-query.properties=UTF-8
 encoding//src/config/intranetAlim-query.properties=UTF-8
+encoding//src/config/intranetChild.properties=UTF-8
 encoding//src/config/intranetCounsel-query.properties=UTF-8
 encoding//src/config/intranetDaily-query.properties=UTF-8
 encoding//src/config/intranetEmployee.properties=UTF-8

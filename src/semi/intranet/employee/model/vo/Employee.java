@@ -19,7 +19,7 @@ public class Employee implements Serializable{
 	private String empEmail;
 	private String empAddr;
 	private String hireDate; 
-	private int entYN;
+	private String entYN;
 	private String entDate;
 	private String empClass;
 	private int hobong;
@@ -63,7 +63,7 @@ public class Employee implements Serializable{
 
 
 	public Employee(int empCode, String empName, String empJob, String empNo, String empPhone, String empEmail,
-			String empAddr, String hireDate, int entYN, String entDate, String empClass, int hobong, String empimg) {
+			String empAddr, String hireDate, String entYN, String entDate, String empClass, int hobong, String empimg) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -100,7 +100,7 @@ public class Employee implements Serializable{
 
 
 
-	public int getEntYN() {
+	public String getEntYN() {
 		return entYN;
 	}
 
@@ -108,8 +108,8 @@ public class Employee implements Serializable{
 
 
 
-	public void setEntYN(int entYN) {
-		this.entYN = entYN;
+	public void setEntYN(String string) {
+		this.entYN = string;
 	}
 
 

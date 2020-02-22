@@ -83,6 +83,11 @@ public class AlimReadServlet extends HttpServlet {
 			request.setAttribute("a", a);
 			request.setAttribute("b", b);
 			
+		} else {
+				 
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "게시글을 가져올 수 없습니다.");
+
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

@@ -51,5 +51,27 @@ public class EmployeeService {
 				
 		return ae;
 	}
+	public int editEmployee(int code, String phone, String email, String addr, String enddate) {
+		con = getConnection();
+		int result = eDao.updateMember(con,code,phone,email,addr,enddate);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+	public int deleteEmployee(int delid) {
+		con = getConnection();
+		int result = eDao.deleteEmployee(con,delid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

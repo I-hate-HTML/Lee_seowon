@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import semi.intranet.alimjang.model.vo.Alim;
+import semi.intranet.nav.model.vo.NavAlim;
 import semi.intranet.nav.model.vo.NavEmployeeInfo;
 import semi.intranet.nav.model.vo.NavForm;
 
@@ -160,6 +162,95 @@ public class IntranetNavDao {
 		} finally {
 			close(rset);
 			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+	/**
+	 * 알림장 혹인 안한 알림 갯수 확인용
+	 * @param con
+	 * @param emp
+	 * @return
+	 */
+	public int newAlimCount(Connection con, int emp) {
+		
+		int newCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("newAlimCount");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, emp);
+			pstmt.setInt(2, emp);
+			pstmt.setInt(3, emp);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				newCount = rset.getInt("SUM(TOTAL)");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return newCount;
+	}
+
+
+	/**
+	 * 확인 안한 알림 리스트
+	 * @param con
+	 * @param emp
+	 * @return
+	 */
+	public ArrayList<NavAlim> navListAlim(Connection con, int emp) {
+		
+		ArrayList<NavAlim> list = new ArrayList<NavAlim>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("navListAlim");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			pstmt.setInt(2, emp);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				NavAlim b = new NavAlim();
+				
+				b.setAno(rset.getInt("ANO")); // 글번호
+				b.setCategory(rset.getString("ACATEGORY"));
+				b.setAcategory(rset.getInt("ACODE"));
+				b.setCclass(rset.getInt("CCLASS"));
+				b.setCcode(rset.getInt("CCODE"));
+				b.setAchild(rset.getString("CNAME"));
+				b.setAwriter(rset.getString("WRITER"));
+				b.setAdate(rset.getDate("CDATE"));
+				b.setAck(rset.getString("CK"));
+				
+				list.add(b);
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
 		}
 		
 		return list;

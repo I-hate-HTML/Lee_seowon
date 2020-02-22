@@ -46,6 +46,9 @@ public class DailyModifyViewServlet extends HttpServlet {
 		if(d != null) {
 			page = "views/intranet/intranetDailyModify.jsp";
 			request.setAttribute("daily", d);
+		} else {
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "교육일지를 수정할 수 없습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

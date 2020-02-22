@@ -1,26 +1,28 @@
-package semi.intranet.daily.controller;
+package semi.intranet.qna.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.daily.model.service.DailyService;
-import semi.intranet.daily.model.vo.Daily;
+import semi.home.qna.model.vo.QnA;
+import semi.intranet.qna.service.IntranetQnaService;
 
 /**
- * Servlet implementation class ReadServletNotice
+ * Servlet implementation class IntranetQnaListServlet
  */
-@WebServlet("/nRead.da")
-public class NoticeReadServlet extends HttpServlet {
+@WebServlet("/list.qna")
+public class IntranetQnaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeReadServlet() {
+    public IntranetQnaListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +31,25 @@ public class NoticeReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 구별을 위한 카테고리 --> 공지사항 1
-		int category = 1;
+		//공지사항 글 여러 개를 받아
+		//목록 형태로(ArrayList형태로)
+		//데이터를 전달하는 서블릿
 		
+		ArrayList<QnA> list = new ArrayList<QnA>();
 		
-		int dno = Integer.parseInt(request.getParameter("dno"));
+		IntranetQnaService qs = new IntranetQnaService();
 		
-		DailyService ds = new DailyService();
+		list = qs.selectList();
 		
-		Daily d = ds.selectOne(dno, category);
+		String page ="";
 		
-		String page = "";
-		
-		if(d != null) {
-			page = "views/intranet/intranetNoticeRead.jsp";
-			request.setAttribute("daily", d);
-		} else {
-			page = "views/intranet/common/intranetError.jsp";
-			request.setAttribute("msg", "공지사항 글을 읽어올 수 없습니다.");
+		if(list != null) {
+			page = "views/intranet/intranetAdviceBoard.jsp";
+			request.setAttribute("list", list);
+			System.out.println(list);
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "목록 불러오기 에러!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

@@ -446,6 +446,15 @@ public class AlimDao {
 	}
 
 
+	/**
+	 * 알림장들 읽기 확인 취소 버튼
+	 * @param con
+	 * @param empNo
+	 * @param read
+	 * @param ano
+	 * @param category
+	 * @return
+	 */
 	public int readAlimCheck(Connection con, int empNo, String read, int ano, int category) {
 		
 		int result = 0;
@@ -482,102 +491,5 @@ public class AlimDao {
 	}
 
 
-	/**
-	 * 확인 안한 알림 갯수 확인용
-	 * @param con
-	 * @param emp
-	 * @return
-	 */
-	public int newAlimCount(Connection con, int emp) {
-		
-		int newCount = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("newAlimCount");
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, emp);
-			pstmt.setInt(2, emp);
-			pstmt.setInt(3, emp);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				newCount = rset.getInt("SUM(TOTAL)");
-			}
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return newCount;
-	}
-
-
-	/**
-	 * 확인 안한 알림 리스트
-	 * @param con
-	 * @param emp
-	 * @return
-	 */
-	public ArrayList<Alim> navListAlim(Connection con, int emp) {
-		
-		ArrayList<Alim> list = new ArrayList<Alim>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("navListAlim");
-		
-		try {
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, 3);
-			pstmt.setInt(2, emp);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				
-				Alim b = new Alim();
-				
-				b.setAno(rset.getInt("ANO")); // 글번호
-				b.setCategory(rset.getString("ACATEGORY"));
-				b.setAcategory(rset.getInt("ACODE"));
-				b.setCclass(rset.getInt("CCLASS"));
-				b.setCcode(rset.getInt("CCODE"));
-				b.setAchild(rset.getString("CNAME"));
-				b.setAwriter(rset.getString("WRITER"));
-				b.setAdate(rset.getDate("CDATE"));
-				b.setAck(rset.getString("CK"));
-				
-				list.add(b);
-			}
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			
-		}
-		
-		return list;
-	}
-
-
-	
-
-
-	
-
-
-
-	
 
 }

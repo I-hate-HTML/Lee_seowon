@@ -95,7 +95,12 @@ public class AlimListClassServlet extends HttpServlet {
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);
 			request.setAttribute("pi", pi);
-		}
+		} else {
+	 
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "알림장 리스트를 가져올 수 없습니다.");
+		
+	    }
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
