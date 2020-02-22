@@ -46,6 +46,9 @@ public class NoticeModifyViewServlet extends HttpServlet {
 		if(d != null) {
 			page = "views/intranet/intranetNoticeModify.jsp";
 			request.setAttribute("daily", d);
+		} else {
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "공지사항 글을 수정할 수 없습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

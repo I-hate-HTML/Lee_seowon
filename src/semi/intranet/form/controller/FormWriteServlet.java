@@ -100,6 +100,11 @@ public class FormWriteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			response.sendRedirect("fList.fo");
+		} else {
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "품의서를 등록할 수 없습니다");
+			
+			request.getRequestDispatcher(page).forward(request, response);
 		}
 
 		

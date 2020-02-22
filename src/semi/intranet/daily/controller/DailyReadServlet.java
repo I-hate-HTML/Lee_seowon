@@ -48,6 +48,9 @@ public class DailyReadServlet extends HttpServlet {
 		if(d != null) {
 			page = "views/intranet/intranetDailyRead.jsp";
 			request.setAttribute("daily", d);
+		} else {
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "교육일지를 읽어올 수 없습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

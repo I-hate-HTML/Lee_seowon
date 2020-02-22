@@ -65,6 +65,9 @@ public class FormReadServlet extends HttpServlet {
 		} else if (f != null && empNo != f.getfWriterId()) {// 결재자 일 경우
 			page = "views/intranet/intranetFormReadSign.jsp";
 			request.setAttribute("form", f);
+		} else {
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "품의서 게시글을 가져올 수 없습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

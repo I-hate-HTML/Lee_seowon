@@ -95,11 +95,11 @@ public class InsertServlet extends HttpServlet {
 			
 			
 		} else {
-			request.setAttribute("msg", "게시글 작성 실패!");
-			request.getRequestDispatcher("").forward(request, response);;
+			request.setAttribute("msg", "해당 글을 등록 할 수 없습니다.");
+			request.getRequestDispatcher("\"views/intranet/common/intranetError.jsp\"").forward(request, response);;
 			
 		}
-
+		
 	}
 
 	/**
