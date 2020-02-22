@@ -278,17 +278,29 @@ $(".signCall").click(function(){
 // 결재완료버튼
 $(".signSave").click(function(){
 	
+	var code = $('input[name="signCode"]');
+	var re = $('input[name="return"]');
+	var se = $('select[name="formLineP"]');
+	var len="";
+	
+	for(var i = 0; i < code.length; i++ ) {
+		if(code[i].value == <%= m.getUserId()%>){
+			len = i;
+		}
+		
+	}
 	
 	var aa="";
 	var bb="";
 	var fno = '<%= form.getFno() %>';
 	var result = "";
 	
-	if($('input[name="signCode"]').val() == <%= m.getUserId()%>){
+	
+	if(code[len].value == <%= m.getUserId()%>){
 		
-		aa =$('input[name="signCode"]').parent().parent().parent().parent().children().eq(3).children().val();
+		aa = se[len].value;
+	    bb = re[len].value;
 
-	    bb = $('input[name="return"]').val();
 	}
 	
 	
@@ -324,7 +336,9 @@ $(".signSave").click(function(){
 			}
 			
 			if(aa != null && bb != null) {
-				$('input[name="signCode"]').parent().parent().parent().parent().children().eq(3).attr("disable",true);
+				
+
+				$('select[name="formLineP"]').attr("disable",true);
 				$('input[name="return"]').attr("disable",true);
 			}
 			

@@ -36,6 +36,8 @@ public class InsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		DailyService ds = new DailyService();
+		
 		// 파일 처리용 서블릿
 		// 전송할 최대 크기
 		int maxSize = 1024 * 1024 * 10;
@@ -71,17 +73,21 @@ public class InsertServlet extends HttpServlet {
 		// 기본 전송값 처리하기
 		int category = Integer.parseInt(mrequest.getParameter("category"));
 		String title = mrequest.getParameter("subject");
-		String writer = mrequest.getParameter("writer");
 		int writerCode = Integer.parseInt(mrequest.getParameter("writerId"));
+		// 선생님 이름 가져오기
+		String writer = ds.dailyWriterName(writerCode);
+		// 선생님 담당반 가져오기
+		int writerClass = ds.dailyClass(writerCode);
 		String content = mrequest.getParameter("content");
 		
 		// 전달받은 파일을 먼저 저장하고, 그 파일의 이름을 가져오는 메소드를 실행한다.
 		String bfile = mrequest.getFilesystemName("file");
 		
 		
-		DailyService ds = new DailyService();
+		Daily b = new Daily(writerClass, title, content, writer, category, bfile, writerCode);
 		
-		Daily b = new Daily(title, content, writer, category, bfile, writerCode);
+		
+		System.out.println(b.toString());
 		
 		
 		int result = ds.dailyInsert(b);		

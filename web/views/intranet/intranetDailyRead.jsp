@@ -21,8 +21,8 @@
         		<h6 class="m-0 font-weight-bold text-primary">교육일지</h6>
             </td>
             <td align="right">
-              <button class = "btn btn-primary btn-sm" onclick="location.href='dModifyView.da?dno=<%= d.getBno() %>'">수정</button>
-              <button class = "btn btn-primary btn-sm" onclick="location.href='<%= request.getContextPath() %>/dDelete.da?dno=<%= d.getBno() %>'">삭제</button>                              
+              <button class = "btn btn-primary btn-sm readBtn" onclick="location.href='dModifyView.da?dno=<%= d.getBno() %>'">수정</button>
+              <button class = "btn btn-primary btn-sm readBtn" onclick="location.href='<%= request.getContextPath() %>/dDelete.da?dno=<%= d.getBno() %>'">삭제</button>                              
             </td>
           </tr>
         </table>
@@ -36,9 +36,15 @@
            </tr>
            <tr>
              <th style="text-align: center;">반</th>
-             <td><%= d.getBclass() %></td>
+             <td>
+             	<input type = "hidden" name = "dclassNum" value="<%= d.getBclass() %>"/>
+                <%= d.getBclassName() %>
+             </td>
              <th style="text-align: center;">작성자</th>
-             <td><%= d.getBwriter() %></td>
+             <td>
+             	<input type = "hidden" id="dwriterCode" name = "dwriterCode" value="<%= d.getBwriterCode() %>"/>
+             	<%= d.getBwriter() %>
+             </td>
              <th style="text-align: center;">날짜</th>
              <td><%= d.getBdate() %></td>
            </tr>
@@ -64,8 +70,7 @@
          </table>
     	<a class="btn btn-secondary btn-sm pull-right" href="<%= request.getContextPath() %>/dList.da">목록</a>
      	
-     	<%-- 댓글 --%>
-     	<%-- <%@ include file = "../intranet/common/comment.jsp" %> --%>
+
 	  </div>
      </div>
      </div>
@@ -73,6 +78,12 @@
 
 </div>
 <!-- End of Main Content -->
-
+<script>
+	$(function(){
+		 if(<%= m.getUserId()%> != $('#dwriterCode').val()){
+			 $('.readBtn').css('display','none');
+		 }
+	 });
+</script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>

@@ -11,7 +11,8 @@ public class Daily implements Serializable{
 	private static final long serialVersionUID = -7526365370075270878L;
 
 	private int bno;		// 글번호
-	private int bclass;		// 반
+	private int bclass;		// 반번호
+	private String bclassName; // 반이름
 	private String btitle;	// 글제목
 	private String bcontent; // 글내용
 	private Date bdate;		// 작성 날짜
@@ -31,6 +32,7 @@ public class Daily implements Serializable{
 	 * 글 조회용
 	 * @param bno
 	 * @param bclass
+	 * @param bclassName
 	 * @param btitle
 	 * @param bcontent
 	 * @param bdate
@@ -40,12 +42,14 @@ public class Daily implements Serializable{
 	 * @param bwriterCode
 	 * @param status
 	 * @param bcount
+	 * @param rownum
 	 */
-	public Daily(int bno, int bclass, String btitle, String bcontent, Date bdate, String bwriter, int bcategory,
-			String bfile, int bwriterCode, String status, int bcount, int rownum) {
+	public Daily(int bno, int bclass, String bclassName, String btitle, String bcontent, Date bdate, String bwriter,
+			int bcategory, String bfile, int bwriterCode, String status, int bcount, int rownum) {
 		super();
 		this.bno = bno;
 		this.bclass = bclass;
+		this.bclassName = bclassName;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bdate = bdate;
@@ -58,10 +62,10 @@ public class Daily implements Serializable{
 		this.rownum = rownum;
 	}
 
-
 	
+
 	/**
-	 * 글 등록용
+	 * 글 수정용
 	 * @param btitle
 	 * @param bcontent
 	 * @param bwriter
@@ -71,6 +75,29 @@ public class Daily implements Serializable{
 	 */
 	public Daily(String btitle, String bcontent, String bwriter, int bcategory, String bfile, int bwriterCode) {
 		super();
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bwriter = bwriter;
+		this.bcategory = bcategory;
+		this.bfile = bfile;
+		this.bwriterCode = bwriterCode;
+	}
+
+
+	/**
+	 * 글 등록용
+	 * @param bclass
+	 * @param btitle
+	 * @param bcontent
+	 * @param bwriter
+	 * @param bcategory
+	 * @param bfile
+	 * @param bwriterCode
+	 */
+	public Daily(int bclass, String btitle, String bcontent, String bwriter, int bcategory, String bfile,
+			int bwriterCode) {
+		super();
+		this.bclass = bclass;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bwriter = bwriter;
@@ -200,21 +227,26 @@ public class Daily implements Serializable{
 		this.rownum = rownum;
 	}
 
+	
 
-	@Override
-	public String toString() {
-		return "Daily [bno=" + bno + ", bclass=" + bclass + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bdate="
-				+ bdate + ", bwriter=" + bwriter + ", bcategory=" + bcategory + ", bfile=" + bfile + ", bwriterCode="
-				+ bwriterCode + ", status=" + status + ", bcount=" + bcount + ", rownum=" + rownum + "]";
+	public String getBclassName() {
+		return bclassName;
 	}
 
 
-	
+	public void setBclassName(String bclassName) {
+		this.bclassName = bclassName;
+	}
 
 
-	
-	
+	@Override
+	public String toString() {
+		return "Daily [bno=" + bno + ", bclass=" + bclass + ", bclassName=" + bclassName + ", btitle=" + btitle
+				+ ", bcontent=" + bcontent + ", bdate=" + bdate + ", bwriter=" + bwriter + ", bcategory=" + bcategory
+				+ ", bfile=" + bfile + ", bwriterCode=" + bwriterCode + ", status=" + status + ", bcount=" + bcount
+				+ ", rownum=" + rownum + "]";
+	}
 
-	
+
 
 }

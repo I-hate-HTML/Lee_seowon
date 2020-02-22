@@ -30,8 +30,8 @@
             <table id = "viewTable" class="table table-striped" style="font-size:.8rem; text-align: center;">
               <tr>
                 <th width = "10%">번호</th>
-                <th width = "5%">반</th>
-                <th width = "35%">제목</th>
+                <th width = "10%">반</th>
+                <th width = "30%">제목</th>
                 <th width = "15%">작성자</th>
                 <th width = "20%">작성일</th>
                 <th width = "15%">조회수</th>
@@ -42,9 +42,15 @@
                 	<input type = "hidden" name = "dno" value="<%= d.getBno() %>"/>
                 	<%= d.getRownum() %>
                 </td>
-                <td><%= d.getBclass() %></td>
+                <td>
+                	<input type = "hidden" name = "dclassNum" value="<%= d.getBclass() %>"/>
+                	<%= d.getBclassName() %>
+                </td>
                 <td><%= d.getBtitle() %></td>
-                <td><%= d.getBwriter() %></td>
+                <td>
+                	<input type = "hidden" name = "dwriterCode" value="<%= d.getBwriterCode() %>"/>
+                	<%= d.getBwriter() %>
+                </td>
                 <td><%= d.getBdate() %></td>     
                 <td><%= d.getBcount() %></td>           
               </tr>
@@ -119,6 +125,8 @@
       location.href = "<%= request.getContextPath() %>/dRead.da?dno=" + dno;
     });
   });
+  
+  
 </script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>
