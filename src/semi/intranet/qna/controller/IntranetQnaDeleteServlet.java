@@ -1,26 +1,25 @@
-package semi.intranet.counsel.controller;
+package semi.intranet.qna.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.counsel.model.service.CounselService;
+import semi.intranet.qna.service.IntranetQnaService;
 
 /**
- * Servlet implementation class CounselDeleteServlet
+ * Servlet implementation class IntranetQnaDeleteServlet
  */
-@WebServlet("/delete.counsel")
-public class CounselDeleteServlet extends HttpServlet {
+@WebServlet("/qdelete.qna")
+public class IntranetQnaDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CounselDeleteServlet() {
+    public IntranetQnaDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +28,18 @@ public class CounselDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("cno"));
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
-		System.out.println(cno);
+		System.out.println(qno);
 		
-		CounselService cs = new CounselService();
+		IntranetQnaService iqs = new IntranetQnaService();
 		
-		int result = cs.deleteCounsel(nno);
+		int result = iqs.deleteQnaList(qno);
 		
 		if(result > 0) {
-			response.sendRedirect("selectList.counsel");
+			response.sendRedirect("list.qna");
 		}else {
-			request.setAttribute("msg", "수정 실패!");
+			request.setAttribute("msg", "삭제 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}

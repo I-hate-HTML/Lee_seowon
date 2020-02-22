@@ -125,7 +125,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
             <a class="collapse-item" href="/semi/aListClass.al">알림장 확인</a>            
-            <a class="collapse-item" href="<%=request.getContextPath()%>/views/intranet/intranetAdviceBoard.jsp">상담확인</a>            
+            <a class="collapse-item" href="/semi/list.qna">문의 확인</a>            
           </div>
         </div>
       </li>
