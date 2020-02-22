@@ -21,7 +21,7 @@
 		            <td>
 		              <h6 class="m-0 font-weight-bold text-primary">귀가 의뢰서</h6>        		
 		            </td>
-		            <td align="right">
+		            <td align="right" id="btnTable">
 		            	<button class = "btn btn-primary btn-sm readBtn" value='Y'>읽음 확인</button>
 		              	<button class = "btn btn-primary btn-sm readBtn" value='N'>읽음 취소</button>                                                        
 		            </td>
@@ -42,7 +42,7 @@
                         <th style="text-align: center;">작성자</th>
                         <td style="text-align: center;"><%= a.getAlhm_writer() %></td>
                         <th style="text-align: center;">선생님확인</th>
-                        <td style="text-align: center;">
+                        <td style="text-align: center;" id="chk">
                         	<input type="hidden" class = "tCK" name="ck" value="<%= b.getAck() %>">
                         	<%= b.getAck() %>
                         </td>
@@ -121,7 +121,8 @@
       <!-- End of Main Content -->
       
  <script>
- $('.readBtn').click(function(){
+ 
+ $('.readBtn').on("click", function(){
 	console.log("버튼 클릭")
 	
 	if(<%= b.getCclass()%> == $('#classNum').val() ){
@@ -143,7 +144,7 @@
 		},
 		success:function(data){
 			$('.tCK').val(result);
-			$('.tCK').parent().text(result);
+			$('#chk').text(result);
 		}, error:function(data){
 			alert("권한이 없습니다.");
 		}

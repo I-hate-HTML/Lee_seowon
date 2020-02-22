@@ -42,7 +42,7 @@
                         <th style="text-align: center;">작성자</th>
                         <td style="text-align: center;"><%= a.getAl_writer() %></td>
                         <th style="text-align: center;">선생님확인</th>
-                        <td style="text-align: center;" >
+                        <td style="text-align: center;" id="chk">
                         	<input type="hidden" class="tCK" name="ck" value="<%= b.getAck() %>">
                         	<%= b.getAck() %>
                         </td>
@@ -245,7 +245,7 @@ $(function(){
 			},
 			success:function(data){
 				$('.tCK').val(result);
-				$('.tCK').parent().text(result);
+				$('#chk').text(result);
 			}
 		});
 	
