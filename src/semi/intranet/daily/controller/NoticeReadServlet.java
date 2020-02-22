@@ -44,6 +44,9 @@ public class NoticeReadServlet extends HttpServlet {
 		if(d != null) {
 			page = "views/intranet/intranetNoticeRead.jsp";
 			request.setAttribute("daily", d);
+		} else {
+			page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "공지사항 글을 읽어올 수 없습니다.");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

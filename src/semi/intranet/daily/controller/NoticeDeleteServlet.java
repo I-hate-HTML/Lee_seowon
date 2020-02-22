@@ -40,6 +40,9 @@ public class NoticeDeleteServlet extends HttpServlet {
 		
 		if(result > 0) {
 			response.sendRedirect("nList.da");
+		} else {
+			request.setAttribute("msg", "글을 삭제할 수 없습니다.");
+			request.getRequestDispatcher("views/intranet/common/intranetError.jsp").forward(request, response);
 		}
 	}
 

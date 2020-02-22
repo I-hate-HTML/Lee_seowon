@@ -46,9 +46,13 @@ public class FormSignListServlet extends HttpServlet {
 		
 		ArrayList<SignList> list = new FormService().getSignList(empNo);
 		
-		
-		new Gson().toJson(list, response.getWriter());
-	
+		if(list != null) {
+			new Gson().toJson(list, response.getWriter());
+		} else {
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "품의서를 삭제할 수 없습니다.");
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 	}
 
 	/**

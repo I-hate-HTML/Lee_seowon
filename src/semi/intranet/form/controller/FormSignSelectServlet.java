@@ -50,7 +50,15 @@ public class FormSignSelectServlet extends HttpServlet {
 		
 		hmap.put("signList", listArr);
 		
-		new Gson().toJson(hmap, response.getWriter());
+		if(listArr != null) {
+			
+			new Gson().toJson(hmap, response.getWriter());
+		} else {
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "품의서를 삭제할 수 없습니다.");
+			
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 		
 	
 	
