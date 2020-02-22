@@ -219,7 +219,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-child fa-2x"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter" id="count"></span>
+                <span class="badge badge-danger badge-counter formCount" ></span>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="childAlim" aria-labelledby="alertsDropdown">
@@ -329,7 +329,7 @@
        	var empno = '<%= m.getUserId()%>';
 
        	$.ajax({
-       		url:"/semi/aNav.al",
+       		url:"/semi/iNavAlimjang.in",
        		type:"post",
        		data:{"empno" : empno},
        		success:function(data){

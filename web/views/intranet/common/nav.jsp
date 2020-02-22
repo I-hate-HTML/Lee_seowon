@@ -331,7 +331,7 @@
        	var empno = '<%= m.getUserId()%>';
 
        	$.ajax({
-       		url:"/semi/aNav.al",
+       		url:"/semi/iNavAlimjang.in",
        		type:"post",
        		data:{"empno" : empno},
        		success:function(data){
