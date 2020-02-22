@@ -94,10 +94,11 @@
 			$("#viewTable td").mouseenter(function(){
 				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
 			}).mouseout(function(){
-				$(this).parent().css({"background":"pink"});
+				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
-				var nno = $(this).parent().children().eq(0).text();
+				var qno = $(this).parent().children().eq(0).text();
+				alert(qno);
 				location.href="<%=request.getContextPath()%>/selectOne.qna?qno=" + qno;
 			});
 		});
