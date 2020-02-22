@@ -1,4 +1,4 @@
-package semi.intranet.nav.model.service;
+package semi.intranet.nav.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -64,6 +64,8 @@ public class IntranetNavDao {
 				info.setClassNum(rset.getInt("EMP_CLASS"));
 				info.setImage(rset.getString("EMP_IMG"));
 				info.setPosition(rset.getString("JOB"));
+				info.setClassName(rset.getString("CNAME"));
+				
 			}
 			
 			

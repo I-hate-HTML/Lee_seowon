@@ -164,4 +164,37 @@ public class DailyService {
 		return result;
 	}
 
+	/**
+	 * 선생님 담당반 찾기용
+	 * @param writerCode
+	 * @return
+	 */
+	public int dailyClass(int writerCode) {
+		
+		Connection con = getConnection();
+		
+		int result = dd.dailyClass(con, writerCode);
+		
+		close(con);
+		
+		
+		return result;
+	}
+
+	/**
+	 * 선생님 이름 가져오기
+	 * @param writerCode
+	 * @return
+	 */
+	public String dailyWriterName(int writerCode) {
+		
+		Connection con = getConnection();
+		
+		String name = dd.dailyWriterName(con, writerCode);
+		
+		close(con);
+		
+		return name;
+	}
+
 }

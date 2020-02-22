@@ -386,7 +386,7 @@
        			});
        			
        		}, error:function(data){
-       			alret("권한이 없습니다.");
+       			alert("알림장 알림 오류");
        		}
        	});
        });
@@ -398,21 +398,22 @@
           		url:"/semi/iNavEmployee.in",
           		type:"post",
           		success:function(data){
-          			
+          		console.log(data);	
           			var classNum = data.info.classNum;
           			var position = data.info.position;
           			var image = data.info.image;
+          			var cName = data.info.className;
 
           			if(classNum == 0) {
           				$('#classNum').text(position);
           			} else {
-          				$('#classNum').text(classNum + "반");
+          				$('#classNum').text(cName + "반").val(classNum);
           			}
           			
           			$('#tImage').attr("src",'resources/intranet/image/'+ image);
           			
           		}, error:function(data){
-          			
+          			alert("선생님 정보 오류");
           		}
           	});
        	
@@ -473,7 +474,7 @@
      			  });
      			  
      		  }, error:function(data){
-     			  console.log("에러");
+     			 alert("품의 알림 오류");
      		  }
      	   });
         });
