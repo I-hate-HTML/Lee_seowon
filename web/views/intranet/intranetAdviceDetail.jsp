@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav.jsp" %>
 <% 
-	ArrayList<QnA> qna = (ArrayList<QnA>)request.getAttribute("qna");
+	QnA q = (QnA)request.getAttribute("qna");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@
                     </tr>
                     <tr>
                       <th style="text-align: center;">내용</th>
-                      <td colspan = "5" name = "content"><%=q.getQcontent()%></td>
+                      <td colspan = "5" name = "content"><span><%=q.getQcontent().charAt(0)%></span><%=q.getQcontent().substring(1) %></td>
                     </tr>
                     <%
                     	}
