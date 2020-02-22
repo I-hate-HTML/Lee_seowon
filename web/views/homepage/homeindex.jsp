@@ -89,8 +89,9 @@
 
             <!-- Portfolio Item 1 -->
             <div class="col-md-6 col-lg-4" >
-  
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" alt="" style="margin-bottom: 30px;">
+  					<a href="/semi/boardlsit.do">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a1.png" alt="" style="margin-bottom: 30px; cursor: pointer;">
+  					</a>
                     <br>
                     <b>공지사항</b>
                     <p style="margin: 20px; font-size: 13px;">팡팡 가족이<br> 알아야할 공지사항</p>
@@ -98,8 +99,9 @@
     
             <!-- Portfolio Item 2 -->
             <div class="col-md-6 col-lg-4">
-          
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a2.png" alt="" style="margin-bottom: 30px;">
+          			<a href="<%=request.getContextPath()%>/views/homepage/food_calender.jsp">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a2.png" alt="" style="margin-bottom: 30px;cursor: pointer;">
+          			</a>
                     <br>
                     <b>식단표</b>
                     <p style="margin: 20px; font-size: 13px;">영양과 맛을 <br>고루 갖춘 영양식단</p>
@@ -107,8 +109,9 @@
     
             <!-- Portfolio Item 3 -->
             <div class="col-md-6 col-lg-4">
-      
-                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a3.png" alt="" style="margin-bottom: 30px;">
+      				<a href="/semi/selectOne.bo?bno=1">
+                    <img class="img-fluid" src="<%=request.getContextPath()%>/resources/homepage/images/a3.png" alt="" style="margin-bottom: 30px;cursor: pointer;">
+      				</a>
                     <br>
                     <b>버스시간표</b>
                     <p style="margin: 20px; font-size: 13px;">팡팡버스를 <br>타야하는 시간</p>
@@ -187,22 +190,27 @@
 					var $div = $('<div class="col-md-6 col-lg-4">');
 					var $a = $('<a target="_blank" href="" style="margin-bottom: 30px;">');
 					$a.attr('href','<%=request.getContextPath()%>/gboardselectone.go?gno='+value.gno);
-					var $img = $('<img src="" alt="Fjords" width="100%" height="300" style="margin-bottom: 30px;>');
+					var $img = $('<img src="" width="100%" height="300" style="margin-bottom: 30px;">');
 					$img.attr('src','<%=request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/'+value.gfile);
 					var $p = $('<p style="margin: 20px; font-size: 13px;">').text(value.gtitle);
-					
+					console.log($img);
 					$a.append($img);
 					
 					$div.append($a);
 					$div.append($p);
 					
 					$('#imgdiv').append($div);
+					
+					
 				});
 				
 			},error:function(){
 				
 			}
 		});
+	
+		
+		
 	});
 
 </script>

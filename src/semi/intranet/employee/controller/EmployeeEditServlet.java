@@ -1,26 +1,25 @@
-package semi.intranet.counsel.controller;
+package semi.intranet.employee.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.intranet.counsel.model.service.CounselService;
+import semi.intranet.employee.model.service.EmployeeService;
 
 /**
- * Servlet implementation class CounselDeleteServlet
+ * Servlet implementation class EmployeeEditServlet
  */
-@WebServlet("/delete.counsel")
-public class CounselDeleteServlet extends HttpServlet {
+@WebServlet("/editEmp.em")
+public class EmployeeEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CounselDeleteServlet() {
+    public EmployeeEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +28,24 @@ public class CounselDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("cno"));
-		
-		System.out.println(cno);
-		
-		CounselService cs = new CounselService();
-		
-		int result = cs.deleteCounsel(nno);
-		
-		if(result > 0) {
-			response.sendRedirect("selectList.counsel");
+		int code = Integer.parseInt(request.getParameter("editcode"));
+		String phone = request.getParameter("editphone");
+		String email = request.getParameter("editemail");
+		String addr = request.getParameter("editaddr");
+		String enddate = request.getParameter("editentdate");
+		System.out.println(enddate);
+		if(enddate != null) {
+			System.out.println("재직 중 확인");
+			enddate ="1998";
 		}else {
-			request.setAttribute("msg", "수정 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			System.out.println("퇴사 여부 확인됨");
+			
 		}
+		
+		EmployeeService es = new EmployeeService();
+		int result = es.editEmployee(code,phone,email,addr,enddate);
+		
+		response.getWriter().print(result);
 	}
 
 	/**
