@@ -135,12 +135,9 @@ public class IntranetNavDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, emp);
+			
+			pstmt.setString(1, "%"+emp+"%");
 			pstmt.setInt(2, emp);
-			pstmt.setString(3, "%"+emp+"%");
-			pstmt.setInt(4, emp);
-			pstmt.setInt(5, emp);
-			pstmt.setInt(6, emp);
 			
 			rset = pstmt.executeQuery();
 			
@@ -256,6 +253,37 @@ public class IntranetNavDao {
 		}
 		
 		return list;
+	}
+
+
+	/**
+	 * 품의 내 알림 삭제용
+	 * @param con
+	 * @param emp
+	 * @return
+	 */
+	public int formAlimDel(Connection con, int emp) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("formAlimDel");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, emp);
+			
+			result = pstmt.executeUpdate();
+						
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

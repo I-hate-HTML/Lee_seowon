@@ -24,6 +24,7 @@
 
 <div class="card shadow mb-4">
   <div class="card-header py-3">
+  	
   	<table style="min-width:0px" style="min-width:0px" table-layout="fixed;" word-break="break-all;" cellspacing="0">
   	<tr>
   	<td>
@@ -32,10 +33,10 @@
 	    <a class="nav-link" href="/semi/fMyList.fo">내 품의</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link active" href="/semi/fList.fo">진행중</a>
+	    <a class="nav-link " href="/semi/fList.fo">진행중</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" href="/semi/fFinList.fo">진행완료</a>
+	    <a class="nav-link active" href="/semi/fFinList.fo">진행완료</a>
 	  </li>
 	</ul>
 	</td>

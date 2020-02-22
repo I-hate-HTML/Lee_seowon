@@ -131,7 +131,7 @@ public class FormDao {
 
 
 	/**
-	 * 품의서 게시판 목록 읽기 + 페이징 처리 --> 사용
+	 * 품의서 게시판 진행중인 품의서 목록 읽기 + 페이징 처리 --> 사용
 	 * @param con
 	 * @param empNum 
 	 * @param limitContent 
@@ -192,18 +192,147 @@ public class FormDao {
 	
 	
 	/**
-	 * 총 페이지 가져오기 --> 사용
+	 * 품의서 게시판 내 품의서 목록 읽기 + 페이징 처리 --> 사용
 	 * @param con
+	 * @param empNo
+	 * @param currentPage
+	 * @param limitContent
 	 * @return
 	 */
-	public int getListCount(Connection con) {
+	public ArrayList<Form> myListForm(Connection con, int empNum, int currentPage, int limitContent) {
+		
+		ArrayList<Form> list = new ArrayList<Form>();
+		
+		String emp = Integer.toString(empNum);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myListForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			int startContent = (currentPage -1) * limitContent +1;
+			int endContent = startContent + limitContent -1;
+			
+			pstmt.setInt(1, empNum);
+			pstmt.setInt(2, endContent);
+			pstmt.setInt(3, startContent);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Form f = new Form();
+				
+				f.setFno(rset.getInt("DRAFT_NO"));
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setFstate(rset.getString("DRAFT_PROCESS"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFwriter(rset.getString("TNAME"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				
+				list.add(f);
+			}
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 품의서 게시판 완료된 품의서 목록 읽기 + 페이징 처리 --> 사용
+	 * @param con
+	 * @param empNo
+	 * @param currentPage
+	 * @param limitContent
+	 * @return
+	 */
+	public ArrayList<Form> finListForm(Connection con, int empNum, int currentPage, int limitContent) {
+		
+		ArrayList<Form> list = new ArrayList<Form>();
+		
+		String emp = Integer.toString(empNum);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("finListForm");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			int startContent = (currentPage -1) * limitContent +1;
+			int endContent = startContent + limitContent -1;
+			
+			pstmt.setInt(1, empNum);
+			pstmt.setString(2, '%'+emp+'%');
+			pstmt.setInt(3, endContent);
+			pstmt.setInt(4, startContent);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Form f = new Form();
+				
+				f.setFno(rset.getInt("DRAFT_NO"));
+				f.setFcategory(rset.getInt("DRAFT_TYPE"));
+				f.setFstate(rset.getString("DRAFT_PROCESS"));
+				f.setFtitle(rset.getString("DRAFT_TITLE"));
+				f.setFwriter(rset.getString("TNAME"));
+				f.setfWriterId(rset.getInt("DRAFT_EMP"));
+				f.setFdate(rset.getDate("DRAFT_DATE"));
+				
+				list.add(f);
+			}
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
+	
+	
+	/**
+	 * 총 페이지 가져오기 --> 사용
+	 * @param con
+	 * @param chk 
+	 * @param query 
+	 * @return
+	 */
+	public int getListCount(Connection con, int chk) {
 		
 		int listCount = 0;
 		
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("listCount");
+		String sql = null;
+		
+		if(chk == 1) {
+			sql = prop.getProperty("listCount");
+		} else if (chk == 2) {
+			sql = prop.getProperty("FinListCount");
+		} 
 		
 		try {
 			
@@ -219,6 +348,43 @@ public class FormDao {
 		} finally {
 			close(rset);
 			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	
+	/**
+	 * 내가 쓴 품의 총 게시글 확인 --> 사용
+	 * @param con
+	 * @param empNo
+	 * @return
+	 */
+	public int getMyListCount(Connection con, int empNo) {
+int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("MyListCount");
+		
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return listCount;
@@ -440,6 +606,17 @@ public class FormDao {
 		
 		return list;
 	}
+
+
+
+	
+
+
+	
+
+
+
+	
 
 
 

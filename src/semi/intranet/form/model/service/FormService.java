@@ -60,7 +60,7 @@ public class FormService {
 	}
 
 	/**
-	 * 품의서 게시판 목록 불러오기 + 페이징 처리 --> 사용
+	 * 품의서 게시판 진행중인 품의글 목록 불러오기 + 페이징 처리 --> 사용
 	 * @param empNum 
 	 * @param limitContent 
 	 * @param currentPage 
@@ -101,16 +101,122 @@ public class FormService {
 		return list;
 	}
 	
+	/**
+	 * 품의서 게시판 내 품의글 목록 불러오기 + 페이징 처리 --> 사용
+	 * @param empNo
+	 * @param currentPage
+	 * @param limitContent
+	 * @return
+	 */
+	public ArrayList<Form> myListForm(int empNo, int currentPage, int limitContent) {
+		
+		Connection con = getConnection();
+
+		ArrayList<Form> list = fd.myListForm(con, empNo, currentPage, limitContent);
+
+		close(con);
+		
+		Form f = new Form();
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getFcategory() == 1) {
+				f = list.get(i);
+				f.setCategory("지출결의서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 2) {
+				f = list.get(i);
+				f.setCategory("휴가신청서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 3) {
+				f = list.get(i);
+				f.setCategory("교구신청서");
+				list.set(i, f);
+			} else {
+				f = list.get(i);
+				f.setCategory("기타");
+				list.set(i, f);
+			}
+			
+			
+		}
+
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 품의서 게시판 완료된 품의글 목록 불러오기 + 페이징 처리 --> 사용
+	 * @param empNo
+	 * @param currentPage
+	 * @param limitContent
+	 * @return
+	 */
+	public ArrayList<Form> FinListForm(int empNo, int currentPage, int limitContent) {
+		
+		Connection con = getConnection();
+
+		ArrayList<Form> list = fd.finListForm(con, empNo, currentPage, limitContent);
+
+		close(con);
+		
+		Form f = new Form();
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getFcategory() == 1) {
+				f = list.get(i);
+				f.setCategory("지출결의서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 2) {
+				f = list.get(i);
+				f.setCategory("휴가신청서");
+				list.set(i, f);
+			} else if(list.get(i).getFcategory() == 3) {
+				f = list.get(i);
+				f.setCategory("교구신청서");
+				list.set(i, f);
+			} else {
+				f = list.get(i);
+				f.setCategory("기타");
+				list.set(i, f);
+			}
+			
+			
+		}
+
+		return list;
+	}
+
+	
 	
 	/**
 	 * 총 게시글 확인 --> 사용
+	 * @param query 
+	 * @param empNo 
 	 * @return
 	 */
-	public int getListCount() {
+	public int getListCount(int chk) {
 
 		Connection con = getConnection();
 
-		int listCount = fd.getListCount(con);
+		int listCount = fd.getListCount(con, chk);
+
+		close(con);
+
+		return listCount;
+	}
+	
+	
+	/**
+	 * 내가 쓴 품의 총 게시글 확인 --> 사용
+	 * @param empNo
+	 * @return
+	 */
+	public int getMyListCount(int empNo) {
+		
+		Connection con = getConnection();
+
+		int listCount = fd.getMyListCount(con, empNo);
 
 		close(con);
 
@@ -292,6 +398,14 @@ public class FormService {
 		
 		return SignList;
 	}
+
+
+	
+
+
+	
+
+	
 
 	
 

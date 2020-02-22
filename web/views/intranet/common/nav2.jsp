@@ -250,39 +250,9 @@
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">결재 상태</h6>
-                <%-- <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/a.png" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold">
-                    <div class="text-truncate">교육일지 확인바랍니다.</div>
-                    <div class="small text-gray-500">한원장, 2020-01-20, 결재신청</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">휴가 신청 품의서입니다.</div>
-                    <div class="small text-gray-500">차은우, 2020-01-06, 반려</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">2019년 12월 지출결의서입니다.</div>
-                    <div class="small text-gray-500">차은우, 2019-12-30, 결재완료</div>
-                  </div>
-                </a> --%>
                 
-
-                <a class="dropdown-item text-center small text-gray-500" href="intranetForm.jsp">더보기</a>
+                <a class="dropdown-item text-center small text-gray-500 delForm">내 품의 알림 삭제</a>
+                <a class="dropdown-item text-center small text-gray-500" href="/semi/fList.fo">더보기</a>
               </div>
             </li>
 
@@ -397,8 +367,7 @@
           	$.ajax({
           		url:"/semi/iNavEmployee.in",
           		type:"post",
-          		success:function(data){
-          		console.log(data);	
+          		success:function(data){	
           			var classNum = data.info.classNum;
           			var position = data.info.position;
           			var image = data.info.image;
@@ -427,8 +396,6 @@
      		  type:"post",
      		  data:{"empno":empno},
      		  success:function(data){
-     			  console.log(data);
-     			  
      			  // 결재 알림 카운트
      			  $(".formCount").text(data.fCount);
      			  
@@ -449,7 +416,7 @@
        					// 알림 사진 나오기
        					
        					$a1 = $('<a>').attr({"class":"dropdown-item d-flex align-items-center",
-       										 'href' :'/semi/fList.fo'
+       										 'href' :'/semi/fRead.fo?fno=' + fno
        										});
        					
        					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
@@ -479,6 +446,27 @@
      	   });
         });
      
+     	// 내 품의 알림 삭제
+     	$('.delForm').click(function(){
+     		var empno = '<%= m.getUserId()%>';
+     		
+     		$.ajax({
+     			url:'/semi/iNavFormDel.in',
+     			type:'post',
+     			success:function(data){
+     				var result = data.result;
+     				
+     			
+     			// 결재 알림 카운트
+       			  $(".formCount").text(result);
+     				
+     				
+     			}, error:function(data){
+     				
+     			}
+     		});
+     		
+     	});
 
         </script>
         

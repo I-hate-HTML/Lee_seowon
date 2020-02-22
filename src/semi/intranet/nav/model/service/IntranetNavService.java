@@ -101,5 +101,27 @@ public class IntranetNavService {
 		return list;
 	}
 
+
+	/**
+	 * 품의서 내 알림 삭제용
+	 * @param emp
+	 * @return
+	 */
+	public int formAlimDel(int emp) {
+		
+		
+		Connection con = getConnection();
+		
+		int result = ind.formAlimDel(con, emp);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
 	
 }
