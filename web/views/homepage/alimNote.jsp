@@ -139,7 +139,7 @@ vertical-align: middle;}
             <a href="alim_medi.jsp" class="alimtab3">투약 통지서</a>
         </div>
         </div>
-        <form action="<%= request.getContextPath() %>/anInsert.al" method="post">
+        <form action="<%= request.getContextPath() %>/anInsert.al" method="post" id="alimnoteform">
             <table class="table table-bordered">
                     <tr>
                         <td colspan="4"><textarea name="al_content" id="alim_text" cols="30" rows="10" placeholder="가정에서 이렇게 지냄" style="width: 100%; resize: none;"></textarea></td>                    
@@ -168,7 +168,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">식사여부</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="al_meal" id="bob" style="width: 70%;">
+                            <select name="al_meal" id="bob" style="width: 70%;" >
                                 <option value="선택안함">선택안함</option>
                                 <option value="약간">약간</option>
                                 <option value="보통">보통</option>
@@ -201,16 +201,13 @@ vertical-align: middle;}
                     </tr>
                     
                     <tr>
-                        <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray; text-align: center;">
-                            
-                            
-                            <input onclick="return chkradio" class="btn" type="submit" value="확인" style="background: none; border: none; color: white; text-align: center;">
-                            
+                        <td colspan="4" style="border: 0.1rem solid gray; text-align: center; padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" onclick="return check()" type="submit" value="확인" style="background-color: #002c5f; color: white;">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><input type="reset" value="취소" style="background: none; border: none; color: white;"></div>
+                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray;  padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" type="reset" value="취소" style="background-color: #868e96; color: white;">
                         </td>
                     </tr>
             </table>
@@ -233,15 +230,26 @@ vertical-align: middle;}
           $('#alim_date').text(date);
       })
       
-      function chkradio() {
+    	   
+      function check() {
 		var al_feel = $('#al_feel');
-   		if($(':radio[name="al_feel"]:checked').length < 1){
-   			alert("하라라");
-   			return true;
+   		if($(':radio[name="al_feel"]:checked').length < 1 ||
+   		   $(':radio[name="al_health"]:checked').length < 1 ||
+   		   $(':radio[name="al_temp"]:checked').length < 1 ||
+   		   $('#bob').val()=="선택안함" ||
+   		   $('#sleep').val()=="선택안함" ||
+   		   $('#dong').val()=="선택안함"   		
+   		){
+   			alert("기본 입력값을 입력해 주세요!");
+   			return false;
    		}
-   		return false;
+   		
+   		return true;
 	}
-      
+       
+      $('#al_meal').change(function(){
+    	  console.log($(this).val());
+      })
       
       
   </script>
