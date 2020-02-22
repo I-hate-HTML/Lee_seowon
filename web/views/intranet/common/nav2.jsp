@@ -245,14 +245,13 @@
               <a class="nav-link dropdown-toggle" href="https://blackrockdigital.github.io/startbootstrap-sb-admin-2/blank.html#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-paperclip fa-2x"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">3</span>
+                <span class="badge badge-danger badge-counter formCount"></span>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">
-                  	결재 상태
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">결재 상태</h6>
+                
+                <%-- <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
                   <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/a.png" alt="">
                     <div class="status-indicator bg-success"></div>
@@ -281,9 +280,9 @@
                     <div class="text-truncate">2019년 12월 지출결의서입니다.</div>
                     <div class="small text-gray-500">차은우, 2019-12-30, 결재완료</div>
                   </div>
-                </a>
+                </a> --%>
                 
-                </a>
+                
                 <a class="dropdown-item text-center small text-gray-500" href="intranetForm.jsp">더보기</a>
               </div>
             </li>
@@ -406,9 +405,9 @@
           			var image = data.info.image;
 
           			if(classNum == 0) {
-          				$('#classNum').text(position);
+          				$('#classNum').text(position).val(position);
           			} else {
-          				$('#classNum').text(classNum + "반");
+          				$('#classNum').text(classNum + "반").val(classNum);
           			}
           			
           			$('#tImage').attr("src",'resources/intranet/image/'+ image);
@@ -419,8 +418,66 @@
           	});
        	
        });
-      
-     
+     // 품의 알림
+        $(function(){
+     	   var empno = '<%= m.getUserId()%>';
+     	   
+     	   $.ajax({
+     		  url:"/semi/iNavForm.in",
+     		  type:"post",
+     		  data:{"empno":empno},
+     		  success:function(data){
+     			  console.log(data);
+     			  
+     			  // 결재 알림 카운트
+     			  $(".formCount").text(data.fCount);
+     			  
+     			  // 결재 알림 리스트 목록
+     			  
+     			  $.each(data, function(index, value){
+       				
+       				for(var i in index) {
+       					 
+       					var fno = data.fList[i].fno;
+       					var name = data.fList[i].name;
+       					var fdate = data.fList[i].date;
+       					var process = data.fList[i].process;
+       					var title = data.fList[i].title;
+       					var image = data.fList[i].img;
+       					
+       					
+       					// 알림 사진 나오기
+       					
+       					$a1 = $('<a>').attr({"class":"dropdown-item d-flex align-items-center",
+       										 'href' :'/semi/fList.fo'
+       										});
+       					
+       					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
+       					$img1 = $('<img>').attr({
+       											 "class":"rounded-circle",
+       											 "src" : "resources/intranet/image/" + image,
+       											 "alt" : ""
+       											});
+       					$div2 = $('<div>').attr("class","status-indicator bg-success");
+       					
+       					
+       					// 알림 리스트 가져오기
+       					$div3 = $('<div>').attr("class","font-weight-bold");
+       					$div4 = $('<div>').attr("class","text-truncate").text(title);
+       					$div5 = $('<div>').attr("class","small text-gray-500").text(name + "\t" + fdate + "\t" + process);
+       					
+       					
+       					$a1.append($div1.append($img1).append($div2));
+       					$a1.append($div3.append($div4).append($div5));
+     			 		$('#formAilm').append($a1);
+       				}
+     			  });
+     			  
+     		  }, error:function(data){
+     			  console.log("에러");
+     		  }
+     	   });
+        });
 
         </script>
         

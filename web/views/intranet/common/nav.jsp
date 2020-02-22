@@ -422,7 +422,7 @@
        	
        });
         
-     // 품의 알림
+      // 품의 알림
         $(function(){
      	   var empno = '<%= m.getUserId()%>';
      	   
@@ -444,7 +444,7 @@
        					 
        					var fno = data.fList[i].fno;
        					var name = data.fList[i].name;
-       					var date = data.fList[i].data;
+       					var fdate = data.fList[i].date;
        					var process = data.fList[i].process;
        					var title = data.fList[i].title;
        					var image = data.fList[i].img;
@@ -459,7 +459,7 @@
        					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
        					$img1 = $('<img>').attr({
        											 "class":"rounded-circle",
-       											 "src" : "/resources/intranet/image/" + image,
+       											 "src" : "resources/intranet/image/" + image,
        											 "alt" : ""
        											});
        					$div2 = $('<div>').attr("class","status-indicator bg-success");
@@ -468,24 +468,19 @@
        					// 알림 리스트 가져오기
        					$div3 = $('<div>').attr("class","font-weight-bold");
        					$div4 = $('<div>').attr("class","text-truncate").text(title);
-       					$div5 = $('<div>').attr("class","small text-gray-500").text(name + "\t" + data + "\t" + process);
+       					$div5 = $('<div>').attr("class","small text-gray-500").text(name + "\t" + fdate + "\t" + process);
        					
        					
-       					$('#formAilm').append($a1.append($div1.append($img1).append($div2)));
-       					$('#formAilm').append($div3.append($div4).append($div5));
+       					$a1.append($div1.append($img1).append($div2));
+       					$a1.append($div3.append($div4).append($div5));
+     			 		$('#formAilm').append($a1);
        				}
      			  });
      			  
      		  }, error:function(data){
      			  console.log("에러");
      		  }
-     		   
-     		   
-     		   
      	   });
-     	   
-     	   
-     	   
         });
 
 
