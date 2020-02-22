@@ -42,7 +42,7 @@ public class HomeMemberDeleteServlet extends HttpServlet {
 		try {
 			hms.homedeleteMember(userId);			
 			System.out.println("회원 탈퇴 완료!!");
-			response.sendRedirect("views/homepage/homeindex.jsp");
+			response.sendRedirect("index.jsp");
 			
 			session.invalidate();
 		} catch(MemberException e) {
