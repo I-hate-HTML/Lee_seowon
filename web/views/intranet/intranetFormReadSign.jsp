@@ -95,12 +95,22 @@ $(function(){
 	var signMsg = '<%= form.getFreturnmsg() %>'
 	
 	
+	var noArr = signNo.split(',');
+	var location = 0;
+	
+	for(var i = 0; i < noArr.length-1; i++) {
+		if(emp == noArr[i]){
+			location = i;
+		}
+	}
+	
 	$.ajax({
 		url:"/semi/fSignSelect.fo",
 		type:"post",
 		data:{"sign" : signNo,
 			  "yn" : signYn,
-			  "msg" : signMsg
+			  "msg" : signMsg,
+			  "len" : location
 		}, 
 		success:function(data){
 			console.log(data);

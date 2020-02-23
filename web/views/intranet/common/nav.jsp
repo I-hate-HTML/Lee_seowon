@@ -134,7 +134,7 @@
 
       <!-- Nav Item - 품의관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/fList.fo">
+        <a class="nav-link" href="/semi/fMyList.fo">
           <i class="fa fa-file-alt fa-2x"></i>
           <span>품의관리</span></a>
       </li>
@@ -253,7 +253,7 @@
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">결재 상태</h6>
                 
-                <a class="dropdown-item text-center small text-gray-500" href="/semi/fList.fo">내 품의 알림 삭제</a>
+                <a class="dropdown-item text-center small text-gray-500">내 품의 알림 삭제</a>
                 <a class="dropdown-item text-center small text-gray-500" href="/semi/fList.fo">더보기</a>
               </div>
             </li>
