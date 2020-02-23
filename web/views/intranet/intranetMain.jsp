@@ -44,7 +44,7 @@
 								<tr>
 									<th>글번호</th>
 									<th>구분</th>
-									<th>아이명</th>
+									<th>아이코드</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>날짜</th>
@@ -234,19 +234,21 @@
 	});
 	</script>
 	<script>
-   		$('#userTableBtn').click(function(){
+	$(document).ready(function(){
    			$.ajax({
-   				url : "/semi/",
+   				url : "/semi/callpum.cl",
    				type : "get",
    				success:function(data){
+   					console.log(data);
    					$.each(data,function(index,value){
+   						
    						var $tr = $('<tr>');
    						var $pumno = $('<td>').text(index);
-   						var $pumtype = $('<td>').text(value.userNo);
-   						var $pumnow = $('<td>').text(value.phone);
-   						var $pumtitle = $('<td>').text(value.userName);
-   						var $pumuser = $('<td>').text(value.gender);
-   						var $pumdate = $('<td>').text(value.phone);
+   						var $pumtype = $('<td>').text(value.type);
+   						var $pumnow = $('<td>').text(value.now);
+   						var $pumtitle = $('<td>').text(value.title);
+   						var $pumuser = $('<td>').text(value.user);
+   						var $pumdate = $('<td>').text(value.date);
    						
    						
    						
@@ -267,19 +269,20 @@
    </script>
 	
    <script>
-   		$('#userTableBtn').click(function(){
+   $(document).ready(function(){
    			$.ajax({
-   				url : "/semi/",
-   				type : "get",
+   				url : '/semi/callalim.cl',
+   				type : 'get',
    				success:function(data){
    					$.each(data,function(index,value){
+   						console.log(value);
    						var $tr = $('<tr>');
    						var $alimno = $('<td>').text(index);
-   						var $alimtype = $('<td>').text(value.userNo);
-   						var $childname = $('<td>').text(value.phone);
-   						var $title = $('<td>').text(value.userName);
-   						var $writer = $('<td>').text(value.gender);
-   						var $date = $('<td>').text(value.phone);
+   						var $alimtype = $('<td>').text(value.alimtype);
+   						var $childname = $('<td>').text(value.childname);
+   						var $title = $('<td>').text(value.title);
+   						var $writer = $('<td>').text(value.writer);
+   						var $date = $('<td>').text(value.date);
    						
    						
    						

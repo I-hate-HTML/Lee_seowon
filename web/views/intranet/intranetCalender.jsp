@@ -198,7 +198,9 @@
 		</div>
 	</div>
 
-
+	<script type="text/javascript">
+		var username = <%= m.getUserName()%>;
+	</script>
 
 	<script src="../../resources/js/fullcal/vendor/js/bootstrap.min.js"></script>
 	<script src="../../resources/js/fullcal/vendor/js/moment.min.js"></script>

@@ -1,6 +1,6 @@
 <%@page import="semi.intranet.daily.model.vo.Daily"%>
 <%@page import="semi.intranet.daily.model.vo.PageInfo"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav.jsp" %>

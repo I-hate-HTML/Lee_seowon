@@ -44,7 +44,7 @@ var newEvent = function (start, end, eventType) {
             end: editEnd.val(),
             description: editDesc.val(),
             type: editType.val(),
-            username: '교사',
+            username: username,
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             allDay: false
