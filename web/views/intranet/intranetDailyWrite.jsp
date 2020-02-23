@@ -29,7 +29,7 @@
                       	  </td>
                           <th style="text-align:center">작성자</th>
                           <td style="text-align:center">
-                         	<input type = "text" style="width:100%" name = "writer" value="<%=m.getUserName() %>" disabled>
+                         	<input type = "text" style="width:100%" name = "writerName" value="<%= m.getUserName() %>" disabled>
                       		<input type = "hidden" name = "writerId" value="<%= m.getUserId()%>">
                           </td>
                       </tr>
@@ -64,6 +64,7 @@
 
       </div>
       <!-- End of Main Content -->
+
       
 <%@ include file = "common/footer.jsp" %>
 </body>

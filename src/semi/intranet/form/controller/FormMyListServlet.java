@@ -19,14 +19,14 @@ import semi.intranet.form.model.vo.SignList;
 /**
  * Servlet implementation class FormListServlet
  */
-@WebServlet("/fList.fo")
-public class FormListServlet extends HttpServlet {
+@WebServlet("/fMyList.fo")
+public class FormMyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FormListServlet() {
+    public FormMyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,8 +59,7 @@ public class FormListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		int chk = 1;
-		listCount = new FormService().getListCount(chk);
+		listCount = new FormService().getMyListCount(empNo);
 		
 		maxPage = (int)((double)listCount / limitContent + 0.9);
 		startPage = ((int)((double) currentPage / limitPage + 0.9) -1) * limitPage + 1;
@@ -72,12 +71,12 @@ public class FormListServlet extends HttpServlet {
 		}
 		
 		// 게시판 글목록 리스트
-		flist = new FormService().listForm(empNo, currentPage, limitContent);
+		flist = new FormService().myListForm(empNo, currentPage, limitContent);
 		
 		String page = "";
 		
 		if(flist != null) {
-			page = "views/intranet/intranetFormList.jsp";
+			page = "views/intranet/intranetFormMyList.jsp";
 			request.setAttribute("list", flist);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage);

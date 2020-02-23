@@ -174,20 +174,6 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr>
-                            <th>이메일 수신여부 <span>*</span></th>
-                            <td>
-                                <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" name="mailyn" id="mailynY" value="Y" class="radio01" checked=""> 수신</label>
-                                <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:10px;" name="mailyn" id="mailynN" value="N" class="radio01"> 수신하지 않음</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>SMS서비스 수신여부 <span>*</span></th>
-                            <td>
-                                <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:0px;" name="smsyn" id="smsynY" value="Y" class="radio01" checked=""> 수신</label>
-                                <label><input type="radio" style="width:20px; height:20px; margin-top:6px; margin-left:10px;" name="smsyn" id="smsynN" value="N" class="radio01"> 수신하지 않음</label>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 <br><br>
@@ -234,11 +220,21 @@
                     <br>
                     <input type="submit" value="저장  " class="btn " style="margin-left: 35%; background: #002c5f; color: white;" onclick="">
                     <input type="reset" value="취소  " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return ">
-                    <input type="button" value="탈퇴 " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="location='${pageContext.request.contextPath}/homedelete.hm'">
+                    <input type="button" value="탈퇴 " class="btn " style="margin-left: 10px; background: #002c5f; color: white;" onclick="return deletemember()">
 
                 </form>
                	<script>
 		
+               function deletemember(){
+				if($('#userPwd').val() == ""){
+				alert("비밀번호를 입력해주세요!");
+				return false;
+			}
+			
+			location.href ='${pageContext.request.contextPath}/homedelete.hm'
+		}
+               	
+               	
 		function sign(){
 			$('#edit_form').submit();
 		}

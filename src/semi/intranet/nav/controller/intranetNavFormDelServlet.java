@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
+import semi.home.jsp.model.vo.Member;
+import semi.intranet.nav.model.service.IntranetNavService;
+
 /**
- * Servlet implementation class intranetLogoutServlet
+ * Servlet implementation class intranetNavFormDelServlet
  */
-@WebServlet("/iLogout.in")
-public class intranetLogoutServlet extends HttpServlet {
+@WebServlet("/iNavFormDel.in")
+public class intranetNavFormDelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public intranetLogoutServlet() {
+    public intranetNavFormDelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +32,31 @@ public class intranetLogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 로그인된 세션 종료
-		HttpSession session = request.getSession(false);
 		
-		if(session != null) {
-			System.out.println("로그아웃이 실행됩니다.");
-			session.invalidate();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		
+		int emp = Integer.parseInt(m.getUserId());
+		
+		int result = new IntranetNavService().formAlimDel(emp);
+		
+		if(result > 0) {
+			new Gson().toJson(result, response.getWriter());
+		} else {
+			String page = "views/intranet/common/intranetError.jsp";
+			request.setAttribute("msg", "알림을 삭제할 수 없습니다.");
+			
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-	
-		response.sendRedirect("/semi/index.jsp");
+		
+		
+		
+		
+		
+		
 	}
 
 	/**

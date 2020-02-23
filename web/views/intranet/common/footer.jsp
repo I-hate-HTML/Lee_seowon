@@ -5,7 +5,7 @@
 <footer class="sticky-footer bg-white">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
-      <span>Copyright © 꿈나라어린이집 2020</span>
+      <span>Copyright © 팡팡어린이집 2020</span>
     </div>
   </div>
 </footer>

@@ -53,12 +53,13 @@ public class DailyDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, b.getBtitle());
-			pstmt.setString(2, b.getBwriter());
-			pstmt.setInt(3, b.getBcategory());
-			pstmt.setString(4, b.getBfile());
-			pstmt.setInt(5, b.getBwriterCode());
-			pstmt.setString(6, b.getBcontent());
+			pstmt.setInt(1, b.getBclass());
+			pstmt.setString(2, b.getBtitle());
+			pstmt.setString(3, b.getBwriter());
+			pstmt.setInt(4, b.getBcategory());
+			pstmt.setString(5, b.getBfile());
+			pstmt.setInt(6, b.getBwriterCode());
+			pstmt.setString(7, b.getBcontent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -151,6 +152,7 @@ public class DailyDao {
 				d.setBcontent(rset.getString("DAILY_CONTENT"));
 				d.setBcount(rset.getInt("DAILY_COUNT"));
 				d.setStatus(rset.getString("IS_DELETE"));
+				d.setBclassName(rset.getString("CNAME"));
 								
 				list.add(d);
 			}
@@ -206,6 +208,7 @@ public class DailyDao {
 				d.setBcontent(rset.getString("DAILY_CONTENT"));
 				d.setBcount(rset.getInt("DAILY_COUNT"));
 				d.setStatus(rset.getString("IS_DELETE"));	
+				d.setBclassName(rset.getString("CNAME"));
 				
 			}
 			
@@ -377,24 +380,78 @@ public class DailyDao {
 		return result;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 글쓰기용 선생님 담당반 찾기
+	 * @param con
+	 * @param writerCode
+	 * @return
+	 */
+	public int dailyClass(Connection con, int writerCode) {
+		
+		int result = 0;
+			
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getClass");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, writerCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("EMP_CLASS");
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 선생님 이름 가져오기
+	 * @param con
+	 * @param writerCode
+	 * @return
+	 */
+	public String dailyWriterName(Connection con, int writerCode) {
+		
+		String name = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getName");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, writerCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				name = rset.getString("EMP_NAME");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return name;
+	}
+
 	
 }

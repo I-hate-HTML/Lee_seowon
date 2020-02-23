@@ -116,6 +116,7 @@
       location.href = "<%= request.getContextPath() %>/nRead.da?dno=" + dno;
     });
   });
+
 </script>
 
 <%@ include file = "../intranet/common/footer.jsp" %>

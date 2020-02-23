@@ -1,4 +1,4 @@
-package semi.intranet.alimjang.controller;
+package semi.intranet.nav.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,19 +16,20 @@ import com.google.gson.Gson;
 
 import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
-import semi.intranet.alimjang.model.vo.Alim;
+import semi.intranet.nav.model.service.IntranetNavService;
+import semi.intranet.nav.model.vo.NavAlim;
 
 /**
  * Servlet implementation class AlimNavServlet
  */
-@WebServlet("/aNav.al")
-public class AlimNavServlet extends HttpServlet {
+@WebServlet("/iNavAlimjang.in")
+public class intranetNavAlimjangServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlimNavServlet() {
+    public intranetNavAlimjangServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,15 +47,15 @@ public class AlimNavServlet extends HttpServlet {
 		
 		int emp = Integer.parseInt(m.getUserId());
 
-		ArrayList<Alim> navList = new ArrayList<Alim>();
+		ArrayList<NavAlim> navList = new ArrayList<NavAlim>();
 		
 		
 		// 확인 안한 알림 갯수 가져오기
-		int newAlimCount = new AlimService().newAlimCount(emp); 
+		int newAlimCount = new IntranetNavService().newAlimCount(emp); 
 		
 		
 		// 확인 안한 알림 리스트 가져오기
-		navList = new AlimService().navListAlim(emp);
+		navList = new IntranetNavService().navListAlim(emp);
 		
 		Map<String,Object> hmap = new HashMap<String, Object>();
 		
