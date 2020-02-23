@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, semi.intranet.employee.model.vo.*"%>
-<% Employee emp = (Employee)request.getAttribute("employee"); %>
+<% Employee e = (Employee)session.getAttribute("employee"); %>
 
 <%@ include file = "../intranet/common/nav.jsp" %>
 <!DOCTYPE html>
@@ -46,10 +46,10 @@
                           </div>                          
                         </td>
                       </tr>
-                      <% for(Employee e : emp) {%>
+                      
                       <tr>
                         <th>성명</th>
-                        <td><input type="text" id="name" name="name" class="width1" value="<%=e.getEmpName() %>>" disabled></td>
+                        <td><input type="text" id="name" name="name" class="width1" value="<%=e.getEmpName() %>" disabled></td>
                       </tr>
                       <tr>
                         <th>직원코드</th>
@@ -57,7 +57,7 @@
                           <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="<%=e.getEmpCode() %>" disabled>
                         </td>
                       </tr>
-                      <%} %>
+                      
                       <!-- <tr>
                         <th>비밀번호 <span>*</span></th>
                         <td><input type="password" id="userpw" name="userpw" value="" class="width1">

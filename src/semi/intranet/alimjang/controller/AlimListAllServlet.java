@@ -88,8 +88,8 @@ public class AlimListAllServlet extends HttpServlet {
 		
 			  request.setAttribute("list", list);
 			  
-			  PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage,
-			  maxPage, startPage, endPage); request.setAttribute("pi", pi); 
+			  PageInfo pi = new PageInfo(currentPage, listCount, limitContent, limitPage, maxPage, startPage, endPage); 
+			  request.setAttribute("pi", pi); 
 		  
 		  } else {
 		 

@@ -173,7 +173,7 @@ public class AlimService {
 		
 		close(con);
 		
-		return 0;
+		return result;
 	}
 
 	
