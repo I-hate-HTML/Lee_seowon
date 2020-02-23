@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, semi.intranet.employee.model.vo.*"%>
-<% Employee e = (Employee)session.getAttribute("employee"); %>
+<% Employee e = (Employee)session.getAttribute("employee"); 
+  String[] imgArr = (String[])request.getAttribute("empImg");
+%>
 
 <%@ include file = "../intranet/common/nav.jsp" %>
 <!DOCTYPE html>
@@ -33,8 +35,12 @@
                         <td>
                           <div class="tdcell">
                             <div class="profile_photo">
-                              <img id="imgThumb" src="../../resource/image/woo.png" width="100" height="100">
+                            	<%if(imgArr[0]!="1") {%>
+                            	<%for(int i = 0; i<imgArr.length;i++){%>
+                              <img alt="" id="imgThumb" src="<%= request.getContextPath()%>/resources/intranet/image/<%=imgArr[i] %>" width="100" height="100">
                               <span class="mask"></span>
+                              <%} %>
+                              <%} %>
                             </div>
                             <div class="btn_area_btm">
                               <span class="btn_file">
@@ -90,7 +96,7 @@
                           </select>
                         </td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <th>연락처</th>
                         <td>
                           <select name="tel1" id="tel1" class="select1 ko" style="width:120px;">
@@ -117,7 +123,7 @@
                           - <input type="text" id="tel3" name="tel3" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
       
                           </td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <th>핸드폰번호 <span>*</span></th>
                         <td>
