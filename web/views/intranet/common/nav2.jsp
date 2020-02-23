@@ -132,7 +132,7 @@
 
       <!-- Nav Item - 품의관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/fList.fo">
+        <a class="nav-link" href="/semi/fMyList.fo">
           <i class="fa fa-file-alt fa-2x"></i>
           <span>품의관리</span></a>
       </li>
