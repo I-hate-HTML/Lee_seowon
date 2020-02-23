@@ -39,15 +39,13 @@ public class MainAlimcall extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8"); 
 		
 		MainService ms = new MainService();
-		List<MainAlim> ae = new ArrayList<>();
-		
+		ArrayList<MainAlim> ae = new ArrayList<>();
+		System.out.println("시발2");
 		
 		ae = ms.alimlist();
-		
-		System.out.println(ae);
+
 		String json = new Gson().toJson(ae);
-		System.out.println(json);
-		
+		System.out.println("시발3");
 		response.getWriter().print(json);
 	}
 

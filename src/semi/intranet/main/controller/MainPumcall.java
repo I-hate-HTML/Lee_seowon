@@ -37,7 +37,7 @@ public class MainPumcall extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8"); 
 		
 		MainService ms = new MainService();
-		List<MainDraft> ae = new ArrayList<>();
+		ArrayList<MainDraft> ae = new ArrayList<>();
 		
 		
 		ae = ms.draftlist();
