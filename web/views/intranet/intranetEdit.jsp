@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, semi.intranet.employee.model.vo.*"%>
+<% Employee emp = (Employee)request.getAttribute("employee"); %>
+
 <%@ include file = "../intranet/common/nav.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">                  
-                <form action="write_ok.jsp" method="post" encType="multiplart/form-data"></form>
+                <form id="updateForm" action="/semi/maUpdate.emp" method="post" encType="multiplart/form-data">
                   <table class="table table-bordered" style="font-size: 12px;">
                     <tbody>
                       <tr>
@@ -44,17 +46,19 @@
                           </div>                          
                         </td>
                       </tr>
+                      <% for(Employee e : emp) {%>
                       <tr>
                         <th>성명</th>
-                        <td><input type="text" id="name" name="name" class="width1" value="차은우" disabled></td>
+                        <td><input type="text" id="name" name="name" class="width1" value="<%=e.getEmpName() %>>" disabled></td>
                       </tr>
                       <tr>
                         <th>직원코드</th>
                         <td>
-                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="2015-005" disabled>
+                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="<%=e.getEmpCode() %>" disabled>
                         </td>
                       </tr>
-                      <tr>
+                      <%} %>
+                      <!-- <tr>
                         <th>비밀번호 <span>*</span></th>
                         <td><input type="password" id="userpw" name="userpw" value="" class="width1">
                           <br>
@@ -67,7 +71,7 @@
                           <br>
                           <em>비밀번호를 한번 더 입력해 주세요</em>
                         </td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <th>이메일 <span>*</span></th>
                         <td>
@@ -145,7 +149,7 @@
                     </tbody>
                   </table>                   
                     <br>
-                    <input type="submit" value="   저장   " class="btn btn-primary" style="margin-left: 40%;" onclick="">
+                    <input type="submit" value="   저장   " class="btn btn-primary" style="margin-left: 40%;" onclick="updateMember">
                     <input type="reset" value="   취소   " class="btn btn-primary" style="margin-left: 10px;" onclick="return ">
                   </form>
                 </div>
@@ -218,6 +222,10 @@
             }
         }).open();
     };
+    
+    function updateMember() {
+		$("#updateForm").submit();
+	}
 	</script>
 <%@ include file = "../intranet/common/footer.jsp" %>
 </body>

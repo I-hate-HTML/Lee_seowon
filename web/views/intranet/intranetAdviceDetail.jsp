@@ -39,7 +39,7 @@
                     <tr>
                       <th style="text-align: center;">반</th>
                       <td name = "class"><%=q.getQcclass()%>반</td>
-                      <th style="text-align: center;">아이이름</th>
+                      <th style="text-align: center;">원아명</th>
                       <td name = "studentName"><%=q.getQcname()%></td>
                       <th style="text-align: center;">작성자</th>
                       <td name = "writer"><%=q.getQusername()%></td>
