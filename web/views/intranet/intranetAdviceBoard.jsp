@@ -1,9 +1,17 @@
-<%@page import="java.util.*,semi.home.qna.model.vo.*"%>
+<%@page import="java.util.*,semi.intranet.qna.model.vo.*,semi.intranet.qna.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../intranet/common/nav.jsp" %>
 <% 
-	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
+	ArrayList<IntranetQna> list = (ArrayList<IntranetQna>)request.getAttribute("list");
+	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -21,22 +29,13 @@
 		
           <div class="card shadow mb-4">
             <div class="card-header py-3"> 
-              <table width="100%" table-layout="fixed;" word-break="break-all;" cellspacing="0">
-                <tr>
-                  <td>
-                  </td>
-                  <td align="right">
-                    <button class = "btn btn-primary btn-sm" onclick="studentDelete();">삭제</button>                              
-                  </td>
-                </tr>
-              </table>
+               <h6 class="m-0 font-weight-bold text-primary">문의확인</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive"> 
                   <table id = "viewTable" class="table table-striped" style="font-size:12px; text-align: center;">
                     
             <tr>
-              <th><input type="checkbox" id="chkalltop" onclick="checkAll()"></th>
               <th>글번호</th>
               <th>반</th>
               <th>원아명</th>
@@ -47,15 +46,26 @@
               <th>문의확인</th>
             </tr>
             <%
-            for(QnA q : list) {
+            for(IntranetQna q : list) {
             %>
             <tr>
-              <td><input type ="checkbox" name="sangdham"> </td>
-              <td name = "num"><%=q.getQno()%></td>
-              <td name = "class"><%=q.getQcclass()%>반</td>
-              <td name = "studentName"><%=q.getQcname()%></td>
+              <td name = "num" >
+              	<input type = "hidden" id = "qno1" name = "qno" value="<%= q.getQno() %>">
+              	<%=q.getQno()%>
+              </td>
+              <td name = "className">
+              	<%= q.getqClassName() %>반
+              	<input type="hidden" name="classNum" value="<%= q.getQcclass() %>">
+              </td>
+              <td name = "studentName">
+              	<%=q.getQcname()%>
+              	<input type="hidden" name="CNO" value="<%= q.getQcnum() %>">
+              </td>
               <td name = "title"><%=q.getQtitle()%></td>
-              <td name = "parentId"><%=q.getQwriter()%></td>
+              <td name = "parentId">
+              	<%=q.getQwriter()%>
+              	<input type="hidden" name="MNO" value="<%= q.getQusernum() %>">
+              </td>
               <td name = "parentName"><%=q.getQusername()%></td>
               <td name = "date"><%=q.getQdate()%></td>
               <td name = "chk_status"><%=q.getChk_status()%></td>
@@ -68,28 +78,65 @@
           <div>
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-sm justify-content-center">
+                <!-- 현재 페이지가 1페이지면 이전 페이지 버튼 disabled -->
+                <% if(currentPage <= 1){ %>
                 <li class="page-item disabled">
-                  <a class="page-link" href="#" aria-label="Previous">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                 </li>
+                <% } else { %>
+                <li class="page-item">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%=currentPage -1 %>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                 </li>
-                <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
+                <% } %>
+                
+                
+                <!-- 페이지 버튼 만들고 현재 페이지는 버튼 disabled -->                
+                <%	for(int p = startPage; p <= endPage; p++){
+                		if(p == currentPage){ 
+                %>               
+                	<li class="page-item disabled"><a class="page-link"><%= p %></a></li>
+                <%		} else {%>	
+                	<li class="page-item"><a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%= p %>"><%= p %></a></li>	
+                <%		} %>
+                <%	} %>
+                		
+                <% if(currentPage >= maxPage){ %>
+                <li class="page-item disabled">
                   <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
                 </li>
+                <% } else { %>
+                <li class="page-item">
+                  <a class="page-link" href="<%= request.getContextPath() %>/aListAll.al?currentPage=<%=currentPage +1 %>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+                <% } %>
               </ul>
-            </nav>  
+            </nav>
           </div>                   
         </div>
         
    		<script>
-		$(function(){
+   		
+	 	//게시물 이동용 스크립트 
+	 	 $('#viewTable td').click(function(){
+	 	 		
+	 	 		var qno = $(this).parent().children().find("input[type=hidden]").val(); 
+	 	 		location.href="<%= request.getContextPath() %>/qSelectOne.qna?qno=" + qno;
+	 	 
+	 	 });
+
+		<%-- $(function(){
 			
 			$("#viewTable td").mouseenter(function(){
 				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
@@ -101,7 +148,7 @@
 				alert(qno);
 				location.href="<%=request.getContextPath()%>/selectOne.qna?qno=" + qno;
 			});
-		});
+		}); --%>
 		
 	   		function checkAll(){
 				if($("#chkalltop").is(':checked')){
