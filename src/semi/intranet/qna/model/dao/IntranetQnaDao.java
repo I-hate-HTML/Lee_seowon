@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.home.qna.model.vo.QnA;
+import semi.intranet.qna.model.vo.IntranetQna;
 
 public class IntranetQnaDao {
 
@@ -30,36 +31,82 @@ public class IntranetQnaDao {
 		}		
 	}
 	
+	
+	
+	/**
+	 * 인트라넷 문의사항 총 게시물 수 확인용
+	 * @param con
+	 * @param empNo 
+	 * @return
+	 */
+	public int getListCount(Connection con, int empNo) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listCount = rset.getInt("COUNT(*)");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return listCount;
+	}
+	
+	
 	/**
 	 * 인트라넷 문의 확인 첫화면에서 리스트 불러오기
 	 * @param con
+	 * @param empNo 
 	 * @return
 	 */
-	public ArrayList<QnA> selectList(Connection con) {
-		ArrayList<QnA> list = null;//반환시켜줄 변수 선언하자
-		Statement stmt = null;
+	public ArrayList<IntranetQna> selectList(Connection con, int empNo) {
+		
+		ArrayList<IntranetQna> list = new ArrayList<IntranetQna>();
+		
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;//statement라서 여기에 넣어줌
 		
 		String sql = prop.getProperty("selectList");
 		
 		try {
-			stmt = con.createStatement();
 			
-			rset = stmt.executeQuery(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, empNo);
 			
-			list = new ArrayList<QnA>();
+			rset = pstmt.executeQuery();
+						
 			
 			while(rset.next()) {
-				QnA q = new QnA();
-				//다른 테이블에 있는 거 써도 되나
-				q.setQno(rset.getInt(1));
-				q.setQcclass(rset.getInt("CCLASS"));//(2)이렇게 해야 하나
-				q.setQcname(rset.getString("CNAME"));
+				
+				IntranetQna q = new IntranetQna();
+				
+				q.setQno(rset.getInt("QNO"));
 				q.setQtitle(rset.getString("QTITLE"));
 				q.setQwriter(rset.getString("QWRITER"));
-				q.setQusername(rset.getString("USERNAME"));
 				q.setQdate(rset.getDate("QDATE"));
 				q.setChk_status(rset.getString("CHK_STATUS"));
+				q.setQcclass(rset.getInt("CLASSNUM"));
+				q.setqClassName(rset.getString("CLASSNAME"));
+				q.setQcname(rset.getString("CNAME"));
+				q.setQcnum(rset.getInt("CNO"));
+				q.setQusername(rset.getString("NAME"));
+				q.setQusernum(rset.getInt("MNO"));
 				
 				list.add(q);
 			}
@@ -68,7 +115,7 @@ public class IntranetQnaDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
@@ -79,9 +126,10 @@ public class IntranetQnaDao {
 	 * @param qno
 	 * @return
 	 */
-	public QnA selectOne(Connection con, int qno) {
+	public IntranetQna selectOne(Connection con, int qno) {
 		
-		QnA q = null;
+		IntranetQna q = null;
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -94,15 +142,21 @@ public class IntranetQnaDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				q = new QnA();
+				q = new IntranetQna();
 				
-				q.setQno(rset.getInt(1));
+				q.setQno(rset.getInt("QNO"));
 				q.setQtitle(rset.getString("QTITLE"));
-				q.setQdate(rset.getDate("QDATE"));
-				q.setQcclass(rset.getInt("CCLASS"));//(2)이렇게 해야 하나
-				q.setQcname(rset.getString("CNAME"));
+				q.setQcontent(rset.getString("QCONTENT"));
 				q.setQwriter(rset.getString("QWRITER"));
-				q.setQcname(rset.getString("QCONTENT"));
+				q.setQdate(rset.getDate("QDATE"));
+				q.setChk_status(rset.getString("CHK_STATUS"));
+				q.setQcclass(rset.getInt("CLASSNUM"));
+				q.setqClassName(rset.getString("CLASSNAME"));
+				q.setQcname(rset.getString("CNAME"));
+				q.setQcnum(rset.getInt("CNO"));
+				q.setQusername(rset.getString("NAME"));
+				q.setQusernum(rset.getInt("MNO"));
+				q.setAsk_date(rset.getDate("ASK_DATE"));
 				
 			}
 		}catch(SQLException e){
@@ -169,5 +223,42 @@ public class IntranetQnaDao {
 		}
 		return result;
 	}
+
+
+
+	/**
+	 * Qna 읽기 확인 취소 버튼
+	 * @param con
+	 * @param empNo
+	 * @param read
+	 * @param qno
+	 * @return
+	 */
+	public int readQnaCheck(Connection con, int empNo, String read, int qno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("readCheck");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, read);
+			pstmt.setInt(2, qno);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
 
 }

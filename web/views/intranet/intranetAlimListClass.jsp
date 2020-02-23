@@ -149,8 +149,6 @@
     	var category = $(this).parent().children().eq(1).find("input[type=hidden]").val();
     	var empno = '<%= m.getUserId()%>'
       
-    	console.log('ano : ' + ano);
-    	console.log('category : ' + category);
     	
     	location.href = "<%= request.getContextPath() %>/aRead.al?ano=" + ano + "&category=" + category;
     });

@@ -1,27 +1,49 @@
 package semi.intranet.qna.service;
 
 import static semi.common.JDBCTemplate.close;
+import static semi.common.JDBCTemplate.commit;
 import static semi.common.JDBCTemplate.getConnection;
-import static semi.common.JDBCTemplate.*;
+import static semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.home.qna.model.vo.QnA;
 import semi.intranet.qna.model.dao.IntranetQnaDao;
+import semi.intranet.qna.model.vo.IntranetQna;
 
 public class IntranetQnaService {
 
 	private IntranetQnaDao qDao = new IntranetQnaDao();
 	
+	
 	/**
-	 * 인트라넷 문의 확인 리스트 불러오기
+	 * 인트라넷 총 게시글 확인
+	 * @param empNo 
 	 * @return
 	 */
-	public ArrayList<QnA> selectList() {
+	public int getListCount(int empNo) {
+		
 		Connection con = getConnection();
 		
-		ArrayList<QnA> list = qDao.selectList(con);
+		int listCount = qDao.getListCount(con, empNo);
+		
+		return listCount;
+		
+	}
+	
+	
+	
+	/**
+	 * 인트라넷 문의 확인 리스트 불러오기
+	 * @param empNo 
+	 * @return
+	 */
+	public ArrayList<IntranetQna> selectList(int empNo) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<IntranetQna> list = qDao.selectList(con, empNo);
 		
 		close(con);
 		
@@ -33,10 +55,11 @@ public class IntranetQnaService {
 	 * @param qno
 	 * @return
 	 */
-	public QnA selectOne(int qno) {
+	public IntranetQna selectOne(int qno) {
+		
 		Connection con = getConnection();
 		
-		QnA q = qDao.selectOne(con, qno);
+		IntranetQna q = qDao.selectOne(con, qno);
 		
 		// 게시글 상세보기를 통해 1회 조회할때
 		// 2가지 기능이 실행된다.
@@ -73,5 +96,36 @@ public class IntranetQnaService {
 		
 		return result;
 	}
+
+
+
+	/**
+	 * 문의사항 읽기 여부 업데이트용
+	 * @param empNo
+	 * @param read
+	 * @param qno
+	 * @return
+	 */
+	public int readQnaCheck(int empNo, String read, int qno) {
+		
+		Connection con = getConnection();
+		
+		int result = qDao.readQnaCheck(con, empNo, read, qno);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+		
+		
+		
+	}
+
+	
 
 }

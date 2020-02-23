@@ -8,22 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import semi.home.jsp.model.vo.Member;
-import semi.home.qna.model.vo.QnA;
-import semi.intranet.qna.model.vo.IntranetQna;
 import semi.intranet.qna.service.IntranetQnaService;
 
 /**
- * Servlet implementation class IntranetQnaSelectOneServlet
+ * Servlet implementation class IntranetQnaReadCheckServlet
  */
-@WebServlet("/qSelectOne.qna")
-public class IntranetQnaSelectOneServlet extends HttpServlet {
+@WebServlet("/qReadCk.qna")
+public class IntranetQnaReadCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IntranetQnaSelectOneServlet() {
+    public IntranetQnaReadCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,27 +33,20 @@ public class IntranetQnaSelectOneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+		
 		HttpSession session = request.getSession(false);
 		Member m = (Member)session.getAttribute("member");
 		
 		int empNo = Integer.parseInt(m.getUserId());
 		
+		String read = request.getParameter("result");
 		int qno = Integer.parseInt(request.getParameter("qno"));
-		
-		IntranetQnaService iqs = new IntranetQnaService();
-		
-		IntranetQna q = iqs.selectOne(qno);
-		
-		String page = "";
-		if(q != null) {
-			page = "views/intranet/intranetAdviceDetail.jsp";
-			request.setAttribute("qna", q);
-		}else {
-			page = "views/intranet/common/intranetError.jsp";
-			request.setAttribute("msg", "문의사항 글을 읽어올 수 없습니다.");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+	
+		int result = new IntranetQnaService().readQnaCheck(empNo, read, qno); 
+	
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**
