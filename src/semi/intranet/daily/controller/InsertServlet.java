@@ -40,7 +40,7 @@ public class InsertServlet extends HttpServlet {
 		
 		// 파일 처리용 서블릿
 		// 전송할 최대 크기
-		int maxSize = 1024 * 1024 * 10;
+		int maxSize = 1024 * 1024 * 30;
 		
 		// multipart/form-data형식으로 전송되었는지 확인!
 		if(!ServletFileUpload.isMultipartContent(request)) {

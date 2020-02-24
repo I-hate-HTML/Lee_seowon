@@ -139,7 +139,7 @@
 
       <!-- Nav Item - 일정관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/semi/empUpdateView">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetCalender.jsp">
           <i class="fa fa-calendar-alt fa-2x"></i>
           <span>일정관리</span></a>
       </li>
