@@ -12,7 +12,7 @@
 			id="mainNav" style="background-color: white;">
 			<div class="container">
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/views/homepage/homeindex.jsp"
-					style="font-size: 28px; color: black;">무슨무슨유치원</a>
+					style="font-size: 28px; color: black;"><img src="<%=request.getContextPath()%>/resources/homepage/images/logo1.png"></a>
 				<button class="navbar-toggler navbar-toggler-right" type="button"
 					data-toggle="collapse" data-target="#navbarResponsive"
 					aria-controls="navbarResponsive" aria-expanded="false"
