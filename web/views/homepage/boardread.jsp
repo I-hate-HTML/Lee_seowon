@@ -102,7 +102,7 @@
                     <input type="hidden" name="pbno" value="<%=b.getBno()%>" >
                 <div class="float-right">
                 
-                <% if(m.getJob_code()!=6|| m.getJob_code()!=7){ %>
+                <% if(m.getJob_code()!=6){ %>
                   <input class="btn" style="background: #002c5f; color: white; width: 100px;" type="button" value="수정" onclick="location.href='/semi/bupdateview.bo?pbno=<%=b.getBno() %>'" class="pull-right"/>
                 <%} %>  
                   

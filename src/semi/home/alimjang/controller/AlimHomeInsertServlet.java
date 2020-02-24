@@ -49,6 +49,7 @@ public class AlimHomeInsertServlet extends HttpServlet {
 		ah.setAlhm_phone(alhm_phone);
 		ah.setAlhm_status2(alhm_status2);
 		ah.setAlhm_phone2(alhm_phone2);
+//		ah.setAlhm_writer(m.getUserId());
 		
 		System.out.println(ah);
 		
@@ -56,7 +57,8 @@ public class AlimHomeInsertServlet extends HttpServlet {
 		
 		if(result > 0) {
 			// 알림장 등록완료
-			response.sendRedirect("views/homepage/alimNote.jsp");
+			response.sendRedirect("views/homepage/homeindex.jsp");
+			// 등록 완료 페이지 올릴까 말까
 		}else {
 			// 알림장 등록 실패
 			request.setAttribute("msg", "알림장 등록 실패");

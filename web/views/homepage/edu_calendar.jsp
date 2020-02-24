@@ -95,7 +95,7 @@
             </div>
             </div>
             <form  action="<%= request.getContextPath() %>/ecalinputimg.me" id="imguploadform" method="post" enctype="multipart/form-data">
-            <% if(m.getJob_code()!=6|| m.getJob_code()!=7){ %>
+            <% if(m.getJob_code()!=6){ %>
             <label class="btn justify-content-center" style="background: #002c5f; color: white; width: 150px; margin-top: 9px" >
             	<input type="file" id="fileinput" class="btn btn-primary"
                	style="background: #002c5f; color: white; width: 100px;" name="eduimg"
