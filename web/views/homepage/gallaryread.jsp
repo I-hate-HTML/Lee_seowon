@@ -87,7 +87,7 @@
                                      <div style="height: auto;">
                                       <%if(stArr[0]!="1") {%>
                                       <%for(int i = 0; i<stArr.length;i++){%>
-                                    	<img alt="" src="<%= request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/<%= stArr[i] %>" style="max-height: 500px; max-width: 630px">
+                                    	<img alt="" name="imgtag" src="<%= request.getContextPath()%>/resources/homepage/images/gboardUploadFiles/<%= stArr[i] %>" style="max-height: 500px; max-width: 630px">
                                     		<br>
                                     	<!-- 배열이 비어있을때 nullException이  발생하기 때문에 구분을 위해 넣어준 1 이 아닐때 이미지를 생성시킴-->          
                                        <%} %>
@@ -119,7 +119,7 @@
 	<%@ include file = "common/footer.jsp" %>
 	
 	<script>
-		$('img').click(function(){
+		$('img[name=imgtag]').click(function(){
 			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
 	</script>

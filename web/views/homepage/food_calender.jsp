@@ -93,7 +93,7 @@
             </div>
             <hr>
             <div>
-                <img src="" style="width: 100%;" alt="음식 사진 들어갑니다" id="foodimg">
+                <img src="" name="imgtag" style="width: 100%;" alt="음식 사진 들어갑니다" id="foodimg">
             <hr>
             <p>
             	⊙ 식단은 원내 사정(검수 물품 불량, 물가 인상 등)상 변경될 수 있습니다. <br>
@@ -177,7 +177,7 @@
  		 }
  	});
       
-      	$('img').click(function(){
+      	$('img[name=imgtag]').click(function(){
 			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
 

@@ -68,6 +68,8 @@ public class EventService {
 		if(result>0) { commit(con); System.out.println("성공");}
 		else { rollback(con);}
 		
+		close(con);
+		
 	}
 	public int editEvent(String before, String event, String after) {
 		con = getConnection();
@@ -77,6 +79,8 @@ public class EventService {
 		
 		if(result>0) { commit(con); System.out.println("성공");}
 		else { rollback(con);}
+		
+		close(con);
 		
 		return result;
 	}
