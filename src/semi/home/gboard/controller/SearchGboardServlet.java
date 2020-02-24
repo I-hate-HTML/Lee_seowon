@@ -54,9 +54,6 @@ public class SearchGboardServlet extends HttpServlet {
 		}
 		
 			request.getRequestDispatcher(page).forward(request, response);
-		}else {
-			page = "gboardlist";
-			request.getRequestDispatcher(page).forward(request, response);
 		}
 		
 	}
