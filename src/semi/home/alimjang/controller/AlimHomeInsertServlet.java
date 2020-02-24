@@ -57,7 +57,7 @@ public class AlimHomeInsertServlet extends HttpServlet {
 		
 		if(result > 0) {
 			// 알림장 등록완료
-			response.sendRedirect("views/homepage/homeindex.jsp");
+			response.sendRedirect("views/homepage/alimNote.jsp");
 			// 등록 완료 페이지 올릴까 말까
 		}else {
 			// 알림장 등록 실패
