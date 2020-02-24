@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="semi.intranet.alimjang.model.vo.Alim"%>
 <%@page import="semi.intranet.alimjang.model.vo.PageInfo"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@ include file = "../intranet/common/nav.jsp" %>
 
 <%
@@ -149,8 +149,6 @@
     	var category = $(this).parent().children().eq(1).find("input[type=hidden]").val();
     	var empno = '<%= m.getUserId()%>'
       
-    	console.log('ano : ' + ano);
-    	console.log('category : ' + category);
     	
     	location.href = "<%= request.getContextPath() %>/aRead.al?ano=" + ano + "&category=" + category;
     });

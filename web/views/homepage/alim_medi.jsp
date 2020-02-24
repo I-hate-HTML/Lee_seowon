@@ -156,25 +156,25 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">증상</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="almd_con" style="width: 70%;" placeholder="예) 감기, 몸살, 술병">
+                            <input type="text" name="almd_con" id="almd_con" style="width: 70%;" placeholder="예) 감기, 몸살, 술병">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">약의 종류</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="almd_type" style="width: 70%;" placeholder="예) 물약, 가루약, 마약">
+                            <input type="text" name="almd_type" id="almd_type" style="width: 70%;" placeholder="예) 물약, 가루약, 마약">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">투약 용량</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="almd_vol" style="width: 70%;" placeholder="예) 한 봉, 6ml">
+                            <input type="text" name="almd_vol" id="almd_vol" style="width: 70%;" placeholder="예) 한 봉, 6ml">
                         </td>
                     </tr>
                      <tr>
                         <td style="border-right: none;">투약 횟수</td>
                         <td colspan="3"style="border-left: none;">
-                            <select name="almd_num" id="bob" style="width: 70%;">
+                            <select name="almd_num" id="almd_num" style="width: 70%;">
                                 <option value="1회">1회</option>
                                 <option value="2회">2회</option>
                                 <option value="3회">3회</option>
@@ -185,7 +185,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">투약 시간</td>
                         <td colspan="3" style="border-left: none; border-right: none;">
-                            <input type="text" name="almd_time" style="width: 70%;" placeholder="예) 오전 9시, 식후 30분">
+                            <input type="text" name="almd_time" id="almd_time" style="width: 70%;" placeholder="예) 오전 9시, 식후 30분">
                         </td>
                     </tr>
                      <tr> 
@@ -199,14 +199,14 @@ vertical-align: middle;}
                             <input type="text" name="almd_ps" style="width: 70%;" placeholder="예) 보드카와 함께 줘야 좋아합니다, 약을 먹기 싫어해요">
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><input type="submit" value="확인" style="background: none; border: none; color: white;"></div>
+                     <tr>
+                        <td colspan="4" style="border: 0.1rem solid gray; text-align: center; padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" onclick="return check()" type="submit" value="확인" style="background-color: #002c5f; color: white;">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><img src="" alt="">취소</div>
+                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray;  padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" type="reset" value="취소" style="background-color: #868e96; color: white;">
                         </td>
                     </tr>
             </table>
@@ -225,7 +225,23 @@ vertical-align: middle;}
       var date = new Date();
       $(function(){
           $('#alim_date').text(date);
-      })
+      });
+      
+      function check() {
+    		var al_feel = $('#al_feel');
+       		if($('#almd_con').val()=="" ||
+       		   $('#almd_type').val()=="" ||	
+       		   $('#almd_vol').val()=="" ||	
+       		   $('#almd_time').val()==""  ||
+       		   $(':radio[name="almd_temp"]:checked').length < 1
+       		){
+       			alert("기본 입력값을 입력해 주세요!");
+       			return false;
+       		}
+       		return true;
+    	}
+      
+      
   </script>
 </body>
 

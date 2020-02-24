@@ -1,4 +1,4 @@
-package semi.intranet.nav.model.dao;
+package semi.intranet.nav.model.service;
 
 import static semi.common.JDBCTemplate.*;
 
@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.intranet.alimjang.model.vo.Alim;
-import semi.intranet.nav.model.service.IntranetNavDao;
+import semi.intranet.nav.model.dao.IntranetNavDao;
 import semi.intranet.nav.model.vo.NavAlim;
 import semi.intranet.nav.model.vo.NavEmployeeInfo;
 import semi.intranet.nav.model.vo.NavForm;
@@ -99,6 +99,28 @@ public class IntranetNavService {
 		close(con);
 		
 		return list;
+	}
+
+
+	/**
+	 * 품의서 내 알림 삭제용
+	 * @param emp
+	 * @return
+	 */
+	public int formAlimDel(int emp) {
+		
+		
+		Connection con = getConnection();
+		
+		int result = ind.formAlimDel(con, emp);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
 	}
 
 	

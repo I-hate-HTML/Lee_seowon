@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 import semi.home.jsp.model.vo.Member;
 import semi.intranet.alimjang.model.service.AlimService;
-import semi.intranet.nav.model.dao.IntranetNavService;
+import semi.intranet.nav.model.service.IntranetNavService;
 import semi.intranet.nav.model.vo.NavAlim;
 
 /**

@@ -64,7 +64,7 @@ public class EmployeeDao {
 		return result;
 	}
 
-	/**
+	/**원태 씨의
 	 * 인트라넷 employee 정보 수정
 	 * @param con
 	 * @param e
@@ -129,6 +129,16 @@ public class EmployeeDao {
 				
 	}
 
+	/**
+	 * 원태 씨가 만든 거
+	 * @param con
+	 * @param code
+	 * @param phone
+	 * @param email
+	 * @param addr
+	 * @param enddate
+	 * @return
+	 */
 	public int updateMember(Connection con, int code, String phone, String email, String addr, String enddate) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -153,6 +163,36 @@ public class EmployeeDao {
 		return result;
 	}
 
+	/**
+	 * 마정훈이 한 
+	 * 인트라넷 intraEdit.jsp 정보수정
+	 * @param con
+	 * @param empl
+	 * @return
+	 */
+	public int updateMemberByMa(Connection con, Employee empl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateEmployeeByMa");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, empl.getEmpimg());
+			pstmt.setString(2, empl.getEmpPhone());
+			pstmt.setString(3, empl.getEmpEmail());
+			pstmt.setString(4, empl.getEmpAddr());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public int deleteEmployee(Connection con, int delid) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("delEmp");
@@ -171,27 +211,46 @@ public class EmployeeDao {
 		return result;
 	}
 
+	/**
+	 * 개인정보수정intranetEdit.화면 불러오기
+	 * @param con
+	 * @return
+	 */
+	public ArrayList<Employee> updateViewShowingByMa(Connection con) {
+		ArrayList<Employee> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("updateViewShowingByMa");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			list = new ArrayList<Employee>();
+			
+			while(rset.next()) {
+				Employee empl = new Employee();
+				
+				empl.setEmpimg(rset.getString("EMP_IMG"));
+				empl.setEmpName(rset.getString("EMP_NAME"));
+				empl.setEmpCode(rset.getInt("EMP_CODE"));
+				empl.setEmpEmail(rset.getString("EMP_EMAIL"));
+				empl.setEmpPhone(rset.getString("EMP_PHONE"));
+				empl.setEmpAddr(rset.getString("EMP_ADDR"));
+				
+				list.add(empl);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+	}
+
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 

@@ -272,7 +272,6 @@ $('#submitBtn').off().on('click',(function(){
 	
 	if(!$('#selectSign').val()) {
 		alert("결재자를 선택해주세요");
-		document.location.href="views/intranet/intranetFormWrite.jsp";
 	} else {
 		document.formWrite.submit();
 	}

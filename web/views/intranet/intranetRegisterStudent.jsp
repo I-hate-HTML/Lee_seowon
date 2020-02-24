@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ include file="../intranet/common/nav2.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-  
-  
-  <!-- Custom fonts for this template-->
-  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/all.min.css" rel="stylesheet" type="text/css">
-  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/css.css" rel="stylesheet" type="text/css">
-  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/1_content.css" rel="stylesheet" type="text/css">
-   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="<%=request.getContextPath()%>/resources/intranet/intranet/sb-admin-2.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">

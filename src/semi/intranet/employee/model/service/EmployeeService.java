@@ -26,7 +26,7 @@ public class EmployeeService {
 		return result;
 	}
 	/**
-	 * 인트라넷 정보수정
+	 * 원태 씨의 인트라넷 정보수정
 	 * @param e
 	 */
 	public int updateEmployee(Employee e) {
@@ -43,6 +43,21 @@ public class EmployeeService {
 		return result;
 		 
 	}
+	
+	/**마정훈이 한 인트라넷 intranetEdit.정보 수정
+	 * @param empl
+	 * @return
+	 */
+	public int updateEmployeeByMa(Employee empl) {
+		con = getConnection();
+		int result = eDao.updateMemberByMa(con,empl);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		close(con);
+		return result;
+	}
+	
 	public ArrayList<Employee> emplistAll() {
 		con = getConnection();
 		
@@ -73,5 +88,19 @@ public class EmployeeService {
 		
 		return result;
 	}
+	
+	/**
+	 * 인트라넷 마정훈 개인정보수정 화면  불러오기
+	 * @return
+	 */
+	public ArrayList<Employee> updateViewShowingByMa() {
+		Connection con = getConnection();
+		
+		ArrayList<Employee> list = eDao.updateViewShowingByMa(con);
+		close(con);
+		
+		return list;
+	}
+	
 
 }

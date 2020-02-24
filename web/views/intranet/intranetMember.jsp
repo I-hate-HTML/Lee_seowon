@@ -209,30 +209,30 @@ input.check {
 
 					<tbody id="applymemberList" class="tc">
 						<%
-											for (Member m : list) {
+											for (Member mem : list) {
 										%>
 						<tr class="member">
-							<td class="tc"><input class='memCheck' type="checkbox" data-userId="<%=m.getUserId()%>"
-								name="applyMemberCheck" value="<%=m.getUserId()%>" id="c1" title="선택"
+							<td class="tc"><input class='memCheck' type="checkbox" data-userId="<%=mem.getUserId()%>"
+								name="applyMemberCheck" value="<%=mem.getUserId()%>" id="c1" title="선택"
 								class="check _click"></td>
-							<td class="tc"><span class="img"><%=m.getUserId()%></span></td>
-							<td class="tc"><span class="txt"><%=m.getUserName()%></span>
+							<td class="tc"><span class="img"><%=mem.getUserId()%></span></td>
+							<td class="tc"><span class="txt"><%=mem.getUserName()%></span>
 							</td>
-							<td class="tc"><span class="txt"><%=m.getGender()%></span></td>
-							<td class="tc"><span class="num"><%=m.getEmail()%></span></td>
-							<td class="tc"><span class="num"><%=m.getPhone()%></span></td>
-							<td class="tc"><span class="num"><%=m.getAddress()%></span>
+							<td class="tc"><span class="txt"><%=mem.getGender()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getEmail()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getPhone()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getAddress()%></span>
 							</td>
-							<td class="tc"><span class="num"><%=m.getEnrolldate()%></span>
+							<td class="tc"><span class="num"><%=mem.getEnrolldate()%></span>
 							</td>
-							<td class="tc"><span class="num"><%=m.getCno()%></span></td>
-							<td class="tc"><span class="num"><%=m.getCname()%></span></td>
-							<td class="tc"><span class="num"><%=m.getCbdate()%></span></td>
-							<td class="tc"><span class="num"><%=m.getCgender()%></span>
+							<td class="tc"><span class="num"><%=mem.getCno()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getCname()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getCbdate()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getCgender()%></span>
 							</td>
-							<td class="tc"><span class="num"><%=m.getCclass()%></span></td>
-							<td class="tc"><span class="num"><%=m.getJob_code()%></span></td>
-							<td class="tc" id="thanksNuNa"><span class="num"><%=m.getMstatus()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getCclass()%></span></td>
+							<td class="tc"><span class="num"><%=mem.getJob_code()%></span></td>
+							<td class="tc" id="thanksNuNa"><span class="num"><%=mem.getMstatus()%></span></td>
 						</tr>
 
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, semi.intranet.employee.model.vo.*"%>
+<% Employee e = (Employee)session.getAttribute("employee"); 
+  String[] imgArr = (String[])request.getAttribute("empImg");
+%>
+
 <%@ include file = "../intranet/common/nav.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">                  
-                <form action="write_ok.jsp" method="post" encType="multiplart/form-data"></form>
+                <form id="updateForm" action="/semi/maUpdate.emp" method="post" encType="multiplart/form-data">
                   <table class="table table-bordered" style="font-size: 12px;">
                     <tbody>
                       <tr>
@@ -31,8 +35,12 @@
                         <td>
                           <div class="tdcell">
                             <div class="profile_photo">
-                              <img id="imgThumb" src="../../resource/image/woo.png" width="100" height="100">
+                            	<%if(imgArr[0]!="1") {%>
+                            	<%for(int i = 0; i<imgArr.length;i++){%>
+                              <img alt="" id="imgThumb" src="<%= request.getContextPath()%>/resources/intranet/image/<%=imgArr[i] %>" width="100" height="100">
                               <span class="mask"></span>
+                              <%} %>
+                              <%} %>
                             </div>
                             <div class="btn_area_btm">
                               <span class="btn_file">
@@ -44,17 +52,19 @@
                           </div>                          
                         </td>
                       </tr>
+                      
                       <tr>
                         <th>성명</th>
-                        <td><input type="text" id="name" name="name" class="width1" value="차은우" disabled></td>
+                        <td><input type="text" id="name" name="name" class="width1" value="<%=e.getEmpName() %>" disabled></td>
                       </tr>
                       <tr>
                         <th>직원코드</th>
                         <td>
-                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="2015-005" disabled>
+                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="<%=e.getEmpCode() %>" disabled>
                         </td>
                       </tr>
-                      <tr>
+                      
+                      <!-- <tr>
                         <th>비밀번호 <span>*</span></th>
                         <td><input type="password" id="userpw" name="userpw" value="" class="width1">
                           <br>
@@ -67,7 +77,7 @@
                           <br>
                           <em>비밀번호를 한번 더 입력해 주세요</em>
                         </td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <th>이메일 <span>*</span></th>
                         <td>
@@ -86,7 +96,7 @@
                           </select>
                         </td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <th>연락처</th>
                         <td>
                           <select name="tel1" id="tel1" class="select1 ko" style="width:120px;">
@@ -113,7 +123,7 @@
                           - <input type="text" id="tel3" name="tel3" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
       
                           </td>
-                      </tr>
+                      </tr> -->
                       <tr>
                         <th>핸드폰번호 <span>*</span></th>
                         <td>
@@ -145,7 +155,7 @@
                     </tbody>
                   </table>                   
                     <br>
-                    <input type="submit" value="   저장   " class="btn btn-primary" style="margin-left: 40%;" onclick="">
+                    <input type="submit" value="   저장   " class="btn btn-primary" style="margin-left: 40%;" onclick="updateMember">
                     <input type="reset" value="   취소   " class="btn btn-primary" style="margin-left: 10px;" onclick="return ">
                   </form>
                 </div>
@@ -218,6 +228,10 @@
             }
         }).open();
     };
+    
+    function updateMember() {
+		$("#updateForm").submit();
+	}
 	</script>
 <%@ include file = "../intranet/common/footer.jsp" %>
 </body>

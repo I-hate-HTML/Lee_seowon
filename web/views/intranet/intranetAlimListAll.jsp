@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="semi.intranet.alimjang.model.vo.Alim"%>
 <%@page import="semi.intranet.alimjang.model.vo.PageInfo"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@ include file = "../intranet/common/nav.jsp" %>
 
 <%

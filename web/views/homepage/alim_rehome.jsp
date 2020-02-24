@@ -151,7 +151,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">귀가 방법</td>
                         <td colspan="3"style="border-left: none; text-align: center;"">
-                            <select name="alhm_wayhome" id="bob" style="width: 70%;">
+                            <select name="alhm_wayhome" id="alhm_wayhome" style="width: 70%;">
                                 <option value="도보">귀가방법선택</option>
                                 <option value="도보">도보</option>
                                 <option value="차량">차량</option>
@@ -163,7 +163,7 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">귀가요청시간</td>
                         <td colspan="3"style="border-left: none; text-align: center;"">
-                            <select name="alhm_time" id="bob" style="width: 70%;">
+                            <select name="alhm_time" id="alhm_time" style="width: 70%;">
                                 <option value="도보">시간 선택</option>
                                 <option value="오전">오전(12:00)</option>
                                 <option value="오후">오후(15:00)</option>
@@ -173,25 +173,25 @@ vertical-align: middle;}
                     <tr>
                         <td style="border-right: none;">보호자</td>
                         <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
-                            <input type="text" name="alhm_status" style="width: 70%;" placeholder="원아와의 관계">
-                            <input type="text" name="alhm_phone" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
+                            <input type="text" name="alhm_status" id="alhm_status" style="width: 70%;" placeholder="원아와의 관계">
+                       	    <input type="text" name="alhm_phone" id="alhm_phone" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
                     </tr>
                     <tr>
                         <td style="border-right: none;">비상 연락망</td>
-                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;"">
-                            <input type="text" name="alhm_status2" style="width: 70%;" placeholder="원아와의 관계">
-                            <input type="text" name="alhm_phone2" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
+                        <td colspan="3" style="border-left: none; border-right: none; text-align: center;">
+                            <input type="text" name="alhm_status2" id="alhm_status2" style="width: 70%;" placeholder="원아와의 관계">
+                            <input type="text" name="alhm_phone2" id="alhm_phone2" style="width: 70%; margin-top: 5px;" placeholder="전화번호(-제외)">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #002c5f; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><input type="submit" value="확인" style="background: none; border: none; color: white;"></div>
+                        <td colspan="4" style="border: 0.1rem solid gray; text-align: center; padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" onclick="return check()" type="submit" value="확인" style="background-color: #002c5f; color: white;">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray">
-                            <div style="text-align: center;" onclick=""><img src="" alt="">취소</div>
+                        <td colspan="4" style="background-color: #868e96; color: white; border: 0.1rem solid gray;  padding:0px;">
+                            <input class="btn btn-primary col-lg-12 col-md-12" type="reset" value="취소" style="background-color: #868e96; color: white;">
                         </td>
                     </tr>
             </table>
@@ -210,7 +210,22 @@ vertical-align: middle;}
       var date = new Date();
       $(function(){
           $('#alim_date').text(date);
-      })
+      });
+      
+      function check() {
+  		var al_feel = $('#al_feel');
+     		if($('#alhm_status').val()=="" ||
+     		   $('#alhm_phone').val()=="" ||	
+     		   $('#alhm_status2').val()=="" ||	
+     		   $('#alhm_phone2').val()=="" ||	
+     		   $('#alhm_wayhome').val()=="귀가방법선택" ||	
+     		   $('#alhm_time').val()=="시간 선택"		     		
+     		){
+     			alert("기본 입력값을 입력해 주세요!");
+     			return false;
+     		}
+     		return true;
+  	}
   </script>
 </body>
 

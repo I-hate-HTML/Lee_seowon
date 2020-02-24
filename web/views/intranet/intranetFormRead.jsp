@@ -208,40 +208,6 @@ $('#viewTable td').click(function(){
 });
 
 
-/* $(function(){
-	
-	// 결재자 1의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP1').val() == "null") {
-		$('#formLineP1').css('display','none');
-	}
-	
-	// 결재자 2가 없으면 select 안보이게
-	if($('#formLine2').val() == "null") {
-		$('#formLine2').css('display','none');
-	}
-	
-	// 결재자 2의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP2').val() == "null") {
-		$('#formLineP2').css('display','none');
-	}
-	
-	// 결재자 3가 없으면 select 안보이게
-	if($('#formLine3').val() == "null") {
-		$('#formLine3').css('display','none');
-	}
-	
-	// 결재자3의 결재가 없으면 결재 select 안보이게
-	if($('#formLineP3').val() == "null") {
-		$('#formLineP3').css('display','none');
-	}
-
-}); */
-
-
-
-
-
-
 </script>
 
 

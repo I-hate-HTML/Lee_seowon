@@ -59,7 +59,8 @@ public class FormListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		listCount = new FormService().getListCount();
+		int chk = 1;
+		listCount = new FormService().getListCount(chk);
 		
 		maxPage = (int)((double)listCount / limitContent + 0.9);
 		startPage = ((int)((double) currentPage / limitPage + 0.9) -1) * limitPage + 1;

@@ -258,7 +258,7 @@ public class AlimDao {
 				a.setAl_content(rset.getString("AL_CONTENT"));
 				a.setAl_date(rset.getDate("AL_DATE"));
 				a.setAl_feel(rset.getString("AL_FEEL"));
-				a.setAl_health(rset.getString("AL_HEALTH"));
+				a.setAl_health(rset.getString("AL_HEATH"));
 				a.setAl_meal(rset.getString("AL_MEAL"));
 				a.setAl_no(rset.getInt("AL_NO"));
 				a.setAl_poop(rset.getString("AL_POOP"));

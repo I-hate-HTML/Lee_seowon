@@ -127,14 +127,14 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">상세 메뉴</h6>
             <a class="collapse-item"  href="/semi/aListClass.al">알림장 확인</a>            
-            <a class="collapse-item" href="/semi/list.qna">문의 확인</a>            
+            <a class="collapse-item" href="/semi/qList.pna">문의 확인</a>            
           </div>
         </div>
       </li>
 
       <!-- Nav Item - 품의관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/fList.fo">
+        <a class="nav-link" href="/semi/fMyList.fo">
           <i class="fa fa-file-alt fa-2x"></i>
           <span>품의관리</span></a>
       </li>
@@ -156,7 +156,7 @@
 
        <!-- Nav Item - 개인정보수정 -->
       <li class="nav-item">
-        <a class="nav-link" href="intranetEdit.jsp">
+        <a class="nav-link" href="/semi/empUpdateView">
           <i class="fa fa-user fa-2x"></i>
           <span>개인정보수정</span></a>
       </li>
@@ -253,39 +253,8 @@
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="formAilm" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">결재 상태</h6>
                 
-                <%-- <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/a.png" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold">
-                    <div class="text-truncate">교육일지 확인바랍니다.</div>
-                    <div class="small text-gray-500">한원장, 2020-01-20, 결재신청</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">휴가 신청 품의서입니다.</div>
-                    <div class="small text-gray-500">차은우, 2020-01-06, 반려</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="intranetForm.jsp">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="<%=request.getContextPath()%>/resources/intranet/image/woo.png" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">2019년 12월 지출결의서입니다.</div>
-                    <div class="small text-gray-500">차은우, 2019-12-30, 결재완료</div>
-                  </div>
-                </a> --%>
-                
-                
-                <a class="dropdown-item text-center small text-gray-500" href="intranetForm.jsp">더보기</a>
+                <a class="dropdown-item text-center small text-gray-500">내 품의 알림 삭제</a>
+                <a class="dropdown-item text-center small text-gray-500" href="/semi/fList.fo">더보기</a>
               </div>
             </li>
 
@@ -388,7 +357,7 @@
        			});
        			
        		}, error:function(data){
-       			alret("권한이 없습니다.");
+       			alert("알림장 알림 오류");
        		}
        	});
        });
@@ -401,22 +370,23 @@
           		url:"/semi/iNavEmployee.in",
           		type:"post",
           		success:function(data){
-          			
+          			console.log(data);
           			var classNum = data.info.classNum;
           			var position = data.info.position;
           			var image = data.info.image;
+          			var cName = data.info.className;
           			
 
           			if(classNum == 0) {
           				$('#classNum').text(position).val(position);
           			} else {
-          				$('#classNum').text(classNum + "반").val(classNum);
+          				$('#classNum').text(cName + "반").val(classNum);
           			}
           			
           			$('#tImage').attr("src",'resources/intranet/image/'+ image);
           			
           		}, error:function(data){
-          			
+          			alert("선생님 정보");
           		}
           	});
        	
@@ -453,7 +423,7 @@
        					// 알림 사진 나오기
        					
        					$a1 = $('<a>').attr({"class":"dropdown-item d-flex align-items-center",
-       										 'href' :'/semi/fList.fo'
+       										 'href' :'/semi/fRead.fo?fno=' + fno
        										});
        					
        					$div1 = $('<div>').attr("class","dropdown-list-image mr-3");
@@ -478,11 +448,32 @@
      			  });
      			  
      		  }, error:function(data){
-     			  console.log("에러");
+     			 alert("품의 알림 오류");
      		  }
      	   });
         });
-
+	
+     // 내 품의 알림 삭제
+     	$('.delForm').click(function(){
+     		var empno = '<%= m.getUserId()%>';
+     		
+     		$.ajax({
+     			url:'/semi/iNavFormDel.in',
+     			type:'post',
+     			success:function(data){
+     				var result = data.result;
+     				
+     			
+     			// 결재 알림 카운트
+       			  $(".formCount").text(result);
+     				
+     				
+     			}, error:function(data){
+     				
+     			}
+     		});
+     		
+     	})
 
         </script>
         
