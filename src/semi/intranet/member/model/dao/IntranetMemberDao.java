@@ -180,13 +180,13 @@ public class IntranetMemberDao {
 			pstmt.setInt(1, 6);
 			pstmt.setString(2, "Y");
 			pstmt.setString(3, userId);
+			pstmt.setString(4, userId);
 			result = pstmt.executeUpdate();
-			commit(con);
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(pstmt);
-			close(con);
+			close(pstmt);			
 		}
 		return result;
 	}

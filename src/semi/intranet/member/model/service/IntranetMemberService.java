@@ -31,10 +31,17 @@ public class IntranetMemberService {
 	 * @param userId
 	 * @return
 	 */
-	public int acceptMember(String userId) {
+	public int acceptMember(String userId) {		
 		Connection con = getConnection();
+		
+		int result = imDao.acceptMember(con,userId);
+		
+		if(result > 0) 	commit(con);
+		else rollback(con);
+		
 		close(con);
-		return imDao.acceptMember(con,userId);
+		
+		return result;
 	
 	}
 	
