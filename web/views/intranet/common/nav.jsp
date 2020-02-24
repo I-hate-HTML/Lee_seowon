@@ -156,7 +156,7 @@
 
        <!-- Nav Item - 개인정보수정 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/empUpdateView">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetEdit.jsp">
           <i class="fa fa-user fa-2x"></i>
           <span>개인정보수정</span></a>
       </li>

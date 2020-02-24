@@ -26,7 +26,7 @@
             <div class="card-body">
               <div class="table-responsive">                  
                 <form id="updateForm" action="/semi/maUpdate.emp" method="post" encType="multiplart/form-data">
-                  <table class="table table-bordered" style="font-size: 12px;">
+                  <table id="viewtable" class="table table-bordered" style="font-size: 12px;">
                     <tbody>
                       <tr>
                         <th scope="row">
@@ -35,17 +35,16 @@
                         <td>
                           <div class="tdcell">
                             <div class="profile_photo">
-                            	<%if(imgArr[0]!="1") {%>
-                            	<%for(int i = 0; i<imgArr.length;i++){%>
-                              <img alt="" id="imgThumb" src="<%= request.getContextPath()%>/resources/intranet/image/<%=imgArr[i] %>" width="100" height="100">
+
+                              <img alt="" id="imgThumb" src="<%= request.getContextPath()%>/resources/intranet/image/" width="100" height="100">
                               <span class="mask"></span>
-                              <%} %>
-                              <%} %>
+
                             </div>
                             <div class="btn_area_btm">
                               <span class="btn_file">
-                                <label for="inputImage" class="btn btn-primary btn-sm" style="margin-top: 6px;"><span id="btnChangeProfile" class="btn2" onclick="clickcr(this,'prf.upimg','','',event);">사진변경</span></label>
-                                <input type="file" id="inputImage" name="profileImage"  accept="image/*" style="overflow: hidden; width: 1px; height: 1px; margin:-1px;"/>
+                                <label for="ex_file" class="btn btn-primary btn-sm" style="margin-top: 6px;"><span id="btnChangeProfile" class="btn2" onclick="clickcr(this,'prf.upimg','','',event);">사진변경</span></label>
+                                <input type="file" id="ex_file" name="empimg"  accept=".jpg,.jpeg,.png,.gif" 
+                                onchange="imageURL(this)" style="overflow: hidden; width: 1px; height: 1px; margin:-1px;"/>
                               </span>
                               <a href="javascript:;" class="btn btn-primary btn-sm"><span id="btnDelete" class="btn2" onclick="clickcr(this,'prf.delimg','','',event);">삭제</span></a>
                             </div>
@@ -55,12 +54,12 @@
                       
                       <tr>
                         <th>성명</th>
-                        <td><input type="text" id="name" name="name" class="width1" value="<%=e.getEmpName() %>" disabled></td>
+                        <td><input type="text" id="name" name="name" class="width1" value="" disabled></td>
                       </tr>
                       <tr>
                         <th>직원코드</th>
                         <td>
-                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="<%=e.getEmpCode() %>" disabled>
+                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="" disabled>
                         </td>
                       </tr>
                       
@@ -172,6 +171,18 @@
 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
 	<script type="text/javascript">
+	function imageURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#empImg').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
 	$('#selectEmail').change(function(){ 
 		$("#selectEmail option:selected").each(function () {
 			
@@ -228,6 +239,55 @@
             }
         }).open();
     };
+    
+    $(function() {
+		$.ajax({
+			url : "/semi/empUpdateView",
+			type : "get",
+			success : function(data) {
+				$.each(data, function(index, value) {
+											
+					var $tr = $('<tr>');
+					var $chk = $('<input>').attr({'type':'radio','class':'chkemp','value':value.empCode+','+value.empName});
+					var $checkbox = $('<td>');
+					var $empIndex = $('<td>').text(index + 1);
+					var $empName = $('<td>').text(value.empName);
+					var $empCode = $('<td>').text(value.empCode);
+					var $empPhone = $('<td>').text(value.empPhone);
+					var $empAddr = $('<td>').text(value.empAddr);
+
+					$checkbox.append($chk);
+					$tr.append($checkbox);
+					$tr.append($empIndex);
+					$tr.append($empCode);
+					$tr.append($empJob);
+					$tr.append($empName);
+					$tr.append($empPhone);
+					$tr.append($hireDate);
+					$tr.append($entDate);
+					$tr.append($empClass);
+					$tr.append($hobong);
+					$tr.append($entYN);
+					
+					$('#viewtable').append($tr);
+				});
+			},
+			error : function() {
+				console.log("에러입니다.");
+			}
+		});
+	});
+    
+	/* var editmodal = $('#editEmp')
+	$('#empedit1').click(function() {
+		var eid = $('.chkemp:checked').val();
+		var ecn = eid.split(',');
+		if (eid != null) {
+			editmodal.modal();
+			$('#editcode').val(ecn[0]);
+			$('#editname').val(ecn[1]);
+		}
+	}); */
     
     function updateMember() {
 		$("#updateForm").submit();

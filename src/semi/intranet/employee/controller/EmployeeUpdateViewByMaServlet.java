@@ -2,12 +2,15 @@ package semi.intranet.employee.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import semi.intranet.employee.model.service.EmployeeService;
 import semi.intranet.employee.model.vo.Employee;
@@ -32,7 +35,7 @@ public class EmployeeUpdateViewByMaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Employee> list = new ArrayList<Employee>();
+/*		ArrayList<Employee> list = new ArrayList<Employee>();
 
 		EmployeeService es = new EmployeeService();
 		
@@ -43,11 +46,24 @@ public class EmployeeUpdateViewByMaServlet extends HttpServlet {
 			page = "views/intranet/intranetEdit.jsp";
 			request.setAttribute("employee", list);
 		}else {
-			page = "views/homepage/common/errorPage.jsp";
+			page = "views/intranet/intranetEdit.jsp";
 			request.setAttribute("msg", "불러오기 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+		
+		response.setContentType("application/json; charset=UTF-8"); 
+		*/
+		EmployeeService es = new EmployeeService();
+		List<Employee> ae = new ArrayList<>();
+		
+		
+		ae = es.emplistAll();
+		System.out.println(ae);
+		String json = new Gson().toJson(ae);
+		System.out.println(json);
+		
+		response.getWriter().print(json);
 	}
 
 	/**
