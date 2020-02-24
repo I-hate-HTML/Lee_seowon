@@ -55,7 +55,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fa fa-smile"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">어린이집<br>인트라넷</div>
+        <div class="sidebar-brand-text mx-3">팡팡어린이집<br>인트라넷</div>
       </a>
 
       <!-- Divider -->
