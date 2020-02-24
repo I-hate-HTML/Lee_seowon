@@ -114,7 +114,7 @@
 					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="searchboard()" value="검색">
 					</div>	
 					<br>
-                  <% if(m.getJob_code()!=6){ %>
+                  <% if(m.getJob_code()!=6|| m.getJob_code()!=7){ %>
                   		
                   		<button class="btn float-right" style="background: #002c5f; color: white; width: 100px;" onclick="location='views/homepage/boardwrite.jsp'">글작성</button>
                   <% } %>
