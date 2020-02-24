@@ -54,8 +54,9 @@ public class EmployeeUpdateMaServlet extends HttpServlet {
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyRenamePolicy());
 
-		mrequest.getFilesystemName("empimg");
+		//mrequest.getFilesystemName("empimg");
 		
+		String empimg = mrequest.getFilesystemName("empimg");
 		String empEmail = mrequest.getParameter("empEmail");
 		String empPhone = mrequest.getParameter("hp1")+"-"
 					+ mrequest.getParameter("hp2")+"-"
@@ -72,7 +73,7 @@ public class EmployeeUpdateMaServlet extends HttpServlet {
 		
 		ArrayList filelist = MyRenamePolicy.Filenamechange;
 		//이름 변경?
-		String empimg="";
+		
 		
 		for(int i=0; i<filelist.size();i++) {
 			if(i==filelist.size()-1) {
