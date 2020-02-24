@@ -40,12 +40,11 @@ public class MainAlimcall extends HttpServlet {
 		
 		MainService ms = new MainService();
 		ArrayList<MainAlim> ae = new ArrayList<>();
-		System.out.println("시발2");
 		
 		ae = ms.alimlist();
 
 		String json = new Gson().toJson(ae);
-		System.out.println("시발3");
+		
 		response.getWriter().print(json);
 	}
 

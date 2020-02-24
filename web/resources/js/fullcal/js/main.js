@@ -84,9 +84,9 @@ function calDateWhenDragnDrop(event) {
 	return newDates;
 }
 
-
+// 달력호출
 var calendar = $('#calendar').fullCalendar({
-
+	//일정 렌더링
 	eventRender: function (event, element, view) {
 
 		//일정에 hover시 요약
@@ -130,13 +130,23 @@ var calendar = $('#calendar').fullCalendar({
 			}
 		}
 	},
-
+	
+	//상단에 담은 메뉴
 	header: {
+
+
 		left: 'today, prevYear, nextYear, viewWeekends',
 		center: 'prev, title, next',
 		right: 'month,agendaWeek,agendaDay,listWeek'
 	},
+	
+	// 메뉴별 날짜 표현방식 설정
+	
+	
+
+
 	views: {
+
 		month: {
 			columnFormat: 'dddd'
 		},
@@ -154,6 +164,7 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
+	
 	/* ****************
 	 *  일정 받아옴 
 	 * ************** */
@@ -191,6 +202,7 @@ var calendar = $('#calendar').fullCalendar({
 		});
 	},
 
+	// 일정 호출후 달력표시
 	eventAfterAllRender: function (view) {
 		if (view.name == "month") {
 			$(".fc-content").css('height', 'auto');
@@ -221,6 +233,7 @@ var calendar = $('#calendar').fullCalendar({
 
 	},
 
+	//일정 드래그 시작
 	eventDragStart: function (event, jsEvent, ui, view) {
 		draggedEventIsAllDay = event.allDay;
 	},
@@ -257,6 +270,7 @@ var calendar = $('#calendar').fullCalendar({
 
 	},
 
+	 //날짜 선택시 일정추가 함수 호출  
 	select: function (startDate, endDate, jsEvent, view) {
 
 		$(".fc-body").unbind('click');
@@ -313,22 +327,22 @@ var calendar = $('#calendar').fullCalendar({
 
 	},
 
-	//이벤트 클릭시 수정이벤트
+	//일정 클릭시 일정수정 함수 호출
 	eventClick: function (event, jsEvent, view) {
 		editEvent1(event);
 	},
 
-	locale: 'ko',
-	timezone: "local",
-	nextDayThreshold: "09:00:00",
-	allDaySlot: true,
-	displayEventTime: true,
-	displayEventEnd: true,
+	locale: 'ko', //한국어설정
+	timezone: "local", //현재지역기준
+	nextDayThreshold: "09:00:00", //기본시간값
+	allDaySlot: true, //일정 추가 혹은 수정시 하루종일 선택가능
+	displayEventTime: true, //일정 시작시간표시
+	displayEventEnd: true,	//일정 종료시간 표시
 	firstDay: 0, //월요일이 먼저 오게 하려면 1
-	weekNumbers: false,
-	selectable: true,
+	weekNumbers: false, //요일 숫자로 표시
+	selectable: true, //선택가능
 	weekNumberCalculation: "ISO",
-	eventLimit: true,
+	eventLimit: true, 
 	views: {
 		month: {
 			eventLimit: 12
@@ -336,7 +350,7 @@ var calendar = $('#calendar').fullCalendar({
 	},
 	eventLimitClick: 'week', //popover
 	navLinks: true,
-	defaultDate: moment('2020-02'), 
+	defaultDate: moment('2020-02'), // 달력 기본 날짜
 	timeFormat: 'HH:mm',
 	defaultTimedEventDuration: '01:00:00',
 	editable: true,

@@ -25,8 +25,8 @@ var newEvent = function (start, end, eventType) {
     editEnd.val(end);
     editType.val(eventType).prop("selected", true);
 
-    addBtnContainer1.show();
-    modifyBtnContainer1.hide();
+    addBtnContainer1.show(); //새 이벤트 footer
+    modifyBtnContainer1.hide(); //이벤트 수정 footer
     eventModal.modal('show');
 
     /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
@@ -44,7 +44,7 @@ var newEvent = function (start, end, eventType) {
             end: editEnd.val(),
             description: editDesc.val(),
             type: editType.val(),
-            username: username,
+            username: '원장',
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             allDay: false
