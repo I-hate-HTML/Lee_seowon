@@ -33,8 +33,9 @@ public class IntranetMemberService {
 	 */
 	public int acceptMember(String userId) {
 		Connection con = getConnection();
-		
+		close(con);
 		return imDao.acceptMember(con,userId);
+	
 	}
 	
 	/**
@@ -44,7 +45,7 @@ public class IntranetMemberService {
 	 */
 	public int rejectMember(String userId) {
 		Connection con = getConnection();
-		
+		close(con);
 		return imDao.rejectMember(con,userId);
 	}
 
