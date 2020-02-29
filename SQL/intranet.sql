@@ -144,7 +144,15 @@ CREATE TABLE CHILD(
     PARENT_CODE NUMBER DEFAULT 0
 );
 INSERT INTO CHILD VALUES(10000,'박테스트','중성','200202-1111111','2020-02-02','2019-03-02','1900','노숙',1,'재학','5','SIBAL',0);
-
+INSERT INTO CHILD VALUES(SEQ_CHILD.NEXTVAL,'홍달이','남','170201-3129421','20170201','20190101',null,'경기도',3,'재학','2',null,null);
+INSERT INTO CHILD VALUES(SEQ_CHILD.NEXTVAL,'서민정','여','160730-4028392','20160730','20180101',null,'서울',4,'재학','1',null,null);					      
+INSERT INTO MEMBER VALUES(SEQ_MEMNO.NEXTVAL,'dalmom','gfv5KaYZb641ZNNEV7Dy90NFeG+fw6diA59X6NR/X4phLmGpbzPuFlQU3jbnqw0mFWZ6djauXVmLWvslzofAtA==','이경인','F','dalmom@naver.com','01093851749','06031, 서울 강남구 논현로 841 (신사동, 제이비 미소빌딩), 1903호','20200229','2020001','홍달이','20200202','M','	1','Y','6');
+INSERT INTO MEMBER VALUES(SEQ_MEMNO.NEXTVAL,'minzzang','gfv5KaYZb641ZNNEV7Dy90NFeG+fw6diA59X6NR/X4phLmGpbzPuFlQU3jbnqw0mFWZ6djauXVmLWvslzofAtA==','서준수','M','minzzang@daum.net','01048275728','07289, 서울 영등포구 경인로 701 (문래동2가), 1층','20200229','2020002','서민정','20200202','F','2','Y','6');					      
+INSERT INTO MEMBER VALUES(SEQ_MEMNO.NEXTVAL,'1001','gfv5KaYZb641ZNNEV7Dy90NFeG+fw6diA59X6NR/X4phLmGpbzPuFlQU3jbnqw0mFWZ6djauXVmLWvslzofAtA==','박막례','F','mrpark@gmail.com','01038591042','04055, 서울 마포구 와우산로27길 79 (서교동), 1','20200229','10000','박테스트','20200202','M','4','Y','1');
+INSERT INTO MEMBER VALUES(SEQ_MEMNO.NEXTVAL,'1003','gfv5KaYZb641ZNNEV7Dy90NFeG+fw6diA59X6NR/X4phLmGpbzPuFlQU3jbnqw0mFWZ6djauXVmLWvslzofAtA==','김지혜','F','jgkim@daum.net','01047290531','03158, 서울 종로구 삼봉로 100 (공평동), 1층','20200229','10000','박테스트','20200202','M','4','Y','3');
+INSERT INTO MEMBER VALUES(SEQ_MEMNO.NEXTVAL,'1006','gfv5KaYZb641ZNNEV7Dy90NFeG+fw6diA59X6NR/X4phLmGpbzPuFlQU3jbnqw0mFWZ6djauXVmLWvslzofAtA==','함원심','M','1sim@daum.net','01093859293','06031, 서울 강남구 논현로 841 (신사동, 제이비 미소빌딩), 1903호','20200229','10000','박테스트','20200202','M','4','Y','3');
+				
+					      
 CREATE TABLE FAMILY(
     CHILD_CODE NUMBER REFERENCES CHILD(CHILD_CODE),
     FAMILY_REL VARCHAR2(10) CHECK (FAMILY_REL IN('부','모','기타')),
@@ -207,4 +215,24 @@ INSERT INTO EMPLOYEE VALUES('1013','김아름','5','701207-2759105','01046251893
 INSERT INTO EMPLOYEE VALUES('1014','박다희','5','940207-2582714','01085728174','daaaheee@gmail.com','서울 마포구 독막로 153, 1층 3호','20190101',null,'Y',null,'0','1014.png');
 
 
+-- 알림장
+INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020001','차량','오전','하원도우미','010947293533','할머니','01044839683','dalmom','20200229','N');
+INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020002','도보','오전','엄마','01035389853','아빠','01038892848','minzzang','20200229','N');
+INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020001','감기','물약','한봉','2회','오전9시','on','약을 싫어해요','dalmom','20200229','N');
+INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020002','몸살','물약','6ml','1회','오전9시','on','약을 싫어해요','minzzang','20200229','N');
+INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,'1','2020001','"달이가 오늘은 감기 기운이 있어서 컨디션이 안좋아요"','나쁨','나쁨','미열','약간','8시간','보통','dalmom','20200229','N');	
 
+-- 공지사항 / 교육일지
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'0','팡팡어린이집 공지사항입니다','20/02/29','박막례','1','1001','N','팡팡어린이집 공지사항입니다');
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'2','3월 3일 단체 회식 있습니다.','	20/02/29','함원심','1','1006','N','"3월 3일 단체 회식 있습니다. 장소 : 또보겠지떡볶이 홍대점  시간 : 3월 3일 퇴근 후 불참자는 말씀해주세요"');
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'1','씨앗반 2월 29일 교육일지입니다','20/02/29','김지혜','2','1003','N','씨앗반 교육일지 입니다');
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'2','새싹반 2월 29일 교육일지입니다','20/02/29','박민영','2','1007','N','새싹반 교육일지 입니다');
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'3','나무반 2월 29일 교육일지입니다','20/02/29','함원심','2','1006','N','나무반 교육일지 입니다');
+INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'4','열매반 2월 29일 교육일지입니다','20/02/29','이준영','2','1009','N','열매반 교육일지 입니다');
+				
+-- 				
+INSERT INTO DRAFT VALUES(SEQ_DRAFT.NEXTVAL,'1','1003','20/02/29','1009,1006,1001,',null,null,'지출결의서 작성','"지출결의서 내역 :    외 합계 금액 :    원 위 금액을 청구하오니 결재 바랍니다. ** 지출결의서 파일을 첨부해주세요 "',null,'검토','N','N');
+INSERT INTO DRAFT VALUES(SEQ_DRAFT.NEXTVAL,'1','1003','20/02/29','1001,','N,','aaa,','지출결의서 작성','"지출결의서 내역 :    외  합계 금액 :    원 위 금액을 청구하오니 결재 바랍니다. ** 지출결의서 파일을 첨부해주세요 "',null,'반려','N','N');
+INSERT INTO DRAFT VALUES(SEQ_DRAFT.NEXTVAL,'2','1006','20/02/29','1002,1001,','Y,Y,','조심히 다녀오세요,다녀오세요,','휴가 신청합니다','"휴가신청서  휴가 기간 :  2020 년 3 월 2 일  ~   2020년  3월 3 일  총 1 일  휴가 사유 :  개인적 사유   위와 같이 휴가를 신청하오니 결재 바랍니다.  ** 휴가신청서 파일을 첨부해주세요 "',null,'승인','N','N');
+INSERT INTO DRAFT VALUES(SEQ_DRAFT.NEXTVAL,'1','1009','20/02/29','1001,',null,null,'2월 지출 결의서 입니다','지출결의서  내역 :    간식 외 합계 금액 :    30,000원 위 금액을 청구하오니 결재 바랍니다. ** 지출결의서 파일을 첨부해주세요 "',null,'검토','N','N');
+INSERT INTO DRAFT VALUES(SEQ_DRAFT.NEXTVAL,'3','1007','20/02/29','1002,1001,',null,null,'3월분 교구 신청합니다.','교구신청서  품목 :   스케치북 외  10 개   금액 :    50,000원   위와 같이 교재 교구의 구입을 신청하오니 결재 바랍니다.  ** 교구신청서 파일을 첨부해주세요 "',null,'검토','N','N');				
