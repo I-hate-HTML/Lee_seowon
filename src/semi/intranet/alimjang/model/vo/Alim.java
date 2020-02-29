@@ -17,31 +17,18 @@ public class Alim implements Serializable{
 	private String achild;	// 아이 이름
 	private int ccode;		// 아이 코드
 	private int cclass;		// 아이 반
+	private String cclassName; // 아이반 이름
 	private String awriter;	// 작성자 id
 	private Date adate;		// 작성 날짜
 	private String ack;		// 글 확인
 	
+	
 	public Alim() {}
 
-	
-	
 
 
-	/**
-	 * 알림장 리스트 불러오기용
-	 * @param ano
-	 * @param arownum
-	 * @param acategory
-	 * @param category
-	 * @param achild
-	 * @param ccode
-	 * @param cclass
-	 * @param awriter
-	 * @param adate
-	 * @param ack
-	 */
 	public Alim(int ano, int arownum, int acategory, String category, String achild, int ccode, int cclass,
-			String awriter, Date adate, String ack) {
+			String cclassName, String awriter, Date adate, String ack) {
 		super();
 		this.ano = ano;
 		this.arownum = arownum;
@@ -50,13 +37,11 @@ public class Alim implements Serializable{
 		this.achild = achild;
 		this.ccode = ccode;
 		this.cclass = cclass;
+		this.cclassName = cclassName;
 		this.awriter = awriter;
 		this.adate = adate;
 		this.ack = ack;
 	}
-
-
-
 
 
 	public int getAno() {
@@ -157,13 +142,22 @@ public class Alim implements Serializable{
 	public void setArownum(int arownum) {
 		this.arownum = arownum;
 	}
+	
+
+	public String getCclassName() {
+		return cclassName;
+	}
+
+	public void setCclassName(String cclassName) {
+		this.cclassName = cclassName;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Alim [ano=" + ano + ", acategory=" + acategory + ", category=" + category + ", achild=" + achild
-				+ ", ccode=" + ccode + ", cclass=" + cclass + ", awriter=" + awriter + ", adate=" + adate + ", ack="
-				+ ack + "]";
+		return "Alim [ano=" + ano + ", arownum=" + arownum + ", acategory=" + acategory + ", category=" + category
+				+ ", achild=" + achild + ", ccode=" + ccode + ", cclass=" + cclass + ", cclassName=" + cclassName
+				+ ", awriter=" + awriter + ", adate=" + adate + ", ack=" + ack + "]";
 	}
 	
 	

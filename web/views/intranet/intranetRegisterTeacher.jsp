@@ -126,15 +126,15 @@
 							<tr>
 								<th style="padding: 0.2rem">담임반</th>
 								<td style="padding: 0.2rem"><input type="radio"
-									id="empClass1" name="empClass" value="1반"> <label
+									id="empClass1" name="empClass" value="1"> <label
 									for="empClass" style="display: initial;">1반</label> <input
-									type="radio" id="empClass2" name="empClass" value="2반">
+									type="radio" id="empClass2" name="empClass" value="2">
 									<label for="empClass" style="display: initial;">2반</label> <input
-									type="radio" id="empClass3" name="empClass" value="3반">
+									type="radio" id="empClass3" name="empClass" value="3">
 									<label for="empClass" style="display: initial;">3반</label> <input
-									type="radio" id="empClass4" name="empClass" value="4반">
+									type="radio" id="empClass4" name="empClass" value="4">
 									<label for="empClass" style="display: initial;">4반</label> <input
-									type="radio" id="empClassNo" name="empClass" value="없음">
+									type="radio" id="empClassNo" name="empClass" value="">
 									<label for="empClass" style="display: initial;">없음</label></td>
 								<th style="padding: 0.2rem">호봉</th>
 								<td style="padding: 0.2rem" colspan='3'><input

@@ -403,6 +403,11 @@ public class DailyDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
+				if(rset.getString("EMP_CLASS").equals("없음")) {
+					 result = 0;
+				}
+				
 				result = rset.getInt("EMP_CLASS");
 			}
 			

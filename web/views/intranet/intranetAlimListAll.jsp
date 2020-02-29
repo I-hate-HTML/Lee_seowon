@@ -60,13 +60,13 @@
                     <tr>
 	                  <td> 
 	                    <input type = "hidden" name = "ano" value="<%= a.getAno() %>">
-	                  	<%= a.getArownum()%>
+	                  	<%= a.getArownum() %>
 	                  </td>
 	                  <td>
 	                  	<input type = "hidden" name = "category" value="<%= a.getAcategory() %>">
 	                  	<%= a.getCategory() %>
 	                  </td>
-	                  <td><%= a.getCclass() %>반</td>
+	                  <td>	<%= a.getCclassName() %>반 </td>
 	                  <td>
 	                  	<input type = "hidden" name = "ccode" value="<%= a.getCcode() %>">
 	                  	<%= a.getAchild() %>
