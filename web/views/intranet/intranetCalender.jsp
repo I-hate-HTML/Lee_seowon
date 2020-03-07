@@ -5,8 +5,14 @@
  response.setHeader("Cache-Control","no-cache");
  response.setHeader("Pragma","no-cache");
  response.setDateHeader("Expires",0);
+ 
 %>
+<%@ page import="semi.home.jsp.model.vo.*"%>
 
+<%
+ Member mem = (Member)session.getAttribute("member"); 
+ request.setAttribute("member", mem);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -199,7 +205,10 @@
 	</div>
 
 	<script type="text/javascript">
-		var username = <%= m.getUserName()%>;
+		var username = '<%= mem.get()%>';
+		$(function(){
+			console.log(username);
+		})
 	</script>
 
 	<script src="../../resources/js/fullcal/vendor/js/bootstrap.min.js"></script>

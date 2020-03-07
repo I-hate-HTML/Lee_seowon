@@ -29,9 +29,8 @@ var newEvent = function (start, end, eventType) {
     modifyBtnContainer1.hide(); //이벤트 수정 footer
     eventModal.modal('show');
 
-    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
+    /******** 임시 RAMDON ID **********/
     var eventId = 1 + Math.floor(Math.random() * 1000);
-    /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
 
     //새로운 일정 저장버튼 클릭
     $('#save-event').unbind();
