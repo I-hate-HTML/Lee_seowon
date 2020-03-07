@@ -59,6 +59,24 @@ public class AlimService {
 		
 		close(con);
 		
+		Alim a = new Alim();
+		for(int i = 0; i < list.size(); i++) {
+			
+			if(list.get(i).getCclass() == 1) {
+				a = list.get(i);
+				a.setCclassName("씨앗");
+			} else if(list.get(i).getCclass() == 2) {
+				a = list.get(i);
+				a.setCclassName("새싹");
+			} else if(list.get(i).getCclass() == 3) {
+				a = list.get(i);
+				a.setCclassName("나무");
+			} else if(list.get(i).getCclass() == 4) {
+				a = list.get(i);
+				a.setCclassName("열매");
+			}
+		}
+		
 		return list;
 	}
 
@@ -76,6 +94,24 @@ public class AlimService {
 		
 		close(con);
 		
+		Alim a = new Alim();
+		for(int i = 0; i < list.size(); i++) {
+			
+			if(list.get(i).getCclass() == 1) {
+				a = list.get(i);
+				a.setCclassName("씨앗");
+			} else if(list.get(i).getCclass() == 2) {
+				a = list.get(i);
+				a.setCclassName("새싹");
+			} else if(list.get(i).getCclass() == 3) {
+				a = list.get(i);
+				a.setCclassName("나무");
+			} else if(list.get(i).getCclass() == 4) {
+				a = list.get(i);
+				a.setCclassName("열매");
+			}
+		}
+		
 		return list;
 	}
 
@@ -92,6 +128,7 @@ public class AlimService {
 		AlimNote a = ad.readAlimNote(con, empNo, ano);
 		
 		close(con);
+		
 		
 		return a;
 		
@@ -147,6 +184,16 @@ public class AlimService {
 		Alim b = ad.readAlimCommon(con, empNo, ano, category);
 		
 		close(con);
+		
+		if(b.getCclass() == 1) {
+			b.setCclassName("씨앗");
+		} else if(b.getCclass() == 2) {
+			b.setCclassName("새싹");
+		} else if(b.getCclass() == 3) {
+			b.setCclassName("나무");
+		} else if(b.getCclass() == 4) {
+			b.setCclassName("열매");
+		}
 		
 		return b;
 	}

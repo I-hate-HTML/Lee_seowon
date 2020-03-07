@@ -90,7 +90,7 @@
             <div id="cal_tab" class="cal">
             </div>
             <div>
-                <img src="" style="width: 100%;" id="eduimg" alt="교육일정 사진 들어갈예정" onclick="clickimg(this)">
+                <img src="" name="imgtag" style="width: 100%;" id="eduimg" alt="교육일정 사진 들어갈예정" onclick="clickimg(this)">
             </div>
             </div>
             </div>
@@ -118,7 +118,7 @@
 
       <script type="text/javascript">
 
-        $('img').click(function(){
+        $('img[name=imgtag]').click(function(){
 			window.open($(this).attr('src'),'파일상세보기','location=no,width=500,height=500');
 		});
         

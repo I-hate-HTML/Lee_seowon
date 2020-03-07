@@ -40,7 +40,7 @@ public class InsertServlet extends HttpServlet {
 		
 		// 파일 처리용 서블릿
 		// 전송할 최대 크기
-		int maxSize = 1024 * 1024 * 10;
+		int maxSize = 1024 * 1024 * 30;
 		
 		// multipart/form-data형식으로 전송되었는지 확인!
 		if(!ServletFileUpload.isMultipartContent(request)) {
@@ -53,7 +53,7 @@ public class InsertServlet extends HttpServlet {
 		String root = request.getServletContext().getRealPath("/");
 		
 		// 게시판의 첨부파일을 저장할 폴더 이름 지정하기
-		String savePath = root + "resources/intranet/uploadFiles/DailyFile";
+		String savePath = root + "resources/intranet/image";
 
 		// 실제 담아온 파일 기타 정보들을 활용하여 MultipartRequest 생성하기
 		MultipartRequest mrequest = new MultipartRequest(

@@ -46,7 +46,7 @@ public class IntranetNavService {
 		
 		int newCount = ind.newFormCount(con, emp);
 				
-		
+		close(con);
 		return newCount;
 	}
 
@@ -120,6 +120,7 @@ public class IntranetNavService {
 			rollback(con);
 		}
 		
+		close(con);
 		return result;
 	}
 

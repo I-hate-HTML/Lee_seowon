@@ -51,7 +51,7 @@
                         <th style="text-align: center;">반</th>
                         <td style="text-align: center;">
                         	<input type="hidden" name="class" value="<%= b.getCclass() %>">
-                        	<%= b.getCclass() %>반
+                        	<%= b.getCclassName() %>반
                         </td>
                         <th style="text-align: center;">아이 이름</th>
                         <td style="text-align: center;">

@@ -27,6 +27,7 @@ public class IntranetQnaService {
 		Connection con = getConnection();
 		
 		int listCount = qDao.getListCount(con, empNo);
+		close(con);
 		
 		return listCount;
 		

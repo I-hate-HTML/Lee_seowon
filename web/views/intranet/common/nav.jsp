@@ -55,7 +55,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fa fa-smile"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">어린이집<br>인트라넷</div>
+        <div class="sidebar-brand-text mx-3">팡팡어린이집<br>인트라넷</div>
       </a>
 
       <!-- Divider -->
@@ -156,7 +156,7 @@
 
        <!-- Nav Item - 개인정보수정 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/empUpdateView">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetEdit.jsp">
           <i class="fa fa-user fa-2x"></i>
           <span>개인정보수정</span></a>
       </li>

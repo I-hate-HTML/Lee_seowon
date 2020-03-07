@@ -129,14 +129,14 @@
 
 								<th style="padding: 0.2rem">소속반</th>
 								<td style="padding: 0.2rem">&nbsp; <input type="radio"
-									id="studentClass1" name="stuclass" value="1반"> <label
+									id="studentClass1" name="stuclass" value="1"> <label
 									for="studentClass1" style="display: initial;">1반</label> <input
-									type="radio" id="studentClass2" name="stuclass" value="2반">
+									type="radio" id="studentClass2" name="stuclass" value="2">
 									<label for="studentClass2" style="display: initial;">2반</label>
 									<input type="radio" id="studentClass3" name="stuclass"
-									value="3반"> <label for="studentClass3"
+									value="3"> <label for="studentClass3"
 									style="display: initial;">3반</label> <input type="radio"
-									id="studentClass4" name="stuclass" value="4반"> <label
+									id="studentClass4" name="stuclass" value="4"> <label
 									for="studentClass4" style="display: initial;">4반</label>
 								</td>
 

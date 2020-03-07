@@ -139,7 +139,7 @@
 
       <!-- Nav Item - 일정관리 -->
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/semi/empUpdateView">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetCalender.jsp">
           <i class="fa fa-calendar-alt fa-2x"></i>
           <span>일정관리</span></a>
       </li>
@@ -154,7 +154,7 @@
 
        <!-- Nav Item - 개인정보수정 -->
       <li class="nav-item">
-        <a class="nav-link" href="/semi/empUpdateView">
+        <a class="nav-link" href="<%=request.getContextPath()%>/views/intranet/intranetEdit.jsp">
           <i class="fa fa-user fa-2x"></i>
           <span>개인정보수정</span></a>
       </li>

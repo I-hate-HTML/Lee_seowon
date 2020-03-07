@@ -48,7 +48,7 @@ public class FormWriteServlet extends HttpServlet {
 
 		String root = request.getServletContext().getRealPath("/");
 
-		String savePath = root + "resources/intranet/uploadFiles/FormFile";
+		String savePath = root + "resources/intranet/image";
 
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",new DefaultFileRenamePolicy());
 

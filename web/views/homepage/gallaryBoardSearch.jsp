@@ -134,7 +134,7 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
 							<option value="content">내용</option>
 						</select>
 					<input type="text" class="form-control" style="margin-right: 30px; width:60%" id="keyword">
-					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="searchgboard()" value="검색">
+					<input type="button" class="btn" style="background: #002c5f; color: white; width: 100px;" onclick="return searchgboard()" value="검색">
 					</div>
 
 			<script>
@@ -147,8 +147,18 @@ ArrayList<Gboard> list = (ArrayList<Gboard>)request.getAttribute("list");
 				});
 			
 				function searchgboard(){
+					if( $('#keyword').val() == ""){
+						alert("검색할 단어를 입력해 주세요!");
+						return false;
+					}
+					if($('#searchval').val()==""){
+						alert("검색할 옵션을 선택해 주세요!");
+						return false;
+					}
 					location.href="<%=request.getContextPath()%>/searchgboard?con="+$('#searchval').val()+"&keyword="+$('#keyword').val();
+					
 				}
+				
 				
 				</script>
     

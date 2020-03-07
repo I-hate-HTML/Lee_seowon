@@ -7,7 +7,7 @@
 <!-- saved from url=(0061)https://blackrockdigital.github.io/startbootstrap-sb-admin-2/ -->
 <html lang="ko">
 <head>
-<title>꿈나라어린이집 # 인트라넷_메인</title>
+<title>팡팡어린이집 # 인트라넷_메인</title>
 <link rel="stylesheet"
 	href="../../resources/js/fullcal/vendor/css/fullcalendar.min.css" />
 <link rel="stylesheet"
@@ -30,7 +30,7 @@
 			<!-- 컨텐츠 머리글 -->
 			<div
 				class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="h3 mb-0 text-gray-800">멸망과 공포의 어린이집</h1>
+				<h1 class="h3 mb-0 text-gray-800">광광 어린이집</h1>
 			</div>
 
 
