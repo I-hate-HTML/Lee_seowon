@@ -57,15 +57,9 @@ public class EmployeeUpdateMaServlet extends HttpServlet {
 		//mrequest.getFilesystemName("empimg");
 		
 		String empimg = mrequest.getFilesystemName("empimg");
-		String empEmail = mrequest.getParameter("empEmail");
-		String empPhone = mrequest.getParameter("hp1")+"-"
-					+ mrequest.getParameter("hp2")+"-"
-					+ mrequest.getParameter("hp3");
-		
-		String empAddr = mrequest.getParameter("homezipcode")+", "
-						+ mrequest.getParameter("homeaddress")+", "
-						+ mrequest.getParameter("homeaddress2");
-		
+		String empEmail = mrequest.getParameter("editemail");
+		String empPhone = mrequest.getParameter("editphone");		
+		String empAddr = mrequest.getParameter("editaddr");		
 		
 		//HttpSession session = request.getSession(false);
 		

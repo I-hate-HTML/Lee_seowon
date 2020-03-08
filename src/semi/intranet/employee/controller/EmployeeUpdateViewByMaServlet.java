@@ -51,9 +51,9 @@ public class EmployeeUpdateViewByMaServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		
-		response.setContentType("application/json; charset=UTF-8"); 
 		*/
+		response.setContentType("application/json; charset=UTF-8"); 
+		
 		EmployeeService es = new EmployeeService();
 		List<Employee> ae = new ArrayList<>();
 		

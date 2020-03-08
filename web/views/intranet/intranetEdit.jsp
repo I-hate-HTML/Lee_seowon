@@ -33,20 +33,20 @@
                           <div class="thcell">프로필 사진</div>
                         </th>
                         <td>
-                          <div class="tdcell">
-                            <div class="profile_photo">
+                          <div class="tdcell" style="width: 100%; height: 100%;">
+                            <div class="profile_photo" style="width: 30%; height: 30%">
 
-                              <img alt="" id="imgThumb" src="<%= request.getContextPath()%>/resources/intranet/image/" width="100" height="100">
+                              <img alt="profile image" id="empImg" src="" style="width:100%; height:auto;">
                               <span class="mask"></span>
 
                             </div>
                             <div class="btn_area_btm">
                               <span class="btn_file">
-                                <label for="ex_file" class="btn btn-primary btn-sm" style="margin-top: 6px;"><span id="btnChangeProfile" class="btn2" onclick="clickcr(this,'prf.upimg','','',event);">사진변경</span></label>
+                                <label for="ex_file" class="btn btn-primary btn-sm" style="cursor: pointer; margin-top: 6px;"><span id="btnChangeProfile" class="btn2" onclick="clickcr(this,'prf.upimg','','',event);">사진변경</span></label>
                                 <input type="file" id="ex_file" name="empimg"  accept=".jpg,.jpeg,.png,.gif" 
                                 onchange="imageURL(this)" style="overflow: hidden; width: 1px; height: 1px; margin:-1px;"/>
                               </span>
-                              <a href="javascript:;" class="btn btn-primary btn-sm"><span id="btnDelete" class="btn2" onclick="clickcr(this,'prf.delimg','','',event);">삭제</span></a>
+                              <a href="javascript:;" class="btn btn-primary btn-sm"><span id="btnDelete" class="btn2" onclick="deleteImg();">삭제</span></a>
                             </div>
                           </div>                          
                         </td>
@@ -54,12 +54,12 @@
                       
                       <tr>
                         <th>성명</th>
-                        <td><input type="text" id="name" name="name" class="width1" value="" disabled></td>
+                        <td><input type="text" id="nameshowing" name="name" value="" disabled></td>
                       </tr>
                       <tr>
                         <th>직원코드</th>
                         <td>
-                          <input type="text" id="userid" name="userid" class="width1" style="ime-mode:inactive;" value="" disabled>
+                          <input type="text" id="usercodeshowing" name="userid" style="ime-mode:inactive;" value="" disabled>
                         </td>
                       </tr>
                       
@@ -95,34 +95,6 @@
                           </select>
                         </td>
                       </tr>
-                      <!-- <tr>
-                        <th>연락처</th>
-                        <td>
-                          <select name="tel1" id="tel1" class="select1 ko" style="width:120px;">
-                            <option value="">서울(02)</option>
-                            <option value="02">서울(02)</option>
-                            <option value="031">경기(031)</option>
-                            <option value="032">인천(032)</option>
-                            <option value="033">강원(033)</option>
-                            <option value="041">충남(041)</option>
-                            <option value="042">대전(042)</option>
-                            <option value="043">충북(043)</option>
-                            <option value="051">부산(051)</option>
-                            <option value="052">울산(052)</option>
-                            <option value="053">대구(053)</option>
-                            <option value="054">경북(054)</option>
-                            <option value="055">경남(055)</option>
-                            <option value="061">전남(061)</option>
-                            <option value="062">광주(062)</option>
-                            <option value="063">전북(063)</option>
-                            <option value="064">제주(064)</option>
-                            <option value="070">070</option>
-                          </select>
-                          - <input type="text" id="tel2" name="tel2" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
-                          - <input type="text" id="tel3" name="tel3" maxlength="4" class="width2" style="text-align:center;" onkeyup="if(this.value.match(/[^0-9]/)) { alert('숫자만 넣어주세요'); this.value = ''; this.focus(); return false; };">
-      
-                          </td>
-                      </tr> -->
                       <tr>
                         <th>핸드폰번호 <span>*</span></th>
                         <td>
@@ -154,7 +126,7 @@
                     </tbody>
                   </table>                   
                     <br>
-                    <input type="submit" value="   저장   " class="btn btn-primary" style="margin-left: 40%;" onclick="updateMember">
+                    <input type="submit" value="   저장   " id="sendedit" class="btn btn-primary" style="margin-left: 40%;" onclick="updateMember">
                     <input type="reset" value="   취소   " class="btn btn-primary" style="margin-left: 10px;" onclick="return ">
                   </form>
                 </div>
@@ -182,6 +154,74 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	
+	function deleteImg(){
+		$('#empImg').attr('src','기본이미지');
+	}
+	
+	//직원정보 테이블로 불러오는 ajax
+		$(function() {
+			$.ajax({
+				url : "/semi/empUpdateView",//불러오기 서블릿
+				type : "get",
+				success : function(data) {
+					$.each(data, function(index, value) {
+												
+						var $tr = $('<tr>');
+						var $empName = $('<td>').text(value.empName);
+						var $empCode = $('<td>').text(value.empCode);
+						var $empEmail = $('<td>').text(value.empEmail);
+						var $empPhone = $('<td>').text(value.empPhone);
+
+						//$checkbox.append($chk);
+						/* $tr.append($empName);
+						$tr.append($empCode);
+						$tr.append($empEmail);
+						$tr.append($empPhone); */
+						
+						//$('#viewtable').append($tr);
+					});
+				},
+				error : function() {
+					console.log("에러입니다.");
+				}
+			});
+		});
+		
+		/* var editmodal = $('#editEmp')
+		$('#empedit1').click(function() {
+			var eid = $('.chkemp:checked').val();
+			var ecn = eid.split(',');
+			if (eid != null) {
+				editmodal.modal();
+				$('#editcode').val(ecn[0]);
+				$('#editname').val(ecn[1]);
+			}
+		}); */
+		
+		$('#sendedit').click(function(){
+			if($('#editphone').val()==null){
+				alert('빈항목이 있습니다!');
+			}else{
+				$.ajax({
+					url : '/semi/maUpdate.emp',//고치는 서블릿
+					type : 'get',
+					data : {
+						editemail : $('#email1').val()+$('#email2').val(),
+						editphone : $('#hp1').val()+$('#hp2').val()+$('#hp3').val(),
+						editaddr : $('#homezipcode').val()+$('#homeaddress').val()+$('#homeaddress2').val()
+						},
+					success : function(data){
+						if(data>0){alert('수정 성공!'),location.reload();}
+						else{alert('빈항목이 있습니다!')}
+					},error : function(){
+						alert('수정 오류!');
+					}
+				});
+			}
+			
+			
+		});
 	
 	$('#selectEmail').change(function(){ 
 		$("#selectEmail option:selected").each(function () {
@@ -240,58 +280,7 @@
         }).open();
     };
     
-    $(function() {
-		$.ajax({
-			url : "/semi/empUpdateView",
-			type : "get",
-			success : function(data) {
-				$.each(data, function(index, value) {
-											
-					var $tr = $('<tr>');
-					var $chk = $('<input>').attr({'type':'radio','class':'chkemp','value':value.empCode+','+value.empName});
-					var $checkbox = $('<td>');
-					var $empIndex = $('<td>').text(index + 1);
-					var $empName = $('<td>').text(value.empName);
-					var $empCode = $('<td>').text(value.empCode);
-					var $empPhone = $('<td>').text(value.empPhone);
-					var $empAddr = $('<td>').text(value.empAddr);
-
-					$checkbox.append($chk);
-					$tr.append($checkbox);
-					$tr.append($empIndex);
-					$tr.append($empCode);
-					$tr.append($empJob);
-					$tr.append($empName);
-					$tr.append($empPhone);
-					$tr.append($hireDate);
-					$tr.append($entDate);
-					$tr.append($empClass);
-					$tr.append($hobong);
-					$tr.append($entYN);
-					
-					$('#viewtable').append($tr);
-				});
-			},
-			error : function() {
-				console.log("에러입니다.");
-			}
-		});
-	});
     
-	/* var editmodal = $('#editEmp')
-	$('#empedit1').click(function() {
-		var eid = $('.chkemp:checked').val();
-		var ecn = eid.split(',');
-		if (eid != null) {
-			editmodal.modal();
-			$('#editcode').val(ecn[0]);
-			$('#editname').val(ecn[1]);
-		}
-	}); */
-    
-    function updateMember() {
-		$("#updateForm").submit();
-	}
 	</script>
 <%@ include file = "../intranet/common/footer.jsp" %>
 </body>
