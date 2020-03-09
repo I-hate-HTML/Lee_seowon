@@ -10,6 +10,12 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
+CREATE SEQUENCE SEQ_QNA
+START WITH 1
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+
 CREATE SEQUENCE SEQ_DRAFT
 START WITH 20200000
 INCREMENT BY 1
@@ -216,11 +222,12 @@ INSERT INTO EMPLOYEE VALUES('1014','박다희','5','940207-2582714','01085728174
 
 
 -- 알림장
-INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020001','차량','오전','하원도우미','010947293533','할머니','01044839683','dalmom','20200229','N');
-INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020002','도보','오전','엄마','01035389853','아빠','01038892848','minzzang','20200229','N');
-INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020001','감기','물약','한봉','2회','오전9시','on','약을 싫어해요','dalmom','20200229','N');
-INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020002','몸살','물약','6ml','1회','오전9시','on','약을 싫어해요','minzzang','20200229','N');
-INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,'1','2020001','"달이가 오늘은 감기 기운이 있어서 컨디션이 안좋아요"','나쁨','나쁨','미열','약간','8시간','보통','dalmom','20200229','N');	
+-- 알림장 테이블이 인트라넷구문엔 없어서 홈페이지쪽으로 옮겨놨어요~~ 114번째 줄에서 확인할수 있습니다~~
+--INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020001','차량','오전','하원도우미','010947293533','할머니','01044839683','dalmom','20200229','N');
+--INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,'2','2020002','도보','오전','엄마','01035389853','아빠','01038892848','minzzang','20200229','N');
+--INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020001','감기','물약','한봉','2회','오전9시','on','약을 싫어해요','dalmom','20200229','N');
+--INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,'3','2020002','몸살','물약','6ml','1회','오전9시','on','약을 싫어해요','minzzang','20200229','N');
+--INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,'1','2020001','"달이가 오늘은 감기 기운이 있어서 컨디션이 안좋아요"','나쁨','나쁨','미열','약간','8시간','보통','dalmom','20200229','N');	
 
 -- 공지사항 / 교육일지
 INSERT INTO DAILY VALUES(SEQ_DAILY.NEXTVAL,'0','팡팡어린이집 공지사항입니다','20/02/29','박막례','1','1001','N','팡팡어린이집 공지사항입니다');

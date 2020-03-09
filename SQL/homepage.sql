@@ -19,11 +19,6 @@ CREATE TABLE MEMBER(
     JOB_CODE NUMBER                                             -- 아이디 정보 확인
 );
 
-INSERT INTO MEMBER VALUES(1,'admin','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','관리자','M','admin@naver.com','01012345678','주소',DEFAULT,1,'나자녀',SYSDATE,'M',1,'Y',1);
-INSERT INTO MEMBER VALUES(2,'kimhana','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','하나님','M','kim15@nate.com','01011111111','31172, 충남 천안시 서북구 월봉로 48 (쌍용동, 나사렛대학교), 진리관',DEFAULT,2020002,'예수림',20/12/25,'M',2,'Y',6);
-INSERT INTO MEMBER VALUES(3,'hamtory','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','햄토리','M','ham@to.ry','01010203040','15643, 경기 안산시 단원구 대부동동, 햄찌볼',DEFAULT,2020003,'아이쿵',25/02/04,'F',3,'Y',6);
-INSERT INTO MEMBER VALUES(4,'kimok','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','김옥지','F','kimok@daum.net','01001010202','29004, 충북 옥천군 군북면 옥지로 204 (지오리), 1층',DEFAULT,2020004,'양금옥',20/05/04,'F',4,'N',6);
-INSERT INTO MEMBER VALUES(5,'admin','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','김파인애플','F','pine@apple.com','01082825353','30053, 세종특별자치시 장군면 파인빌리지길 9 (도계리), 101동 101호',DEFAULT,2020005,'이채리',25/06/12,'F',3,'N',6);
 
 CREATE TABLE BOARDTYPE(
     BTYPE NUMBER PRIMARY KEY,
@@ -71,7 +66,9 @@ CREATE TABLE QNA(
     ASK_DATE DATE,                                              --문의 신청 날짜
     CHK_STATUS VARCHAR2(1) DEFAULT 'N' CHECK (CHK_STATUS IN('Y','N')) -- 문의 확인여부
 );
-
+INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,'상담신청합니다.','종일반 문제로 상담신청 합니다.','dalmom',DEFAULT,2020/03/12,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,'상담 하려고합니다...','민정이 동생 대기걸어놓으려고 하는데 서류 지침해야하나요?','minzzang',DEFAULT,2020/03/27,DEFAULT);
+INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,'선생님.. 상담이요~^^','달이장난감을 친구가 가져갔다고 하네요..ㅠㅠ 잠시 이야기 나누고 싶은데 문자 남겨주세요..','dalmom',DEFAULT,2020/03/16,DEFAULT);
 
 CREATE TABLE ALIMCODE(
     ALIM_CODE NUMBER PRIMARY KEY,           -- 알림장 구별번호
@@ -114,10 +111,10 @@ COMMENT ON COLUMN ALIMNOTE.AL_WRITER IS '작성자';
 COMMENT ON COLUMN ALIMNOTE.AL_DATE IS '작성일';
 COMMENT ON COLUMN ALIMNOTE.ALIM_CK IS '체크여부';
 
-INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,1,2020001,'안녕하세요 쿵야맘이에요^^ 어제 울 쿵야가 샘샘님이 보고싶다고 칭얼..ㅎㅎ
-잠을 좀 설쳤어여~
-놀이활동시간에 그냥 재워주세여~~ 부탁드립니다ㅎㅎ^^','좋음','나쁨','미열','약간','6~8시간','보통','hamtory',DEFAULT,'N');
-INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,1,2020001,'쿵야맘이에요~~ 오늘 쿵이가 콧물이 좀 나는데 불편해 하네여 쉬는시간마다 코좀 닦아주셔요^^*','좋음','보통','미열','보통','4시간미만','보통','hamtory',DEFAULT,'N');
+INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,1,2020002,'안녕하세요^^ 민정이 오늘 열이 있어서 잠을 설쳤어요~~','좋음','나쁨','미열','약간','6~8시간','보통','minzzang',DEFAULT,'N');
+INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,1,2020001,'달이맘이에요~~ 오늘 달이가 콧물이 좀 나는데 불편해 하네여 쉬는시간마다 코좀 닦아주셔요^^*','좋음','보통','미열','보통','4시간미만','보통','dalmom',DEFAULT,'N');
+INSERT INTO ALIMNOTE VALUES(SEQ_ALIM.NEXTVAL,1,2020001,'"달이가 오늘은 감기 기운이 있어서 컨디션이 안좋아요"','나쁨','나쁨','미열','약간','8시간','보통','dalmom',2020/02/29,'N');
+
 
 
 CREATE TABLE ALIMHOME(              -- 귀가 통지서
@@ -150,7 +147,9 @@ COMMENT ON COLUMN ALIMHOME.ALHM_WRITER IS '작성자';
 COMMENT ON COLUMN ALIMHOME.ALHM_DATE IS '작성일';
 COMMENT ON COLUMN ALIMHOME.ALIM_CK IS '체크여부';
 
-INSERT INTO ALIMHOME VALUES (SEQ_ALHM.NEXTVAL,2,2020004,'도보','오후','아빠','01044044404','할아버지','01055055505','kimok',DEFAULT,'N');
+INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,2,2020001,'차량','오전','하원도우미','010947293533','할머니','01044839683','dalmom',2020/02/29,'N');
+INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,2,2020002,'도보','오전','엄마','01035389853','아빠','01038892848','minzzang',2020/02/29,'N');
+INSERT INTO ALIMHOME VALUES(SEQ_ALHM.NEXTVAL,2,2020004,'도보','오후','외할머니','01044044404','외할아버지','01055055505','dalmom',DEFAULT,'N');
 
 
 CREATE TABLE ALIMMEDI(              -- 투약 통지서
@@ -184,6 +183,9 @@ COMMENT ON COLUMN ALIMMEDI.ALMD_PS IS '특이사항';
 COMMENT ON COLUMN ALIMMEDI.ALMD_WRITER IS '작성자';
 COMMENT ON COLUMN ALIMMEDI.ALMD_DATE IS '작성일';
 COMMENT ON COLUMN ALIMMEDI.ALIM_CK IS '체크여부';
+
+INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,3,2020001,'감기','물약','한봉','2회','오전9시','on','약을 싫어해요','dalmom',2020/02/29,'N');
+INSERT INTO ALIMMEDI VALUES(SEQ_ALMD.NEXTVAL,3,2020002,'몸살','물약','6ml','1회','오전9시','on','약먹고 물 부탁드려요','minzzang',2020/02/29,'N');
 
 CREATE TABLE FCALENDAR(
     FCALMONTH VARCHAR2(40) PRIMARY KEY,
